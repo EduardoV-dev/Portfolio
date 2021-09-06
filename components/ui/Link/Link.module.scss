@@ -1,0 +1,55 @@
+@import '../../../styles/breakpoints';
+@import '../../../styles/themes';
+
+.link {
+  padding: 1rem 0.5rem;
+  font-size: 1rem;
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+
+  // Layout
+  &-header {
+    margin-right: 2rem;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+  &-footer {
+    margin-bottom: 2rem;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  &__icon {
+    // Layout
+    &-footer {
+      display: none;
+    }
+  }
+
+  &__text {
+    display: block;
+    text-align: center;
+
+    // Layout
+    &-header {
+      margin-top: 0.5rem;
+    }
+
+    // Theme
+    &-light {
+      color: getLight(text);
+    }
+    &-dark {
+      color: getDark(text);
+    }
+  }
+}

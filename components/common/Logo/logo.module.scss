@@ -1,0 +1,27 @@
+@import '../../../styles/themes';
+@import '../../../styles/breakpoints';
+
+.logo {
+  display: flex;
+  align-items: center;
+
+  &__text {
+    display: none;
+    font-size: 1.562rem;
+    font-weight: 800;
+    margin-left: 0.5rem;
+    width: 7.5rem;
+
+    &-light {
+      color: getLight(text);
+    }
+
+    &-dark {
+      color: getDark(text);
+    }
+
+    @include responsive(md) {
+      display: block;
+    }
+  }
+}

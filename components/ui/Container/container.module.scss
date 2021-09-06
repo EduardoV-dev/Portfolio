@@ -1,0 +1,24 @@
+@import '../../../styles/themes';
+
+.container {
+  &-header,
+  &-footer {
+    opacity: 0.9;
+  }
+
+  &-light {
+    background-color: getLight(bg);
+
+    &-odd {
+      background-color: getLight(bgDarken);
+    }
+  }
+
+  &-dark {
+    background-color: getDark(bg);
+
+    &-odd {
+      background-color: getDark(bgDarken);
+    }
+  }
+}

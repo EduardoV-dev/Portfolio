@@ -1,0 +1,4 @@
+export enum types {
+  TOGGLEUIMODE = 'TOGGLEUIMODE',
+  LOADPROJECTS = 'LOADPROJECTS',
+}

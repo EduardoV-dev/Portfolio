@@ -1,0 +1,31 @@
+$light-colors: (
+  bg: #f2f2f2,
+  bgDarken: #ececec,
+  text: #333,
+  bgPlaceholder: #5285da,
+  bgDarkenPlaceholder: #5285da,
+  primary: #133774,
+  secondary: #5285da,
+  bgDarkenCard: #cccccc,
+  bgCard: #e1e1e1,
+);
+
+$dark-colors: (
+  bg: #373548,
+  bgDarken: #3e3c52,
+  text: #f2f2f2,
+  bgPlaceholder: #3f3d54,
+  bgDarkenPlaceholder: #48455e,
+  primary: #133774,
+  secondary: #5285da,
+  bgDarkenCard: #49475f,
+  bgCard: #424055,
+);
+
+@function getLight($color-name) {
+  @return map-get($light-colors, $color-name);
+}
+
+@function getDark($color-name) {
+  @return map-get($dark-colors, $color-name);
+}

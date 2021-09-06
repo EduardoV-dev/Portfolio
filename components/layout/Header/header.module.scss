@@ -1,0 +1,17 @@
+@import '../../../styles/breakpoints';
+
+.header {
+  width: 100%;
+  display: flex;
+  padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+
+  @include responsive(md) {
+    position: relative;
+    top: 0;
+  }
+}

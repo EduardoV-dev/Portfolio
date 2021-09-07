@@ -1,11 +1,11 @@
 import React from 'react';
-import { UIMode } from '../../../consts';
 import cn from 'classnames';
 import styles from './container.module.scss';
+import { manageUIStyle } from '../../../styles/helpers';
 
 interface IContainer {
-  containerType: 'header' | 'footer' | 'container';
-  uiMode: UIMode.DARK | UIMode.LIGHT;
+  containerType: 'header' | 'footer' | 'container' | 'navbar';
+  darkMode: boolean;
   children: JSX.Element | JSX.Element[];
   className?: string;
   order?: 'pair' | 'odd';
@@ -13,16 +13,18 @@ interface IContainer {
 
 const Container: React.FC<IContainer> = ({
   containerType,
-  uiMode,
+  darkMode,
   children,
   className,
   order,
 }): JSX.Element => {
   const classNames = cn({
     [styles[`container-${containerType}`]]: containerType,
-    [styles[`container-${uiMode}`]]: uiMode,
-    [styles[`container-${uiMode}-${order}`]]: order,
+    [styles[`container-${manageUIStyle(darkMode)}`]]: manageUIStyle(darkMode),
+    [styles[`container-${manageUIStyle(darkMode)}-${order}`]]: order,
   });
+
+  console.log(darkMode);
 
   return (
     <>
@@ -34,6 +36,9 @@ const Container: React.FC<IContainer> = ({
       )}
       {containerType === 'footer' && (
         <footer className={`${classNames} ${className}`}>{children}</footer>
+      )}
+      {containerType === 'navbar' && (
+        <nav className={`${classNames} ${className}`}>{children}</nav>
       )}
     </>
   );

@@ -1,5 +1,5 @@
-@import '../../../styles/breakpoints';
-@import '../../../styles/themes';
+@import "../../../styles/breakpoints";
+@import "../../../styles/themes";
 
 .link {
   padding: 1rem 0.5rem;
@@ -11,6 +11,10 @@
   justify-content: center;
   align-items: center;
   transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(10%);
+  }
 
   // Layout
   &-header {
@@ -29,6 +33,10 @@
   }
 
   &__icon {
+    @include responsive(md) {
+      display: none;
+    }
+
     // Layout
     &-footer {
       display: none;
@@ -44,10 +52,12 @@
       margin-top: 0.5rem;
     }
 
-    // Theme
+    // Dark mode off
     &-light {
       color: getLight(text);
     }
+
+    // Dark mode on
     &-dark {
       color: getDark(text);
     }

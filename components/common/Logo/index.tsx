@@ -1,20 +1,23 @@
 import React from 'react';
 import Image from 'next/image';
-import styles from './logo.module.scss';
-import { UIMode } from '../../../consts';
 import cn from 'classnames';
+import styles from './logo.module.scss';
+import { manageUIStyle } from '../../../styles/helpers';
 
 interface ILogo {
-  uiMode: UIMode.LIGHT | UIMode.DARK;
+  darkMode: boolean;
+  className?: string;
 }
 
-const Logo: React.FC<ILogo> = ({ uiMode = UIMode.LIGHT }): JSX.Element => {
-  const classNames = cn(styles.logo__text, {
-    [styles[`logo__text-${uiMode}`]]: uiMode,
+const Logo: React.FC<ILogo> = ({ darkMode, className }): JSX.Element => {
+  const logoClassNames = cn(styles.logo, className);
+
+  const textClassNames = cn(styles.logo__text, {
+    [styles[`logo__text-${manageUIStyle(darkMode)}`]]: manageUIStyle(darkMode),
   });
 
   return (
-    <div className={styles.logo}>
+    <div className={logoClassNames}>
       <Image
         src="/images/logo.png"
         alt="Front end Developer"
@@ -23,7 +26,7 @@ const Logo: React.FC<ILogo> = ({ uiMode = UIMode.LIGHT }): JSX.Element => {
         objectFit="cover"
         layout="fixed"
       />
-      <p className={classNames}>Eduardo Varela</p>
+      <p className={textClassNames}>Eduardo Varela</p>
     </div>
   );
 };

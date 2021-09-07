@@ -1,7 +1,50 @@
-@import '../../../styles/themes';
-@import '../../../styles/breakpoints';
+@import "../../../styles/breakpoints";
 
 .navbar {
-  display: none;
-  opacity: 0.8;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(150%);
+
+  // When menu is displayed on a inner width less than 768px
+  &-true {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  @include responsive(md) {
+    width: auto;
+    position: relative;
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__link {
+    @include responsive(md) {
+      margin-right: 1rem;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+
+    @include responsive(lg) {
+      margin-right: 1.5rem;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+  }
 }

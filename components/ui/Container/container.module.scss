@@ -1,4 +1,4 @@
-@import '../../../styles/themes';
+@import "../../../styles/themes";
 
 .container {
   &-header,
@@ -6,6 +6,7 @@
     opacity: 0.9;
   }
 
+  // Dark mode off
   &-light {
     background-color: getLight(bg);
 
@@ -14,6 +15,7 @@
     }
   }
 
+  // Dark mode on
   &-dark {
     background-color: getDark(bg);
 

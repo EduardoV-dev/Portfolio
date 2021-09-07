@@ -1,13 +1,13 @@
-import { UIMode } from '../../consts';
-import { IAppContext, IProject } from '../../Models/Interfaces';
+import { AppAction } from '../../models/types';
+import { initialState } from '../context/AppContext';
 import { types } from './types';
 
-const AppReducer = (state: IAppContext = initialState, action: AppAction) => {
+const AppReducer = (state = initialState, action: AppAction) => {
   switch (action.type) {
     case types.TOGGLEUIMODE:
       return {
         ...state,
-        uiMode: state.uiMode === UIMode.LIGHT ? UIMode.DARK : UIMode.LIGHT,
+        darkMode: state.darkMode ? false : true,
       };
     case types.LOADPROJECTS:
       return {

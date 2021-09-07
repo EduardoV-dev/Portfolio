@@ -3,15 +3,25 @@
 .header {
   width: 100%;
   display: flex;
-  padding: 1rem;
   justify-content: space-between;
   align-items: center;
+  padding: 1rem;
   position: fixed;
   bottom: 0;
   z-index: 1;
+  height: 5rem;
 
   @include responsive(md) {
     position: relative;
     top: 0;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+  }
+
+  &__themeToggler {
+    margin-left: 1.5rem;
   }
 }

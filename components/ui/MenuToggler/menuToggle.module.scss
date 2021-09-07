@@ -1,0 +1,14 @@
+@import '../../../styles/breakpoints';
+
+.menuToggle {
+  background-color: transparent;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  @include responsive(md) {
+    display: none;
+  }
+}

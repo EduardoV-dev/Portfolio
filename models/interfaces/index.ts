@@ -1,5 +1,4 @@
-import { UIMode } from '../../consts';
-import { UIType } from '../types';
+import { AppAction } from '../types';
 
 export interface IProject {
   name: string;
@@ -10,12 +9,21 @@ export interface IProject {
   urlToSourceCode: string;
 }
 
+export interface IAppContext {
+  state: IAppReducer;
+  dispatch: React.Dispatch<AppAction>;
+}
+
 export interface IAppReducer {
-  uiMode: UIType;
+  darkMode: boolean;
   projects: IProject[];
 }
 
 export interface IIcon {
   className: string; 
-  uiMode: UIMode.DARK | UIMode.LIGHT;
+  darkmode: 'true' | 'false';
+}
+
+export interface ISvg extends React.SVGProps<SVGSVGElement> {
+  darkmode: 'true' | 'false';
 }

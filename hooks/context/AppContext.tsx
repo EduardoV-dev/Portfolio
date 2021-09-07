@@ -1,26 +1,19 @@
 import React, { createContext, useReducer } from 'react';
-import { UIMode } from '../../consts';
-import { IAppReducer } from '../../models/interfaces';
-import { AppAction } from '../../models/types';
+import { IAppContext, IAppReducer } from '../../models/interfaces';
 import AppReducer from '../reducer/AppReducer';
 
 interface Props {
   children: JSX.Element | JSX.Element[];
 }
 
-interface IContext {
-  state: IAppReducer;
-  dispatch: React.Dispatch<AppAction>;
+export const initialState: IAppReducer = {
+  darkMode: false,
+  projects: [],
 }
 
-const initialState: IAppReducer = {
-  uiMode: UIMode.DARK,
-  projects: [],
-};
-
-export const appContext = createContext<IContext>({
+export const appContext = createContext<IAppContext>({
   state: initialState,
-  dispatch: () => {}
+  dispatch: () => {},
 });
 
 const AppContext: React.FC<Props> = ({ children }): JSX.Element => {

@@ -1,0 +1,705 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests on <Header /> Should render correctly with dark mode 1`] = `
+Array [
+  <header
+    className="container-header container-dark header"
+  >
+    <div
+      className="logo header__logo"
+    >
+      <div
+        style={
+          Object {
+            "boxSizing": "border-box",
+            "display": "inline-block",
+            "height": 64,
+            "overflow": "hidden",
+            "position": "relative",
+            "width": 64,
+          }
+        }
+      >
+        <noscript>
+          <img
+            alt="Front end Developer"
+            data-nimg={true}
+            decoding="async"
+            src="/_next/image?url=%2Fimages%2Flogo.png&w=128&q=75"
+            srcSet="/_next/image?url=%2Fimages%2Flogo.png&w=64&q=75 1x, /_next/image?url=%2Fimages%2Flogo.png&w=128&q=75 2x"
+            style={
+              Object {
+                "border": "none",
+                "bottom": 0,
+                "boxSizing": "border-box",
+                "display": "block",
+                "height": 0,
+                "left": 0,
+                "margin": "auto",
+                "maxHeight": "100%",
+                "maxWidth": "100%",
+                "minHeight": "100%",
+                "minWidth": "100%",
+                "objectFit": "cover",
+                "objectPosition": undefined,
+                "padding": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "width": 0,
+              }
+            }
+          />
+        </noscript>
+        <img
+          alt="Front end Developer"
+          data-nimg={true}
+          decoding="async"
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+          style={
+            Object {
+              "border": "none",
+              "bottom": 0,
+              "boxSizing": "border-box",
+              "display": "block",
+              "height": 0,
+              "left": 0,
+              "margin": "auto",
+              "maxHeight": "100%",
+              "maxWidth": "100%",
+              "minHeight": "100%",
+              "minWidth": "100%",
+              "objectFit": "cover",
+              "objectPosition": undefined,
+              "padding": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+              "width": 0,
+            }
+          }
+        />
+      </div>
+      <a
+        className="logo__text logo__text-dark"
+        href="#Home"
+      >
+        Eduardo Varela
+      </a>
+    </div>
+    <nav
+      className="container-navbar container-dark navbar header__navbar"
+    >
+      <a
+        className="link navbar__link"
+        href="#Home"
+      >
+        <svg
+          className="link__icon link__icon-header"
+          darkmode="true"
+          fill="none"
+          height={32}
+          viewBox="0 0 32 32"
+          width={32}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M31.336 15.743L17.698 1.31l-.914-.968A1.08 1.08 0 0016 0c-.293 0-.575.123-.784.342L.665 15.743a2.402 2.402 0 00-.496.789c-.114.295-.171.611-.168.93.014 1.316 1.048 2.366 2.29 2.366h1.501V32h24.418V19.828h1.532c.604 0 1.172-.25 1.599-.703.21-.222.377-.486.49-.776a2.5 2.5 0 00.17-.917 2.45 2.45 0 00-.664-1.689zM17.976 29.31h-3.952v-7.624h3.953v7.624zm7.692-12.172V29.31h-5.432v-8.52c0-.827-.632-1.495-1.412-1.495h-5.648c-.78 0-1.412.668-1.412 1.494v8.521H6.332V17.137H2.944l13.06-13.816.815.863 12.24 12.953h-3.391z"
+            fill="#F2F2F2"
+          />
+        </svg>
+        <span
+          className="link__text link__text-dark link__text-header"
+        >
+          Home
+        </span>
+      </a>
+      <a
+        className="link navbar__link"
+        href="#AboutMe"
+      >
+        <svg
+          className="link__icon link__icon-header"
+          darkmode="true"
+          fill="none"
+          height={32}
+          viewBox="0 0 32 32"
+          width={32}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M30.745 26.115a15.017 15.017 0 00-3.43-4.804 16.065 16.065 0 00-5.085-3.24c-.017-.009-.034-.013-.051-.02 2.65-1.81 4.374-4.756 4.374-8.081C26.553 4.462 21.83 0 16 0 10.17 0 5.447 4.462 5.447 9.97c0 3.324 1.723 6.271 4.374 8.084-.017.008-.034.012-.05.02a15.927 15.927 0 00-5.086 3.24 15.084 15.084 0 00-3.43 4.805A14.242 14.242 0 000 31.67a.306.306 0 00.097.233A.343.343 0 00.34 32h2.553c.187 0 .336-.14.34-.314.085-3.103 1.404-6.01 3.736-8.213 2.413-2.279 5.617-3.533 9.03-3.533 3.413 0 6.617 1.254 9.03 3.533 2.332 2.203 3.65 5.11 3.736 8.213.004.177.153.314.34.314h2.553a.359.359 0 00.244-.097.32.32 0 00.097-.233 14.278 14.278 0 00-1.255-5.555zM16 16.885c-1.953 0-3.791-.72-5.174-2.027C9.443 13.552 8.68 11.815 8.68 9.97c0-1.845.762-3.582 2.145-4.889 1.383-1.306 3.22-2.026 5.174-2.026 1.953 0 3.791.72 5.174 2.026 1.383 1.307 2.145 3.044 2.145 4.889 0 1.845-.762 3.582-2.145 4.888-1.383 1.307-3.22 2.026-5.174 2.026z"
+            fill="#F2F2F2"
+          />
+        </svg>
+        <span
+          className="link__text link__text-dark link__text-header"
+        >
+          About Me
+        </span>
+      </a>
+      <a
+        className="link navbar__link"
+        href="#Skills"
+      >
+        <svg
+          className="link__icon link__icon-header"
+          darkmode="true"
+          fill="none"
+          height={32}
+          viewBox="0 0 32 32"
+          width={32}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M6 16.4c0-.318.158-.623.44-.848A1.708 1.708 0 017.5 15.2c.398 0 .78.126 1.06.352.282.225.44.53.44.848 0 .318-.158.623-.44.849a1.708 1.708 0 01-1.06.351c-.398 0-.78-.126-1.06-.352-.282-.225-.44-.53-.44-.848zM7.5 20c-.398 0-.78.126-1.06.352-.282.224-.44.53-.44.848 0 .318.158.623.44.849.28.225.662.351 1.06.351s.78-.126 1.06-.351c.282-.226.44-.53.44-.849 0-.318-.158-.623-.44-.848A1.708 1.708 0 007.5 20zM6 26c0-.318.158-.623.44-.849A1.708 1.708 0 017.5 24.8c.398 0 .78.126 1.06.351.282.226.44.53.44.849 0 .318-.158.623-.44.849a1.708 1.708 0 01-1.06.351c-.398 0-.78-.126-1.06-.351-.282-.226-.44-.53-.44-.849zm7.5-10.8c-.398 0-.78.126-1.06.352-.282.225-.44.53-.44.848 0 .318.158.623.44.849.28.225.662.351 1.06.351h11c.398 0 .78-.126 1.06-.352.282-.225.44-.53.44-.848 0-.318-.158-.623-.44-.848a1.709 1.709 0 00-1.06-.352h-11zm-1.5 6c0-.318.158-.623.44-.848A1.709 1.709 0 0113.5 20h11c.398 0 .78.126 1.06.352.282.224.44.53.44.848 0 .318-.158.623-.44.849a1.709 1.709 0 01-1.06.351h-11c-.398 0-.78-.126-1.06-.351-.282-.226-.44-.53-.44-.849zm1.5 3.6c-.398 0-.78.126-1.06.351-.282.226-.44.53-.44.849 0 .318.158.623.44.849.28.225.662.351 1.06.351h11c.398 0 .78-.126 1.06-.351.282-.226.44-.53.44-.849 0-.318-.158-.623-.44-.849a1.709 1.709 0 00-1.06-.351h-11zm17.328-14.538L19.17.938a.979.979 0 00-.098-.064A1.23 1.23 0 0119 .826a4.097 4.097 0 00-.438-.288 1.43 1.43 0 00-.16-.07l-.096-.04-.1-.046c-.108-.05-.218-.1-.332-.139a4.808 4.808 0 00-1.248-.22 1.388 1.388 0 01-.118-.012A1.507 1.507 0 0016.344 0H4C2.94 0 1.922.337 1.172.937.422 1.537 0 2.351 0 3.2v25.6c0 .849.421 1.663 1.172 2.263.75.6 1.767.937 2.828.937h24c1.06 0 2.078-.337 2.828-.937.75-.6 1.172-1.414 1.172-2.263V12.525c0-.849-.422-1.663-1.172-2.263zM29 28.8a.73.73 0 01-.293.566A1.14 1.14 0 0128 29.6H4a1.14 1.14 0 01-.707-.234A.729.729 0 013 28.8V3.2c0-.212.105-.416.293-.566A1.14 1.14 0 014 2.4h12v7.2c0 .849.421 1.663 1.172 2.263.75.6 1.767.937 2.828.937h9v16zM19 4.194l7.756 6.206H20a1.14 1.14 0 01-.707-.234A.73.73 0 0119 9.6V4.194z"
+            fill="#F2F2F2"
+          />
+        </svg>
+        <span
+          className="link__text link__text-dark link__text-header"
+        >
+          Skills
+        </span>
+      </a>
+      <a
+        className="link navbar__link"
+        href="#Services"
+      >
+        <svg
+          className="link__icon link__icon-header"
+          darkmode="true"
+          fill="none"
+          height={32}
+          viewBox="0 0 32 32"
+          width={32}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M29.714 8h-6.857V2.667c0-.708-.24-1.386-.67-1.886C21.76.281 21.178 0 20.572 0H11.43c-.607 0-1.188.281-1.617.781-.428.5-.67 1.178-.67 1.886V8H2.287c-.606 0-1.188.281-1.617.781C.241 9.281 0 9.96 0 10.667v18.666c0 .708.24 1.386.67 1.886.428.5 1.01.781 1.616.781h27.428c.607 0 1.188-.281 1.617-.781.428-.5.669-1.178.669-1.886V10.667c0-.708-.24-1.386-.67-1.886-.428-.5-1.01-.781-1.616-.781zM11.43 2.667h9.142V8H11.43V2.667zM2.286 29.333V10.667h27.428v18.666H2.286z"
+            fill="#F2F2F2"
+          />
+        </svg>
+        <span
+          className="link__text link__text-dark link__text-header"
+        >
+          Services
+        </span>
+      </a>
+      <a
+        className="link navbar__link"
+        href="#Portfolio"
+      >
+        <svg
+          className="link__icon link__icon-header"
+          darkmode="true"
+          fill="none"
+          height={32}
+          viewBox="0 0 32 32"
+          width={32}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M27 7V6a3.009 3.009 0 00-3-3H4a3.009 3.009 0 00-3 3v16a3.009 3.009 0 003 3h1"
+            stroke="#F2F2F2"
+            strokeLinejoin="round"
+            strokeWidth={2}
+          />
+          <path
+            d="M28.126 8H8.874A2.874 2.874 0 006 10.874v15.252A2.874 2.874 0 008.874 29h19.252A2.874 2.874 0 0031 26.126V10.874A2.874 2.874 0 0028.126 8z"
+            stroke="#F2F2F2"
+            strokeLinejoin="round"
+            strokeWidth={2}
+          />
+          <path
+            d="M23.308 15.637a1.916 1.916 0 001.923-1.91c0-1.054-.861-1.909-1.924-1.909a1.916 1.916 0 00-1.923 1.91c0 1.054.861 1.909 1.924 1.909z"
+            stroke="#F2F2F2"
+            strokeMiterlimit={10}
+            strokeWidth={2}
+          />
+          <path
+            d="M21.384 23.26l-5.447-5.399a1.933 1.933 0 00-2.636-.075L6 24.227M16.577 29l7.412-7.358a1.937 1.937 0 012.591-.117L31 25.182"
+            stroke="#F2F2F2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+          />
+        </svg>
+        <span
+          className="link__text link__text-dark link__text-header"
+        >
+          Portfolio
+        </span>
+      </a>
+      <a
+        className="link navbar__link"
+        href="#ContactMe"
+      >
+        <svg
+          className="link__icon link__icon-header"
+          darkmode="true"
+          fill="none"
+          height={32}
+          viewBox="0 0 32 32"
+          width={32}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g
+            clipPath="url(#prefix__clip0)"
+          >
+            <path
+              d="M16.638 16h9.739M6.899 16a4.268 4.268 0 01-2.952-1.172A3.917 3.917 0 012.725 12c0-1.06.44-2.078 1.222-2.828A4.268 4.268 0 016.9 8c1.107 0 2.168.421 2.951 1.172A3.917 3.917 0 0111.073 12c0 1.06-.44 2.078-1.223 2.828A4.268 4.268 0 016.899 16zm5.565 8v-2.667c0-3-2.486-5.333-5.616-5.333h.076c-3.13 0-5.59 2.333-5.59 5.333V24h11.13zm4.174-14.667h16.695-16.695zm0 13.334H30.55 16.638z"
+              stroke="#F2F2F2"
+              strokeWidth={2}
+            />
+          </g>
+          <defs>
+            <clipPath
+              id="prefix__clip0"
+            >
+              <path
+                d="M0 0h32v32H0z"
+                fill="#F2F2F2"
+              />
+            </clipPath>
+          </defs>
+        </svg>
+        <span
+          className="link__text link__text-dark link__text-header"
+        >
+          Contact Me
+        </span>
+      </a>
+    </nav>
+    <div
+      className="header__actions"
+    >
+      <button
+        className="menuToggle header__menuToggle"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          fill="none"
+          height={32}
+          width={32}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8 4a4 4 0 11-8 0 4 4 0 018 0zM8 16a4 4 0 11-8 0 4 4 0 018 0zM4 32a4 4 0 100-8 4 4 0 000 8zM20 4a4 4 0 11-8 0 4 4 0 018 0zM16 20a4 4 0 100-8 4 4 0 000 8zM20 28a4 4 0 11-8 0 4 4 0 018 0zM28 8a4 4 0 100-8 4 4 0 000 8zM32 16a4 4 0 11-8 0 4 4 0 018 0zM28 32a4 4 0 100-8 4 4 0 000 8z"
+            fill="#5285DA"
+          />
+        </svg>
+      </button>
+      <div
+        className="div header__themeToggler"
+      >
+        <input
+          className="checkbox"
+          id="chk"
+          onClick={[Function]}
+          type="checkbox"
+        />
+        <label
+          className="label"
+          htmlFor="chk"
+        >
+          <svg
+            aria-hidden="true"
+            className="svg-inline--fa fa-sun fa-w-16 faMoon"
+            data-icon="sun"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            style={Object {}}
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z"
+              fill="currentColor"
+              style={Object {}}
+            />
+          </svg>
+          <svg
+            aria-hidden="true"
+            className="svg-inline--fa fa-moon fa-w-16 faSun"
+            data-icon="moon"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            style={Object {}}
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"
+              fill="currentColor"
+              style={Object {}}
+            />
+          </svg>
+          <div
+            className="ball"
+          />
+        </label>
+      </div>
+    </div>
+  </header>,
+  <div
+    className="backdrop"
+    onClick={[Function]}
+  />,
+]
+`;
+
+exports[`Tests on <Header /> Should render correctly without dark mode 1`] = `
+Array [
+  <header
+    className="container-header container-light header"
+  >
+    <div
+      className="logo header__logo"
+    >
+      <div
+        style={
+          Object {
+            "boxSizing": "border-box",
+            "display": "inline-block",
+            "height": 64,
+            "overflow": "hidden",
+            "position": "relative",
+            "width": 64,
+          }
+        }
+      >
+        <noscript>
+          <img
+            alt="Front end Developer"
+            data-nimg={true}
+            decoding="async"
+            src="/_next/image?url=%2Fimages%2Flogo.png&w=128&q=75"
+            srcSet="/_next/image?url=%2Fimages%2Flogo.png&w=64&q=75 1x, /_next/image?url=%2Fimages%2Flogo.png&w=128&q=75 2x"
+            style={
+              Object {
+                "border": "none",
+                "bottom": 0,
+                "boxSizing": "border-box",
+                "display": "block",
+                "height": 0,
+                "left": 0,
+                "margin": "auto",
+                "maxHeight": "100%",
+                "maxWidth": "100%",
+                "minHeight": "100%",
+                "minWidth": "100%",
+                "objectFit": "cover",
+                "objectPosition": undefined,
+                "padding": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "width": 0,
+              }
+            }
+          />
+        </noscript>
+        <img
+          alt="Front end Developer"
+          data-nimg={true}
+          decoding="async"
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+          style={
+            Object {
+              "border": "none",
+              "bottom": 0,
+              "boxSizing": "border-box",
+              "display": "block",
+              "height": 0,
+              "left": 0,
+              "margin": "auto",
+              "maxHeight": "100%",
+              "maxWidth": "100%",
+              "minHeight": "100%",
+              "minWidth": "100%",
+              "objectFit": "cover",
+              "objectPosition": undefined,
+              "padding": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+              "width": 0,
+            }
+          }
+        />
+      </div>
+      <a
+        className="logo__text logo__text-light"
+        href="#Home"
+      >
+        Eduardo Varela
+      </a>
+    </div>
+    <nav
+      className="container-navbar container-light navbar header__navbar"
+    >
+      <a
+        className="link navbar__link"
+        href="#Home"
+      >
+        <svg
+          className="link__icon link__icon-header"
+          darkmode="false"
+          fill="none"
+          height={32}
+          viewBox="0 0 32 32"
+          width={32}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M31.336 15.743L17.698 1.31l-.914-.968A1.08 1.08 0 0016 0c-.293 0-.575.123-.784.342L.665 15.743a2.402 2.402 0 00-.496.789c-.114.295-.171.611-.168.93.014 1.316 1.048 2.366 2.29 2.366h1.501V32h24.418V19.828h1.532c.604 0 1.172-.25 1.599-.703.21-.222.377-.486.49-.776a2.5 2.5 0 00.17-.917 2.45 2.45 0 00-.664-1.689zM17.976 29.31h-3.952v-7.624h3.953v7.624zm7.692-12.172V29.31h-5.432v-8.52c0-.827-.632-1.495-1.412-1.495h-5.648c-.78 0-1.412.668-1.412 1.494v8.521H6.332V17.137H2.944l13.06-13.816.815.863 12.24 12.953h-3.391z"
+            fill="#333"
+          />
+        </svg>
+        <span
+          className="link__text link__text-light link__text-header"
+        >
+          Home
+        </span>
+      </a>
+      <a
+        className="link navbar__link"
+        href="#AboutMe"
+      >
+        <svg
+          className="link__icon link__icon-header"
+          darkmode="false"
+          fill="none"
+          height={32}
+          viewBox="0 0 32 32"
+          width={32}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M30.745 26.115a15.017 15.017 0 00-3.43-4.804 16.065 16.065 0 00-5.085-3.24c-.017-.009-.034-.013-.051-.02 2.65-1.81 4.374-4.756 4.374-8.081C26.553 4.462 21.83 0 16 0 10.17 0 5.447 4.462 5.447 9.97c0 3.324 1.723 6.271 4.374 8.084-.017.008-.034.012-.05.02a15.927 15.927 0 00-5.086 3.24 15.084 15.084 0 00-3.43 4.805A14.242 14.242 0 000 31.67a.306.306 0 00.097.233A.343.343 0 00.34 32h2.553c.187 0 .336-.14.34-.314.085-3.103 1.404-6.01 3.736-8.213 2.413-2.279 5.617-3.533 9.03-3.533 3.413 0 6.617 1.254 9.03 3.533 2.332 2.203 3.65 5.11 3.736 8.213.004.177.153.314.34.314h2.553a.359.359 0 00.244-.097.32.32 0 00.097-.233 14.278 14.278 0 00-1.255-5.555zM16 16.885c-1.953 0-3.791-.72-5.174-2.027C9.443 13.552 8.68 11.815 8.68 9.97c0-1.845.762-3.582 2.145-4.889 1.383-1.306 3.22-2.026 5.174-2.026 1.953 0 3.791.72 5.174 2.026 1.383 1.307 2.145 3.044 2.145 4.889 0 1.845-.762 3.582-2.145 4.888-1.383 1.307-3.22 2.026-5.174 2.026z"
+            fill="#333"
+          />
+        </svg>
+        <span
+          className="link__text link__text-light link__text-header"
+        >
+          About Me
+        </span>
+      </a>
+      <a
+        className="link navbar__link"
+        href="#Skills"
+      >
+        <svg
+          className="link__icon link__icon-header"
+          darkmode="false"
+          fill="none"
+          height={32}
+          viewBox="0 0 32 32"
+          width={32}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M6 16.4c0-.318.158-.623.44-.848A1.708 1.708 0 017.5 15.2c.398 0 .78.126 1.06.352.282.225.44.53.44.848 0 .318-.158.623-.44.849a1.708 1.708 0 01-1.06.351c-.398 0-.78-.126-1.06-.352-.282-.225-.44-.53-.44-.848zM7.5 20c-.398 0-.78.126-1.06.352-.282.224-.44.53-.44.848 0 .318.158.623.44.849.28.225.662.351 1.06.351s.78-.126 1.06-.351c.282-.226.44-.53.44-.849 0-.318-.158-.623-.44-.848A1.708 1.708 0 007.5 20zM6 26c0-.318.158-.623.44-.849A1.708 1.708 0 017.5 24.8c.398 0 .78.126 1.06.351.282.226.44.53.44.849 0 .318-.158.623-.44.849a1.708 1.708 0 01-1.06.351c-.398 0-.78-.126-1.06-.351-.282-.226-.44-.53-.44-.849zm7.5-10.8c-.398 0-.78.126-1.06.352-.282.225-.44.53-.44.848 0 .318.158.623.44.849.28.225.662.351 1.06.351h11c.398 0 .78-.126 1.06-.352.282-.225.44-.53.44-.848 0-.318-.158-.623-.44-.848a1.709 1.709 0 00-1.06-.352h-11zm-1.5 6c0-.318.158-.623.44-.848A1.709 1.709 0 0113.5 20h11c.398 0 .78.126 1.06.352.282.224.44.53.44.848 0 .318-.158.623-.44.849a1.709 1.709 0 01-1.06.351h-11c-.398 0-.78-.126-1.06-.351-.282-.226-.44-.53-.44-.849zm1.5 3.6c-.398 0-.78.126-1.06.351-.282.226-.44.53-.44.849 0 .318.158.623.44.849.28.225.662.351 1.06.351h11c.398 0 .78-.126 1.06-.351.282-.226.44-.53.44-.849 0-.318-.158-.623-.44-.849a1.709 1.709 0 00-1.06-.351h-11zm17.328-14.538L19.17.938a.979.979 0 00-.098-.064A1.23 1.23 0 0119 .826a4.097 4.097 0 00-.438-.288 1.43 1.43 0 00-.16-.07l-.096-.04-.1-.046c-.108-.05-.218-.1-.332-.139a4.808 4.808 0 00-1.248-.22 1.388 1.388 0 01-.118-.012A1.507 1.507 0 0016.344 0H4C2.94 0 1.922.337 1.172.937.422 1.537 0 2.351 0 3.2v25.6c0 .849.421 1.663 1.172 2.263.75.6 1.767.937 2.828.937h24c1.06 0 2.078-.337 2.828-.937.75-.6 1.172-1.414 1.172-2.263V12.525c0-.849-.422-1.663-1.172-2.263zM29 28.8a.73.73 0 01-.293.566A1.14 1.14 0 0128 29.6H4a1.14 1.14 0 01-.707-.234A.729.729 0 013 28.8V3.2c0-.212.105-.416.293-.566A1.14 1.14 0 014 2.4h12v7.2c0 .849.421 1.663 1.172 2.263.75.6 1.767.937 2.828.937h9v16zM19 4.194l7.756 6.206H20a1.14 1.14 0 01-.707-.234A.73.73 0 0119 9.6V4.194z"
+            fill="#333"
+          />
+        </svg>
+        <span
+          className="link__text link__text-light link__text-header"
+        >
+          Skills
+        </span>
+      </a>
+      <a
+        className="link navbar__link"
+        href="#Services"
+      >
+        <svg
+          className="link__icon link__icon-header"
+          darkmode="false"
+          fill="none"
+          height={32}
+          viewBox="0 0 32 32"
+          width={32}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M29.714 8h-6.857V2.667c0-.708-.24-1.386-.67-1.886C21.76.281 21.178 0 20.572 0H11.43c-.607 0-1.188.281-1.617.781-.428.5-.67 1.178-.67 1.886V8H2.287c-.606 0-1.188.281-1.617.781C.241 9.281 0 9.96 0 10.667v18.666c0 .708.24 1.386.67 1.886.428.5 1.01.781 1.616.781h27.428c.607 0 1.188-.281 1.617-.781.428-.5.669-1.178.669-1.886V10.667c0-.708-.24-1.386-.67-1.886-.428-.5-1.01-.781-1.616-.781zM11.43 2.667h9.142V8H11.43V2.667zM2.286 29.333V10.667h27.428v18.666H2.286z"
+            fill="#333"
+          />
+        </svg>
+        <span
+          className="link__text link__text-light link__text-header"
+        >
+          Services
+        </span>
+      </a>
+      <a
+        className="link navbar__link"
+        href="#Portfolio"
+      >
+        <svg
+          className="link__icon link__icon-header"
+          darkmode="false"
+          fill="none"
+          height={32}
+          viewBox="0 0 32 32"
+          width={32}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M27 7V6a3.009 3.009 0 00-3-3H4a3.009 3.009 0 00-3 3v16a3.009 3.009 0 003 3h1"
+            stroke="#333"
+            strokeLinejoin="round"
+            strokeWidth={2}
+          />
+          <path
+            d="M28.126 8H8.874A2.874 2.874 0 006 10.874v15.252A2.874 2.874 0 008.874 29h19.252A2.874 2.874 0 0031 26.126V10.874A2.874 2.874 0 0028.126 8z"
+            stroke="#333"
+            strokeLinejoin="round"
+            strokeWidth={2}
+          />
+          <path
+            d="M23.308 15.637a1.916 1.916 0 001.923-1.91c0-1.054-.861-1.909-1.924-1.909a1.916 1.916 0 00-1.923 1.91c0 1.054.861 1.909 1.924 1.909z"
+            stroke="#333"
+            strokeMiterlimit={10}
+            strokeWidth={2}
+          />
+          <path
+            d="M21.384 23.26l-5.447-5.399a1.933 1.933 0 00-2.636-.075L6 24.227M16.577 29l7.412-7.358a1.937 1.937 0 012.591-.117L31 25.182"
+            stroke="#333"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+          />
+        </svg>
+        <span
+          className="link__text link__text-light link__text-header"
+        >
+          Portfolio
+        </span>
+      </a>
+      <a
+        className="link navbar__link"
+        href="#ContactMe"
+      >
+        <svg
+          className="link__icon link__icon-header"
+          darkmode="false"
+          fill="none"
+          height={32}
+          viewBox="0 0 32 32"
+          width={32}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g
+            clipPath="url(#prefix__clip0)"
+          >
+            <path
+              d="M16.638 16h9.739M6.899 16a4.268 4.268 0 01-2.952-1.172A3.917 3.917 0 012.725 12c0-1.06.44-2.078 1.222-2.828A4.268 4.268 0 016.9 8c1.107 0 2.168.421 2.951 1.172A3.917 3.917 0 0111.073 12c0 1.06-.44 2.078-1.223 2.828A4.268 4.268 0 016.899 16zm5.565 8v-2.667c0-3-2.486-5.333-5.616-5.333h.076c-3.13 0-5.59 2.333-5.59 5.333V24h11.13zm4.174-14.667h16.695-16.695zm0 13.334H30.55 16.638z"
+              stroke="#333"
+              strokeWidth={2}
+            />
+          </g>
+          <defs>
+            <clipPath
+              id="prefix__clip0"
+            >
+              <path
+                d="M0 0h32v32H0z"
+                fill="#333"
+              />
+            </clipPath>
+          </defs>
+        </svg>
+        <span
+          className="link__text link__text-light link__text-header"
+        >
+          Contact Me
+        </span>
+      </a>
+    </nav>
+    <div
+      className="header__actions"
+    >
+      <button
+        className="menuToggle header__menuToggle"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          fill="none"
+          height={32}
+          width={32}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8 4a4 4 0 11-8 0 4 4 0 018 0zM8 16a4 4 0 11-8 0 4 4 0 018 0zM4 32a4 4 0 100-8 4 4 0 000 8zM20 4a4 4 0 11-8 0 4 4 0 018 0zM16 20a4 4 0 100-8 4 4 0 000 8zM20 28a4 4 0 11-8 0 4 4 0 018 0zM28 8a4 4 0 100-8 4 4 0 000 8zM32 16a4 4 0 11-8 0 4 4 0 018 0zM28 32a4 4 0 100-8 4 4 0 000 8z"
+            fill="#5285DA"
+          />
+        </svg>
+      </button>
+      <div
+        className="div header__themeToggler"
+      >
+        <input
+          className="checkbox"
+          id="chk"
+          onClick={[Function]}
+          type="checkbox"
+        />
+        <label
+          className="label"
+          htmlFor="chk"
+        >
+          <svg
+            aria-hidden="true"
+            className="svg-inline--fa fa-sun fa-w-16 faMoon"
+            data-icon="sun"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            style={Object {}}
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z"
+              fill="currentColor"
+              style={Object {}}
+            />
+          </svg>
+          <svg
+            aria-hidden="true"
+            className="svg-inline--fa fa-moon fa-w-16 faSun"
+            data-icon="moon"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            style={Object {}}
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"
+              fill="currentColor"
+              style={Object {}}
+            />
+          </svg>
+          <div
+            className="ball"
+          />
+        </label>
+      </div>
+    </div>
+  </header>,
+  <div
+    className="backdrop"
+    onClick={[Function]}
+  />,
+]
+`;

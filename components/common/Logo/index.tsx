@@ -26,7 +26,12 @@ const Logo: React.FC<ILogo> = ({ darkMode, className }): JSX.Element => {
         objectFit="cover"
         layout="fixed"
       />
-      <p className={textClassNames}>Eduardo Varela</p>
+      <a
+        href="#Home"
+        className={textClassNames}
+      >
+        Eduardo Varela
+      </a>
     </div>
   );
 };

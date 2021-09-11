@@ -24,8 +24,6 @@ const Container: React.FC<IContainer> = ({
     [styles[`container-${manageUIStyle(darkMode)}-${order}`]]: order,
   });
 
-  console.log(darkMode);
-
   return (
     <>
       {containerType === 'container' && (

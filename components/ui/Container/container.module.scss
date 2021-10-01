@@ -6,6 +6,11 @@
     opacity: 0.9;
   }
 
+  // Transparency
+  &-true {
+    background-color: transparent !important;
+  }
+
   // Dark mode off
   &-light {
     background-color: getLight(bg);

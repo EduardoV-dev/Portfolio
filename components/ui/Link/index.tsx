@@ -3,7 +3,7 @@ import { LayoutItem } from '../../../models/types';
 import { IIcon } from '../../../models/interfaces';
 import cn from 'classnames';
 import styles from './Link.module.scss';
-import { manageUIStyle } from '../../../styles/helpers';
+import { manageUIStyle } from '../../../helpers';
 
 interface ILink {
   href?: string;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ISvg } from '../../models/interfaces';
-import { manageSVGStyle } from '../../styles/helpers';
+import { manageSVGStyle } from '../../helpers';
 
 function Home(props: ISvg) {
   return (

@@ -1,20 +1,19 @@
-import React, { useContext, useState } from 'react';
-import { Backdrop, Logo, Navbar } from '../../common';
-import { appContext } from '../../../hooks/context/AppContext';
-import { ThemeToggler } from '../../portfolio';
-import { Container, MenuToggler } from '../../ui';
-import { types } from '../../../hooks/reducer/types';
+import React, { useState } from 'react';
+import {
+  Backdrop,
+  Container,
+  MenuToggler,
+  ThemeToggler,
+  Logo,
+  Navbar
+} from '../../ui';
 import styles from './header.module.scss';
+import useThemeToggler from './useThemeToggler';
 
 const Header: React.FC<{}> = (): JSX.Element => {
-  const {
-    state: { darkMode },
-    dispatch,
-  } = useContext(appContext);
   const [menuState, setMenuState] = useState<boolean>(false);
-
+  const { darkMode, handleToggleDarkMode } = useThemeToggler();
   const handleMenuState = () => setMenuState(!menuState);
-  const handleToggleDarkMode = () => dispatch({ type: types.TOGGLEUIMODE });
 
   return (
     <>
@@ -22,6 +21,7 @@ const Header: React.FC<{}> = (): JSX.Element => {
         containerType="header"
         darkMode={darkMode}
         className={styles.header}
+        order="odd"
       >
         <Logo
           darkMode={darkMode}
@@ -39,6 +39,7 @@ const Header: React.FC<{}> = (): JSX.Element => {
             onClick={handleMenuState}
           />
           <ThemeToggler
+            darkMode={darkMode}
             className={styles.header__themeToggler}
             onClick={handleToggleDarkMode}
           />
@@ -49,7 +50,6 @@ const Header: React.FC<{}> = (): JSX.Element => {
         setState={handleMenuState}
       />
     </>
-
   );
 };
 

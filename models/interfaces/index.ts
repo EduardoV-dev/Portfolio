@@ -27,3 +27,7 @@ export interface IIcon {
 export interface ISvg extends React.SVGProps<SVGSVGElement> {
   darkmode: 'true' | 'false';
 }
+
+export interface IDarkMode {
+  darkMode: boolean;
+}

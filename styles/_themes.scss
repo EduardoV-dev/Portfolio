@@ -8,6 +8,7 @@ $light-colors: (
   secondary: #5285da,
   bgDarkenCard: #cccccc,
   bgCard: #e1e1e1,
+  highlightedText: #5285da
 );
 
 $dark-colors: (
@@ -20,6 +21,7 @@ $dark-colors: (
   secondary: #5285da,
   bgDarkenCard: #49475f,
   bgCard: #424055,
+  highlightedText: #5285da
 );
 
 @function getLight($color-name) {

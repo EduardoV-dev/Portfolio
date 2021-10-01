@@ -1,0 +1,14 @@
+@import '../../../styles/breakpoints';
+
+.placeholder {
+  @include responsive(sm) {
+    bottom: 10%;
+    right: 10%;
+    transform: rotate(-20deg)
+  }
+
+  @include responsive(xl) {
+    left: 10%;
+    top: -10%;
+  }
+} 

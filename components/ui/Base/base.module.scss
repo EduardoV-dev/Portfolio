@@ -1,0 +1,94 @@
+@import "../../../styles/themes";
+@import "../../../styles/breakpoints";
+
+.base {
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+
+  @include responsive(md) {
+    min-height: 85vh;
+  }
+
+  @include responsive(xl) {
+    min-height: 75vh;
+  }
+
+  &__main {
+    width: 95%;
+    max-width: 75rem;
+
+    @include responsive(md) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    div {
+      width: 100%;
+    }
+  }
+
+  &__headlines {
+    width: 100%;
+  }
+
+  &__placeholder {
+    display: none;
+
+    @include responsive(sm) {
+      // General styling
+      display: block;
+      position: absolute;
+      z-index: -1;
+      user-select: none;
+      font-size: 180px;
+      font-family: "Ephesis", cursive, Helvetica, sans-serif;
+
+      &-light {
+        &-pair,
+        &-odd {
+          color: getLight(bgPlaceholder);
+        }
+      }
+
+      &-dark {
+        &-pair {
+          color: getDark(bgPlaceholder);
+        }
+        &-odd {
+          color: getDark(bgDarkenPlaceholder);
+        }
+      }
+    }
+
+    // Dark mode off
+    &-light {
+      // Pair
+      &-pair {
+        color: getColor(bgPlaceholder);
+      }
+      // Odd
+      &-odd {
+        color: getColor(bgDarkenPlaceholder);
+      }
+    }
+
+    // Dark mode on
+    &-light {
+      // Pair
+      &-pair {
+        color: getColor(bgPlaceholder);
+      }
+      // Odd
+      &-odd {
+        color: getColor(bgDarkenPlaceholder);
+      }
+    }
+  }
+}

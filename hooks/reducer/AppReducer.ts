@@ -7,7 +7,7 @@ const AppReducer = (state = initialState, action: AppAction) => {
     case types.TOGGLEUIMODE:
       return {
         ...state,
-        darkMode: state.darkMode ? false : true,
+        darkMode: action.payload
       };
     case types.LOADPROJECTS:
       return {

@@ -1,12 +1,17 @@
 import type { NextPage } from 'next';
+import { useContext } from 'react';
 import { Layout } from '../components/layout';
+import { Home } from '../components/sections';
+import { appContext } from '../hooks/context/AppContext';
 
-const Home: NextPage = () => {
+const SPA: NextPage = () => {
+  const { state: { darkMode } } = useContext(appContext);
+
   return (
     <Layout>
-      <h1>Portfolio</h1>     
+      <Home darkMode={darkMode} />
     </Layout>
   );
 };
 
-export default Home;
+export default SPA;

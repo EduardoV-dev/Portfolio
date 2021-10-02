@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import cn from 'classnames';
 import styles from './container.module.scss';
 import { manageUIStyle } from '../../../helpers';
+import { appContext } from '../../../hooks/context/AppContext';
 
 interface IContainer {
   containerType: 'header' | 'footer' | 'container' | 'navbar';
-  darkMode: boolean;
   children: JSX.Element | JSX.Element[] | undefined;
   className?: string;
   order?: 'pair' | 'odd';
@@ -15,14 +15,13 @@ interface IContainer {
 
 const Container: React.FC<IContainer> = ({
   containerType,
-  darkMode,
   children,
   className,
   order,
   id,
   transparent,
 }): JSX.Element => {
-  console.log(darkMode);
+  const { state: { darkMode } } = useContext(appContext);
 
   const classNames = cn(className, {
     [styles[`container-${containerType}`]]: containerType,

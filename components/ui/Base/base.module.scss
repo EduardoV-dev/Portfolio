@@ -42,53 +42,7 @@
     display: none;
 
     @include responsive(sm) {
-      // General styling
       display: block;
-      position: absolute;
-      z-index: -1;
-      user-select: none;
-      font-size: 180px;
-      font-family: "Ephesis", cursive, Helvetica, sans-serif;
-
-      &-light {
-        &-pair,
-        &-odd {
-          color: getLight(bgPlaceholder);
-        }
-      }
-
-      &-dark {
-        &-pair {
-          color: getDark(bgPlaceholder);
-        }
-        &-odd {
-          color: getDark(bgDarkenPlaceholder);
-        }
-      }
-    }
-
-    // Dark mode off
-    &-light {
-      // Pair
-      &-pair {
-        color: getColor(bgPlaceholder);
-      }
-      // Odd
-      &-odd {
-        color: getColor(bgDarkenPlaceholder);
-      }
-    }
-
-    // Dark mode on
-    &-light {
-      // Pair
-      &-pair {
-        color: getColor(bgPlaceholder);
-      }
-      // Odd
-      &-odd {
-        color: getColor(bgDarkenPlaceholder);
-      }
     }
   }
 }

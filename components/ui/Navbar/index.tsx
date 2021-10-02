@@ -1,21 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Container, Link } from '../../ui';
 import { About, Contact, Home, Portfolio, Services, Skills } from '../../icons';
 import { LayoutItem } from '../../../models/types';
 import styles from './navbar.module.scss';
 import cn from 'classnames';
+import { appContext } from '../../../hooks/context/AppContext';
 
 interface INavbar {
   menuState: boolean;
   layout: LayoutItem;
-  darkMode: boolean;
   className?: string;
 }
 
 const Navbar: React.FC<INavbar> = ({
   menuState,
   layout,
-  darkMode,
   className,
 }): JSX.Element => {
   const classNames = cn(styles.navbar, className, {
@@ -25,11 +24,9 @@ const Navbar: React.FC<INavbar> = ({
   return (
     <Container
       containerType="navbar"
-      darkMode={darkMode}
       className={classNames}
     >
       <Link
-        darkMode={darkMode}
         href="#Home"
         text="Home"
         icon={Home}
@@ -37,7 +34,6 @@ const Navbar: React.FC<INavbar> = ({
         className={styles.navbar__link}
       />
       <Link
-        darkMode={darkMode}
         href="#AboutMe"
         text="About Me"
         icon={About}
@@ -45,7 +41,6 @@ const Navbar: React.FC<INavbar> = ({
         className={styles.navbar__link}
       />
       <Link
-        darkMode={darkMode}
         href="#Skills"
         text="Skills"
         icon={Skills}
@@ -53,7 +48,6 @@ const Navbar: React.FC<INavbar> = ({
         className={styles.navbar__link}
       />
       <Link
-        darkMode={darkMode}
         href="#Services"
         text="Services"
         icon={Services}
@@ -61,7 +55,6 @@ const Navbar: React.FC<INavbar> = ({
         className={styles.navbar__link}
       />
       <Link
-        darkMode={darkMode}
         href="#Portfolio"
         text="Portfolio"
         icon={Portfolio}
@@ -69,7 +62,6 @@ const Navbar: React.FC<INavbar> = ({
         className={styles.navbar__link}
       />
       <Link
-        darkMode={darkMode}
         href="#ContactMe"
         text="Contact Me"
         icon={Contact}

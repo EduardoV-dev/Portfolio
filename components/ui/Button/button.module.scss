@@ -1,14 +1,14 @@
 @import "../../../styles/themes";
 
 .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: none;
   outline: none;
   border-radius: 50px;
   padding: 0.8rem 1.5rem;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   transition: all 0.3s ease;
 
   &:hover,
@@ -48,6 +48,11 @@
         fill: #fff;
       }
     }
+  }
+
+  &-link {
+    width: 11.25rem;
+    text-decoration: none;
   }
 
   span {

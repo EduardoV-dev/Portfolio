@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from 'react';
-import { IAppContext, IAppReducer, IProject } from '../../models/interfaces';
+import { IAppContext, IAppReducer } from '../../models/interfaces';
 import AppReducer from '../reducer/AppReducer';
 
 interface Props {

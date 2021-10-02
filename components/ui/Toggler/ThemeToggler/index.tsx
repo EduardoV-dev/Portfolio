@@ -1,21 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import styles from './themeToggler.module.scss';
 import cn from 'classnames';
 import { manageUIStyle } from '../../../../helpers';
+import { appContext } from '../../../../hooks/context/AppContext';
 
 interface IThemeToggler {
-  darkMode: boolean;
   className?: string;
   onClick: () => void;
 }
 
 const ThemeToggler: React.FC<IThemeToggler> = ({ 
-  darkMode,
   className, 
   onClick, 
 }): JSX.Element => {
+  const { state: { darkMode } } = useContext(appContext);
+  
   const classNames = cn(styles.container, className, {
     [styles[`container-${manageUIStyle(darkMode)}`]]: manageUIStyle(darkMode),
   });

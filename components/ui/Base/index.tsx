@@ -26,10 +26,7 @@ const Base: React.FC<IBase> = ({
   order,
   darkMode,
 }): JSX.Element => {
-  const placeholderClassNames = cn(styles.base__placeholder, placeholder?.className, {
-    [styles[`base__placeholder-${manageUIStyle(darkMode)}`]]: manageUIStyle(darkMode),
-    [styles[`base__placeholder-${manageUIStyle(darkMode)}-${order}`]]: order
-  });
+  const placeholderClassNames = cn(styles.base__placeholder, placeholder?.className);
 
   return (
     <Container
@@ -56,6 +53,10 @@ const Base: React.FC<IBase> = ({
           <Placeholder
             text={placeholder.text}
             className={placeholderClassNames}
+            {... {
+              darkMode,
+              order,
+            }}
           />
         )}
       </>

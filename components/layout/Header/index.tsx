@@ -8,29 +8,26 @@ import {
   Navbar
 } from '../../ui';
 import styles from './header.module.scss';
-import useThemeToggler from './useThemeToggler';
+import useThemeToggler from './useTheme';
 
 const Header: React.FC<{}> = (): JSX.Element => {
   const [menuState, setMenuState] = useState<boolean>(false);
-  const { darkMode, handleToggleDarkMode } = useThemeToggler();
+  const { handleChangeUIMode } = useThemeToggler();
   const handleMenuState = () => setMenuState(!menuState);
 
   return (
     <>
       <Container
         containerType="header"
-        darkMode={darkMode}
         className={styles.header}
         order="odd"
       >
         <Logo
-          darkMode={darkMode}
           className={styles.header__logo}
         />
         <Navbar
           menuState={menuState}
           layout="header"
-          darkMode={darkMode}
           className={styles.header__navbar}
         />
         <div className={styles.header__actions}>
@@ -39,9 +36,8 @@ const Header: React.FC<{}> = (): JSX.Element => {
             onClick={handleMenuState}
           />
           <ThemeToggler
-            darkMode={darkMode}
             className={styles.header__themeToggler}
-            onClick={handleToggleDarkMode}
+            onClick={handleChangeUIMode}
           />
         </div>
       </Container>

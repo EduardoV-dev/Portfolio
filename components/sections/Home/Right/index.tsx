@@ -43,11 +43,12 @@ const Right: React.FC<IRight> = ({
         Contact me so that we can start working together.
       </h2>
       <Button 
-        type="button"
+        type="link"
         color="secondary"
         icon={Go}
         text="Contact Me"
         className={styles.content__button}
+        href="#ContactMe"
       />
     </Container>
   );

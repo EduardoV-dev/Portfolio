@@ -4,11 +4,9 @@ exports[`Test on <Navbar /> Should render correctly and show all the links 1`] =
 <Container
   className="navbar"
   containerType="navbar"
-  darkMode={true}
 >
   <Link
     className="navbar__link"
-    darkMode={true}
     href="#Home"
     icon={[Function]}
     layout="header"
@@ -16,7 +14,6 @@ exports[`Test on <Navbar /> Should render correctly and show all the links 1`] =
   />
   <Link
     className="navbar__link"
-    darkMode={true}
     href="#AboutMe"
     icon={[Function]}
     layout="header"
@@ -24,7 +21,6 @@ exports[`Test on <Navbar /> Should render correctly and show all the links 1`] =
   />
   <Link
     className="navbar__link"
-    darkMode={true}
     href="#Skills"
     icon={[Function]}
     layout="header"
@@ -32,7 +28,6 @@ exports[`Test on <Navbar /> Should render correctly and show all the links 1`] =
   />
   <Link
     className="navbar__link"
-    darkMode={true}
     href="#Services"
     icon={[Function]}
     layout="header"
@@ -40,7 +35,6 @@ exports[`Test on <Navbar /> Should render correctly and show all the links 1`] =
   />
   <Link
     className="navbar__link"
-    darkMode={true}
     href="#Portfolio"
     icon={[Function]}
     layout="header"
@@ -48,7 +42,6 @@ exports[`Test on <Navbar /> Should render correctly and show all the links 1`] =
   />
   <Link
     className="navbar__link"
-    darkMode={true}
     href="#ContactMe"
     icon={[Function]}
     layout="header"

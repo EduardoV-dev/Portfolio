@@ -1,4 +1,4 @@
-import { Backdrop } from "../../../components/common";
+import { Backdrop } from "../../../components/ui";
 import { shallow } from "enzyme";
 
 describe('Tests on <Backdrop />', () => {

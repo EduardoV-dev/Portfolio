@@ -3,7 +3,7 @@
 exports[`Tests on <Header /> Should render correctly with dark mode 1`] = `
 Array [
   <header
-    className="container-header container-dark header"
+    className="header container-header container-dark container-dark-odd"
   >
     <div
       className="logo header__logo"
@@ -88,7 +88,7 @@ Array [
       </a>
     </div>
     <nav
-      className="container-navbar container-dark navbar header__navbar"
+      className="navbar header__navbar container-navbar container-dark"
     >
       <a
         className="link navbar__link"
@@ -296,6 +296,7 @@ Array [
       >
         <input
           className="checkbox"
+          defaultChecked={true}
           id="chk"
           onClick={[Function]}
           type="checkbox"
@@ -355,7 +356,7 @@ Array [
 exports[`Tests on <Header /> Should render correctly without dark mode 1`] = `
 Array [
   <header
-    className="container-header container-light header"
+    className="header container-header container-light container-light-odd"
   >
     <div
       className="logo header__logo"
@@ -440,7 +441,7 @@ Array [
       </a>
     </div>
     <nav
-      className="container-navbar container-light navbar header__navbar"
+      className="navbar header__navbar container-navbar container-light"
     >
       <a
         className="link navbar__link"
@@ -648,6 +649,7 @@ Array [
       >
         <input
           className="checkbox"
+          defaultChecked={false}
           id="chk"
           onClick={[Function]}
           type="checkbox"

@@ -1,4 +1,4 @@
-import { Navbar } from "../../../components/common";
+import { Navbar } from "../../../components/ui";
 import { shallow } from "enzyme";
 import { LayoutItem } from '../../../models/types';
 
@@ -17,7 +17,6 @@ describe('Test on <Navbar />', () => {
 
   const wrapper = shallow(
     <Navbar
-      darkMode={navbarParams.darkMode}
       layout={navbarParams.layout}
       menuState={navbarParams.menuState}
     />

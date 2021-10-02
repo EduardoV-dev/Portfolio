@@ -1,12 +1,12 @@
-import { Header } from "../../../components/layout";
+import { Header } from "../../../../components/layout";
 import { mount } from "enzyme";
-import { appContext } from '../../../hooks/context/AppContext';
-import { types } from "../../../hooks/reducer/types";
-import { initialState } from "../../fixtures";
+import { appContext } from '../../../../hooks/context/AppContext';
+import { types } from "../../../../hooks/reducer/types";
+import { initialState, localStorageMock } from "../../../fixtures";
+import 'jsdom-global/register';
 
-import 'jsdom-global/register'
-
-describe('Tests on <Header />', () => {
+describe('Tests on <Header />', () => { 
+  global.localStorage = localStorageMock;
 
   it('Should render correctly without dark mode', () => {
     const value = {
@@ -68,7 +68,7 @@ describe('Tests on <Header />', () => {
 
     expect(wrapper.find('header').prop('className')?.includes('container-light')).toBeTruthy();
     wrapper.find('ThemeToggler input').simulate('click');
-    expect(value.dispatch).toHaveBeenCalledWith({ type: types.TOGGLEUIMODE });
+    expect(value.dispatch).toHaveBeenCalledWith({ type: types.TOGGLEUIMODE, payload: true });
   });
 
   it('Should turn off dark mode', () => {
@@ -87,7 +87,7 @@ describe('Tests on <Header />', () => {
 
     expect(wrapper.find('header').prop('className')?.includes('container-dark')).toBeTruthy();
     wrapper.find('ThemeToggler input').simulate('click');
-    expect(value.dispatch).toHaveBeenCalledWith({ type: types.TOGGLEUIMODE });
+    expect(value.dispatch).toHaveBeenCalledWith({ type: types.TOGGLEUIMODE, payload: false });
   });
 
   it('Should show the floating menu in a screen width less than 768px and then close it', () => {

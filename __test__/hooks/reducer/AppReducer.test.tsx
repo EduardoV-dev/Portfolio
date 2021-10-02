@@ -14,8 +14,8 @@ describe('Tests on AppReducer', () => {
     expect(projects).toEqual([]);
   });
   
-  it('Should toggle darkMode', () => {
-    const { darkMode, projects } = AppReducer(initialState(false, []), { type: types.TOGGLEUIMODE });
+  it('Should change ui mode', () => {
+    const { darkMode, projects } = AppReducer(initialState(false, []), { type: types.TOGGLEUIMODE, payload: true });
     expect(darkMode).toBeTruthy();
     expect(projects).toEqual([]);
   });

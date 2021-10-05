@@ -1,0 +1,16 @@
+@import '/styles/themes';
+
+.container {
+  &__about {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+
+    &-light {
+      color: getLight(text);
+    }
+    &-dark {
+      color: getDark(text);
+    }
+  }
+}

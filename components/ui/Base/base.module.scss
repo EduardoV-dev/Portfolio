@@ -36,6 +36,11 @@
 
   &__headlines {
     width: 100%;
+    min-height: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 3rem;
   }
 
   &__placeholder {

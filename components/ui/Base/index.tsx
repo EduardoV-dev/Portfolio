@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { IDarkMode } from '../../../models/interfaces';
 import { Container, Placeholder, Subtitle, Title } from '..';
 import styles from './base.module.scss';
 import cn from 'classnames';
-import { manageUIStyle } from '../../../helpers';
+import { appContext } from '../../../hooks/context/AppContext';
 
 interface IBase {
   leftContent: React.FC<IDarkMode>;
   rightContent: React.FC<IDarkMode>;
-  darkMode: boolean;
   order: 'pair' | 'odd';
   placeholder?: { text: string, className?: string };
   title?: string;
@@ -24,14 +23,13 @@ const Base: React.FC<IBase> = ({
   subtitle,
   id,
   order,
-  darkMode,
 }): JSX.Element => {
+  const { state: { darkMode } } = useContext(appContext);
   const placeholderClassNames = cn(styles.base__placeholder, placeholder?.className);
 
   return (
     <Container
       containerType='container'
-      darkMode={darkMode}
       id={id}
       order={order}
       className={styles.base}

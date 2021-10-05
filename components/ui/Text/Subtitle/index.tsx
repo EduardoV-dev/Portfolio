@@ -1,21 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './subtitle.module.scss';
 import cn from 'classnames';
+import { appContext } from '../../../../hooks/context/AppContext';
+import { manageUIStyle } from '../../../../helpers';
 
-interface ITitle {
+interface ISubtitle {
   text: string;
   className?: string;
 }
 
-const Title: React.FC<ITitle> = ({
+const Subtitle: React.FC<ISubtitle> = ({
   text,
   className,
 }): JSX.Element => {
-  const classNames = cn(styles.title, className);
-  
-  return ( 
+  const { state: { darkMode } } = useContext(appContext);
+  const classNames = cn(styles.subtitle, className, {
+    [styles[`subtitle-${manageUIStyle(darkMode)}`]]: manageUIStyle(darkMode),
+  });
+
+  return (
     <p className={classNames}>{text}</p>
   );
 }
 
-export default Title;
+export default Subtitle;

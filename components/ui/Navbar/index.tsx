@@ -1,19 +1,27 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Container, Link } from '../../ui';
-import { About, Contact, Home, Portfolio, Services, Skills } from '../../icons';
+import {
+  About,
+  Contact,
+  Home,
+  Portfolio,
+  Services,
+  Skills,
+} from '../../icons';
 import { LayoutItem } from '../../../models/types';
 import styles from './navbar.module.scss';
 import cn from 'classnames';
-import { appContext } from '../../../hooks/context/AppContext';
 
 interface INavbar {
   menuState: boolean;
+  handleMenuState: () => void;
   layout: LayoutItem;
   className?: string;
 }
 
 const Navbar: React.FC<INavbar> = ({
   menuState,
+  handleMenuState,
   layout,
   className,
 }): JSX.Element => {
@@ -21,10 +29,18 @@ const Navbar: React.FC<INavbar> = ({
     [styles[`navbar-${menuState}`]]: menuState,
   });
 
+  const handleClickOnLink = (e: React.MouseEvent<HTMLElement>) => {
+    if (window.innerWidth >= 768 || !e.target) return;
+    const elementTagName = (e.target as Element).tagName;
+    if (elementTagName === 'DIV') return;
+    handleMenuState();
+  }
+
   return (
     <Container
       containerType="navbar"
       className={classNames}
+      onClick={handleClickOnLink}
     >
       <Link
         href="#Home"

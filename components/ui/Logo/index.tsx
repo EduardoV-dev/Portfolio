@@ -18,7 +18,7 @@ const Logo: React.FC<ILogo> = ({ className }): JSX.Element => {
   });
 
   return (
-    <div className={logoClassNames}>
+    <a href="#Home" className={logoClassNames}>
       <Image
         src="/images/logo.png"
         alt="Front end Developer"
@@ -27,13 +27,10 @@ const Logo: React.FC<ILogo> = ({ className }): JSX.Element => {
         objectFit="cover"
         layout="fixed"
       />
-      <a
-        href="#Home"
-        className={textClassNames}
-      >
+      <span className={textClassNames}>
         Eduardo Varela
-      </a>
-    </div>
+      </span>
+    </a>
   );
 };
 

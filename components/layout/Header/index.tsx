@@ -26,9 +26,12 @@ const Header: React.FC<{}> = (): JSX.Element => {
           className={styles.header__logo}
         />
         <Navbar
-          menuState={menuState}
           layout="header"
           className={styles.header__navbar}
+          {... {
+            menuState,
+            handleMenuState,
+          }}
         />
         <div className={styles.header__actions}>
           <MenuToggler

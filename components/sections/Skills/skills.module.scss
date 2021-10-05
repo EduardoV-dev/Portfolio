@@ -1,0 +1,8 @@
+@import '/styles/breakpoints';
+
+.placeholder {  
+  @include responsive(md) {
+    bottom: 0%;
+    right: 15%;
+  }
+}

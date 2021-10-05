@@ -7,6 +7,7 @@ export { default as Placeholder } from './Placeholder';
 export { default as Title } from './Text/Title';
 export { default as Subtitle } from './Text/Subtitle';
 export { default as Highlight } from './Text/Highlight';
+export { default as Paragraph } from './Text/Paragraph';
 export { default as Logo } from './Logo';
 export { default as Navbar } from './Navbar';
 export { default as Base } from './Base';

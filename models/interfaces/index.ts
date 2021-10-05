@@ -23,11 +23,3 @@ export interface IIcon {
   className: string; 
   darkmode: 'true' | 'false';
 }
-
-export interface ISvg extends React.SVGProps<SVGSVGElement> {
-  darkmode: 'true' | 'false';
-}
-
-export interface IDarkMode {
-  darkMode: boolean;
-}

@@ -28,7 +28,6 @@ const Right: React.FC<IRight> = ({
   return (
     <Container
       containerType="container"
-      darkMode={darkMode}
       className={classNames}
       transparent='true'
     >

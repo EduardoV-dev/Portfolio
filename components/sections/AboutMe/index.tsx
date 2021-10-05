@@ -4,7 +4,7 @@ import AboutLeft from './Left';
 import AboutRight from './Right';
 
 const AboutMe: React.FC<{}> = (): JSX.Element => {
-  return ( 
+  return (
     <Base
       leftContent={AboutLeft}
       rightContent={AboutRight}

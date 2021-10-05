@@ -1,16 +1,22 @@
 @import '/styles/themes';
+@import '/styles/breakpoints';
 
 .container {
   &__about {
-    font-size: 2rem;
-    font-weight: 800;
     margin-bottom: 1rem;
+    text-align: center;
 
-    &-light {
-      color: getLight(text);
+    @include responsive(md) {
+      text-align: left;
     }
-    &-dark {
-      color: getDark(text);
+  }
+
+  &__btn {
+    margin: 0 auto;
+    margin-bottom: 2rem;
+
+    @include responsive(md) {
+      margin: 0;
     }
   }
 }

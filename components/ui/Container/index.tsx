@@ -11,6 +11,7 @@ interface IContainer {
   order?: 'pair' | 'odd';
   id?: string;
   transparent?: 'true' | 'false';
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 const Container: React.FC<IContainer> = ({
@@ -20,6 +21,7 @@ const Container: React.FC<IContainer> = ({
   order,
   id,
   transparent,
+  onClick,
 }): JSX.Element => {
   const { state: { darkMode } } = useContext(appContext);
 
@@ -33,16 +35,32 @@ const Container: React.FC<IContainer> = ({
   return (
     <>
       {containerType === 'container' && (
-        <div className={classNames} id={id}>{children}</div>
+        <div
+          className={classNames}
+          id={id}
+          onClick={onClick}
+        >{children}</div>
       )}
       {containerType === 'header' && (
-        <header className={classNames} id={id}>{children}</header>
+        <header
+          className={classNames}
+          id={id}
+          onClick={onClick}
+        >{children}</header>
       )}
       {containerType === 'footer' && (
-        <footer className={classNames} id={id}>{children}</footer>
+        <footer
+          className={classNames}
+          id={id}
+          onClick={onClick}
+        >{children}</footer>
       )}
       {containerType === 'navbar' && (
-        <nav className={classNames} id={id}>{children}</nav>
+        <nav
+          className={classNames}
+          id={id}
+          onClick={onClick}
+        >{children}</nav>
       )}
     </>
   );

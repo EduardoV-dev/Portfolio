@@ -1,0 +1,16 @@
+@import '/styles/themes';
+
+.paragraph {
+  font-size: 2rem;
+  font-weight: 800;
+
+  &-light {
+    color: getLight(text);
+  }
+  &-dark {
+    color: getDark(text);
+  }
+  &-center {
+    text-align: center;
+  }
+}

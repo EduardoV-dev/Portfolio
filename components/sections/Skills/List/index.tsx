@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { designTechnologies, webDevelopmentTechnologies } from '../../../../consts';
 import { Container } from '../../../ui';
 import styles from './list.module.scss';
@@ -18,10 +18,10 @@ const SkillsList: React.FC<ISkillsList> = ({
       transparent="true"
       className={styles.container}
     >
-      {skills.map(Tech => (
-        <>
+      {skills.map((Tech, idx) => (
+        <Fragment key={idx}>
           {Tech}
-        </>
+        </Fragment>
       ))}
     </Container>
   );

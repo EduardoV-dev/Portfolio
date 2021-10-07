@@ -1,0 +1,28 @@
+@import '/styles/themes';
+
+.card {
+  padding: 1.2rem 2rem;
+  border-radius: 10px;
+  min-height: 7.8125rem;
+
+  &-light {
+    border: 3px solid #CCC;
+    
+    &-pair {
+      background-color: getLight(bgCard);
+    }
+    &-odd {
+      background-color: getLight(bgDarkenCard);
+    }
+  }
+  &-dark {
+    border: 3px solid getDark(primary);
+
+    &-pair {
+      background-color: getDark(bgCard);
+    }
+    &-odd {
+      background-color: getDark(bgDarkenCard);
+    }
+  }
+}

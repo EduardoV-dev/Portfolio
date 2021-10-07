@@ -15,6 +15,7 @@ const Skills: React.FC<{}> = (): JSX.Element => {
       title="Skills"
       subtitle="Technologies I work with"
       placeholder={placeholder}
+      id="Skills"
     />
   );
 }

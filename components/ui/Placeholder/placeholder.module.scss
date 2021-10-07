@@ -5,7 +5,9 @@
   z-index: -1;
   user-select: none;
   font-size: 180px;
-  font-family: "Ephesis", 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, cursive;
+  font-family: "Ephesis", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif,
+    cursive;
+  transform: rotate(-20deg);
 
   &-light {
     &-pair,

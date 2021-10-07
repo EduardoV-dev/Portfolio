@@ -1,19 +1,20 @@
-import React from 'react';
-import { IDarkMode } from '../../../../models/interfaces';
+import React, { useContext } from 'react';
 import { Button, Container, Highlight } from '../../../ui';
 import styles from './right.module.scss';
 import cn from 'classnames';
 import { manageUIStyle } from '../../../../helpers';
 import { Go } from '../../../icons';
+import { appContext } from '../../../../hooks/context/AppContext';
 
-interface IRight extends IDarkMode {
+interface IRight {
   className?: string;
 }
 
 const Right: React.FC<IRight> = ({
-  darkMode,
-  className
+  className,
 }): JSX.Element => {
+  const { state: { darkMode } } = useContext(appContext);
+
   const classNames = cn(styles.content, className);
   const smallClassNames = cn(styles.content__small, {
     [styles[`content__small-${manageUIStyle(darkMode)}`]]: manageUIStyle(darkMode),
@@ -41,7 +42,7 @@ const Right: React.FC<IRight> = ({
       <h2 className={subtitleClassNames}>
         Contact me so that we can start working together.
       </h2>
-      <Button 
+      <Button
         type="link"
         color="secondary"
         icon={Go}

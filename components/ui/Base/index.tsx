@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
-import { IDarkMode } from '../../../models/interfaces';
 import { Container, Placeholder, Subtitle, Title } from '..';
 import styles from './base.module.scss';
 import cn from 'classnames';
 import { appContext } from '../../../hooks/context/AppContext';
 
 interface IBase {
-  leftContent: React.FC<IDarkMode>;
-  rightContent: React.FC<IDarkMode>;
+  leftContent: React.FC;
+  rightContent: React.FC;
   order: 'pair' | 'odd';
   placeholder?: { text: string, className?: string };
   title?: string;
@@ -43,8 +42,8 @@ const Base: React.FC<IBase> = ({
         )}
       </>
       <div className={styles.base__main}>
-        <LeftContent darkMode={darkMode} />
-        <RightContent darkMode={darkMode} />
+        <LeftContent />
+        <RightContent />
       </div>
       <>
         {placeholder && (

@@ -12,3 +12,4 @@ export { default as Logo } from './Logo';
 export { default as Navbar } from './Navbar';
 export { default as Base } from './Base';
 export { default as Button } from './Button';
+export { default as Card } from './Card';

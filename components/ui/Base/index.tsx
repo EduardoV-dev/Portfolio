@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { Container, Placeholder, Subtitle, Title } from '..';
 import styles from './base.module.scss';
 import cn from 'classnames';
 import { appContext } from '../../../hooks/context/AppContext';
 
 interface IBase {
-  leftContent: React.FC;
-  rightContent: React.FC;
   order: 'pair' | 'odd';
+  leftContent?: React.FC;
+  rightContent?: React.FC;
+  centralContent?: React.FC;
   placeholder?: { text: string, className?: string };
   title?: string;
   subtitle?: string;
@@ -17,6 +18,7 @@ interface IBase {
 const Base: React.FC<IBase> = ({
   leftContent: LeftContent,
   rightContent: RightContent,
+  centralContent: CentralContent,
   placeholder,
   title,
   subtitle,
@@ -26,12 +28,24 @@ const Base: React.FC<IBase> = ({
   const { state: { darkMode } } = useContext(appContext);
   const placeholderClassNames = cn(styles.base__placeholder, placeholder?.className);
 
+  const noHeadlines = useMemo(() => title === undefined && subtitle === undefined, []);
+  const isCentralContent = useMemo(() => CentralContent !== undefined, []);
+  const isSideContent = useMemo(() => LeftContent !== undefined && RightContent !== undefined, []);
+
+  const baseClassNames = cn(styles.base, {
+    [styles[`base-noHeadlines`]]: noHeadlines,
+  });
+  const mainClassNames = cn(styles.base__main, {
+    [styles[`base__main-sideContent`]]: isSideContent,
+    [styles[`base__main-centralContent`]]: isCentralContent,
+  });
+
   return (
     <Container
       containerType='container'
       id={id}
       order={order}
-      className={styles.base}
+      className={baseClassNames}
     >
       <>
         {(title && subtitle) && (
@@ -41,9 +55,19 @@ const Base: React.FC<IBase> = ({
           </div>
         )}
       </>
-      <div className={styles.base__main}>
-        <LeftContent />
-        <RightContent />
+      <div className={mainClassNames}>
+        {
+          (LeftContent && RightContent) &&
+          (
+            <>
+              <LeftContent />
+              <RightContent />
+            </>
+          )
+        }
+        {
+          CentralContent && <CentralContent />
+        }
       </div>
       <>
         {placeholder && (

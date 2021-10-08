@@ -6,10 +6,14 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   position: relative;
   z-index: 2;
+  padding: 1rem 0;
+
+  &-noHeadlines {
+    justify-content: center;
+  }
 
   @include responsive(md) {
     min-height: 85vh;
@@ -20,14 +24,23 @@
   }
 
   &__main {
+    display: grid;
     width: 95%;
     max-width: 75rem;
+    gap: 1.25rem;
 
-    @include responsive(md) {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.25rem;
+    &-sideContent {
+      @include responsive(md) {
+        grid-template-columns: 1fr 1fr;
+      }
     }
+
+    &-centralContent {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
 
     div {
       width: 100%;
@@ -44,11 +57,10 @@
 
   &__headlines {
     width: 100%;
-    min-height: 5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin: 1rem 0;
+    margin-bottom: 1rem;
 
     @include responsive(md) {
       margin-bottom: 2rem;

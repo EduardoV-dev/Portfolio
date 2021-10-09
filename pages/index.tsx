@@ -5,15 +5,17 @@ import {
   Home,
   Skills,
   Services,
-} from '../components/sections';
+  Portfolio
+} from '../containers';
 
 const SPA: NextPage = () => {
   return (
     <Layout>
       <Home />
       <AboutMe />
-      <Skills />
+      <Skills />  
       <Services />
+      <Portfolio />
     </Layout>
   );
 };

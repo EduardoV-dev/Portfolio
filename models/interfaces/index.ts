@@ -1,3 +1,4 @@
+import React from 'react';
 import { AppAction } from '../types';
 
 export interface IProject {
@@ -22,4 +23,8 @@ export interface IAppReducer {
 export interface IIcon {
   className: string; 
   darkmode: 'true' | 'false';
+}
+
+export interface ISvg extends React.SVGProps<SVGSVGElement> {
+  darkmode: boolean;
 }

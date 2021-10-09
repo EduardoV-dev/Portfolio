@@ -7,7 +7,7 @@ import { manageUIStyle } from '../../../helpers';
 interface ICard {
   children: JSX.Element | JSX.Element[];
   className?: string;
-  order?: 'pair' | 'odd';
+  order: 'pair' | 'odd';
 }
 
 const Card: React.FC<ICard> = ({

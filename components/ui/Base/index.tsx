@@ -6,32 +6,31 @@ import { appContext } from '../../../hooks/context/AppContext';
 
 interface IBase {
   order: 'pair' | 'odd';
+  id: string;
   leftContent?: React.FC;
   rightContent?: React.FC;
   centralContent?: React.FC;
   placeholder?: { text: string, className?: string };
   title?: string;
   subtitle?: string;
-  id?: string;
 }
 
 const Base: React.FC<IBase> = ({
+  order,
+  id,
   leftContent: LeftContent,
   rightContent: RightContent,
   centralContent: CentralContent,
   placeholder,
   title,
   subtitle,
-  id,
-  order,
 }): JSX.Element => {
   const { state: { darkMode } } = useContext(appContext);
-  const placeholderClassNames = cn(styles.base__placeholder, placeholder?.className);
-
+  
   const noHeadlines = useMemo(() => title === undefined && subtitle === undefined, []);
   const isCentralContent = useMemo(() => CentralContent !== undefined, []);
   const isSideContent = useMemo(() => LeftContent !== undefined && RightContent !== undefined, []);
-
+  
   const baseClassNames = cn(styles.base, {
     [styles[`base-noHeadlines`]]: noHeadlines,
   });
@@ -39,6 +38,7 @@ const Base: React.FC<IBase> = ({
     [styles[`base__main-sideContent`]]: isSideContent,
     [styles[`base__main-centralContent`]]: isCentralContent,
   });
+  const placeholderClassNames = cn(styles.base__placeholder, placeholder?.className);
 
   return (
     <Container

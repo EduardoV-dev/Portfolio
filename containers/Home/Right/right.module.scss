@@ -1,0 +1,54 @@
+@import "/styles/themes";
+@import "/styles/breakpoints";
+
+.content {
+  margin: 0 auto;
+  margin-top: -50px;
+
+  &__small,
+  &__headline,
+  &__subtitle {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+
+    &-light {
+      color: getLight(text);
+    }
+
+    &-dark {
+      color: getDark(text);
+    }
+
+    @include responsive(sm) {
+      text-align: left;
+    }
+  }
+
+  &__headline,
+  &__subtitle {
+    @include responsive(sm) {
+      width: calc(576px);
+      font-size: 2rem;
+    }
+  }
+
+  &__small {
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+
+  @include responsive(sm) {
+
+  }
+
+  &__button {
+    margin: 0 auto;
+
+    @include responsive(sm) {
+      margin: 0;
+      margin-top: 2rem;
+    }
+  }
+}

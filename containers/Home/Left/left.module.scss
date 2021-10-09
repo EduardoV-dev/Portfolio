@@ -1,0 +1,71 @@
+@import "/styles/breakpoints";
+
+.container {
+  width: 100%;
+
+  @include responsive(md) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 7rem), 1fr));
+  }
+
+  @include responsive(xl) {
+    display: block;
+  }
+
+  &__git,
+  &__next,
+  &__sass,
+  &__react {
+    position: absolute;
+
+    @include responsive(md) {
+      position: relative;
+      top: 0;
+      left: 0;
+    }
+
+    @include responsive(xl) {
+      position: absolute;
+    }
+  }
+
+  &__git {
+    top: 5%;
+    left: 5%;
+
+    @include responsive(xl) {
+      top: 65%;
+      left: 20%;
+    }
+  }
+
+  &__next {
+    top: 5%;
+    right: 5%;
+
+    @include responsive(xl) {
+      top: 60%;
+      left: 5%;
+    }
+  }
+
+  &__sass {
+    bottom: 15%;
+    left: 5%;
+
+    @include responsive(xl) {
+      top: 45%;
+      left: 34%;
+    }
+  }
+
+  &__react {
+    bottom: 15%;
+    right: 5%;
+
+    @include responsive(xl) {
+      top: 20%;
+      left: 42%;
+    }
+  }
+}

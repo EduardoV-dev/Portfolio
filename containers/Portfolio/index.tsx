@@ -1,6 +1,6 @@
 import React from 'react';
 import { Base } from '../../components/ui';
-import Central from './central';
+import Central from './Central';
 
 const Portfolio: React.FC<{}> = (): JSX.Element => {
   return ( 

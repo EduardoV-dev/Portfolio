@@ -1,0 +1,36 @@
+@import '/styles/themes';
+
+.item {
+  width: 100%;
+  max-width: 31.25rem;
+
+  &__carousel {
+    margin-bottom: 1rem;
+  }
+
+  &__sectionName {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 0.3rem;
+
+    &-light {
+      color: getLight(text);
+    }
+    &-dark {
+      color: getDark(text);
+    }
+  }
+
+  &__projectDescription {
+    font-style: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+
+    &-light {
+      color: getLight(text);
+    }
+    &-dark {
+      color: getDark(text);
+    }
+  }
+}

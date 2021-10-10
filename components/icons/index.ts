@@ -1,4 +1,5 @@
 export { default as ChevronRight } from './ChevronRight';
+export { default as ChevronLeft } from './ChevronLeft';
 export { default as UIUXDesign } from './UIUXDesign';
 export { default as HTML5 } from './HTML5';
 export { default as CodeOpen } from './CodeOpen';

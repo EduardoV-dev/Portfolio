@@ -1,5 +1,5 @@
 import React from 'react';
-import Item from '../item';
+import Item from '../Item';
 
 const Central: React.FC<{}> = (): JSX.Element => {
   return ( 

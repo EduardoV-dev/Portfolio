@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Paragraph } from '../../../components/ui';
+import { Container, Paragraph } from '../../../components';
 import SkillsList from '../List';
 
 const SkillsLeft: React.FC<{}> = (): JSX.Element => {

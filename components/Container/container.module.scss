@@ -1,0 +1,31 @@
+@import "/styles/themes";
+
+.container {
+  &-header,
+  &-footer {
+    opacity: 0.9;
+  }
+
+  // Transparency
+  &-true {
+    background-color: transparent !important;
+  }
+
+  // Dark mode off
+  &-light {
+    background-color: getLight(bg);
+
+    &-odd {
+      background-color: getLight(bgDarken);
+    }
+  }
+
+  // Dark mode on
+  &-dark {
+    background-color: getDark(bg);
+
+    &-odd {
+      background-color: getDark(bgDarken);
+    }
+  }
+}

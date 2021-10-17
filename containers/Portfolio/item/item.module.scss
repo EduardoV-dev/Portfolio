@@ -1,8 +1,8 @@
-@import '/styles/themes';
+@import "/styles/themes";
+@import "/styles/breakpoints";
 
 .item {
   width: 100%;
-  max-width: 31.25rem;
 
   &__carousel {
     margin-bottom: 1rem;
@@ -31,6 +31,33 @@
     }
     &-dark {
       color: getDark(text);
+    }
+  }
+
+  &__badgesContainer {
+    padding-top: 0.5rem;
+  }
+
+  &__btnsContainer {
+    margin-top: 1rem;
+
+    @include responsive(sm) {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__btn {
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+
+    @include responsive(sm) {
+      margin-bottom: 0;
+    }
+
+    svg {
+      width: 1.125rem;
+      height: 1.125rem;
     }
   }
 }

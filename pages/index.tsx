@@ -1,22 +1,29 @@
 import type { NextPage } from 'next';
-import { Layout } from '../components/layout';
+import Head from 'next/head';
+import { Header } from '../components';
 import {
   AboutMe,
   Home,
   Skills,
   Services,
-  Portfolio
+  Portfolio,
+  ContactMe,
 } from '../containers';
 
 const SPA: NextPage = () => {
   return (
-    <Layout>
+    <>
+      <Head>
+        <title>Eduardo Varela | Front end Developer</title>
+      </Head>
+      <Header />
       <Home />
       <AboutMe />
       <Skills />  
       <Services />
       <Portfolio />
-    </Layout>
+      <ContactMe />
+    </>
   );
 };
 

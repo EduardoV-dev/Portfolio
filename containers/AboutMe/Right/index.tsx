@@ -1,6 +1,6 @@
 import React from 'react';
-import { Download } from '../../../components/icons';
-import { Button, Container, Paragraph } from '../../../components/ui';
+import { Download } from '../../../icons';
+import { Button, Container, Paragraph } from '../../../components';
 import styles from './right.module.scss';
 
 const AboutRight: React.FC<{}> = (): JSX.Element => {

@@ -5,6 +5,7 @@ import {
   Electron,
   Figma,
   Firebase,
+  FirebaseBadge,
   Git,
   HTML5,
   JavaScript,
@@ -14,7 +15,7 @@ import {
   Sass,
   Strapi,
   TypeScript,
-} from "../components/icons";
+} from "../icons";
 
 export const LSDARKMODE = 'isDarkMode';
 export const webDevelopmentTechnologies = [
@@ -31,9 +32,25 @@ export const webDevelopmentTechnologies = [
   <TypeScript />,
   <Strapi />,
   <NextJS />,
-]
+];
 
 export const designTechnologies = [
   <AdobeXD />,
   <Figma />,
-]
+];
+
+export const badgesTechnologies = {
+  html: HTML5,
+  css: CSS3,
+  javascript: JavaScript,
+  git: Git,
+  sass: Sass,
+  bootstrap: Bootstrap,
+  react: ReactLibrary,
+  firebase: FirebaseBadge,
+  redux: Redux,
+  electron: Electron,
+  typescript: TypeScript,
+  strapi: Strapi,
+  next: NextJS,
+};

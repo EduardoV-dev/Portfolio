@@ -1,10 +1,10 @@
 import React from 'react';
-import { AppAction } from '../types';
+import { AppAction, Technologies } from '../types';
 
 export interface IProject {
   name: string;
   description: string;
-  technologies: string[];
+  technologies: Technologies[];
   images: string[];
   urlToProduction: string;
   urlToSourceCode: string;
@@ -21,10 +21,10 @@ export interface IAppReducer {
 }
 
 export interface IIcon {
-  className: string; 
   darkmode: 'true' | 'false';
+  className?: string; 
 }
 
 export interface ISvg extends React.SVGProps<SVGSVGElement> {
-  darkmode: boolean;
+  darkmode: 'true' | 'false';
 }

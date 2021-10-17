@@ -2,13 +2,13 @@ import React from 'react';
 import {
   CodeClose,
   UIUXDesign,
-} from '../../../components/icons';
+} from '../../../icons';
 import {
   Card,
   Container,
   Highlight,
   Paragraph,
-} from '../../../components/ui';
+} from '../../../components';
 import styles from './left.module.scss';
 
 const ServicesLeft: React.FC<{}> = (): JSX.Element => {

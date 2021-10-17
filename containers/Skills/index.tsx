@@ -1,5 +1,5 @@
 import React from 'react';
-import { Base } from '../../components/ui';
+import { Base } from '../../components';
 import SkillsLeft from './Left';
 import SkillsRight from './Right';
 import styles from './skills.module.scss';

@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { Container } from '../../../components/ui';
+import { Container } from '../../../components/';
 import styles from './left.module.scss';
 
 const AboutLeft: React.FC<{}> = (): JSX.Element => {

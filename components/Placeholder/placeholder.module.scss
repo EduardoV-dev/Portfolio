@@ -1,0 +1,27 @@
+@import "/styles/themes";
+
+.placeholder {
+  position: absolute;
+  z-index: -1;
+  user-select: none;
+  font-size: 180px;
+  font-family: "Ephesis", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif,
+    cursive;
+  transform: rotate(-20deg);
+
+  &-light {
+    &-pair,
+    &-odd {
+      color: getLight(bgPlaceholder);
+    }
+  }
+
+  &-dark {
+    &-pair {
+      color: getDark(bgPlaceholder);
+    }
+    &-odd {
+      color: getDark(bgDarkenPlaceholder);
+    }
+  }
+}

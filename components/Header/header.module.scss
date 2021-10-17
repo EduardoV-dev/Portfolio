@@ -1,0 +1,27 @@
+@import '/styles/breakpoints';
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
+  height: 5rem;
+
+  @include responsive(md) {
+    position: sticky;
+    top: 0;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+  }
+
+  &__themeToggler {
+    margin-left: 1.5rem;
+  }
+}

@@ -1,0 +1,6 @@
+@import '/styles/themes';
+
+.highlight {
+  color: getLight(highlightedText);
+  font-weight: bold;
+}

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight } from '../../../components/icons';
+import { ChevronLeft, ChevronRight } from '../../../icons';
 import styles from './carousel.module.scss';
 import cn from 'classnames';
 import useCarousel from './useCarousel';

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Git, NextJS, ReactLibrary, Sass } from '../../../components/icons';
-import { Container } from '../../../components/ui';
+import { Git, NextJS, ReactLibrary, Sass } from '../../../icons';
+import { Container } from '../../../components';
 import styles from './left.module.scss';
 
 const Left: React.FC<{}> = (): JSX.Element => {

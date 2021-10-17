@@ -1,5 +1,5 @@
 import React from 'react';
-import { Base } from '../../components/ui';
+import { Base } from '../../components';
 import AboutLeft from './Left';
 import AboutRight from './Right';
 

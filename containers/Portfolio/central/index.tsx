@@ -1,9 +1,18 @@
 import React from 'react';
+import { Container } from '../../../components';
 import Item from '../Item';
+import styles from './central.module.scss';
 
 const Central: React.FC<{}> = (): JSX.Element => {
-  return ( 
-    <Item />
+  return (
+    <Container 
+      containerType="container"
+      className={styles.container}
+    >
+      <Item />
+      <Item />
+      <Item />
+    </Container>
   );
 }
 

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { designTechnologies, webDevelopmentTechnologies } from '../../../consts';
-import { Container } from '../../../components/ui';
+import { Container } from '../../../components';
 import styles from './list.module.scss';
 
 interface ISkillsList {

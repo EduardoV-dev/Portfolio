@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { Button, Container, Highlight } from '../../../components/ui';
+import { Button, Container, Highlight } from '../../../components';
 import styles from './right.module.scss';
 import cn from 'classnames';
 import { manageUIStyle } from '../../../helpers';
-import { Go } from '../../../components/icons';
+import { Go } from '../../../icons';
 import { appContext } from '../../../hooks/context/AppContext';
 
 interface IRight {

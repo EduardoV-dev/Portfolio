@@ -1,0 +1,71 @@
+@import "/styles/themes";
+@import "/styles/breakpoints";
+
+.container {
+  width: 100%;
+  padding: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+
+  &__label {
+    margin-bottom: 0.3rem;
+    font-family: "Raleway", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+
+    &-light {
+      color: getLight(text);
+    }
+
+    &-dark {
+      color: getDark(text);
+    }
+  }
+
+  &__control {
+    font-family: "Raleway", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+    border-radius: 10px;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 3px getLight(primary);
+    }
+
+    &-light {
+      color: getLight(text);
+      background-color: getLight(bdCard);
+
+      &::placeholder {
+        color: rgba(getLight(text), 0.6);
+      }
+    }
+
+    &-dark {
+      color: getDark(text);
+      background-color: getDark(bgDarkenCard);
+
+      &::placeholder {
+        color: rgba(getDark(text), 0.6);
+      }
+    }
+
+    &_textarea {
+      min-height: 150px;
+      width: 100%;
+      height: auto;
+      resize: vertical;
+      
+      @include responsive(md) {
+        resize: none;
+        min-height: 11.6875rem;
+      }
+    }
+  }
+}

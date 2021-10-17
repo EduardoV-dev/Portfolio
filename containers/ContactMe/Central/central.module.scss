@@ -1,0 +1,22 @@
+@import "/styles/breakpoints";
+
+.form {
+  &__container {
+    @include responsive(md) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      min-width: 38.75rem;
+    }
+
+    & > div {
+      align-self: stretch;
+    }
+  }
+
+  &__btn {
+    margin: 0 auto;
+    margin-top: 2rem;
+    padding: 1rem 3rem;
+  }
+}

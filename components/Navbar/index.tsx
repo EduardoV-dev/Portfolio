@@ -26,6 +26,7 @@ const Navbar: React.FC<INavbar> = ({
   className,
 }): JSX.Element => {
   const classNames = cn(styles.navbar, className, {
+    [styles[`navbar-${layout}`]]: layout,
     [styles[`navbar-${menuState}`]]: menuState,
   });
 

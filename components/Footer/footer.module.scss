@@ -1,0 +1,9 @@
+@import '/styles/breakpoints';
+
+.footer {
+  padding-bottom: 6rem;
+
+  @include responsive(md) {
+    padding: 0;
+  }
+}

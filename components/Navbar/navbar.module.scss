@@ -12,6 +12,18 @@
   visibility: hidden;
   transform: translateY(150%);
 
+  @include responsive(md) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: auto;
+    position: relative;
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    background-color: transparent;
+  }
+
   // When menu is displayed on an inner width less than 768px
   &-true {
     opacity: 1;
@@ -19,16 +31,14 @@
     transform: translateY(0);
   }
 
-  @include responsive(md) {
-    width: auto;
-    position: relative;
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
+  &-footer {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: transparent;
+    flex-direction: column;
+
+    @include responsive(md) {
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
   }
 
   &__link {

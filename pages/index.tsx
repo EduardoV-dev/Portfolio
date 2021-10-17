@@ -1,6 +1,9 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { Header } from '../components';
+import {
+  Header,
+  Footer,
+} from '../components';
 import {
   AboutMe,
   Home,
@@ -19,10 +22,11 @@ const SPA: NextPage = () => {
       <Header />
       <Home />
       <AboutMe />
-      <Skills />  
+      <Skills />
       <Services />
       <Portfolio />
       <ContactMe />
+      <Footer />
     </>
   );
 };

@@ -7,8 +7,8 @@ import {
   Logo,
   Navbar
 } from '..';
-import styles from './header.module.scss';
 import useThemeToggler from './useTheme';
+import styles from './header.module.scss';
 
 const Header: React.FC<{}> = (): JSX.Element => {
   const [menuState, setMenuState] = useState<boolean>(false);

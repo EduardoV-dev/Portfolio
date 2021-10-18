@@ -1,9 +1,49 @@
 @import '/styles/breakpoints';
 
 .footer {
+  padding: 1.5rem 0;
   padding-bottom: 6rem;
 
   @include responsive(md) {
-    padding: 0;
+    padding: 1rem 0;
+  }
+
+  &__wrapper {
+    width: 95%;
+    max-width: 75rem;
+    margin: 0 auto;
+  }
+
+  &__content {
+    margin-bottom: 1rem;
+
+    @include responsive(md) {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.875rem;
+    }
+  }
+
+  &__info {
+    display: none;
+
+    @include responsive(md) {
+      display: block;
+    }
+  }
+
+  &__logo {
+    margin-bottom: 0.5rem;
+
+    @include responsive(md) {
+      span {
+        display: block;
+      }
+    }
+  }
+
+  &__title {
+    font-size: 2rem;
+    text-align: left;
   }
 }

@@ -13,9 +13,9 @@ import styles from './navbar.module.scss';
 import cn from 'classnames';
 
 interface INavbar {
-  menuState: boolean;
-  handleMenuState: () => void;
   layout: LayoutItem;
+  menuState?: boolean;
+  handleMenuState?: () => void;
   className?: string;
 }
 
@@ -34,7 +34,7 @@ const Navbar: React.FC<INavbar> = ({
     if (window.innerWidth >= 768 || !e.target) return;
     const elementTagName = (e.target as Element).tagName;
     if (elementTagName === 'DIV') return;
-    handleMenuState();
+    if(handleMenuState) handleMenuState();
   }
 
   return (

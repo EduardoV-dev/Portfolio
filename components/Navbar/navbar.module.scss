@@ -1,27 +1,44 @@
 @import "/styles/breakpoints";
 
 .navbar {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  position: fixed;
-  z-index: 1000;
-  bottom: 0;
-  left: 0;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(150%);
+  &-header {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    position: fixed;
+    z-index: 1000;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(150%);
 
-  @include responsive(md) {
+    @include responsive(md) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: auto;
+      position: relative;
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+      background-color: transparent;
+    }
+  }
+
+  &-footer {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: auto;
-    position: relative;
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
-    background-color: transparent;
+    flex-direction: column;
+
+    a {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    @include responsive(md) {
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
   }
 
   // When menu is displayed on an inner width less than 768px
@@ -29,16 +46,6 @@
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
-  }
-
-  &-footer {
-    display: flex;
-    flex-direction: column;
-
-    @include responsive(md) {
-      justify-content: flex-start;
-      align-items: flex-start;
-    }
   }
 
   &__link {

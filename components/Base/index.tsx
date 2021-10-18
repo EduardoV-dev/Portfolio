@@ -27,9 +27,9 @@ const Base: React.FC<IBase> = ({
 }): JSX.Element => {
   const { state: { darkMode } } = useContext(appContext);
   
-  const noHeadlines = useMemo(() => title === undefined && subtitle === undefined, []);
-  const isCentralContent = useMemo(() => CentralContent !== undefined, []);
-  const isSideContent = useMemo(() => LeftContent !== undefined && RightContent !== undefined, []);
+  const noHeadlines = useMemo(() => title === undefined && subtitle === undefined, [title, subtitle]);
+  const isCentralContent = useMemo(() => CentralContent !== undefined, [CentralContent]);
+  const isSideContent = useMemo(() => LeftContent !== undefined && RightContent !== undefined, [LeftContent, RightContent]);
   
   const baseClassNames = cn(styles.base, {
     [styles[`base-noHeadlines`]]: noHeadlines,

@@ -22,7 +22,7 @@ const useTheme = () => {
   useEffect(() => {
     const darkMode = JSON.parse(localStorage.getItem(LSDARKMODE) || '{"isDarkModeOn": false}');
     dispatch({ type: types.TOGGLEUIMODE, payload: darkMode.isDarkModeOn });
-  }, []);
+  }, [dispatch]);
 
   return {
     handleChangeUIMode,

@@ -1,10 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Button, Container, Highlight } from '../../../components';
 import styles from './right.module.scss';
-import cn from 'classnames';
-import { manageUIStyle } from '../../../helpers';
 import { Go } from '../../../icons';
-import { appContext } from '../../../hooks/context/AppContext';
+import { animated } from 'react-spring';
+import useAnimationsAndClasses from './useAnimationsAndClasses';
 
 interface IRight {
   className?: string;
@@ -13,35 +12,37 @@ interface IRight {
 const Right: React.FC<IRight> = ({
   className,
 }): JSX.Element => {
-  const { state: { darkMode } } = useContext(appContext);
-
-  const classNames = cn(styles.content, className);
-  const smallClassNames = cn(styles.content__small, {
-    [styles[`content__small-${manageUIStyle(darkMode)}`]]: manageUIStyle(darkMode),
-  });
-  const headlineClassNames = cn(styles.content__headline, {
-    [styles[`content__headline-${manageUIStyle(darkMode)}`]]: manageUIStyle(darkMode),
-  });
-  const subtitleClassNames = cn(styles.content__subtitle, {
-    [styles[`content__subtitle-${manageUIStyle(darkMode)}`]]: manageUIStyle(darkMode),
-  });
+  const {
+    classNames: {
+      container,
+      small,
+      headline,
+      subtitle,
+    },
+    animations: {
+      aniHeadline,
+      aniSmall,
+      aniSubtitle,
+      aniButton
+    }
+  } = useAnimationsAndClasses(className);
 
   return (
     <Container
       containerType="container"
-      className={classNames}
+      className={container}
       transparent='true'
     >
-      <small className={smallClassNames}>
+      <animated.small style={aniSmall} className={small}>
         if <Highlight>Thinkable</Highlight>, then it's <Highlight>Codable</Highlight>
-      </small>
-      <h1 className={headlineClassNames}>
+      </animated.small>
+      <animated.h1 style={aniHeadline} className={headline}>
         Hello There! I am a <Highlight>Front end Developer.</Highlight><br />
         <Highlight>Passionate</Highlight> about what I do.
-      </h1>
-      <h2 className={subtitleClassNames}>
+      </animated.h1>
+      <animated.h2 style={aniSubtitle} className={subtitle}>
         Contact me so that we can start working together.
-      </h2>
+      </animated.h2>
       <Button
         type="link"
         color="secondary"
@@ -49,6 +50,7 @@ const Right: React.FC<IRight> = ({
         text="Contact Me"
         className={styles.content__button}
         href="#ContactMe"
+        style={aniButton}
       />
     </Container>
   );

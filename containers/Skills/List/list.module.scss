@@ -2,7 +2,12 @@
   padding: 0 2rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(6rem, 100%), 1fr));
-  gap: 20px;
+  gap: 30px;
   align-items: center;
   margin-top: 2rem;
+
+  svg {
+    align-self: center;
+    justify-self: center;
+  }
 }

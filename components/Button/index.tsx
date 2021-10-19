@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './button.module.scss';
 import cn from 'classnames';
+import { animated } from 'react-spring';
 
 interface IButton {
   type: 'button' | 'submit' | 'link';
@@ -9,6 +10,7 @@ interface IButton {
   text: string;
   className?: string;
   href?: string;
+  style?: any;
 }
 
 const Button: React.FC<IButton> = ({
@@ -18,6 +20,7 @@ const Button: React.FC<IButton> = ({
   text,
   className,
   href,
+  style,
 }): JSX.Element => {
   const classNames = cn(styles.button, className, {
     [styles[`button-${color}`]]: color,
@@ -27,21 +30,21 @@ const Button: React.FC<IButton> = ({
   return (
     <>
       {type === 'link' ? (
-        <a
-          href={href}
+        <animated.a
+          {...{ href, style }}
           className={classNames}
         >
           <span>{text}</span>
           <Icon />
-        </a >
+        </animated.a>
       ) : (
-        <button
-          type={type}
+        <animated.button
+          {...{ type, style }}
           className={classNames}
         >
           <span>{text}</span>
           <Icon />
-        </button >
+        </animated.button>
       )}
     </>
   );

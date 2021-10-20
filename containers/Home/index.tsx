@@ -14,6 +14,7 @@ const Home: React.FC<{}> = (): JSX.Element => {
       order='pair'
       id='Home'
       placeholder={placeholder}
+      noAos="true"
     />
   );
 }

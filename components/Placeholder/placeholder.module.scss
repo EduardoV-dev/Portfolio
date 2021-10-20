@@ -7,7 +7,7 @@
   font-size: 180px;
   font-family: "Ephesis", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif,
     cursive;
-  transform: rotate(-20deg);
+  transform: rotate(-20deg) !important;
 
   &-light {
     &-pair,

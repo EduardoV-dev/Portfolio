@@ -8,6 +8,7 @@ const Footer: React.FC<{}> = (): JSX.Element => {
       containerType="footer"
       order="pair"
       className={styles.footer}
+      aos="zoom-in"
     >
       <div className={styles.footer__wrapper}>
         <section className={styles.footer__content}>

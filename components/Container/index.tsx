@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { useContext } from 'react';
 import cn from 'classnames';
 import styles from './container.module.scss';
 import { manageUIStyle } from '../../helpers';

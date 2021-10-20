@@ -7,11 +7,13 @@ import { manageUIStyle } from '../../../helpers';
 interface ISubtitle {
   text: string;
   className?: string;
+  aos?: string;
 }
 
 const Subtitle: React.FC<ISubtitle> = ({
   text,
   className,
+  aos,
 }): JSX.Element => {
   const { state: { darkMode } } = useContext(appContext);
   const classNames = cn(styles.subtitle, className, {
@@ -19,7 +21,7 @@ const Subtitle: React.FC<ISubtitle> = ({
   });
 
   return (
-    <p className={classNames}>{text}</p>
+    <p data-aos={aos} className={classNames}>{text}</p>
   );
 }
 

@@ -13,6 +13,7 @@ interface IBase {
   placeholder?: { text: string, className?: string };
   title?: string;
   subtitle?: string;
+  noAos?: 'true';
 }
 
 const Base: React.FC<IBase> = ({
@@ -24,13 +25,14 @@ const Base: React.FC<IBase> = ({
   placeholder,
   title,
   subtitle,
+  noAos,
 }): JSX.Element => {
   const { state: { darkMode } } = useContext(appContext);
-  
+
   const noHeadlines = useMemo(() => title === undefined && subtitle === undefined, [title, subtitle]);
   const isCentralContent = useMemo(() => CentralContent !== undefined, [CentralContent]);
   const isSideContent = useMemo(() => LeftContent !== undefined && RightContent !== undefined, [LeftContent, RightContent]);
-  
+
   const baseClassNames = cn(styles.base, {
     [styles[`base-noHeadlines`]]: noHeadlines,
   });
@@ -50,8 +52,8 @@ const Base: React.FC<IBase> = ({
       <>
         {(title && subtitle) && (
           <div className={styles.base__headlines}>
-            <Title text={title} />
-            <Subtitle text={subtitle} />
+            <Title text={title} aos='zoom-in-down' />
+            <Subtitle text={subtitle} aos='zoom-in-up' />
           </div>
         )}
       </>
@@ -60,13 +62,21 @@ const Base: React.FC<IBase> = ({
           (LeftContent && RightContent) &&
           (
             <>
-              <LeftContent />
-              <RightContent />
+              <div data-aos={noAos ? "" : "fade-right"}>
+                <LeftContent />
+              </div >
+              <div data-aos={noAos ? "" : "fade-left"}>
+                <RightContent />
+              </div>
             </>
           )
         }
         {
-          CentralContent && <CentralContent />
+          CentralContent && (
+            <div data-aos="fade-up">
+              <CentralContent />
+            </div>
+          )
         }
       </div>
       <>

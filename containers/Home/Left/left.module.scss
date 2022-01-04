@@ -17,6 +17,7 @@
   &__sass,
   &__react {
     position: absolute;
+    z-index: -1 !important;
 
     @include responsive(md) {
       position: relative;

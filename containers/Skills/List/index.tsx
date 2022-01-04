@@ -14,8 +14,8 @@ const SkillsList: React.FC<ISkillsList> = ({
   const [animate, setAnimate] = useState<boolean>(false);
   const skills = elements === 'web' ? webDevelopmentTechnologies : designTechnologies;
   const trail = useTrail(skills.length, {
-    from: { opacity: 0, transform: 'translate(50%, 50%) scale(1.5) rotate(180deg)' },
-    to: { opacity: 1, transform: 'translate(0%, 0%) scale(1) rotate(0deg)' },
+    from: { opacity: 0, transform: 'scale(1.5) rotate(180deg)' },
+    to: { opacity: 1, transform: 'scale(1) rotate(0deg)' },
     config: {
       duration: 100,
       bounce: 1,

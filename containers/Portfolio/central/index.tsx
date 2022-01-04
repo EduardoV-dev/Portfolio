@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from '../../../components';
-import Item from '../Item';
+import Item from '../item';
 import styles from './central.module.scss';
 
 const Central: React.FC<{}> = (): JSX.Element => {

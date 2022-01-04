@@ -1,6 +1,9 @@
 @import "/styles/breakpoints";
 
 .navbar {
+  width: 100%;
+  max-width: 100%;
+
   &-header {
     width: 100%;
     display: grid;

@@ -13,6 +13,7 @@ const Left: React.FC<{}> = (): JSX.Element => {
   const trail = useTrail(Icons.length, {
     from: { opacity: 0, transform: 'scale(1.3) translateY(-200%)' },
     to: { opacity: 1, transform: 'scale(1) translateY(0%)' },
+    config: { duration: 300 },
   });
 
   return (

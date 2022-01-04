@@ -8,6 +8,7 @@ interface IFormControl {
   control: 'input' | 'textarea';
   labelText: string;
   placeholder: string;
+  name?: string;
   type?: 'text' | 'email';
   className?: string;
 }
@@ -16,6 +17,7 @@ const FormControl: React.FC<IFormControl> = ({
   control,
   labelText,
   placeholder,
+  name,
   type,
   className,
 }): JSX.Element => {
@@ -32,23 +34,27 @@ const FormControl: React.FC<IFormControl> = ({
   return (
     <div className={containerClassNames}>
       <label
-        htmlFor="control"
+        htmlFor={labelText}
         className={labelClassNames}
       >{labelText}</label>
       {control === 'input' && (
         <input
           {... {
             type,
-            placeholder
+            placeholder,
+            name,
           }}
-          id="control"
+          id={labelText}
           className={controlClassNames}
         />
       )}
       {control === 'textarea' && (
         <textarea
-          placeholder={placeholder}
-          id="control"
+          {... {
+            placeholder,
+            name,
+          }}
+          id={labelText}
           className={`${controlClassNames} ${styles.container__control_textarea}`}
         ></textarea>
       )}

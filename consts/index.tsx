@@ -13,7 +13,6 @@ import {
   ReactLibrary,
   Redux,
   Sass,
-  Strapi,
   TypeScript,
 } from "../icons";
 
@@ -30,7 +29,6 @@ export const webDevelopmentTechnologies = [
   <Redux />,
   <Electron />,
   <TypeScript />,
-  <Strapi />,
   <NextJS />,
 ];
 
@@ -51,6 +49,5 @@ export const badgesTechnologies = {
   redux: Redux,
   electron: Electron,
   typescript: TypeScript,
-  strapi: Strapi,
   next: NextJS,
 };

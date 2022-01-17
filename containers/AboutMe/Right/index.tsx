@@ -13,11 +13,13 @@ const AboutRight: React.FC<{}> = (): JSX.Element => {
         Web developer with extensive knowledge, working with web technologies and UI/UX Design in order to deliver quality work.
       </Paragraph>
       <Button
-        type="button"
+        type="link"
         color="primary"
         icon={Download}
-        text="Download CV"
+        text="Download resume"
         className={styles.container__btn}
+        href="/Resume.pdf"
+        download
       />
     </Container>
   );

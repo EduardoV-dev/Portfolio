@@ -14,7 +14,7 @@ import {
   Redux,
   Sass,
   TypeScript,
-} from "../icons";
+} from '../icons';
 
 export const LSDARKMODE = 'isDarkMode';
 export const webDevelopmentTechnologies = [
@@ -32,10 +32,7 @@ export const webDevelopmentTechnologies = [
   <NextJS />,
 ];
 
-export const designTechnologies = [
-  <AdobeXD />,
-  <Figma />,
-];
+export const designTechnologies = [<AdobeXD />, <Figma />];
 
 export const badgesTechnologies = {
   html: HTML5,
@@ -50,4 +47,10 @@ export const badgesTechnologies = {
   electron: Electron,
   typescript: TypeScript,
   next: NextJS,
+};
+
+export const emailJS = {
+  serviceId: 'service_8elkine',
+  templateId: 'template_grwu51p',
+  userId: process.env.NEXT_PUBLIC_EMAILJS_USERID,
 };

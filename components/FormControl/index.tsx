@@ -16,33 +16,34 @@ interface IFormControl {
 const FormControl: React.FC<IFormControl> = ({
   control,
   labelText,
-  placeholder,
-  name,
   type,
   className,
+  ...rest
 }): JSX.Element => {
-  const { state: { darkMode } } = useContext(appContext);
+  const {
+    state: { darkMode },
+  } = useContext(appContext);
 
   const containerClassNames = cn(styles.container, className);
   const labelClassNames = cn(styles.container__label, {
-    [styles[`container__label-${manageUIStyle(darkMode)}`]]: manageUIStyle(darkMode)
+    [styles[`container__label-${manageUIStyle(darkMode)}`]]:
+      manageUIStyle(darkMode),
   });
   const controlClassNames = cn(styles.container__control, {
-    [styles[`container__control-${manageUIStyle(darkMode)}`]]: manageUIStyle(darkMode),
+    [styles[`container__control-${manageUIStyle(darkMode)}`]]:
+      manageUIStyle(darkMode),
   });
 
   return (
     <div className={containerClassNames}>
-      <label
-        htmlFor={labelText}
-        className={labelClassNames}
-      >{labelText}</label>
+      <label htmlFor={labelText} className={labelClassNames}>
+        {labelText}
+      </label>
       {control === 'input' && (
         <input
-          {... {
+          {...{
             type,
-            placeholder,
-            name,
+            ...rest,
           }}
           id={labelText}
           className={controlClassNames}
@@ -50,16 +51,13 @@ const FormControl: React.FC<IFormControl> = ({
       )}
       {control === 'textarea' && (
         <textarea
-          {... {
-            placeholder,
-            name,
-          }}
+          {...rest}
           id={labelText}
           className={`${controlClassNames} ${styles.container__control_textarea}`}
         ></textarea>
       )}
     </div>
   );
-}
+};
 
 export default FormControl;

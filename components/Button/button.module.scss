@@ -44,7 +44,7 @@
       span {
         color: getDark(text);
       }
-      
+
       svg > * {
         fill: #fff;
       }
@@ -52,7 +52,7 @@
   }
 
   &-link {
-    width: 11.25rem;
+    width: max-content;
     text-decoration: none;
   }
 

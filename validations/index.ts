@@ -1,0 +1,1 @@
+const contactForm = (data: unknown) => {};

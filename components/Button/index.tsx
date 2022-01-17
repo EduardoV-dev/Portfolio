@@ -10,6 +10,7 @@ interface IButton {
   text: string;
   className?: string;
   href?: string;
+  download?: boolean;
   style?: any;
 }
 
@@ -20,6 +21,7 @@ const Button: React.FC<IButton> = ({
   text,
   className,
   href,
+  download,
   style,
 }): JSX.Element => {
   const classNames = cn(styles.button, className, {
@@ -31,7 +33,7 @@ const Button: React.FC<IButton> = ({
     <>
       {type === 'link' ? (
         <animated.a
-          {...{ href, style }}
+          {...{ href, style, download }}
           className={classNames}
         >
           <span>{text}</span>

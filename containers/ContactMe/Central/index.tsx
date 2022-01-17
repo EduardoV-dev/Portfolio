@@ -2,10 +2,13 @@ import React from 'react';
 import { Button, FormControl } from '../../../components';
 import { Email } from '../../../icons';
 import styles from './central.module.scss';
+import useContact from './useContact';
 
 const Central: React.FC<{}> = (): JSX.Element => {
+  const { sendEmail } = useContact();
+
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={sendEmail}>
       <div className={styles.form__container}>
         <div>
           <FormControl
@@ -13,18 +16,21 @@ const Central: React.FC<{}> = (): JSX.Element => {
             labelText="Name"
             placeholder="John Doe..."
             type="text"
+            name="name"
           />
           <FormControl
             control="input"
             labelText="Subject"
             placeholder="Let us start working..."
             type="text"
+            name="subject"
           />
           <FormControl
             control="input"
             labelText="Email"
             placeholder="John Doe..."
             type="email"
+            name="email"
           />
         </div>
         <div>
@@ -32,6 +38,7 @@ const Central: React.FC<{}> = (): JSX.Element => {
             control="textarea"
             labelText="Message"
             placeholder="Here is my project idea..."
+            name="message"
           />
         </div>
       </div>
@@ -44,6 +51,6 @@ const Central: React.FC<{}> = (): JSX.Element => {
       />
     </form>
   );
-}
+};
 
 export default Central;

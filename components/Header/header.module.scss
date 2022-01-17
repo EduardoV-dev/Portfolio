@@ -1,4 +1,4 @@
-@import '/styles/breakpoints';
+@import "/styles/breakpoints";
 
 .header {
   width: 100%;
@@ -6,11 +6,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 0 1rem;
   position: fixed;
-  bottom: 0;
   z-index: 10;
-  height: 5rem;
+  bottom: 0;
+  min-height: 5rem;
 
   @include responsive(md) {
     position: sticky;

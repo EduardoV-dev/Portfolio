@@ -4,12 +4,7 @@ import styles from './footer.module.scss';
 
 const Footer: React.FC<{}> = (): JSX.Element => {
   return (
-    <Container
-      containerType="footer"
-      order="pair"
-      className={styles.footer}
-      aos="zoom-in"
-    >
+    <Container containerType="footer" order="pair" className={styles.footer}>
       <div className={styles.footer__wrapper}>
         <section className={styles.footer__content}>
           <div className={styles.footer__info}>
@@ -22,11 +17,14 @@ const Footer: React.FC<{}> = (): JSX.Element => {
           </div>
         </section>
         <section>
-          <Highlight>&copy; Eduardo Varela {new Date().getFullYear()}, All Rights Reserved.</Highlight>
+          <Highlight>
+            &copy; Eduardo Varela {new Date().getFullYear()}, All Rights
+            Reserved.
+          </Highlight>
         </section>
       </div>
     </Container>
   );
-}
+};
 
 export default Footer;

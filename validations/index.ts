@@ -1,1 +1,0 @@
-const contactForm = (data: unknown) => {};

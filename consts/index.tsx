@@ -3,6 +3,7 @@ import {
   Bootstrap,
   CSS3,
   Electron,
+  ElectronBadge,
   Figma,
   Firebase,
   FirebaseBadge,
@@ -12,7 +13,9 @@ import {
   NextJS,
   ReactLibrary,
   Redux,
+  ReduxBadge,
   Sass,
+  TailwindCSS,
   TypeScript,
 } from '../icons';
 
@@ -30,23 +33,25 @@ export const webDevelopmentTechnologies = [
   <Electron />,
   <TypeScript />,
   <NextJS />,
+  <TailwindCSS />,
 ];
 
 export const designTechnologies = [<AdobeXD />, <Figma />];
 
 export const badgesTechnologies = {
-  html: HTML5,
-  css: CSS3,
-  javascript: JavaScript,
-  git: Git,
-  sass: Sass,
-  bootstrap: Bootstrap,
-  react: ReactLibrary,
-  firebase: FirebaseBadge,
-  redux: Redux,
-  electron: Electron,
-  typescript: TypeScript,
-  next: NextJS,
+  HTML5: HTML5,
+  CSS3: CSS3,
+  JavaScript: JavaScript,
+  Git: Git,
+  SASS: Sass,
+  Bootstrap: Bootstrap,
+  React: ReactLibrary,
+  Firebase: FirebaseBadge,
+  Redux: ReduxBadge,
+  Electron: ElectronBadge,
+  TypeScript: TypeScript,
+  Next: NextJS,
+  TailwindCSS: TailwindCSS,
 };
 
 export const emailJS = {

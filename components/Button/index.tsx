@@ -35,21 +35,20 @@ const Button: React.FC<IButton> = ({
         <animated.a
           {...{ href, style, download }}
           className={classNames}
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <span>{text}</span>
           <Icon />
         </animated.a>
       ) : (
-        <animated.button
-          {...{ type, style }}
-          className={classNames}
-        >
+        <animated.button {...{ type, style }} className={classNames}>
           <span>{text}</span>
           <Icon />
         </animated.button>
       )}
     </>
   );
-}
+};
 
 export default Button;

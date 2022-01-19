@@ -10,20 +10,17 @@ interface IBadgesList {
 
 const BadgesList: React.FC<IBadgesList> = ({
   technologies,
-  className
+  className,
 }): JSX.Element => {
-  const badges = technologies.map(techName => badgesTechnologies[techName]);
+  const badges = technologies.map((techName) => badgesTechnologies[techName]);
 
-  return ( 
+  return (
     <div className={className}>
       {badges.map((Badge, idx) => (
-        <Badge 
-          key={idx}
-          className={styles.badge}
-        />
+        <Badge width={32} height={32} key={idx} className={styles.badge} />
       ))}
     </div>
   );
-}
+};
 
 export default BadgesList;

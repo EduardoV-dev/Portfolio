@@ -3,12 +3,22 @@ import { IProject } from '../interfaces';
 
 export type AppAction =
   | { type: 'testing' }
-  | { type: types.TOGGLEUIMODE, payload: boolean }
+  | { type: types.TOGGLEUIMODE; payload: boolean }
   | { type: types.LOADPROJECTS; payload: IProject[] };
 
 export type LayoutItem = 'header' | 'footer';
 
-export type Technologies = 'html' | 'css' | 'javascript' |
-                           'git' | 'sass' | 'bootstrap' | 
-                           'react' | 'firebase' | 'redux' |
-                           'electron' | 'typescript' | 'next';
+export type Technologies =
+  | 'HTML5'
+  | 'CSS3'
+  | 'JavaScript'
+  | 'Git'
+  | 'SASS'
+  | 'Bootstrap'
+  | 'React'
+  | 'Firebase'
+  | 'Redux'
+  | 'Electron'
+  | 'TypeScript'
+  | 'Next'
+  | 'TailwindCSS';

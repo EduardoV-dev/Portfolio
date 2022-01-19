@@ -28,3 +28,6 @@ export { default as JavaScript } from './JavaScript';
 export { default as Bootstrap } from './Bootstrap';
 export { default as Electron } from './Electron';
 export { default as CSS3 } from './CSS3';
+export { default as TailwindCSS } from './TailwindCSS';
+export { default as ElectronBadge } from './ElectronBadge';
+export { default as ReduxBadge } from './ReduxBadge';

@@ -25,7 +25,7 @@ const Central: React.FC<{}> = (): JSX.Element => {
     <Container containerType="container" className={styles.container}>
       {projects.length &&
         projects.map((project: IProject) => (
-          <Item key={projects.id} project={project} />
+          <Item key={project.id} project={project} />
         ))}
     </Container>
   );

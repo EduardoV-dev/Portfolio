@@ -2,6 +2,7 @@ import React from 'react';
 import { AppAction, Technologies } from '../types';
 
 export interface IProject {
+  id: string;
   name: string;
   description: string;
   technologies: Technologies[];
@@ -22,7 +23,7 @@ export interface IAppReducer {
 
 export interface IIcon {
   darkmode: 'true' | 'false';
-  className?: string; 
+  className?: string;
 }
 
 export interface ISvg extends React.SVGProps<SVGSVGElement> {

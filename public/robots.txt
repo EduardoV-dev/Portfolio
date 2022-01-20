@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Allow: /Resume.pdf
+
+Sitemap: https://www.eduardov-dev.me/sitemap.xml

@@ -4,6 +4,7 @@ import { sendForm } from '@emailjs/browser';
 import swal from 'sweetalert2';
 
 const useContact = () => {
+  if (!emailJS) return null;
   const { serviceId, templateId, userId } = emailJS;
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {

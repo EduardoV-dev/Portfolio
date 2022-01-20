@@ -31,6 +31,8 @@ class Document extends NextDocument<Props> {
             name="og:site_name"
             content="Eduardo Varela | Front end Developer"
           />
+          <link rel="canonical" href="https://www.eduardov-dev.me" />
+          <meta name="robots" content="index, follow" />
           <link
             rel="apple-touch-icon"
             sizes="180x180"

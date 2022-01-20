@@ -5,10 +5,10 @@ import styles from './central.module.scss';
 import useContact from './useContact';
 
 const Central: React.FC<{}> = (): JSX.Element => {
-  const { sendEmail } = useContact();
+  const hook = useContact();
 
   return (
-    <form className={styles.form} onSubmit={sendEmail}>
+    <form className={styles.form} onSubmit={hook?.sendEmail}>
       <div className={styles.form__container}>
         <div>
           <FormControl
@@ -16,7 +16,7 @@ const Central: React.FC<{}> = (): JSX.Element => {
             labelText="Name"
             placeholder="John Doe..."
             type="text"
-            name="name"
+            name="nme"
           />
           <FormControl
             control="input"

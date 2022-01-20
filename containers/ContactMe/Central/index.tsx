@@ -16,7 +16,7 @@ const Central: React.FC<{}> = (): JSX.Element => {
             labelText="Name"
             placeholder="John Doe..."
             type="text"
-            name="nme"
+            name="name"
           />
           <FormControl
             control="input"

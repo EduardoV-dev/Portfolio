@@ -1,8 +1,14 @@
-@import '/styles/breakpoints';
+@import "/styles/breakpoints";
 
-.placeholder {  
+.placeholder {
   @include responsive(md) {
     bottom: 0%;
     right: 15%;
   }
+}
+
+.many-more-text {
+  font-size: 1rem;
+  opacity: 0.7;
+  margin-bottom: 1rem;
 }

@@ -1,13 +1,19 @@
-@import '/styles/themes';
-@import '/styles/breakpoints';
+@import "/styles/themes";
+@import "/styles/breakpoints";
 
 .container {
   &__about {
+    font-weight: 400;
     margin-bottom: 1rem;
     text-align: center;
 
     @include responsive(md) {
       text-align: left;
+    }
+
+    &:last-of-type {
+      font-size: 1.5rem;
+      font-weight: 700;
     }
   }
 

@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+:root {
+    --background-primary: #f1f2ff;
+    --background-secondary: #ffffff;
+    --primary: #5d67c8;
+    --primary-hover: #3d48a7;
+    --secondary: #333333;
+    --text: #333333;
+
+    /* Fonts */
+    /* 
+        1. Poppins: var(--font-poppins)
+        2. Pixelify Sans: var(--font-pixelify-sans)
+     */
+}
+
+@theme inline {
+    --font-poppins: var(--font-poppins);
+    --font-pixelify-sans: var(--font-pixelify-sans);
+
+    --color-bg-primary: var(--background-primary);
+    --color-bg-secondary: var(--background-secondary);
+    --color-primary: var(--primary);
+    --color-primary-hover: var(--primary-hover);
+    --color-secondary: var(--secondary);
+    --color-text: var(--text);
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* @media (prefers-color-scheme: dark) {
+    :root {
+        --background-primary: #333333;
+        --background-secondary: #3a3a3a;
+        --text: #f1f2ff;
+    }
+} */
+
+html.dark {
+    --background-primary: #333333;
+    --background-secondary: #3a3a3a;
+    --text: #f1f2ff;
+}
+
+body {
+    background-color: var(--background-primary);
+    color: var(--primary);
+    font-family: var(--font-poppins);
+}
+
+button {
+    @apply cursor-default;
+}
+
+/** __next is being used as the layout container for `Layout` component */
+#__next {
+    @apply min-h-screen grid gap-4;
+    grid-template-rows: auto 1fr auto;
+}
+
+.icon-size {
+    @apply w-7;
+}
+
+.btn {
+    @apply p-2 px-5 rounded-sm font-semibold transition;
+}
+
+.btn-primary {
+    @apply bg-primary hover:brightness-90 active:brightness-110 text-white;
+}
+
+.btn-outlined-primary {
+    @apply border border-text text-text hover:border-primary hover:bg-primary hover:text-white;
+}

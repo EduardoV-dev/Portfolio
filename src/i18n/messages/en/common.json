@@ -1,0 +1,18 @@
+{
+    "header": {
+        "home": "Home",
+        "about": "About",
+        "projects": "Projects",
+        "contact": "Contact",
+        "resume": "Resume"
+    },
+    "language-selector": {
+        "title": "Choose a language",
+        "spanish": "Spanish",
+        "english": "English"
+    },
+    "footer": {
+        "rights": "All rights reserved.",
+        "made-by": "Made with ♥ by"
+    }
+}

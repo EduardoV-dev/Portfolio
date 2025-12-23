@@ -14,26 +14,35 @@
     },
     "dependencies": {
         "clsx": "^2.1.1",
+        "framer-motion": "^12.23.26",
         "next": "16.0.7",
+        "next-intl": "^4.6.1",
         "react": "19.2.0",
-        "react-dom": "19.2.0"
+        "react-dom": "19.2.0",
+        "react-use-measure": "^2.1.7",
+        "throttle-debounce": "^5.0.2"
     },
     "devDependencies": {
-        "@commitlint/cli": "^20.1.0",
-        "@commitlint/config-conventional": "^20.0.0",
+        "@commitlint/cli": "^20.2.0",
+        "@commitlint/config-conventional": "^20.2.0",
         "@svgr/webpack": "^8.1.0",
-        "@tailwindcss/postcss": "^4",
-        "@types/node": "^20",
-        "@types/react": "^19",
-        "@types/react-dom": "^19",
-        "eslint": "^9",
+        "@tailwindcss/postcss": "^4.1.18",
+        "@types/node": "^20.19.27",
+        "@types/react": "^19.2.7",
+        "@types/react-dom": "^19.2.3",
+        "@types/throttle-debounce": "^5.0.2",
+        "babel-plugin-react-compiler": "^1.0.0",
+        "eslint": "^9.39.2",
         "eslint-config-next": "16.0.7",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-prettier": "^5.5.4",
+        "eslint-plugin-react-hooks": "^7.0.1",
+        "eslint-plugin-simple-import-sort": "^12.1.1",
+        "eslint-plugin-unused-imports": "^4.3.0",
         "husky": "^9.1.7",
         "lint-staged": "^16.2.7",
         "prettier": "^3.7.4",
-        "tailwindcss": "^4",
-        "typescript": "^5"
+        "tailwindcss": "^4.1.18",
+        "typescript": "^5.9.3"
     }
 }

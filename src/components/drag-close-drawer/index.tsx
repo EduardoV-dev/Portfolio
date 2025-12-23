@@ -12,9 +12,9 @@ interface Props {
 }
 
 const CLOSE_DRAG_THRESHOLD_IN_PX = 50;
-const DRAWER_ID = `drawer-${crypto.randomUUID()}`;
 
 function DragCloseDrawer({ children, open, setOpen, className = "" }: Props): React.JSX.Element {
+    const drawerId = React.useId();
     const [scope, animate] = useAnimate();
     const controls = useDragControls();
     const y = useMotionValue(0);
@@ -25,7 +25,7 @@ function DragCloseDrawer({ children, open, setOpen, className = "" }: Props): Re
         const yStart = typeof y.get() === "number" ? y.get() : 0;
 
         animate(scope.current, { opacity: [1, 0] });
-        await animate(`#${DRAWER_ID}`, { y: [yStart, height] });
+        await animate(`#${drawerId}`, { y: [yStart, height] });
         setOpen(false);
     };
 
@@ -45,7 +45,7 @@ function DragCloseDrawer({ children, open, setOpen, className = "" }: Props): Re
                 className="fixed inset-0 z-50 bg-bg-primary/40"
             >
                 <motion.div
-                    id={DRAWER_ID}
+                    id={drawerId}
                     onClick={(e) => e.stopPropagation()}
                     initial={{ y: "100%" }}
                     animate={{ y: "0%" }}

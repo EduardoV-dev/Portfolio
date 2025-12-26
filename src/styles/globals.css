@@ -29,14 +29,6 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* @media (prefers-color-scheme: dark) {
-    :root {
-        --background-primary: #333333;
-        --background-secondary: #3a3a3a;
-        --text: #f1f2ff;
-    }
-} */
-
 html.dark {
     --background-primary: #333333;
     --background-secondary: #3a3a3a;

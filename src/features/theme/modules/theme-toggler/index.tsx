@@ -4,36 +4,10 @@ import clsx from "clsx";
 import React from "react";
 
 import ThemeTogglerIcon from "../../assets/theme-toggler.svg";
-
-type Theme = "light" | "dark";
-
-const THEMES: Record<string, Theme> = {
-    LIGHT: "light",
-    DARK: "dark",
-};
-
-const THEME_LS_KEY = "theme";
+import { useTheme } from "../../contexts/theme";
 
 export default function ThemeToggler(): React.JSX.Element {
-    const toggleHtmlDarkClass = () => {
-        document.documentElement.classList.toggle(
-            "dark",
-            localStorage.theme === "dark" ||
-                (!(THEME_LS_KEY in localStorage) &&
-                    window.matchMedia("(prefers-color-scheme: dark)").matches),
-        );
-    };
-
-    const effectToggleHtmlDarkClass = React.useEffectEvent(toggleHtmlDarkClass);
-
-    React.useEffect(() => {
-        effectToggleHtmlDarkClass();
-    }, []);
-
-    const toggleTheme = () => {
-        localStorage.theme = localStorage.theme === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK;
-        toggleHtmlDarkClass();
-    };
+    const { toggleTheme } = useTheme();
 
     /* === React Render === */
 

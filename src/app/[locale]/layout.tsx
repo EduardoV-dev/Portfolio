@@ -6,6 +6,7 @@ import { Pixelify_Sans, Poppins } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 
+import { ThemeProvider } from "@/features/theme";
 import { routing } from "@/i18n/routing";
 import Layout from "@/layouts/root-layout";
 
@@ -42,7 +43,9 @@ export default async function RootLayout({ children, params }: Readonly<Props>) 
         <html lang={locale}>
             <body className={clsx(poppins.variable, pixelifySans.variable, "antialiased")}>
                 <NextIntlClientProvider>
-                    <Layout>{children}</Layout>
+                    <ThemeProvider>
+                        <Layout>{children}</Layout>
+                    </ThemeProvider>
                 </NextIntlClientProvider>
             </body>
         </html>

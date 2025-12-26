@@ -38,9 +38,13 @@ export default function ThemeProvider({ children }: Readonly<Props>) {
     };
 
     const toggleTheme = () => {
-        setIsDarkMode((prev) => !prev);
-        localStorage.theme = localStorage.theme === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK;
-        applyUserThemePreference();
+        setIsDarkMode((prev) => {
+            const nextIsDark = !prev;
+            localStorage.theme = nextIsDark ? THEMES.DARK : THEMES.LIGHT;
+            applyUserThemePreference();
+
+            return nextIsDark;
+        });
     };
 
     const applyPreferenceEvent = React.useEffectEvent(applyUserThemePreference);

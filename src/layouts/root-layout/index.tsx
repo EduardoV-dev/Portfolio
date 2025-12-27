@@ -15,7 +15,14 @@ export default function RootLayout({ children }: Props) {
             <Header />
             <main className="container mx-auto px-6">{children}</main>
             <Footer />
-            <Particles />
+            <Particles
+                className="fixed inset-0 z-10"
+                quantity={80}
+                ease={80}
+                color="#5d67c8"
+                refresh
+                size={5}
+            />
         </div>
     );
 }

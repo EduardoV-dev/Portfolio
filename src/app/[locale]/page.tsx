@@ -1,3 +1,11 @@
+import BlastPortfolio from "./sections/blast-portfolio";
+import HeroFullStack from "./sections/hero-full-stack";
+
 export default function Home() {
-    return <h1>Hello World</h1>;
+    return (
+        <section className="grid h-full gap-16 py-12 lg:grid-cols-2 lg:items-center lg:gap-16">
+            <HeroFullStack />
+            <BlastPortfolio />
+        </section>
+    );
 }

@@ -22,7 +22,9 @@ export default function RootLayout({ children }: Props) {
                 color="#5d67c8"
                 refresh
                 size={5}
+                vy={-0.01}
             />
+            <div className="fixed bg-primary/15 rounded-2xl top-0 left-0 w-full h-full pointer-events-none" />
         </div>
     );
 }

@@ -15,6 +15,31 @@
      */
 }
 
+@theme {
+    --animate-float: float 6s ease-in-out infinite;
+    --animate-glow: glow 6s ease-in-out infinite;
+
+    @keyframes float {
+        0%,
+        100% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    @keyframes glow {
+        0%,
+        100% {
+            filter: drop-shadow(0 0 5px rgba(93, 103, 200, 0.1));
+        }
+        50% {
+            filter: drop-shadow(0 0 20px rgba(93, 103, 200, 0.3));
+        }
+    }
+}
+
 @theme inline {
     --font-poppins: var(--font-poppins);
     --font-pixelify-sans: var(--font-pixelify-sans);
@@ -37,7 +62,7 @@ html.dark {
 
 body {
     background-color: var(--background-primary);
-    color: var(--primary);
+    color: var(--text);
     font-family: var(--font-poppins);
 }
 
@@ -64,5 +89,9 @@ button {
 }
 
 .btn-outlined-primary {
-    @apply border border-text text-text hover:border-primary hover:bg-primary hover:text-white;
+    @apply border border-text text-text hover:border-primary hover:bg-primary-hover hover:text-white;
+}
+
+.btn-secondary {
+    @apply px-7 border border-primary text-text shadow-[6px_6px_0px_0px_var(--primary)] hover:shadow-none hover:bg-primary;
 }

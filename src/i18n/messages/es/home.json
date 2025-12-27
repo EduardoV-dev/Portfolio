@@ -1,0 +1,25 @@
+{
+    "home": {
+        "metadata": {
+            "title": "Full Stack Developer Turning Product Goals into Scalable Systems",
+            "description": "Full Stack Developer who builds scalable, high-performance web platforms that improve conversion, retention, and team efficiency using React, Node.js, and AWS."
+        },
+        "hero": {
+            "title": {
+                "p1": "A Full Stack Web Developer",
+                "p2": "that will unleash the projects full potential."
+            },
+            "subtitle": "Passionate web developer with a background in computer science and a strong foundation in algorithmic thinking. Skilled in developing scalable web applications and custom features that streamline business operations and enhance the user experience.",
+            "cta": {
+                "projects": "Projects",
+                "contact": "Contact"
+            }
+        },
+        "game": {
+            "astronaut-alt": "Astronaut floating in space",
+            "moon-alt": "Moon surface",
+            "rocket-alt": "Rocket launching",
+            "blast-cta": "Blast this portfolio!"
+        }
+    }
+}

@@ -10,6 +10,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
     const messages = {
         ...(await import(`./messages/${locale}/common.json`)).default,
+        ...(await import(`./messages/${locale}/home.json`)).default,
     };
 
     return {

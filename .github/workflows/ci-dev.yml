@@ -1,15 +1,18 @@
 name: CI
 
 on:
-    push:
-        branches: [Main, Development]
     pull_request:
-        branches: [Main, Development]
+        branches: [Development]
 
 jobs:
     lint-format-build:
         name: Lint, Format & Build
         runs-on: ubuntu-latest
+        environment: Development
+        env:
+            NODE_ENV: production
+            PORT: 3000
+            NEXT_PUBLIC_CDN_URL: ${{ secrets.NEXT_PUBLIC_CDN_URL }}
 
         steps:
             - name: Checkout code

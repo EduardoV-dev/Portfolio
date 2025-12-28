@@ -38,7 +38,7 @@ export default async function BlastPortfolio(): Promise<React.JSX.Element> {
                     alt={t("game.moon-alt")}
                     width={130}
                     height={130}
-                    className="h-15 w-15 absolute bottom-10 left-5 animate-float lg:h-32.5 lg:w-32.5 lg:left-18 xl:bottom-15 xl:left-30 2xl:left-60 "
+                    className="h-15 w-15 absolute bottom-10 left-5 animate-float lg:h-32.5 lg:w-32.5 lg:left-18 xl:bottom-15 xl:left-30 2xl:left-60"
                 />
 
                 <Image
@@ -52,9 +52,9 @@ export default async function BlastPortfolio(): Promise<React.JSX.Element> {
 
             <button
                 type="button"
-                className="hidden btn btn-secondary lg:block  lg:mx-auto"
+                className="hidden btn btn-secondary lg:block lg:mx-auto"
             >
-                Blast this Portfolio!
+                {t("game.blast-cta")}
             </button>
         </div>
     );

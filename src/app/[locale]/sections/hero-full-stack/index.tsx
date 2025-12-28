@@ -34,7 +34,7 @@ export default async function HeroFullStack(): Promise<React.JSX.Element> {
                     type="button"
                     className="btn btn-secondary lg:hidden"
                 >
-                    Blast this Portfolio!
+                    {t("game.blast-cta")}
                 </button>
             </div>
         </div>

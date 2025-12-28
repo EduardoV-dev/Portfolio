@@ -1,4 +1,4 @@
-import { motion, useAnimate, useDragControls, useMotionValue } from "framer-motion";
+import { motion, useAnimate, useDragControls, useMotionValue } from "motion/react";
 import dynamic from "next/dynamic";
 import React from "react";
 import { createPortal } from "react-dom";

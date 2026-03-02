@@ -1,0 +1,23 @@
+{
+    "name": "portfolio",
+    "private": true,
+    "engines": {
+        "node": ">=20.0.0"
+    },
+    "scripts": {
+        "prepare": "husky",
+        "lint": "biome lint .",
+        "format": "biome format . --write",
+        "check": "biome check .",
+        "dev:frontend": "pnpm -F frontend dev",
+        "dev:strapi": "pnpm -F backend dev",
+        "dev": "pnpm dev:frontend & pnpm dev:strapi"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^1.9.4",
+        "@commitlint/cli": "^19.6.0",
+        "@commitlint/config-conventional": "^19.6.0",
+        "husky": "^9.1.7",
+        "lint-staged": "^15.2.10"
+    }
+}

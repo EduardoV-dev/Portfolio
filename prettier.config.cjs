@@ -7,6 +7,7 @@ module.exports = {
     singleQuote: false,
     trailingComma: "all",
     bracketSpacing: true,
+    endOfLine: "auto",
     plugins: ["prettier-plugin-astro"],
     overrides: [
         {

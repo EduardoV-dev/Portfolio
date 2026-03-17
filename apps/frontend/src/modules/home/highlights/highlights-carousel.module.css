@@ -1,0 +1,91 @@
+.carousel {
+    overflow: hidden;
+    /* negative margin to allow peek on right edge without clipping */
+    margin-inline: -1rem;
+    padding-inline: 1rem;
+    cursor: grab;
+}
+
+.carousel:active {
+    cursor: grabbing;
+}
+
+.track {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+    /* padding-right so the last card doesn't flush the edge */
+    padding-right: 1rem;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.slide {
+    /* Mobile: 1 card visible, next peeks on the right */
+    flex: 0 0 85vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Tablet: 2 cards visible, third peeks on the right */
+@media (min-width: 769px) {
+    .slide {
+        flex: 0 0 47%;
+    }
+}
+
+/* Icon box — identical to desktop grid cards */
+.iconBox {
+    position: relative;
+    flex-shrink: 0;
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 0.85rem;
+    border: 1.5px solid rgba(58, 176, 248, 0.32);
+    background: linear-gradient(180deg, rgba(8, 14, 21, 0.97), rgba(6, 11, 18, 0.99));
+    display: grid;
+    place-items: center;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.015) inset,
+        0 8px 20px rgba(2, 7, 13, 0.45);
+}
+
+.iconBox::before {
+    content: "";
+    position: absolute;
+    width: 60%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background: rgba(19, 65, 97, 0.55);
+    pointer-events: none;
+}
+
+.iconBox img {
+    position: relative;
+    z-index: 1;
+    width: 1.25rem;
+    height: 1.25rem;
+    object-fit: contain;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #e9eef4;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+}
+
+.desc {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.4;
+}

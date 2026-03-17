@@ -1,0 +1,23 @@
+/* ─────────────────────────────────────────────
+   Responsive Breakpoint Mixins
+   Mobile-first usage: base styles first,
+   then enhance with @mixin tablet-up / desktop-up
+   ───────────────────────────────────────────── */
+
+@define-mixin tablet-up {
+    @media (min-width: 769px) {
+        @mixin-content;
+    }
+}
+
+@define-mixin desktop-up {
+    @media (min-width: 1025px) {
+        @mixin-content;
+    }
+}
+
+@define-mixin wide-up {
+    @media (min-width: 1281px) {
+        @mixin-content;
+    }
+}

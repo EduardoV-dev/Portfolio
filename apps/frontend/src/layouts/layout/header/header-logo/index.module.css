@@ -1,0 +1,47 @@
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+    color: var(--color-text-primary, #fff);
+    transition: opacity 150ms ease;
+}
+
+.logo:hover {
+    opacity: 0.85;
+}
+
+.logo__img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.logo__text {
+    display: none;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+@media (min-width: 1025px) {
+    .logo__text {
+        display: flex;
+    }
+}
+
+.logo__name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    color: #fff;
+}
+
+.logo__title {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--color-text-secondary, rgba(255, 255, 255, 0.55));
+    letter-spacing: 0.01em;
+    line-height: 1;
+}

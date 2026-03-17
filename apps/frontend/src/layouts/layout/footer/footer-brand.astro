@@ -1,0 +1,124 @@
+---
+import logo from "@/assets/logo.png";
+---
+
+<div class="footer-brand">
+    <a href="/" class="footer-logo" aria-label="Eduardo Varela – Home">
+        <img
+            src={logo.src}
+            alt="Eduardo Varela logo"
+            width="40"
+            height="40"
+            class="footer-logo__img"
+        />
+        <div class="footer-logo__text">
+            <span class="footer-logo__name">Eduardo Varela</span>
+            <span class="footer-logo__title">Full Stack Engineer</span>
+        </div>
+    </a>
+
+    <p class="footer-brand__tagline">
+        Full Stack Engineer building scalable, AI-ready platforms.<br />
+        Focused on long-term system design and business impact.
+    </p>
+
+    <div class="footer-brand__badge">
+        <span class="badge__dot"></span>
+        <span class="badge__label">Available for scale-up projects</span>
+    </div>
+</div>
+
+<style>
+    .footer-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .footer-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: var(--color-text-primary, #fff);
+        transition: opacity 150ms ease;
+        width: fit-content;
+    }
+
+    .footer-logo:hover {
+        opacity: 0.85;
+    }
+
+    .footer-logo__img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        flex-shrink: 0;
+    }
+
+    .footer-logo__text {
+        display: flex;
+        flex-direction: column;
+        gap: 0.1rem;
+    }
+
+    .footer-logo__name {
+        font-size: 0.95rem;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        line-height: 1.2;
+        color: #fff;
+    }
+
+    .footer-logo__title {
+        font-size: 0.7rem;
+        font-weight: 400;
+        color: var(--color-text-secondary, rgba(255, 255, 255, 0.55));
+        letter-spacing: 0.01em;
+        line-height: 1;
+    }
+
+    .footer-brand__tagline {
+        font-size: 0.875rem;
+        line-height: 1.65;
+        color: var(--color-text-secondary, rgba(255, 255, 255, 0.55));
+        max-width: 280px;
+    }
+
+    .footer-brand__badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.35rem 0.75rem;
+        border: 1px solid var(--color-border, rgba(255, 255, 255, 0.05));
+        border-radius: 100px;
+        width: fit-content;
+    }
+
+    .badge__dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--color-accent, #38bdf8);
+        flex-shrink: 0;
+        box-shadow: 0 0 6px var(--color-accent, #38bdf8);
+        animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    .badge__label {
+        font-size: 0.65rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-accent, #38bdf8);
+    }
+
+    @keyframes pulse {
+        0%,
+        100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.4;
+        }
+    }
+</style>

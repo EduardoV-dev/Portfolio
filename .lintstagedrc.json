@@ -1,3 +1,4 @@
 {
-    "*/**/*.{js,ts,jsx,tsx,cjs,mjs,json}": ["biome check --write"]
+    "**/*.{js,ts,jsx,tsx,cjs,mjs,astro}": ["eslint --fix", "prettier --write"],
+    "**/*.{json,css}": ["prettier --write"]
 }

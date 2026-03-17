@@ -1,46 +1,74 @@
-# Astro Starter Kit: Basics
+# Frontend
 
-```sh
-npm create astro@latest -- --template basics
+Astro + React frontend for the personal portfolio website.
+
+## Tech stack
+
+| Concern | Tool |
+|---|---|
+| Framework | Astro 5 |
+| UI components | React 19 |
+| Language | TypeScript (strict mode) |
+| Styling | CSS Modules + PostCSS |
+| Carousel | Embla Carousel |
+| Linting | ESLint 9 (flat config) |
+| Formatting | Prettier |
+| Type checking | `astro check` |
+
+## Prerequisites
+
+- Node.js `>=22.0.0`
+- pnpm `10`
+
+## Getting started
+
+Dependencies are installed from the monorepo root:
+
+```bash
+# From the repository root
+pnpm install
+
+# Start the Astro dev server
+pnpm dev:frontend
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Or start everything at once:
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```bash
+pnpm dev
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+The dev server runs at `http://localhost:4321` by default.
 
-## 🧞 Commands
+## Scripts
 
-All commands are run from the root of the project, from a terminal:
+| Script | Description |
+|---|---|
+| `pnpm dev` | Start the Astro dev server |
+| `pnpm build` | Build for production (output to `dist/`) |
+| `pnpm preview` | Preview the production build locally |
+| `pnpm lint` | Run ESLint |
+| `pnpm typecheck` | Run `astro check` (TypeScript + Astro diagnostics) |
+| `pnpm format` | Format all files with Prettier |
+| `pnpm check` | Lint + Prettier check (no writes) |
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Project structure
 
-## 👀 Want to learn more?
+```
+src/
+├── assets/         # Static assets (images, fonts, etc.)
+├── components/     # Shared, reusable UI components
+├── constants/      # App-wide constants (e.g. route definitions)
+├── layouts/        # Page layout wrappers (header, footer, shell)
+├── modules/        # Page-specific feature modules (e.g. home, about)
+├── pages/          # Astro file-based routes
+└── styles/         # Global styles and PostCSS mixins
+```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Path aliases
+
+`@/*` maps to `src/*`, configured in `tsconfig.json`.
+
+```ts
+import { ROUTES } from "@/constants/routes";
+```

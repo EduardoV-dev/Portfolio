@@ -11,9 +11,10 @@
         "preview": "astro preview",
         "astro": "astro",
         "lint": "eslint .",
+        "formatcheck": "prettier . --check",
         "typecheck": "astro check",
         "format": "prettier . --write",
-        "check": "pnpm run lint && prettier . --check"
+        "check": "pnpm run lint && pnpm run formatcheck && pnpm run typecheck"
     },
     "dependencies": {
         "@astrojs/react": "^4.4.2",

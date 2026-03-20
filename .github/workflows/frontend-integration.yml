@@ -1,6 +1,9 @@
-name: CI
+name: Frontend Integration (CI)
 
 on:
+    push:
+        branches:
+            - development
     pull_request:
         branches:
             - main
@@ -10,6 +13,9 @@ jobs:
     frontend:
         name: Frontend
         runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: apps/frontend
 
         steps:
             - name: Checkout
@@ -30,13 +36,13 @@ jobs:
               run: pnpm install --frozen-lockfile
 
             - name: Lint
-              run: pnpm --filter apps-frontend lint
+              run: pnpm lint
 
             - name: Typecheck
-              run: pnpm --filter apps-frontend typecheck
+              run: pnpm typecheck
 
             - name: Format
-              run: pnpm --filter apps-frontend exec prettier . --check
+              run: pnpm formatcheck
 
             - name: Build
-              run: pnpm --filter apps-frontend build
+              run: pnpm build

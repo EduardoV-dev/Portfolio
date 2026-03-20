@@ -18,6 +18,10 @@ jobs:
     deploy:
         name: Deploy to development environment
         runs-on: ubuntu-latest
+        environment: development
+        defaults:
+            run:
+                working-directory: apps/frontend
 
         env:
             AWS_REGION: ${{ vars.AWS_REGION }}
@@ -44,7 +48,7 @@ jobs:
               run: pnpm install --frozen-lockfile
 
             - name: Build Astro site
-              run: pnpm --filter apps-frontend build
+              run: pnpm build
 
             - name: Configure AWS credentials with OIDC
               uses: aws-actions/configure-aws-credentials@v4

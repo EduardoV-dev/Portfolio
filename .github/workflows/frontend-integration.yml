@@ -1,9 +1,6 @@
 name: Frontend Integration (CI)
 
 on:
-    push:
-        branches:
-            - development
     pull_request:
         branches:
             - main

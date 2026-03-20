@@ -1,0 +1,74 @@
+name: Deploy Astro to AWS (Development Environment)
+
+on:
+    push:
+        branches:
+            - development
+    workflow_dispatch:
+
+permissions:
+    id-token: write
+    contents: read
+
+concurrency:
+    group: deploy-astro-dev
+    cancel-in-progress: true
+
+jobs:
+    deploy:
+        name: Deploy to development environment
+        runs-on: ubuntu-latest
+
+        env:
+            AWS_REGION: ${{ vars.AWS_REGION }}
+            AWS_ROLE_ARN: ${{ vars.AWS_ROLE_ARN }}
+            S3_BUCKET: ${{ vars.S3_BUCKET }}
+            CLOUDFRONT_DISTRIBUTION_ID: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 10
+
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: pnpm
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Build Astro site
+              run: pnpm build
+
+            - name: Configure AWS credentials with OIDC
+              uses: aws-actions/configure-aws-credentials@v4
+              with:
+                  aws-region: ${{ env.AWS_REGION }}
+                  role-to-assume: ${{ env.AWS_ROLE_ARN }}
+                  role-session-name: github-actions-astro-development
+
+            - name: Upload non-HTML assets to S3
+              run: |
+                  aws s3 sync ./dist s3://${S3_BUCKET} \
+                      --delete \
+                      --exclude "*.html" \
+                      --cache-control "public, max-age=31536000, immutable"
+
+            - name: Upload HTML files to S3
+              run: |
+                  aws s3 sync ./dist s3://${S3_BUCKET} \
+                      --exclude "*" \
+                      --include "*.html" \
+                      --cache-control "no-cache, no-store, must-revalidate"
+
+            - name: Invalidate CloudFront cache
+              run: |
+                  aws cloudfront create-invalidation \
+                      --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} \
+                      --paths "/*"

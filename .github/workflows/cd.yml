@@ -44,7 +44,7 @@ jobs:
               run: pnpm install --frozen-lockfile
 
             - name: Build Astro site
-              run: pnpm build
+              run: pnpm --filter apps-frontend build
 
             - name: Configure AWS credentials with OIDC
               uses: aws-actions/configure-aws-credentials@v4

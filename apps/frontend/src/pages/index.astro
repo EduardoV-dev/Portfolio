@@ -2,9 +2,17 @@
 import Layout from "@/layouts/layout/index.astro";
 import HeroSection from "@/modules/home/hero/index.astro";
 import HighlightsSection from "@/modules/home/highlights/index.astro";
+import CaseStudiesSection from "@/modules/home/case-studies/index.astro";
+import PhilosophySection from "@/modules/home/philosophy/index.astro";
+import AiAssistantSection from "@/modules/home/ai-assistant/index";
+import CtaSection from "@/modules/home/cta/index.astro";
 ---
 
 <Layout title="Eduardo Varela – Full Stack Engineer">
     <HeroSection />
     <HighlightsSection />
+    <CaseStudiesSection />
+    <PhilosophySection />
+    <AiAssistantSection client:load />
+    <CtaSection />
 </Layout>

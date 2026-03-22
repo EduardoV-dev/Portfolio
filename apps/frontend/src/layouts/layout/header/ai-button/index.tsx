@@ -3,9 +3,10 @@ import styles from "./index.module.css";
 
 interface AiButtonProps {
     className?: string;
+    onClick?: () => void;
 }
 
-export default function AiButton({ className = "" }: AiButtonProps) {
+export default function AiButton({ className = "", onClick }: AiButtonProps) {
     return (
         <Tooltip
             text="🔍 Explore my experience with AI (Ctrl + K)"
@@ -16,6 +17,7 @@ export default function AiButton({ className = "" }: AiButtonProps) {
                 className={styles["ai-button"]}
                 aria-label="Explore AI experience"
                 type="button"
+                onClick={onClick}
             >
                 <svg
                     width="20"

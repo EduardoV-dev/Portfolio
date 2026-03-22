@@ -1,0 +1,153 @@
+---
+import CaseStudyCard from "./case-study-card.astro";
+
+const caseStudies = [
+    {
+        title: "Marketing Platform – Now Optics",
+        description:
+            "Built scalable marketing websites and APIs using React, Next.js, and Node.js. Optimized performance, accessibility, and deployment pipelines using AWS infrastructure.",
+        tags: ["E-COMMERCE", "SAAS"],
+        impact: [
+            { icon: "🔥", text: "40% performance improvement" },
+            { icon: "⚙️", text: "Automated CI/CD deployment pipeline" },
+            { icon: "☁️", text: "Production-ready AWS infrastructure" },
+        ],
+        tech: ["React", "Next.js", "Node.js", "AWS", "CI/CD"],
+        href: "/case-studies",
+    },
+    {
+        title: "Real-Time Analytics Dashboard",
+        description:
+            "Architected a real-time analytics dashboard processing thousands of events per second. Built with WebSocket-driven updates, D3.js visualizations, and a distributed Node.js backend.",
+        tags: ["ANALYTICS", "INTERNAL TOOLS"],
+        impact: [
+            { icon: "⚡", text: "Sub-100ms data latency" },
+            { icon: "🛡️", text: "99.9% uptime SLA" },
+            { icon: "📉", text: "Reduced analyst report time by 60%" },
+        ],
+        tech: ["Node.js", "D3.js", "WebSockets", "PostgreSQL", "Docker"],
+        href: "/case-studies",
+    },
+    {
+        title: "Cloud Infrastructure Migration",
+        description:
+            "Led the migration of a monolithic application to a microservices architecture on AWS. Implemented infrastructure-as-code with Terraform, automated deployments, and a full observability stack.",
+        tags: ["DEVOPS", "AWS"],
+        impact: [
+            { icon: "🚀", text: "Zero-downtime migration" },
+            { icon: "💰", text: "35% reduction in cloud spend" },
+            { icon: "🔍", text: "Full observability with distributed tracing" },
+        ],
+        tech: ["AWS", "Terraform", "Docker", "Kubernetes", "Datadog"],
+        href: "/case-studies",
+    },
+];
+---
+
+<section class="cs-section" aria-labelledby="cs-heading">
+    <div class="cs-section__inner">
+        <!-- Section header -->
+        <div class="cs-section__header">
+            <div class="cs-section__meta">
+                <p class="cs-section__label">PORTFOLIO</p>
+                <h2 class="cs-section__heading" id="cs-heading">Selected Case Studies</h2>
+            </div>
+            <a href="/case-studies" class="cs-section__view-all">
+                View all projects <span aria-hidden="true">&#x2197;</span>
+            </a>
+        </div>
+
+        <!-- Cards -->
+        <div class="cs-section__cards">
+            {caseStudies.map((study) => <CaseStudyCard {...study} />)}
+        </div>
+    </div>
+</section>
+
+<style>
+    @import "../../../styles/mixins.css";
+
+    .cs-section {
+        position: relative;
+        z-index: 1;
+        padding-block: 5rem 4rem;
+    }
+
+    .cs-section__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    @mixin tablet-up {
+        .cs-section__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    /* ── Section header ── */
+    .cs-section__header {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-bottom: 2.5rem;
+    }
+
+    @mixin tablet-up {
+        .cs-section__header {
+            flex-direction: row;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+    }
+
+    .cs-section__label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 0.5rem;
+    }
+
+    .cs-section__heading {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        font-weight: 760;
+        letter-spacing: -0.04em;
+        color: var(--color-text-primary);
+        line-height: 1.1;
+    }
+
+    .cs-section__view-all {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition: color var(--transition-fast);
+        padding-bottom: 0.15rem;
+    }
+
+    .cs-section__view-all:hover {
+        color: var(--color-text-primary);
+    }
+
+    /* ── Cards list ── */
+    .cs-section__cards {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    @mixin tablet-up {
+        .cs-section__cards {
+            gap: 2rem;
+        }
+    }
+</style>

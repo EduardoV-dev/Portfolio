@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { routes } from "@/constants/routes";
+import { useChatStore } from "@/store/chat";
 import AiButton from "../ai-button";
 import HeaderCta from "../header-cta";
 import HeaderLogo from "../header-logo";
@@ -12,6 +13,12 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ currentPath, isOpen, onClose }: MobileMenuProps) {
+    const { openChat } = useChatStore();
+
+    function handleAiClick() {
+        onClose();
+        openChat();
+    }
     return (
         <>
             <div
@@ -71,7 +78,10 @@ export default function MobileMenu({ currentPath, isOpen, onClose }: MobileMenuP
                     </ul>
 
                     <div className={styles["mobile-actions"]}>
-                        <AiButton className={styles["mobile-actions__ai"]} />
+                        <AiButton
+                            className={styles["mobile-actions__ai"]}
+                            onClick={handleAiClick}
+                        />
                         <HeaderCta mobile />
                     </div>
                 </nav>

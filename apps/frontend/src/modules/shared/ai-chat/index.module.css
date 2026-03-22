@@ -288,7 +288,6 @@
     font-family: var(--font-sans);
     font-size: 0.88rem;
     color: var(--color-text-primary);
-    placeholder-color: rgba(255, 255, 255, 0.3);
     min-width: 0;
 }
 

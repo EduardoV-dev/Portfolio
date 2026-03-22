@@ -1,0 +1,124 @@
+---
+
+---
+
+<section class="cta-section" aria-label="Call to action">
+    <div class="cta-section__inner">
+        <h2 class="cta-section__heading">
+            Building something ambitious?
+            <span class="cta-section__accent">Let's architect it right</span>
+            from day one.
+        </h2>
+
+        <p class="cta-section__subtext">
+            I help startups and growing teams design scalable systems from the ground up.
+        </p>
+
+        <a href="/schedule" class="cta-section__btn"> Book a Strategy Call </a>
+    </div>
+</section>
+
+<style>
+    @import "../../../styles/mixins.css";
+
+    .cta-section {
+        position: relative;
+        z-index: 1;
+        padding-block: 5rem 6rem;
+    }
+
+    .cta-section__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.5rem;
+    }
+
+    .cta-section__heading {
+        font-size: clamp(1.9rem, 8vw, 3rem);
+        font-weight: 760;
+        letter-spacing: -0.04em;
+        line-height: 1.1;
+        color: var(--color-text-primary);
+        text-wrap: balance;
+        max-width: 18ch;
+    }
+
+    .cta-section__accent {
+        color: var(--color-accent);
+    }
+
+    .cta-section__subtext {
+        color: var(--color-text-secondary);
+        font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+        line-height: 1.65;
+        max-width: 42ch;
+        text-wrap: pretty;
+    }
+
+    .cta-section__btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0.5rem;
+        padding: 0.95rem 2rem;
+        min-height: 3.9rem;
+        border-radius: 0.95rem;
+        border: 1px solid transparent;
+        color: #04131f;
+        background: linear-gradient(135deg, #44b7ff 0%, #38bdf8 52%, #3cb4ff 100%);
+        box-shadow:
+            0 12px 30px rgba(56, 189, 248, 0.25),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.25);
+        font-size: 1.03rem;
+        font-weight: 650;
+        letter-spacing: -0.01em;
+        text-decoration: none;
+        transition:
+            transform var(--transition-fast),
+            box-shadow var(--transition-base);
+        will-change: transform;
+    }
+
+    .cta-section__btn:hover {
+        transform: translateY(-2px);
+        box-shadow:
+            0 15px 34px rgba(56, 189, 248, 0.35),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    .cta-section__btn:focus-visible {
+        outline: 2px solid rgba(56, 189, 248, 0.95);
+        outline-offset: 2px;
+    }
+
+    .cta-section__btn:active {
+        transform: translateY(0);
+    }
+
+    @mixin tablet-up {
+        .cta-section__inner {
+            padding-inline: 1.5rem;
+        }
+
+        .cta-section__heading {
+            font-size: clamp(2.2rem, 5vw, 3rem);
+        }
+
+        .cta-section__btn {
+            min-height: 3.7rem;
+            border-radius: 0.85rem;
+            font-size: 1.05rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .cta-section__btn {
+            transition: none;
+        }
+    }
+</style>

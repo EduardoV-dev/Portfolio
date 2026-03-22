@@ -49,7 +49,7 @@ jobs:
 
             - name: Build Astro site
               run: pnpm build
-              
+
             - name: Debug GitHub context
               run: |
                   echo "GITHUB_REPOSITORY=${GITHUB_REPOSITORY}"

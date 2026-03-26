@@ -1,5 +1,5 @@
 ---
-import CaseStudyCard from "./case-study-card.astro";
+import CaseStudyCard from "@/components/case-study-card/index.astro";
 
 const caseStudies = [
     {
@@ -7,39 +7,28 @@ const caseStudies = [
         description:
             "Built scalable marketing websites and APIs using React, Next.js, and Node.js. Optimized performance, accessibility, and deployment pipelines using AWS infrastructure.",
         tags: ["E-COMMERCE", "SAAS"],
-        impact: [
-            { icon: "🔥", text: "40% performance improvement" },
-            { icon: "⚙️", text: "Automated CI/CD deployment pipeline" },
-            { icon: "☁️", text: "Production-ready AWS infrastructure" },
+        bullets: [
+            "40% performance improvement across marketing properties.",
+            "Production-ready AWS infrastructure with automated CI/CD pipeline.",
         ],
         tech: ["React", "Next.js", "Node.js", "AWS", "CI/CD"],
         href: "/case-studies",
+        sourceHref: "#",
+        liveHref: "#",
     },
     {
         title: "Real-Time Analytics Dashboard",
         description:
             "Architected a real-time analytics dashboard processing thousands of events per second. Built with WebSocket-driven updates, D3.js visualizations, and a distributed Node.js backend.",
         tags: ["ANALYTICS", "INTERNAL TOOLS"],
-        impact: [
-            { icon: "⚡", text: "Sub-100ms data latency" },
-            { icon: "🛡️", text: "99.9% uptime SLA" },
-            { icon: "📉", text: "Reduced analyst report time by 60%" },
+        bullets: [
+            "Sub-100ms data latency with 99.9% uptime SLA.",
+            "Reduced analyst report generation time by 60%.",
         ],
         tech: ["Node.js", "D3.js", "WebSockets", "PostgreSQL", "Docker"],
         href: "/case-studies",
-    },
-    {
-        title: "Cloud Infrastructure Migration",
-        description:
-            "Led the migration of a monolithic application to a microservices architecture on AWS. Implemented infrastructure-as-code with Terraform, automated deployments, and a full observability stack.",
-        tags: ["DEVOPS", "AWS"],
-        impact: [
-            { icon: "🚀", text: "Zero-downtime migration" },
-            { icon: "💰", text: "35% reduction in cloud spend" },
-            { icon: "🔍", text: "Full observability with distributed tracing" },
-        ],
-        tech: ["AWS", "Terraform", "Docker", "Kubernetes", "Datadog"],
-        href: "/case-studies",
+        sourceHref: "#",
+        liveHref: "#",
     },
 ];
 ---
@@ -47,7 +36,7 @@ const caseStudies = [
 <section class="cs-section" aria-labelledby="cs-heading">
     <div class="cs-section__inner">
         <!-- Section header -->
-        <div class="cs-section__header">
+        <div class="cs-section__header" data-animate>
             <div class="cs-section__meta">
                 <p class="cs-section__label">PORTFOLIO</p>
                 <h2 class="cs-section__heading" id="cs-heading">Selected Case Studies</h2>
@@ -57,9 +46,13 @@ const caseStudies = [
             </a>
         </div>
 
-        <!-- Cards -->
-        <div class="cs-section__cards">
-            {caseStudies.map((study) => <CaseStudyCard {...study} />)}
+        <!-- Cards grid -->
+        <div class="cs-section__grid">
+            {
+                caseStudies.map((study, i) => (
+                    <CaseStudyCard {...study} data-animate data-animate-delay={String(i + 1)} />
+                ))
+            }
         </div>
     </div>
 </section>
@@ -138,16 +131,22 @@ const caseStudies = [
         color: var(--color-text-primary);
     }
 
-    /* ── Cards list ── */
-    .cs-section__cards {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
+    /* ── Cards grid ── */
+    .cs-section__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
     }
 
     @mixin tablet-up {
-        .cs-section__cards {
-            gap: 2rem;
+        .cs-section__grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
         }
     }
 </style>
+
+<script>
+    import { initScrollReveal } from "@/utils/animations";
+    initScrollReveal();
+</script>

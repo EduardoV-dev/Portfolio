@@ -18,3 +18,4 @@ apps/strapi/database/data.db*
 .pnp
 .pnp.js
 .pnp.cjs
+nul

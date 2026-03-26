@@ -1,0 +1,179 @@
+---
+import CaseStudyCard from "./case-study-card.astro";
+
+const projects = [
+    {
+        title: "Neural Grid Orchestrator",
+        description:
+            "A high-throughput distributed system designed for real-time processing of sensory data across edge computing nodes.",
+        tags: ["REACT", "AWS LAMBDA", "TERRAFORM"],
+        bullets: [
+            "Improved latency by 40% across regional clusters.",
+            "Automated CI/CD deployment pipeline for 200+ services.",
+        ],
+        tech: ["React", "AWS Lambda", "Terraform"],
+        href: "#",
+        sourceHref: "#",
+        liveHref: "#",
+    },
+    {
+        title: "Vortex Data Integrity",
+        description:
+            "Secure vault infrastructure providing cryptographic verification for financial transaction ledgers and audit trails.",
+        tags: ["NEXT.JS", "POSTGRESQL", "REDIS"],
+        bullets: [
+            "Zero downtime during migration of 50TB legacy data.",
+            "Implemented SOC2 compliant monitoring systems.",
+        ],
+        tech: ["Next.js", "PostgreSQL", "Redis"],
+        href: "#",
+        sourceHref: "#",
+        liveHref: "#",
+    },
+    {
+        title: "Prism API Gateway",
+        description:
+            "Unified entry point for microservices ecosystem handling over 1M requests per minute with intelligent caching.",
+        tags: ["NODE.JS", "GRAPHQL", "DOCKER"],
+        bullets: [
+            "Reduced API overhead by 65% using GraphQL schema stitching.",
+            "Auto-scaling infrastructure for peak demand handling.",
+        ],
+        tech: ["Node.js", "GraphQL", "Docker"],
+        href: "#",
+        sourceHref: "#",
+        liveHref: "#",
+    },
+    {
+        title: "Obsidian Core Engine",
+        description:
+            "Low-level computational kernel developed for ultra-fast physics simulations within browser environments.",
+        tags: ["RUST", "WEBASSEMBLY", "KUBERNETES"],
+        bullets: [
+            "Performance parity with native C++ applications.",
+            "Containerized deployment with zero-config clustering.",
+        ],
+        tech: ["Rust", "WebAssembly", "Kubernetes"],
+        href: "#",
+        sourceHref: "#",
+        liveHref: "#",
+    },
+];
+---
+
+<section class="csw-section" aria-labelledby="csw-heading">
+    <div class="csw-section__inner">
+        <!-- Page header -->
+        <header class="csw-section__header" data-animate>
+            <p class="csw-section__label">
+                <span class="csw-section__label-dot" aria-hidden="true"></span>
+                ARCHIVE REGISTRY
+            </p>
+            <h1 class="csw-section__heading" id="csw-heading">Selected Work</h1>
+            <p class="csw-section__subheading">
+                A selection of systems I've designed and built, focused on scalability, performance,
+                and real-world impact.
+            </p>
+        </header>
+
+        <!-- 2-column grid of cards -->
+        <div class="csw-section__grid">
+            {
+                projects.map((project, i) => (
+                    <CaseStudyCard {...project} data-animate data-animate-delay={String(i + 1)} />
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .csw-section {
+        position: relative;
+        z-index: 1;
+        padding-block: 4rem 2rem;
+    }
+
+    .csw-section__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    @mixin tablet-up {
+        .csw-section__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    /* ── Page header ── */
+    .csw-section__header {
+        margin-bottom: 3rem;
+    }
+
+    @mixin tablet-up {
+        .csw-section__header {
+            margin-bottom: 3.5rem;
+        }
+    }
+
+    .csw-section__label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 0.85rem;
+    }
+
+    .csw-section__label-dot {
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--color-accent);
+        box-shadow: 0 0 6px 2px rgba(56, 189, 248, 0.5);
+        flex-shrink: 0;
+    }
+
+    .csw-section__heading {
+        font-size: clamp(2.25rem, 8vw, 3.5rem);
+        font-weight: 780;
+        letter-spacing: -0.04em;
+        line-height: 1.05;
+        color: var(--color-text-primary);
+        margin-bottom: 0.85rem;
+    }
+
+    .csw-section__subheading {
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+        max-width: 52ch;
+        text-wrap: pretty;
+    }
+
+    /* ── Grid ── */
+    .csw-section__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    @mixin tablet-up {
+        .csw-section__grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+    }
+</style>
+
+<script>
+    import { initScrollReveal } from "@/utils/animations";
+    initScrollReveal();
+</script>

@@ -28,6 +28,7 @@ jobs:
             AWS_ROLE_ARN: ${{ vars.AWS_ROLE_ARN }}
             S3_BUCKET: ${{ vars.S3_BUCKET }}
             CLOUDFRONT_DISTRIBUTION_ID: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
+            SITE_URL: ${{ vars.SITE_URL }}
 
         steps:
             - name: Checkout code

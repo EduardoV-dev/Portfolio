@@ -1,0 +1,24 @@
+---
+import Layout from "@/layouts/layout/index.astro";
+import CaseStudyDetail from "@/modules/case-study-detail/index.astro";
+import { getProjectBySlug, getAllSlugs } from "@/data/projects";
+
+export function getStaticPaths() {
+    return getAllSlugs().map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const project = getProjectBySlug(slug);
+
+// Shouldn't happen with getStaticPaths, but guard for type safety
+if (!project) {
+    return Astro.redirect("/case-studies");
+}
+
+const pageTitle = `${project.title} – Case Study – Eduardo Varela`;
+const pageDescription = project.description;
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+    <CaseStudyDetail project={project} />
+</Layout>

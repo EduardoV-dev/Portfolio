@@ -1,73 +1,7 @@
 ---
 import CaseStudyCard from "@/components/case-study-card/index.astro";
 import FeaturedProjectCard from "@/components/featured-project-card/index.astro";
-
-const projects = [
-    {
-        title: "Neural Grid Orchestrator",
-        impact: "Processed 40M+ events/day with 40% latency reduction across regional clusters.",
-        description:
-            "A high-throughput distributed system designed for real-time processing of sensory data across edge computing nodes.",
-        tags: ["REACT", "AWS LAMBDA", "TERRAFORM"],
-        category: "architecture",
-        bullets: [
-            "Improved latency by 40% across regional clusters.",
-            "Automated CI/CD deployment pipeline for 200+ services.",
-        ],
-        tech: ["React", "AWS Lambda", "Terraform"],
-        href: "#",
-        sourceHref: "#",
-        liveHref: "#",
-    },
-    {
-        title: "Vortex Data Integrity",
-        impact: "Migrated 50TB of legacy data with zero downtime and SOC2-compliant audit trails.",
-        description:
-            "Secure vault infrastructure providing cryptographic verification for financial transaction ledgers and audit trails.",
-        tags: ["NEXT.JS", "POSTGRESQL", "REDIS"],
-        category: "backend",
-        bullets: [
-            "Zero downtime during migration of 50TB legacy data.",
-            "Implemented SOC2 compliant monitoring systems.",
-        ],
-        tech: ["Next.js", "PostgreSQL", "Redis"],
-        href: "#",
-        sourceHref: "#",
-        liveHref: "#",
-    },
-    {
-        title: "Prism API Gateway",
-        impact: "Handles 1M+ requests/minute with 65% overhead reduction via GraphQL schema stitching.",
-        description:
-            "Unified entry point for microservices ecosystem handling over 1M requests per minute with intelligent caching.",
-        tags: ["NODE.JS", "GRAPHQL", "DOCKER"],
-        category: "backend",
-        bullets: [
-            "Reduced API overhead by 65% using GraphQL schema stitching.",
-            "Auto-scaling infrastructure for peak demand handling.",
-        ],
-        tech: ["Node.js", "GraphQL", "Docker"],
-        href: "#",
-        sourceHref: "#",
-        liveHref: "#",
-    },
-    {
-        title: "Obsidian Core Engine",
-        impact: "Achieved native C++ performance parity in-browser via WebAssembly with zero-config clustering.",
-        description:
-            "Low-level computational kernel developed for ultra-fast physics simulations within browser environments.",
-        tags: ["RUST", "WEBASSEMBLY", "KUBERNETES"],
-        category: "performance",
-        bullets: [
-            "Performance parity with native C++ applications.",
-            "Containerized deployment with zero-config clustering.",
-        ],
-        tech: ["Rust", "WebAssembly", "Kubernetes"],
-        href: "#",
-        sourceHref: "#",
-        liveHref: "#",
-    },
-];
+import { projects } from "@/data/projects";
 
 const featuredProject = projects[0];
 const gridProjects = projects.slice(1);
@@ -90,7 +24,10 @@ const gridProjects = projects.slice(1);
 
         <!-- Featured project -->
         <div data-animate data-animate-delay="1">
-            <FeaturedProjectCard {...featuredProject} />
+            <FeaturedProjectCard
+                {...featuredProject}
+                href={`/case-studies/${featuredProject.slug}`}
+            />
         </div>
 
         <!-- Filter bar -->
@@ -114,6 +51,7 @@ const gridProjects = projects.slice(1);
                 gridProjects.map((project, i) => (
                     <CaseStudyCard
                         {...project}
+                        href={`/case-studies/${project.slug}`}
                         data-animate
                         data-animate-delay={String(i + 2)}
                         data-category={project.category}

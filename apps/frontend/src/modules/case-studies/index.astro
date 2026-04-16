@@ -1,12 +1,15 @@
 ---
 import CaseStudyCard from "@/components/case-study-card/index.astro";
+import FeaturedProjectCard from "@/components/featured-project-card/index.astro";
 
 const projects = [
     {
         title: "Neural Grid Orchestrator",
+        impact: "Processed 40M+ events/day with 40% latency reduction across regional clusters.",
         description:
             "A high-throughput distributed system designed for real-time processing of sensory data across edge computing nodes.",
         tags: ["REACT", "AWS LAMBDA", "TERRAFORM"],
+        category: "architecture",
         bullets: [
             "Improved latency by 40% across regional clusters.",
             "Automated CI/CD deployment pipeline for 200+ services.",
@@ -18,9 +21,11 @@ const projects = [
     },
     {
         title: "Vortex Data Integrity",
+        impact: "Migrated 50TB of legacy data with zero downtime and SOC2-compliant audit trails.",
         description:
             "Secure vault infrastructure providing cryptographic verification for financial transaction ledgers and audit trails.",
         tags: ["NEXT.JS", "POSTGRESQL", "REDIS"],
+        category: "backend",
         bullets: [
             "Zero downtime during migration of 50TB legacy data.",
             "Implemented SOC2 compliant monitoring systems.",
@@ -32,9 +37,11 @@ const projects = [
     },
     {
         title: "Prism API Gateway",
+        impact: "Handles 1M+ requests/minute with 65% overhead reduction via GraphQL schema stitching.",
         description:
             "Unified entry point for microservices ecosystem handling over 1M requests per minute with intelligent caching.",
         tags: ["NODE.JS", "GRAPHQL", "DOCKER"],
+        category: "backend",
         bullets: [
             "Reduced API overhead by 65% using GraphQL schema stitching.",
             "Auto-scaling infrastructure for peak demand handling.",
@@ -46,9 +53,11 @@ const projects = [
     },
     {
         title: "Obsidian Core Engine",
+        impact: "Achieved native C++ performance parity in-browser via WebAssembly with zero-config clustering.",
         description:
             "Low-level computational kernel developed for ultra-fast physics simulations within browser environments.",
         tags: ["RUST", "WEBASSEMBLY", "KUBERNETES"],
+        category: "performance",
         bullets: [
             "Performance parity with native C++ applications.",
             "Containerized deployment with zero-config clustering.",
@@ -59,6 +68,9 @@ const projects = [
         liveHref: "#",
     },
 ];
+
+const featuredProject = projects[0];
+const gridProjects = projects.slice(1);
 ---
 
 <section class="csw-section" aria-labelledby="csw-heading">
@@ -67,7 +79,7 @@ const projects = [
         <header class="csw-section__header" data-animate>
             <p class="csw-section__label">
                 <span class="csw-section__label-dot" aria-hidden="true"></span>
-                ARCHIVE REGISTRY
+                PORTFOLIO
             </p>
             <h1 class="csw-section__heading" id="csw-heading">Selected Work</h1>
             <p class="csw-section__subheading">
@@ -76,13 +88,45 @@ const projects = [
             </p>
         </header>
 
-        <!-- 2-column grid of cards -->
-        <div class="csw-section__grid">
+        <!-- Featured project -->
+        <div data-animate data-animate-delay="1">
+            <FeaturedProjectCard {...featuredProject} />
+        </div>
+
+        <!-- Filter bar -->
+        <div class="csw-section__filters" role="group" aria-label="Filter projects by category">
             {
-                projects.map((project, i) => (
-                    <CaseStudyCard {...project} data-animate data-animate-delay={String(i + 1)} />
+                ["all", "backend", "cloud", "architecture", "performance"].map((cat) => (
+                    <button
+                        class="csw-filter-btn"
+                        data-filter={cat}
+                        aria-pressed={cat === "all" ? "true" : "false"}
+                    >
+                        {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                    </button>
                 ))
             }
+        </div>
+
+        <!-- Projects grid -->
+        <div class="csw-section__grid" id="csw-grid">
+            {
+                gridProjects.map((project, i) => (
+                    <CaseStudyCard
+                        {...project}
+                        data-animate
+                        data-animate-delay={String(i + 2)}
+                        data-category={project.category}
+                    />
+                ))
+            }
+        </div>
+
+        <!-- Empty state (shown when filter has no matches) -->
+        <div class="csw-section__empty" id="csw-empty" aria-live="polite" hidden>
+            <p class="csw-section__empty-text">
+                No projects in this category yet — check back soon.
+            </p>
         </div>
     </div>
 </section>
@@ -158,6 +202,49 @@ const projects = [
         text-wrap: pretty;
     }
 
+    /* ── Filter bar ── */
+    .csw-section__filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-block: 2.5rem 1.75rem;
+    }
+
+    .csw-filter-btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.45rem 1rem;
+        border-radius: 99px;
+        border: 1px solid var(--color-border);
+        background: transparent;
+        color: var(--color-text-secondary);
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        cursor: pointer;
+        transition:
+            color var(--transition-fast),
+            border-color var(--transition-fast),
+            background var(--transition-fast);
+        font-family: var(--font-sans);
+    }
+
+    .csw-filter-btn:hover {
+        color: var(--color-text-primary);
+        border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    .csw-filter-btn[aria-pressed="true"] {
+        color: var(--color-accent);
+        border-color: rgba(56, 189, 248, 0.45);
+        background: rgba(56, 189, 248, 0.08);
+    }
+
+    .csw-filter-btn:focus-visible {
+        outline: 2px solid rgba(56, 189, 248, 0.9);
+        outline-offset: 2px;
+    }
+
     /* ── Grid ── */
     .csw-section__grid {
         display: grid;
@@ -171,9 +258,55 @@ const projects = [
             gap: 1.5rem;
         }
     }
+
+    /* ── Empty state ── */
+    .csw-section__empty {
+        padding-block: 4rem;
+        text-align: center;
+    }
+
+    .csw-section__empty-text {
+        color: var(--color-text-secondary);
+        font-size: 0.95rem;
+    }
+
+    /* ── Card hide/show transitions ── */
+    :global(.csw-card-hidden) {
+        display: none !important;
+    }
 </style>
 
 <script>
     import { initScrollReveal } from "@/utils/animations";
     initScrollReveal();
+
+    // ── Filter logic ──
+    const buttons = document.querySelectorAll<HTMLButtonElement>(".csw-filter-btn");
+    const grid = document.getElementById("csw-grid")!;
+    const emptyState = document.getElementById("csw-empty")!;
+
+    function applyFilter(category: string) {
+        const cards = grid.querySelectorAll<HTMLElement>("[data-category]");
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+            const matches = category === "all" || card.dataset.category === category;
+            if (matches) {
+                card.classList.remove("csw-card-hidden");
+                visibleCount++;
+            } else {
+                card.classList.add("csw-card-hidden");
+            }
+        });
+
+        emptyState.hidden = visibleCount > 0;
+    }
+
+    buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            buttons.forEach((b) => b.setAttribute("aria-pressed", "false"));
+            btn.setAttribute("aria-pressed", "true");
+            applyFilter(btn.dataset.filter ?? "all");
+        });
+    });
 </script>

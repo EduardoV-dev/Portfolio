@@ -35,6 +35,17 @@ export function initScrollReveal(): void {
 
                 el.classList.add("is-visible");
                 observer.unobserve(el);
+
+                // Release compositor layer once the reveal transition completes.
+                // Keeping will-change on all ~42 revealed elements indefinitely
+                // exhausts GPU memory and causes stutter during scroll.
+                el.addEventListener(
+                    "transitionend",
+                    () => {
+                        el.style.willChange = "auto";
+                    },
+                    { once: true },
+                );
             }
         },
         // Fire when ~12% of the element is inside the viewport

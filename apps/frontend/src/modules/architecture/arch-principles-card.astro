@@ -101,10 +101,13 @@ const { iconName, title, description, delay = 1 } = Astro.props;
             transform var(--transition-base),
             box-shadow var(--transition-base),
             border-color var(--transition-base);
-        will-change: transform;
+        /* will-change removed from static rule — permanently holding a compositor
+           layer on every card wastes GPU memory even when nothing is animating */
     }
 
     .arch-pc:hover {
+        /* Hint the compositor only while the hover is active */
+        will-change: transform;
         transform: translateY(-4px);
         box-shadow:
             0 0 0 1px rgba(56, 189, 248, 0.15),

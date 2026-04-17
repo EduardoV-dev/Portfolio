@@ -1,0 +1,70 @@
+<section class="arch-header" aria-labelledby="arch-header-heading">
+    <div class="arch-header__inner">
+        <p class="arch-header__label" data-animate data-animate-delay="1">ARCHITECTURE</p>
+        <h1 class="arch-header__title" data-animate data-animate-delay="2">
+            System Design &amp; Architecture
+        </h1>
+        <p class="arch-header__subtext" data-animate data-animate-delay="3">
+            I design scalable, resilient systems that handle real-world production demands.
+        </p>
+    </div>
+</section>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .arch-header {
+        position: relative;
+        z-index: 1;
+        padding-block: 5rem 4rem;
+    }
+
+    .arch-header__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    @mixin tablet-up {
+        .arch-header__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    .arch-header__label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 1rem;
+    }
+
+    .arch-header__title {
+        font-size: clamp(2.25rem, 8vw, 4rem);
+        font-weight: 800;
+        letter-spacing: -0.05em;
+        color: var(--color-text-primary);
+        line-height: 1.05;
+        margin-bottom: 1.5rem;
+        max-width: 18ch;
+    }
+
+    .arch-header__subtext {
+        font-size: clamp(1rem, 2.5vw, 1.15rem);
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+        max-width: 46ch;
+    }
+
+    @mixin desktop-up {
+        .arch-header {
+            padding-block: 6rem 4.5rem;
+        }
+    }
+</style>
+
+<script>
+    import { initScrollReveal } from "@/utils/animations";
+    initScrollReveal();
+</script>

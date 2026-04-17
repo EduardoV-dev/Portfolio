@@ -1,0 +1,314 @@
+---
+const domains = [
+    {
+        id: "api-design",
+        label: "API Design",
+        heading: "API Design",
+        bullets: [
+            "REST & GraphQL",
+            "Versioning strategies",
+            "Validation & error contracts",
+            "Rate limiting & throttling",
+        ],
+        description:
+            "Well-designed APIs are the contract between systems. I define clear resource models, consistent error shapes, and versioning strategies that let clients evolve independently from servers.",
+    },
+    {
+        id: "system-architecture",
+        label: "System Architecture",
+        heading: "System Architecture",
+        bullets: [
+            "Monolith vs microservices",
+            "Event-driven systems",
+            "Service communication",
+            "Saga & outbox patterns",
+        ],
+        description:
+            "Architecture decisions have compounding consequences. I evaluate monolith-first vs. distributed tradeoffs deliberately — decomposing only when operational complexity is justified by scale or team autonomy.",
+    },
+    {
+        id: "data-persistence",
+        label: "Data & Persistence",
+        heading: "Data & Persistence",
+        bullets: [
+            "Schema & data modeling",
+            "Indexing strategies",
+            "Read replicas & sharding",
+            "Eventual vs strong consistency",
+        ],
+        description:
+            "Data is the most durable artifact in a system. I design schemas with access patterns in mind, optimize queries early, and choose consistency models based on actual business requirements.",
+    },
+    {
+        id: "cloud-infrastructure",
+        label: "Cloud & Infrastructure",
+        heading: "Cloud & Infrastructure",
+        bullets: [
+            "AWS-native services",
+            "IaC with CDK / Terraform",
+            "CI/CD pipelines",
+            "High availability design",
+        ],
+        description:
+            "Infrastructure is code. I build cloud systems with automation from day one — declarative infrastructure, environment parity, and deployment pipelines that make production releases routine rather than risky.",
+    },
+    {
+        id: "performance-optimization",
+        label: "Performance & Optimization",
+        heading: "Performance & Optimization",
+        bullets: [
+            "Multi-layer caching",
+            "Load balancing strategies",
+            "Profiling & bottleneck analysis",
+            "Observability & alerting",
+        ],
+        description:
+            "Performance is a feature. I instrument systems from the start with tracing, metrics, and structured logging — so bottlenecks are identified with data, not guesswork.",
+    },
+];
+---
+
+<section class="arch-domains" aria-labelledby="arch-domains-heading">
+    <div class="arch-domains__inner">
+        <header class="arch-domains__header">
+            <p class="arch-domains__label" data-animate data-animate-delay="1">DOMAINS</p>
+            <h2
+                class="arch-domains__heading"
+                id="arch-domains-heading"
+                data-animate
+                data-animate-delay="2"
+            >
+                Architecture Domains
+            </h2>
+            <p class="arch-domains__subtext" data-animate data-animate-delay="3">
+                Five areas where system-level thinking translates to real engineering decisions.
+            </p>
+        </header>
+
+        <div class="arch-domains__grid">
+            {
+                domains.map((domain, i) => (
+                    <article
+                        class="arch-domain-card"
+                        id={domain.id}
+                        data-animate
+                        data-animate-delay={i + 1}
+                    >
+                        <div class="arch-domain-card__left">
+                            <p class="arch-domain-card__label">{domain.label}</p>
+                            <h3 class="arch-domain-card__heading">{domain.heading}</h3>
+                            <ul class="arch-domain-card__bullets" role="list">
+                                {domain.bullets.map((b) => (
+                                    <li class="arch-domain-card__bullet">{b}</li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div class="arch-domain-card__right">
+                            <p class="arch-domain-card__desc">{domain.description}</p>
+                        </div>
+                    </article>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .arch-domains {
+        position: relative;
+        z-index: 1;
+        padding-block: 4rem;
+    }
+
+    .arch-domains__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    @mixin tablet-up {
+        .arch-domains__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    /* ── Section header ── */
+    .arch-domains__header {
+        margin-bottom: 3rem;
+    }
+
+    @mixin desktop-up {
+        .arch-domains__header {
+            max-width: 52rem;
+            margin-bottom: 3.5rem;
+        }
+    }
+
+    .arch-domains__label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 0.75rem;
+    }
+
+    .arch-domains__heading {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        font-weight: 760;
+        letter-spacing: -0.04em;
+        color: var(--color-text-primary);
+        line-height: 1.1;
+        margin-bottom: 1.25rem;
+    }
+
+    .arch-domains__subtext {
+        font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+        max-width: 48rem;
+    }
+
+    /* ── Domain grid — stacked on mobile, 2-col on desktop ── */
+    .arch-domains__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    @mixin desktop-up {
+        .arch-domains__grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+
+        /* Last item spans full width when count is odd */
+        .arch-domain-card:last-child:nth-child(odd) {
+            grid-column: 1 / -1;
+        }
+    }
+
+    /* ── Domain card ── */
+    .arch-domain-card {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        padding: 1.75rem;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 1rem;
+        transition:
+            border-color var(--transition-base),
+            box-shadow var(--transition-base);
+    }
+
+    .arch-domain-card:hover {
+        border-color: rgba(56, 189, 248, 0.15);
+        box-shadow:
+            0 0 0 1px rgba(56, 189, 248, 0.08),
+            0 12px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    @mixin tablet-up {
+        .arch-domain-card {
+            flex-direction: row;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+    }
+
+    @mixin desktop-up {
+        .arch-domain-card {
+            flex-direction: column;
+            padding: 2rem;
+            gap: 1.5rem;
+        }
+    }
+
+    /* ── Left: label + bullets ── */
+    .arch-domain-card__left {
+        flex-shrink: 0;
+    }
+
+    @mixin tablet-up {
+        .arch-domain-card__left {
+            min-width: 13rem;
+            max-width: 14rem;
+        }
+    }
+
+    @mixin desktop-up {
+        .arch-domain-card__left {
+            min-width: unset;
+            max-width: unset;
+        }
+    }
+
+    .arch-domain-card__label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 0.5rem;
+        opacity: 0.8;
+    }
+
+    .arch-domain-card__heading {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        letter-spacing: -0.025em;
+        margin-bottom: 1rem;
+    }
+
+    .arch-domain-card__bullets {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+    }
+
+    .arch-domain-card__bullet {
+        font-size: 0.825rem;
+        color: var(--color-text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        line-height: 1.4;
+    }
+
+    .arch-domain-card__bullet::before {
+        content: "";
+        flex-shrink: 0;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--color-accent);
+        opacity: 0.65;
+    }
+
+    /* ── Right: description prose ── */
+    .arch-domain-card__right {
+        flex: 1;
+    }
+
+    .arch-domain-card__desc {
+        font-size: 0.9rem;
+        color: var(--color-text-secondary);
+        line-height: 1.75;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .arch-domain-card {
+            transition: none;
+        }
+    }
+</style>
+
+<script>
+    import { initScrollReveal } from "@/utils/animations";
+    initScrollReveal();
+</script>

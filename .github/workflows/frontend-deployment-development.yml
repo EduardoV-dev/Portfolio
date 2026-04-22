@@ -21,7 +21,7 @@ jobs:
         environment: development
         defaults:
             run:
-                working-directory: apps/frontend
+                working-directory: apps/web
 
         env:
             AWS_REGION: ${{ vars.AWS_REGION }}

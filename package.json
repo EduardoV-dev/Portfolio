@@ -9,8 +9,8 @@
         "lint": "eslint .",
         "format": "prettier . --write",
         "check": "pnpm run lint && prettier . --check",
-        "dev:frontend": "pnpm --filter apps-frontend dev",
-        "dev:strapi": "pnpm --filter strapi dev",
+        "dev:frontend": "pnpm --filter web dev",
+        "dev:strapi": "pnpm --filter headless-cms dev",
         "dev": "concurrently \"pnpm run dev:frontend\" \"pnpm run dev:strapi\""
     },
     "devDependencies": {

@@ -10,19 +10,18 @@ export const routes: Route[] = [
     { label: "Blog", href: "/blog" },
 ];
 
-export const footerMoreLinks: Route[] = [{ label: "Uses (Tech Stack)", href: "/uses" }];
-
 export const footerCapabilitiesLinks: Route[] = [
-    { label: "Product-Focused Development", href: "/about#capabilities" },
-    { label: "Scalable System Architecture", href: "/about#capabilities" },
-    { label: "API & Backend Design", href: "/about#capabilities" },
-    { label: "Cloud Infrastructure (AWS)", href: "/about#capabilities" },
+    { label: "Backend Engineering", href: "/about#capabilities" },
+    { label: "System Architecture", href: "/architecture" },
+    { label: "Cloud Infrastructure", href: "/about#capabilities" },
+    { label: "Frontend & UI", href: "/about#capabilities" },
+    { label: "Tech Stack", href: "/about#tech-stack" },
 ];
 
 export const footerConnectLinks: Route[] = [
     { label: "Schedule a Call", href: "/contact" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/eduardov-dev" },
     { label: "GitHub", href: "https://www.github.com/EduardoV-dev" },
-    { label: "Email", href: "mailto:hello@eduardovarela.dev" },
+    { label: "Email", href: "/contact#send-email" },
     { label: "Resume", href: "/resume" },
 ];

@@ -4,14 +4,14 @@ const year = new Date().getFullYear();
 
 <div class="footer-bottom">
     <div class="footer-bottom__inner">
-        <div class="footer-bottom__left"></div>
-        <p class="footer-bottom__copy">
-            &copy; {year} Eduardo Varela. All rights reserved.
-        </p>
         <div class="footer-bottom__legal">
             <a href="/privacy-policy" class="footer-bottom__link">Privacy Policy</a>
             <a href="/terms-of-use" class="footer-bottom__link">Terms of Use</a>
         </div>
+
+        <p class="footer-bottom__copy">
+            &copy; {year} Eduardo Varela. All rights reserved.
+        </p>
     </div>
 </div>
 
@@ -31,10 +31,6 @@ const year = new Date().getFullYear();
         text-align: center;
     }
 
-    .footer-bottom__left {
-        display: none;
-    }
-
     .footer-bottom__copy {
         font-size: 0.75rem;
         color: var(--color-text-secondary, rgba(255, 255, 255, 0.55));
@@ -47,6 +43,7 @@ const year = new Date().getFullYear();
         align-items: center;
         justify-content: center;
         gap: 1.5rem;
+        order: 1;
     }
 
     .footer-bottom__link {
@@ -67,12 +64,9 @@ const year = new Date().getFullYear();
             text-align: initial;
         }
 
-        .footer-bottom__left {
-            display: block;
-        }
-
         .footer-bottom__legal {
-            justify-content: flex-end;
+            order: unset;
+            justify-content: flex-start;
         }
     }
 </style>

@@ -9,7 +9,15 @@ interface AiChatProps {
 }
 
 export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
-    const { messages, pendingPrompt, addMessage, setPendingPrompt, resetMessages } = useChatStore();
+    const {
+        messages,
+        pendingPrompt,
+        inlinePendingPrompt,
+        addMessage,
+        setPendingPrompt,
+        setInlinePendingPrompt,
+        resetMessages,
+    } = useChatStore();
     const [input, setInput] = useState("");
     const [isTyping, setIsTyping] = useState(false);
     const messagesContainerRef = useRef<HTMLDivElement>(null);
@@ -32,6 +40,15 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
         submitMessage(prompt);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pendingPrompt]);
+
+    // Consume inlinePendingPrompt — only in inline mode
+    useEffect(() => {
+        if (!inlinePendingPrompt || mode !== "inline") return;
+        const prompt = inlinePendingPrompt;
+        setInlinePendingPrompt(null);
+        submitMessage(prompt);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [inlinePendingPrompt]);
 
     function submitMessage(text: string) {
         const trimmed = text.trim();

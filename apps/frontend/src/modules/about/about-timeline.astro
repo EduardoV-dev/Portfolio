@@ -1,0 +1,323 @@
+---
+// TODO: Replace placeholder entries with real career history before launch
+
+interface TimelineEntry {
+    period: string;
+    current?: boolean;
+    title: string;
+    company: string;
+    location: string;
+    description: string;
+    tags: string[];
+}
+
+const entries: TimelineEntry[] = [
+    {
+        period: "2024 – Present",
+        current: true,
+        title: "Senior Full Stack Engineer",
+        company: "[Company Name]",
+        location: "Remote",
+        description:
+            "Leading architecture and delivery of cloud-native platforms. Owning services end-to-end from schema design through infrastructure — API design, AWS deployment, and CI/CD pipelines.",
+        tags: ["TypeScript", "Node.js", "AWS", "React"],
+    },
+    {
+        period: "2022 – 2024",
+        title: "Full Stack Engineer",
+        company: "Now Optics",
+        location: "Remote",
+        description:
+            "Built the full marketing platform for a nationwide optical retail chain — high-traffic landing pages, A/B testing infrastructure, and a CI/CD pipeline on AWS that cut deploy times by 60%.",
+        tags: ["React", "Next.js", "Node.js", "AWS"],
+    },
+    {
+        period: "2021 – 2022",
+        title: "Frontend Developer",
+        company: "[Company Name]",
+        location: "Remote",
+        description:
+            "Developed React applications and reusable component libraries. Expanded into API integration, performance work, and internal tooling as product responsibilities grew.",
+        tags: ["React", "TypeScript", "CSS"],
+    },
+    {
+        period: "2020 – 2021",
+        title: "Junior Frontend Developer",
+        company: "[Company Name]",
+        location: "Remote",
+        description:
+            "First engineering role. Shipped UI features, learned the full development lifecycle, and discovered a strong pull toward system design and backend work.",
+        tags: ["JavaScript", "React", "HTML/CSS"],
+    },
+];
+---
+
+<section class="about-tl" aria-labelledby="about-tl-heading">
+    <div class="about-tl__inner">
+        <header class="about-tl__header">
+            <p class="about-tl__label" data-animate data-animate-delay="1">EXPERIENCE</p>
+            <h2 class="about-tl__heading" id="about-tl-heading" data-animate data-animate-delay="2">
+                Career Timeline
+            </h2>
+        </header>
+
+        <ol class="about-tl__list" role="list">
+            {
+                entries.map((entry, i) => (
+                    <li class="about-tl__entry" data-animate data-animate-delay={i + 1}>
+                        <div class="about-tl__marker" aria-hidden="true">
+                            <span
+                                class:list={[
+                                    "about-tl__dot",
+                                    { "about-tl__dot--current": entry.current },
+                                ]}
+                            />
+                        </div>
+
+                        <div class="about-tl__content">
+                            <div class="about-tl__meta">
+                                <span class="about-tl__period">{entry.period}</span>
+                                {entry.current && <span class="about-tl__badge">Current</span>}
+                            </div>
+                            <h3 class="about-tl__role">{entry.title}</h3>
+                            <p class="about-tl__company">
+                                {entry.company}
+                                <span class="about-tl__sep" aria-hidden="true">
+                                    ·
+                                </span>
+                                {entry.location}
+                            </p>
+                            <p class="about-tl__desc">{entry.description}</p>
+                            <ul class="about-tl__tags" role="list">
+                                {entry.tags.map((tag) => (
+                                    <li class="about-tl__tag">{tag}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    </li>
+                ))
+            }
+        </ol>
+    </div>
+</section>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .about-tl {
+        position: relative;
+        z-index: 1;
+        padding-block: 4rem;
+    }
+
+    .about-tl__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    @mixin tablet-up {
+        .about-tl__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    /* ── Header ── */
+    .about-tl__header {
+        margin-bottom: 3rem;
+    }
+
+    .about-tl__label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 0.75rem;
+    }
+
+    .about-tl__heading {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        font-weight: 760;
+        letter-spacing: -0.04em;
+        color: var(--color-text-primary);
+        line-height: 1.1;
+    }
+
+    /* ── List ── */
+    .about-tl__list {
+        list-style: none;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    /* Vertical spine line */
+    .about-tl__list::before {
+        content: "";
+        position: absolute;
+        left: 7px;
+        top: 8px;
+        bottom: 8px;
+        width: 1px;
+        background: var(--color-border, rgba(255, 255, 255, 0.08));
+    }
+
+    @mixin tablet-up {
+        .about-tl__list::before {
+            left: 11px;
+        }
+    }
+
+    /* ── Entry ── */
+    .about-tl__entry {
+        display: grid;
+        grid-template-columns: 16px 1fr;
+        gap: 0 1.25rem;
+        padding-bottom: 2.5rem;
+    }
+
+    .about-tl__entry:last-child {
+        padding-bottom: 0;
+    }
+
+    @mixin tablet-up {
+        .about-tl__entry {
+            grid-template-columns: 24px 1fr;
+            gap: 0 1.75rem;
+        }
+    }
+
+    @mixin desktop-up {
+        .about-tl__entry {
+            grid-template-columns: 24px minmax(0, 44rem);
+        }
+    }
+
+    /* ── Marker ── */
+    .about-tl__marker {
+        display: flex;
+        justify-content: center;
+        padding-top: 6px;
+    }
+
+    .about-tl__dot {
+        display: block;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: var(--color-surface);
+        border: 2px solid var(--color-border, rgba(255, 255, 255, 0.15));
+        flex-shrink: 0;
+        transition: border-color 200ms ease;
+    }
+
+    @mixin tablet-up {
+        .about-tl__dot {
+            width: 23px;
+            height: 23px;
+        }
+    }
+
+    .about-tl__dot--current {
+        background: rgba(56, 189, 248, 0.15);
+        border-color: var(--color-accent);
+        box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.08);
+    }
+
+    /* ── Content ── */
+    .about-tl__content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .about-tl__meta {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .about-tl__period {
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        color: rgba(255, 255, 255, 0.35);
+        font-variant-numeric: tabular-nums;
+    }
+
+    .about-tl__badge {
+        display: inline-block;
+        padding: 0.15rem 0.55rem;
+        border-radius: 999px;
+        background: rgba(34, 197, 94, 0.1);
+        border: 1px solid rgba(34, 197, 94, 0.25);
+        color: #22c55e;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        line-height: 1;
+    }
+
+    .about-tl__role {
+        font-size: clamp(1rem, 2.5vw, 1.1rem);
+        font-weight: 700;
+        color: var(--color-text-primary);
+        letter-spacing: -0.02em;
+        line-height: 1.3;
+    }
+
+    .about-tl__company {
+        font-size: 0.88rem;
+        color: var(--color-accent);
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .about-tl__sep {
+        color: rgba(255, 255, 255, 0.2);
+        font-weight: 300;
+    }
+
+    .about-tl__desc {
+        font-size: 0.9rem;
+        color: var(--color-text-secondary);
+        line-height: 1.7;
+        margin-top: 0.25rem;
+    }
+
+    /* ── Tags ── */
+    .about-tl__tags {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-top: 0.25rem;
+    }
+
+    .about-tl__tag {
+        padding: 0.2rem 0.65rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.04);
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.75rem;
+        font-weight: 500;
+        line-height: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .about-tl__dot {
+            transition: none;
+        }
+    }
+</style>
+
+<script>
+    import { initScrollReveal } from "@/utils/animations";
+    initScrollReveal();
+</script>

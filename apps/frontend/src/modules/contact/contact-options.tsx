@@ -4,7 +4,7 @@ import styles from "./contact-options.module.css";
 
 const CALENDLY_URL = "https://calendly.com/eduardov-dev/30min";
 const LINKEDIN_URL = "https://www.linkedin.com/in/eduardov-dev";
-const EMAIL = "hello@eduardovarela.dev";
+const EMAIL = "eduardovarela139@gmail.com";
 
 type CopyStatus = "idle" | "copied";
 
@@ -12,6 +12,7 @@ export default function ContactOptions() {
     const [formOpen, setFormOpen] = useState(false);
     const [copyStatus, setCopyStatus] = useState<CopyStatus>("idle");
     const formPanelRef = useRef<HTMLDivElement>(null);
+    const openedViaHash = useRef(false);
 
     function openForm() {
         setFormOpen(true);
@@ -28,14 +29,27 @@ export default function ContactOptions() {
         });
     }
 
-    // Move focus into the panel for keyboard users when it opens
+    // Auto-open form when navigated via /contact#send-email
     useEffect(() => {
-        if (formOpen && formPanelRef.current) {
-            const firstFocusable = formPanelRef.current.querySelector<HTMLElement>(
-                "button, input, textarea, [tabindex]",
-            );
-            firstFocusable?.focus();
+        if (window.location.hash === "#send-email") {
+            openedViaHash.current = true;
+            openForm();
         }
+    }, []);
+
+    // After form renders: focus first field; if opened via hash, scroll panel into view
+    useEffect(() => {
+        if (!formOpen || !formPanelRef.current) return;
+
+        if (openedViaHash.current) {
+            formPanelRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+            openedViaHash.current = false;
+        }
+
+        const firstFocusable = formPanelRef.current.querySelector<HTMLElement>(
+            "button, input, textarea, [tabindex]",
+        );
+        firstFocusable?.focus();
     }, [formOpen]);
 
     return (
@@ -90,6 +104,7 @@ export default function ContactOptions() {
 
                     {/* ── Email ── */}
                     <div
+                        id="send-email"
                         className={
                             styles["co__card"] +
                             (formOpen ? " " + styles["co__card--email-active"] : "")

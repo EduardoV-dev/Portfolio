@@ -1,0 +1,328 @@
+---
+import { posts, formatPostDate } from "@/data/posts";
+
+const previewPosts = posts.slice(0, 3);
+
+const categoryColors: Record<string, string> = {
+    architecture: "var(--bp-cat-architecture)",
+    backend: "var(--bp-cat-backend)",
+    performance: "var(--bp-cat-performance)",
+    cloud: "var(--bp-cat-cloud)",
+};
+
+const categoryLabels: Record<string, string> = {
+    architecture: "Architecture",
+    backend: "Backend",
+    performance: "Performance",
+    cloud: "Cloud",
+};
+---
+
+<section class="bp" aria-labelledby="bp-heading">
+    <div class="bp__inner">
+        <header class="bp__header">
+            <div class="bp__header-text">
+                <p class="bp__label" data-animate data-animate-delay="1">LATEST THINKING</p>
+                <h2 class="bp__heading" id="bp-heading" data-animate data-animate-delay="2">
+                    From the Blog
+                </h2>
+                <p class="bp__subtext" data-animate data-animate-delay="3">
+                    Writing on system design, performance, and engineering practice.
+                </p>
+            </div>
+            <a href="/blog" class="bp__cta-link" data-animate data-animate-delay="3">
+                View all posts <span aria-hidden="true">→</span>
+            </a>
+        </header>
+
+        <ul class="bp__grid" role="list">
+            {
+                previewPosts.map((post, i) => (
+                    <li class="bp__card" data-animate data-animate-delay={i + 1}>
+                        <a
+                            href={`/blog/${post.slug}`}
+                            class="bp__card-link"
+                            tabindex="-1"
+                            aria-hidden="true"
+                        />
+                        <div class="bp__card-top">
+                            <span
+                                class="bp__card-cat"
+                                style={`color: ${categoryColors[post.category]};`}
+                            >
+                                {categoryLabels[post.category]}
+                            </span>
+                        </div>
+                        <h3 class="bp__card-title">
+                            <a href={`/blog/${post.slug}`} class="bp__card-title-link">
+                                {post.title}
+                            </a>
+                        </h3>
+                        <p class="bp__card-desc">{post.description}</p>
+                        <footer class="bp__card-footer">
+                            <span class="bp__card-meta">{post.readingTime} min read</span>
+                            <span class="bp__card-sep" aria-hidden="true">
+                                ·
+                            </span>
+                            <time class="bp__card-meta" datetime={post.date}>
+                                {formatPostDate(post.date)}
+                            </time>
+                        </footer>
+                    </li>
+                ))
+            }
+        </ul>
+
+        <div class="bp__cta-mobile">
+            <a href="/blog" class="bp__cta-link">
+                View all posts <span aria-hidden="true">→</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+    @import "../../../styles/mixins.css";
+
+    /* ── Category colour tokens ── */
+    .bp {
+        --bp-cat-architecture: #a78bfa;
+        --bp-cat-backend: var(--color-accent, #38bdf8);
+        --bp-cat-performance: #fb923c;
+        --bp-cat-cloud: #34d399;
+
+        position: relative;
+        z-index: 1;
+        padding-block: 4rem;
+    }
+
+    .bp__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    @mixin tablet-up {
+        .bp__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    /* ── Header ── */
+    .bp__header {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        margin-bottom: 2.5rem;
+    }
+
+    @mixin desktop-up {
+        .bp__header {
+            flex-direction: row;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+        }
+    }
+
+    .bp__label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 0.75rem;
+    }
+
+    .bp__heading {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        font-weight: 760;
+        letter-spacing: -0.04em;
+        color: var(--color-text-primary);
+        line-height: 1.1;
+        margin-bottom: 0.75rem;
+    }
+
+    .bp__subtext {
+        font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+        max-width: 44ch;
+    }
+
+    /* Desktop CTA next to header */
+    .bp__cta-link {
+        display: none;
+        font-size: 0.88rem;
+        font-weight: 500;
+        color: var(--color-accent);
+        white-space: nowrap;
+        transition: opacity 150ms ease;
+        padding-bottom: 0.2rem;
+    }
+
+    .bp__cta-link:hover {
+        opacity: 0.75;
+    }
+
+    @mixin desktop-up {
+        .bp__cta-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+    }
+
+    /* Mobile CTA below grid */
+    .bp__cta-mobile {
+        margin-top: 2rem;
+        display: flex;
+    }
+
+    .bp__cta-mobile .bp__cta-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+    }
+
+    @mixin desktop-up {
+        .bp__cta-mobile {
+            display: none;
+        }
+    }
+
+    /* ── Grid ── */
+    .bp__grid {
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    @mixin tablet-up {
+        .bp__grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+    }
+
+    @mixin desktop-up {
+        .bp__grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    /* ── Card ── */
+    .bp__card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1.75rem;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 1rem;
+        transition:
+            transform var(--transition-base),
+            box-shadow var(--transition-base),
+            border-color var(--transition-base);
+    }
+
+    .bp__card:hover {
+        will-change: transform;
+        transform: translateY(-4px);
+        box-shadow:
+            0 0 0 1px rgba(56, 189, 248, 0.15),
+            0 16px 40px rgba(0, 0, 0, 0.45),
+            0 0 32px rgba(56, 189, 248, 0.07);
+        border-color: rgba(56, 189, 248, 0.18);
+    }
+
+    @mixin desktop-up {
+        .bp__card {
+            padding: 2rem;
+        }
+    }
+
+    /* Full-card link overlay (behind title link) */
+    .bp__card-link {
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+    }
+
+    .bp__card-top {
+        display: flex;
+        align-items: center;
+    }
+
+    .bp__card-cat {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        line-height: 1;
+    }
+
+    .bp__card-title {
+        font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+        font-weight: 700;
+        color: var(--color-text-primary);
+        letter-spacing: -0.02em;
+        line-height: 1.35;
+    }
+
+    .bp__card-title-link {
+        position: relative;
+        color: inherit;
+        transition: color 150ms ease;
+    }
+
+    .bp__card:hover .bp__card-title-link {
+        color: var(--color-accent);
+    }
+
+    .bp__card-desc {
+        font-size: 0.88rem;
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+        flex: 1;
+
+        /* Clamp to 3 lines */
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .bp__card-footer {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin-top: auto;
+        padding-top: 0.5rem;
+        border-top: 1px solid var(--color-border, rgba(255, 255, 255, 0.06));
+    }
+
+    .bp__card-meta {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.3);
+        font-variant-numeric: tabular-nums;
+    }
+
+    .bp__card-sep {
+        color: rgba(255, 255, 255, 0.15);
+        font-size: 0.75rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .bp__card {
+            transition: none;
+        }
+    }
+</style>
+
+<script>
+    import { initScrollReveal } from "@/utils/animations";
+    initScrollReveal();
+</script>

@@ -206,7 +206,7 @@ export default function ContactForm({ onClose }: ContactFormProps) {
             {status === "error" && (
                 <p className={styles["form__submit-error"]} role="alert">
                     Something went wrong. Try emailing directly at{" "}
-                    <a href="mailto:hello@eduardovarela.dev">hello@eduardovarela.dev</a>.
+                    <a href="mailto:eduardovarela139@gmail.com">eduardovarela139@gmail.com</a>.
                 </p>
             )}
 

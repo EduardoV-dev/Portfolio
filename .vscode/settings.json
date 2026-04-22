@@ -1,7 +1,0 @@
-{
-    "eslint.useFlatConfig": true,
-    "eslint.experimental.useFlatConfig": true,
-    "eslint.packageManager": "pnpm",
-    "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "astro"],
-    "eslint.workingDirectories": [{ "mode": "auto" }, ".", "apps/frontend"]
-}

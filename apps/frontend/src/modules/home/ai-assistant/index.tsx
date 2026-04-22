@@ -3,11 +3,10 @@ import AiChat from "@/modules/shared/ai-chat/index";
 import styles from "./index.module.css";
 
 export default function AiAssistantSection() {
-    const { openChat, setPendingPrompt } = useChatStore();
+    const { setInlinePendingPrompt } = useChatStore();
 
     function handlePromptClick(prompt: string) {
-        setPendingPrompt(prompt);
-        openChat();
+        setInlinePendingPrompt(prompt);
     }
 
     return (
@@ -17,7 +16,7 @@ export default function AiAssistantSection() {
                     {/* Left column */}
                     <div className={styles.left}>
                         <h2 className={styles.heading} id="ai-heading">
-                            Meet My AI Portfolio Assistant
+                            Meet My AI Assistant
                         </h2>
                         <p className={styles.description}>
                             Ask about my experience, architecture decisions, or tech stack. This

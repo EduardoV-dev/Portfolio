@@ -1,10 +1,5 @@
 ---
-import {
-    footerCapabilitiesLinks,
-    footerConnectLinks,
-    footerMoreLinks,
-    routes,
-} from "@/constants/routes";
+import { footerCapabilitiesLinks, footerConnectLinks, routes } from "@/constants/routes";
 
 interface FooterLink {
     label: string;
@@ -22,10 +17,6 @@ const footerNavColumns: FooterNavColumn[] = [
     {
         heading: "Navigation",
         links: routes,
-    },
-    {
-        heading: "More",
-        links: footerMoreLinks,
     },
     {
         heading: "Capabilities",
@@ -116,7 +107,9 @@ const footerNavColumns: FooterNavColumn[] = [
 
     @mixin tablet-up {
         .footer-nav {
-            grid-template-columns: repeat(4, 1fr);
+            grid-column: span 3;
+            grid-template-columns: subgrid;
+            gap: 0;
         }
     }
 </style>

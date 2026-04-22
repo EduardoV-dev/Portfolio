@@ -21,7 +21,7 @@
     left: 50%;
     transform: translateX(-50%);
     z-index: 200;
-    width: min(440px, calc(100vw - 2rem));
+    width: min(580px, calc(100vw - 2rem));
     height: min(520px, calc(100dvh - var(--header-height, 68px) - 2rem));
     display: flex;
     flex-direction: column;

@@ -1,3 +1,4 @@
+import { useChatStore } from "@/store/chat";
 import Tooltip from "@/components/tooltip/index";
 import styles from "./index.module.css";
 
@@ -7,11 +8,14 @@ interface AiButtonProps {
 }
 
 export default function AiButton({ className = "", onClick }: AiButtonProps) {
+    const isOpen = useChatStore((s) => s.isOpen);
+
     return (
         <Tooltip
             text="🔍 Explore my experience with AI (Ctrl + K)"
             position="bottom"
             className={className}
+            disabled={isOpen}
         >
             <button
                 className={styles["ai-button"]}

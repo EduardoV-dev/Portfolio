@@ -1,7 +1,5 @@
 {
     "eslint.useFlatConfig": true,
-    "eslint.experimental.useFlatConfig": true,
-    "eslint.packageManager": "pnpm",
     "eslint.options": {
         "overrideConfigFile": "eslint.config.mjs"
     },

@@ -46,11 +46,13 @@ interface ChatState {
     isOpen: boolean;
     messages: Message[];
     pendingPrompt: string | null;
+    inlinePendingPrompt: string | null;
 
     openChat: () => void;
     closeChat: () => void;
     addMessage: (msg: Omit<Message, "id">) => void;
     setPendingPrompt: (prompt: string | null) => void;
+    setInlinePendingPrompt: (prompt: string | null) => void;
     resetMessages: () => void;
 }
 
@@ -58,6 +60,7 @@ export const useChatStore = create<ChatState>((set) => ({
     isOpen: false,
     messages: [INITIAL_MESSAGE],
     pendingPrompt: null,
+    inlinePendingPrompt: null,
 
     openChat: () => set({ isOpen: true }),
     closeChat: () => set({ isOpen: false }),
@@ -71,6 +74,7 @@ export const useChatStore = create<ChatState>((set) => ({
         })),
 
     setPendingPrompt: (prompt) => set({ pendingPrompt: prompt }),
+    setInlinePendingPrompt: (prompt) => set({ inlinePendingPrompt: prompt }),
 
     resetMessages: () => set({ messages: [INITIAL_MESSAGE] }),
 }));

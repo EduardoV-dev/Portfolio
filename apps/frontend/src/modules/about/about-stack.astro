@@ -1,0 +1,239 @@
+---
+interface StackCategory {
+    label: string;
+    note: string;
+    tools: string[];
+}
+
+const categories: StackCategory[] = [
+    {
+        label: "Languages",
+        note: "Strict TypeScript everywhere. Go for performance-critical services.",
+        tools: ["TypeScript", "Go"],
+    },
+    {
+        label: "Frontend",
+        note: "Static-first with Astro, React islands where interactivity is needed.",
+        tools: ["Astro 5", "React 19", "Zustand 5", "Embla Carousel"],
+    },
+    {
+        label: "Backend",
+        note: "Node.js for TypeScript-based API servers and high-throughput services.",
+        tools: ["Node.js", "Fastify", "REST", "GraphQL", "PostgreSQL", "Redis"],
+    },
+    {
+        label: "Cloud & Infra",
+        note: "AWS-first. Keyless CI auth via OIDC — no long-lived secrets.",
+        tools: ["AWS S3", "CloudFront", "Lambda", "RDS", "OIDC", "Terraform"],
+    },
+    {
+        label: "Tooling",
+        note: "Pre-commit hooks enforce lint, format, and full build. Broken code can't enter the repo.",
+        tools: ["pnpm", "ESLint", "Prettier", "Husky", "lint-staged", "Docker"],
+    },
+];
+---
+
+<section class="about-stack" id="tech-stack" aria-labelledby="about-stack-heading">
+    <div class="about-stack__inner">
+        <header class="about-stack__header">
+            <p class="about-stack__label" data-animate data-animate-delay="1">MY STACK</p>
+            <h2
+                class="about-stack__heading"
+                id="about-stack-heading"
+                data-animate
+                data-animate-delay="2"
+            >
+                Tech I Reach For
+            </h2>
+            <p class="about-stack__subtext" data-animate data-animate-delay="3">
+                The languages, frameworks, and tools I rely on in production. Updated as my setup
+                evolves.
+            </p>
+        </header>
+
+        <dl class="about-stack__list">
+            {
+                categories.map((cat, i) => (
+                    <div class="about-stack__row" data-animate data-animate-delay={i + 1}>
+                        <dt class="about-stack__category">
+                            <span class="about-stack__category-name">{cat.label}</span>
+                            <span class="about-stack__category-note">{cat.note}</span>
+                        </dt>
+                        <dd class="about-stack__tools">
+                            <ul class="about-stack__tags" role="list">
+                                {cat.tools.map((tool) => (
+                                    <li class="about-stack__tag">{tool}</li>
+                                ))}
+                            </ul>
+                        </dd>
+                    </div>
+                ))
+            }
+        </dl>
+    </div>
+</section>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .about-stack {
+        position: relative;
+        z-index: 1;
+        padding-block: 4rem;
+    }
+
+    .about-stack__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    @mixin tablet-up {
+        .about-stack__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    /* ── Header ── */
+    .about-stack__header {
+        margin-bottom: 3rem;
+    }
+
+    @mixin desktop-up {
+        .about-stack__header {
+            max-width: 52rem;
+            margin-bottom: 3.5rem;
+        }
+    }
+
+    .about-stack__label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 0.75rem;
+    }
+
+    .about-stack__heading {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        font-weight: 760;
+        letter-spacing: -0.04em;
+        color: var(--color-text-primary);
+        line-height: 1.1;
+        margin-bottom: 1.25rem;
+    }
+
+    .about-stack__subtext {
+        font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+        max-width: 48ch;
+    }
+
+    /* ── List ── */
+    .about-stack__list {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+
+    /* ── Row ── */
+    .about-stack__row {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+        transition: background 150ms ease;
+    }
+
+    .about-stack__row:last-child {
+        border-bottom: none;
+    }
+
+    .about-stack__row:hover {
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    @mixin tablet-up {
+        .about-stack__row {
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 2rem;
+            padding: 1.75rem 2rem;
+        }
+    }
+
+    /* ── Category ── */
+    .about-stack__category {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        flex-shrink: 0;
+    }
+
+    @mixin tablet-up {
+        .about-stack__category {
+            width: 18rem;
+        }
+    }
+
+    @mixin desktop-up {
+        .about-stack__category {
+            width: 22rem;
+        }
+    }
+
+    .about-stack__category-name {
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        letter-spacing: -0.01em;
+    }
+
+    .about-stack__category-note {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.35);
+        line-height: 1.5;
+    }
+
+    /* ── Tools ── */
+    .about-stack__tools {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .about-stack__tags {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+    }
+
+    .about-stack__tag {
+        padding: 0.3rem 0.75rem;
+        border-radius: 999px;
+        border: 1px solid rgba(56, 189, 248, 0.18);
+        background: rgba(56, 189, 248, 0.08);
+        color: var(--color-accent);
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        line-height: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .about-stack__row {
+            transition: none;
+        }
+    }
+</style>
+
+<script>
+    import { initScrollReveal } from "@/utils/animations";
+    initScrollReveal();
+</script>

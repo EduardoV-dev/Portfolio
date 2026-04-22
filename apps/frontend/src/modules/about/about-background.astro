@@ -1,0 +1,160 @@
+<section class="about-bg" aria-labelledby="about-bg-heading">
+    <div class="about-bg__inner">
+        <header class="about-bg__header">
+            <p class="about-bg__label" data-animate data-animate-delay="1">
+                PROFESSIONAL BACKGROUND
+            </p>
+            <h2 class="about-bg__heading" id="about-bg-heading" data-animate data-animate-delay="2">
+                How I Got Here
+            </h2>
+        </header>
+
+        <div class="about-bg__prose">
+            <p class="about-bg__para" data-animate data-animate-delay="1">
+                I started as a frontend developer and grew into full-stack and systems work — driven
+                by a need to understand how everything connects from the UI layer down to the
+                infrastructure underneath. That path led me to own end-to-end platforms, not just
+                individual components.
+            </p>
+            <p class="about-bg__para" data-animate data-animate-delay="2">
+                Over 4+ years, I've designed and shipped cloud-native systems across startups and
+                scale-ups — spanning REST and GraphQL APIs, event-driven architectures, AWS
+                infrastructure, and high-traffic React applications. Most of my work lives at the
+                intersection of product velocity and system reliability.
+            </p>
+            <p class="about-bg__para" data-animate data-animate-delay="3">
+                I gravitate toward roles where I can take ownership early, shape the architecture,
+                and carry that decision-making through to production. The work I'm proudest of is
+                where technical craft directly enabled a business outcome.
+            </p>
+        </div>
+
+        <dl class="about-bg__stats">
+            <div class="about-bg__stat" data-animate data-animate-delay="1">
+                <dt class="about-bg__stat-value">4+</dt>
+                <dd class="about-bg__stat-label">Years in production</dd>
+            </div>
+            <div class="about-bg__stat" data-animate data-animate-delay="2">
+                <dt class="about-bg__stat-value">10+</dt>
+                <dd class="about-bg__stat-label">Systems shipped</dd>
+            </div>
+            <div class="about-bg__stat" data-animate data-animate-delay="3">
+                <dt class="about-bg__stat-value">3</dt>
+                <dd class="about-bg__stat-label">Core domains</dd>
+            </div>
+        </dl>
+    </div>
+</section>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .about-bg {
+        position: relative;
+        z-index: 1;
+        padding-block: 4rem;
+    }
+
+    .about-bg__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    @mixin tablet-up {
+        .about-bg__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    /* ── Header ── */
+    .about-bg__header {
+        margin-bottom: 2.5rem;
+    }
+
+    .about-bg__label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 0.75rem;
+    }
+
+    .about-bg__heading {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        font-weight: 760;
+        letter-spacing: -0.04em;
+        color: var(--color-text-primary);
+        line-height: 1.1;
+    }
+
+    /* ── Prose ── */
+    .about-bg__prose {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        margin-bottom: 3.5rem;
+    }
+
+    @mixin desktop-up {
+        .about-bg__prose {
+            max-width: 68ch;
+        }
+    }
+
+    .about-bg__para {
+        font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+        color: var(--color-text-secondary);
+        line-height: 1.75;
+    }
+
+    /* ── Stats ── */
+    .about-bg__stats {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding-top: 2.5rem;
+        border-top: 1px solid var(--color-border);
+    }
+
+    @mixin tablet-up {
+        .about-bg__stats {
+            flex-direction: row;
+            gap: 0;
+        }
+
+        .about-bg__stat {
+            flex: 1;
+            padding-inline: 2rem;
+        }
+
+        .about-bg__stat:first-child {
+            padding-left: 0;
+        }
+
+        .about-bg__stat:not(:last-child) {
+            border-right: 1px solid var(--color-border);
+        }
+    }
+
+    .about-bg__stat-value {
+        font-size: clamp(2rem, 6vw, 2.75rem);
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        color: var(--color-accent);
+        line-height: 1;
+        margin-bottom: 0.4rem;
+    }
+
+    .about-bg__stat-label {
+        font-size: 0.9rem;
+        color: var(--color-text-secondary);
+        line-height: 1.4;
+    }
+</style>
+
+<script>
+    import { initScrollReveal } from "@/utils/animations";
+    initScrollReveal();
+</script>

@@ -1,0 +1,192 @@
+---
+export interface Props {
+    iconName: "product" | "ownership" | "scalable" | "clarity";
+    title: string;
+    description: string;
+    delay?: number;
+}
+
+const { iconName, title, description, delay = 1 } = Astro.props;
+---
+
+<li class="about-pc" data-animate data-animate-delay={delay}>
+    <div class="about-pc__icon-box" aria-hidden="true">
+        <span class="about-pc__icon">
+            {
+                iconName === "product" && (
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                        <path d="M2 12h20" />
+                    </svg>
+                )
+            }
+            {
+                iconName === "ownership" && (
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                        <polyline points="3.29 7 12 12 20.71 7" />
+                        <line x1="12" y1="22" x2="12" y2="12" />
+                    </svg>
+                )
+            }
+            {
+                iconName === "scalable" && (
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                        <polyline points="16 7 22 7 22 13" />
+                    </svg>
+                )
+            }
+            {
+                iconName === "clarity" && (
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <polyline points="16 18 22 12 16 6" />
+                        <polyline points="8 6 2 12 8 18" />
+                    </svg>
+                )
+            }
+        </span>
+    </div>
+    <h3 class="about-pc__title">{title}</h3>
+    <p class="about-pc__desc">{description}</p>
+</li>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .about-pc {
+        display: flex;
+        flex-direction: column;
+        padding: 1.75rem;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 1rem;
+        transition:
+            transform var(--transition-base),
+            box-shadow var(--transition-base),
+            border-color var(--transition-base);
+    }
+
+    .about-pc:hover {
+        will-change: transform;
+        transform: translateY(-4px);
+        box-shadow:
+            0 0 0 1px rgba(56, 189, 248, 0.15),
+            0 16px 40px rgba(0, 0, 0, 0.45),
+            0 0 32px rgba(56, 189, 248, 0.07);
+        border-color: rgba(56, 189, 248, 0.18);
+    }
+
+    @mixin desktop-up {
+        .about-pc {
+            padding: 2rem;
+        }
+    }
+
+    /* ── Icon box ── */
+    .about-pc__icon-box {
+        position: relative;
+        flex-shrink: 0;
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 0.9rem;
+        border: 1.5px solid rgba(56, 189, 248, 0.32);
+        background: linear-gradient(180deg, rgba(8, 14, 21, 0.97), rgba(6, 11, 18, 0.99));
+        display: grid;
+        place-items: center;
+        margin-bottom: 1.5rem;
+        box-shadow:
+            0 0 0 1px rgba(255, 255, 255, 0.015) inset,
+            0 8px 20px rgba(2, 7, 13, 0.45);
+    }
+
+    .about-pc__icon-box::before {
+        content: "";
+        position: absolute;
+        width: 60%;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        background: rgba(19, 65, 97, 0.55);
+        pointer-events: none;
+    }
+
+    .about-pc__icon {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-accent);
+    }
+
+    .about-pc__icon svg {
+        width: 1.35rem;
+        height: 1.35rem;
+    }
+
+    /* ── Title ── */
+    .about-pc__title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        letter-spacing: -0.02em;
+        line-height: 1.3;
+        margin-bottom: 0.85rem;
+    }
+
+    @mixin desktop-up {
+        .about-pc__title {
+            font-size: 1.05rem;
+        }
+    }
+
+    /* ── Description ── */
+    .about-pc__desc {
+        font-size: 0.9rem;
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .about-pc {
+            transition: none;
+        }
+    }
+</style>

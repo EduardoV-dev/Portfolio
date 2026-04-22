@@ -44,10 +44,6 @@ export default function AiAssistantSection() {
 
                     {/* Right column — inline chat */}
                     <div className={styles.right}>
-                        {/* "More suggested prompts" label — desktop only, above chat */}
-                        <p className={styles.moreSuggestedLabel} aria-hidden="true">
-                            MORE SUGGESTED PROMPTS
-                        </p>
                         <div className={styles.chatWrap}>
                             <AiChat mode="inline" />
                         </div>

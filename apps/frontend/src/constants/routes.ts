@@ -24,7 +24,7 @@ export const footerCapabilitiesLinks: Route[] = [
 ];
 
 export const footerConnectLinks: Route[] = [
-    { label: "Schedule a Call", href: "/schedule" },
+    { label: "Schedule a Call", href: "/contact" },
     { label: "LinkedIn", href: "https://linkedin.com" },
     { label: "GitHub", href: "https://github.com" },
     { label: "Email", href: "mailto:hello@eduardovarela.dev" },

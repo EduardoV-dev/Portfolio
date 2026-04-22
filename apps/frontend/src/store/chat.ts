@@ -11,7 +11,7 @@ export interface Message {
 const INITIAL_MESSAGE: Message = {
     id: "init",
     role: "assistant",
-    text: "Hello! I'm an AI representation of the engineer. I can share details about technical stack, past projects, or cloud expertise. How can I help you today?",
+    text: "I'm Eduardo's AI assistant. Ask me about his technical experience, projects, or architecture decisions.",
 };
 
 const RESPONSES: Record<string, string> = {
@@ -24,7 +24,7 @@ const RESPONSES: Record<string, string> = {
 };
 
 const FALLBACK_RESPONSE =
-    "That's a great question. The engineer has broad experience across full-stack development, cloud infrastructure, and system design. Feel free to ask about a specific project or technology!";
+    "The engineer has broad experience across full-stack development, cloud infrastructure, and system design. Feel free to ask about a specific project or technology.";
 
 export function getSimulatedResponse(input: string): string {
     const key = input.trim().toLowerCase().replace(/^"|"$/g, "");
@@ -37,9 +37,9 @@ export function getSimulatedResponse(input: string): string {
 }
 
 export const DEFAULT_PROMPTS = [
-    '"Explain your AWS experience"',
-    '"Tell me about Now Optics project"',
-    '"What backend stacks have you used?"',
+    "Explain your AWS experience",
+    "Tell me about Now Optics project",
+    "What backend stacks have you used?",
 ];
 
 interface ChatState {

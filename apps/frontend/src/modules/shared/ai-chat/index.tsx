@@ -9,7 +9,7 @@ interface AiChatProps {
 }
 
 export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
-    const { messages, pendingPrompt, addMessage, setPendingPrompt } = useChatStore();
+    const { messages, pendingPrompt, addMessage, setPendingPrompt, resetMessages } = useChatStore();
     const [input, setInput] = useState("");
     const [isTyping, setIsTyping] = useState(false);
     const messagesContainerRef = useRef<HTMLDivElement>(null);
@@ -24,9 +24,9 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
         }
     }, [messages, isTyping]);
 
-    // Consume pendingPrompt — auto-submit it
+    // Consume pendingPrompt — only in popup mode to avoid double-submission
     useEffect(() => {
-        if (!pendingPrompt) return;
+        if (!pendingPrompt || mode !== "popup") return;
         const prompt = pendingPrompt;
         setPendingPrompt(null);
         submitMessage(prompt);
@@ -77,27 +77,61 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
                             <p className={styles.chatStatus}>STATUS: ONLINE</p>
                         </div>
                     </div>
-                    <button
-                        className={styles.closeBtn}
-                        onClick={onClose}
-                        aria-label="Close chat"
-                        type="button"
-                    >
-                        <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 20 20"
-                            fill="none"
-                            aria-hidden="true"
+                    <div className={styles.chatHeaderRight}>
+                        {hasUserMessages && (
+                            <button
+                                className={styles.resetBtn}
+                                onClick={resetMessages}
+                                aria-label="New conversation"
+                                title="New conversation"
+                                type="button"
+                            >
+                                <svg
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
+                                        stroke="currentColor"
+                                        strokeWidth="1.5"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
+                                    <path
+                                        d="M3 3v5h5"
+                                        stroke="currentColor"
+                                        strokeWidth="1.5"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
+                                </svg>
+                            </button>
+                        )}
+                        <button
+                            className={styles.closeBtn}
+                            onClick={onClose}
+                            aria-label="Close chat"
+                            type="button"
                         >
-                            <path
-                                d="M15 5L5 15M5 5L15 15"
-                                stroke="currentColor"
-                                strokeWidth="1.5"
-                                strokeLinecap="round"
-                            />
-                        </svg>
-                    </button>
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 20 20"
+                                fill="none"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M15 5L5 15M5 5L15 15"
+                                    stroke="currentColor"
+                                    strokeWidth="1.5"
+                                    strokeLinecap="round"
+                                />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             )}
 

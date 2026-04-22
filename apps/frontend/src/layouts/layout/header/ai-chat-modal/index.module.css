@@ -47,3 +47,31 @@
         transform: translateX(-50%) translateY(0) scale(1);
     }
 }
+
+@keyframes modalOut {
+    from {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-6px) scale(0.97);
+    }
+}
+
+.modal--closing {
+    animation: modalOut 160ms ease forwards;
+}
+
+@keyframes backdropOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.backdrop--closing {
+    animation: backdropOut 160ms ease forwards;
+}

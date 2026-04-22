@@ -1,0 +1,364 @@
+@import "../../styles/mixins.css";
+
+/* ── Section ── */
+.co {
+    position: relative;
+    z-index: 1;
+    padding-block: 2rem 4rem;
+}
+
+.co__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-inline: 1rem;
+}
+
+@mixin tablet-up {
+    .co__inner {
+        padding-inline: 1.5rem;
+    }
+}
+
+/* ── Header ── */
+.co__header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.co__label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.75rem;
+}
+
+.co__heading {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    font-weight: 760;
+    letter-spacing: -0.04em;
+    color: var(--color-text-primary);
+    line-height: 1.1;
+}
+
+/* ── Grid ── */
+.co__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@mixin tablet-up {
+    .co__grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+}
+
+/* ── Card ── */
+.co__card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1.75rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    transition:
+        transform 250ms ease,
+        box-shadow 250ms ease,
+        border-color 250ms ease;
+}
+
+.co__card:hover {
+    will-change: transform;
+    transform: translateY(-4px);
+    box-shadow:
+        0 0 0 1px rgba(56, 189, 248, 0.15),
+        0 16px 40px rgba(0, 0, 0, 0.45),
+        0 0 32px rgba(56, 189, 248, 0.07);
+    border-color: rgba(56, 189, 248, 0.18);
+}
+
+.co__card--primary {
+    border-color: rgba(56, 189, 248, 0.25);
+    background: linear-gradient(160deg, rgba(56, 189, 248, 0.06) 0%, var(--color-surface) 60%);
+}
+
+.co__card--primary:hover {
+    border-color: rgba(56, 189, 248, 0.4);
+    box-shadow:
+        0 0 0 1px rgba(56, 189, 248, 0.2),
+        0 16px 48px rgba(0, 0, 0, 0.5),
+        0 0 48px rgba(56, 189, 248, 0.1);
+}
+
+/* Email card active (form open) */
+.co__card--email-active {
+    border-color: rgba(56, 189, 248, 0.35);
+    background: linear-gradient(160deg, rgba(56, 189, 248, 0.06) 0%, var(--color-surface) 60%);
+    transform: none !important;
+}
+
+.co__card--email-active:hover {
+    transform: none;
+    border-color: rgba(56, 189, 248, 0.35);
+}
+
+@mixin desktop-up {
+    .co__card {
+        padding: 2rem;
+    }
+}
+
+/* ── Icon ── */
+.co__card-icon {
+    width: 2.75rem;
+    height: 2.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.65rem;
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--color-accent);
+    flex-shrink: 0;
+}
+
+/* ── Body ── */
+.co__card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex: 1;
+}
+
+.co__card-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    opacity: 0.85;
+}
+
+.co__card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+}
+
+.co__card-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    flex: 1;
+}
+
+.co__card-email {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    letter-spacing: -0.01em;
+    word-break: break-all;
+}
+
+/* ── Card actions row ── */
+.co__card-actions {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-top: auto;
+}
+
+/* ── Buttons ── */
+.co__card-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1.1rem;
+    border-radius: 0.6rem;
+    font-size: 0.875rem;
+    font-weight: 650;
+    font-family: inherit;
+    letter-spacing: -0.01em;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+        background 150ms ease,
+        border-color 150ms ease,
+        transform 150ms ease;
+    margin-top: auto;
+    align-self: flex-start;
+}
+
+.co__card-btn:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+.co__card-btn:focus-visible {
+    outline: 2px solid rgba(56, 189, 248, 0.95);
+    outline-offset: 2px;
+}
+
+.co__card-btn:active {
+    transform: translateY(0);
+}
+
+.co__card-btn--primary {
+    color: #04131f;
+    background: linear-gradient(135deg, #44b7ff 0%, #38bdf8 52%, #3cb4ff 100%);
+    border-color: transparent;
+    box-shadow:
+        0 8px 24px rgba(56, 189, 248, 0.25),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.co__card-btn--primary:hover {
+    box-shadow:
+        0 12px 32px rgba(56, 189, 248, 0.35),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+/* "Write a Message" trigger button on email card */
+.co__card-btn--email {
+    color: var(--color-accent);
+    background: rgba(56, 189, 248, 0.08);
+    border-color: rgba(56, 189, 248, 0.25);
+}
+
+.co__card-btn--email:hover {
+    background: rgba(56, 189, 248, 0.14);
+    border-color: rgba(56, 189, 248, 0.4);
+    color: var(--color-accent);
+}
+
+/* Copy button */
+.co__card-copy {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.6rem 1.1rem;
+    border-radius: 0.6rem;
+    font-size: 0.875rem;
+    font-weight: 650;
+    font-family: inherit;
+    letter-spacing: -0.01em;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    background: rgba(56, 189, 248, 0.06);
+    color: var(--color-accent);
+    cursor: pointer;
+    transition:
+        background 150ms ease,
+        border-color 150ms ease,
+        transform 150ms ease;
+}
+
+.co__card-copy:hover {
+    background: rgba(56, 189, 248, 0.12);
+    border-color: rgba(56, 189, 248, 0.35);
+    transform: translateY(-1px);
+}
+
+.co__card-copy:focus-visible {
+    outline: 2px solid rgba(56, 189, 248, 0.95);
+    outline-offset: 2px;
+}
+
+.co__card-copy:active {
+    transform: translateY(0);
+}
+
+/* ── Form panel ── */
+.co__form-panel {
+    margin-top: 1.5rem;
+    padding: 2rem;
+    background: var(--color-surface);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 1rem;
+    animation: panel-reveal 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.co__form-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.75rem;
+}
+
+.co__form-panel-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
+}
+
+.co__form-panel-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--color-text-secondary);
+    font-family: inherit;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+        background 150ms ease,
+        border-color 150ms ease,
+        color 150ms ease;
+    flex-shrink: 0;
+}
+
+.co__form-panel-close:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.18);
+    color: var(--color-text-primary);
+}
+
+.co__form-panel-close:focus-visible {
+    outline: 2px solid rgba(56, 189, 248, 0.95);
+    outline-offset: 2px;
+}
+
+@keyframes panel-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .co__card,
+    .co__card-btn,
+    .co__card-copy,
+    .co__form-panel-close {
+        transition: none;
+    }
+
+    .co__card:hover,
+    .co__card-btn:hover,
+    .co__card-copy:hover {
+        transform: none;
+    }
+
+    .co__form-panel {
+        animation: none;
+    }
+}

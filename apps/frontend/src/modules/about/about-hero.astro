@@ -1,0 +1,89 @@
+<section class="about-hero" aria-labelledby="about-hero-heading">
+    <div class="about-hero__inner">
+        <p class="about-hero__label">ABOUT</p>
+        <h1 class="about-hero__title" id="about-hero-heading">About Me</h1>
+        <p class="about-hero__subtext">
+            4+ years building cloud-native systems — API design, distributed architecture, and
+            production full-stack engineering from first commit to live traffic.
+        </p>
+    </div>
+</section>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .about-hero {
+        position: relative;
+        z-index: 1;
+        padding-block: 5rem 4rem;
+    }
+
+    .about-hero__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    @mixin tablet-up {
+        .about-hero__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    .about-hero__label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 1rem;
+        animation: about-fade-up 500ms ease both;
+        animation-delay: 40ms;
+    }
+
+    .about-hero__title {
+        font-size: clamp(2.25rem, 8vw, 4rem);
+        font-weight: 800;
+        letter-spacing: -0.05em;
+        color: var(--color-text-primary);
+        line-height: 1.05;
+        margin-bottom: 1.5rem;
+        animation: about-fade-up 560ms ease both;
+        animation-delay: 120ms;
+    }
+
+    .about-hero__subtext {
+        font-size: clamp(1rem, 2.5vw, 1.15rem);
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+        max-width: 46ch;
+        animation: about-fade-up 520ms ease both;
+        animation-delay: 200ms;
+    }
+
+    @mixin desktop-up {
+        .about-hero {
+            padding-block: 6rem 4.5rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .about-hero__label,
+        .about-hero__title,
+        .about-hero__subtext {
+            animation: none;
+        }
+    }
+
+    @keyframes about-fade-up {
+        from {
+            opacity: 0;
+            transform: translateY(18px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

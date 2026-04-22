@@ -35,6 +35,14 @@
     align-items: center;
     gap: 0.6rem;
     min-width: 0;
+    flex: 1;
+}
+
+.chatHeaderRight {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    flex-shrink: 0;
 }
 
 .onlineDot {
@@ -63,7 +71,8 @@
     margin-top: 0.1rem;
 }
 
-.closeBtn {
+.closeBtn,
+.resetBtn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -77,7 +86,8 @@
         color 150ms ease;
 }
 
-.closeBtn:hover {
+.closeBtn:hover,
+.resetBtn:hover {
     background: rgba(255, 255, 255, 0.07);
     color: var(--color-text-primary);
 }
@@ -117,11 +127,23 @@
     justify-content: flex-end;
 }
 
+@keyframes msgIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .messageGroup {
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
     max-width: 88%;
+    animation: msgIn 180ms ease both;
 }
 
 .messageRow--user .messageGroup {
@@ -171,6 +193,8 @@
     border-radius: 0.65rem;
     font-size: 0.88rem;
     line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
 .bubble--assistant {
@@ -278,6 +302,11 @@
     padding: 0.75rem 1.1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.07);
     flex-shrink: 0;
+    transition: border-top-color 150ms ease;
+}
+
+.inputBar:focus-within {
+    border-top-color: rgba(56, 189, 248, 0.22);
 }
 
 .input {

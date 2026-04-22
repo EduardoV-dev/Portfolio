@@ -1,0 +1,71 @@
+<section class="about-beyond" aria-labelledby="about-beyond-heading">
+    <div class="about-beyond__inner">
+        <p class="about-beyond__label" data-animate data-animate-delay="1">BEYOND CODE</p>
+        <h2
+            class="about-beyond__heading"
+            id="about-beyond-heading"
+            data-animate
+            data-animate-delay="2"
+        >
+            Outside the Terminal
+        </h2>
+        <p class="about-beyond__text" data-animate data-animate-delay="3">
+            When I'm not building systems, I'm usually thinking about them — reading about
+            distributed systems, exploring new languages, or working through side projects that
+            scratch an architecture itch. I'm drawn to anything that rewards deep thinking: chess,
+            long-form writing, and the occasional unreasonably complex board game.
+        </p>
+    </div>
+</section>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .about-beyond {
+        position: relative;
+        z-index: 1;
+        padding-block: 4rem;
+    }
+
+    .about-beyond__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    @mixin tablet-up {
+        .about-beyond__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    .about-beyond__label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 0.75rem;
+    }
+
+    .about-beyond__heading {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        font-weight: 760;
+        letter-spacing: -0.04em;
+        color: var(--color-text-primary);
+        line-height: 1.1;
+        margin-bottom: 1.25rem;
+    }
+
+    .about-beyond__text {
+        font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+        color: var(--color-text-secondary);
+        line-height: 1.75;
+        max-width: 56ch;
+    }
+</style>
+
+<script>
+    import { initScrollReveal } from "@/utils/animations";
+    initScrollReveal();
+</script>

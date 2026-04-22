@@ -1,0 +1,29 @@
+---
+import Layout from "@/layouts/layout/index.astro";
+import InsightsDetail from "@/modules/insights-detail/index.astro";
+import { getPostBySlug, getAllSlugs, getAdjacentPosts, formatPostDate } from "@/data/posts";
+
+export function getStaticPaths() {
+    return getAllSlugs().map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const post = getPostBySlug(slug);
+
+if (!post) {
+    return Astro.redirect("/blog");
+}
+
+const adjacent = getAdjacentPosts(slug);
+const pageTitle = `${post.title} – Blog – Eduardo Varela`;
+const displayDate = formatPostDate(post.date);
+---
+
+<Layout title={pageTitle} description={post.description}>
+    <InsightsDetail
+        post={post}
+        displayDate={displayDate}
+        prev={adjacent.prev}
+        next={adjacent.next}
+    />
+</Layout>

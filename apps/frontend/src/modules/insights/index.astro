@@ -1,0 +1,15 @@
+---
+import InsightsHero from "./insights-hero.astro";
+import InsightsFeatured from "./insights-featured.astro";
+import InsightsPosts from "./insights-posts";
+import InsightsCta from "./insights-cta.astro";
+import { getFeaturedPost, getNonFeaturedPosts } from "@/data/posts";
+
+const featured = getFeaturedPost();
+const rest = getNonFeaturedPosts();
+---
+
+<InsightsHero />
+{featured && <InsightsFeatured post={featured} />}
+<InsightsPosts posts={rest} client:visible />
+<InsightsCta />

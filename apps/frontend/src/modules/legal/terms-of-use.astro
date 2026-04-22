@@ -1,0 +1,274 @@
+---
+const lastUpdated = "April 22, 2025";
+---
+
+<article class="legal" aria-labelledby="legal-heading">
+    <div class="legal__inner">
+        <header class="legal__header">
+            <p class="legal__label">LEGAL</p>
+            <h1 class="legal__title" id="legal-heading">Terms of Use</h1>
+            <p class="legal__meta">Last updated: {lastUpdated}</p>
+        </header>
+
+        <div class="legal__body">
+            <section class="legal__section">
+                <h2 class="legal__section-title">Acceptance of Terms</h2>
+                <p class="legal__para">
+                    By accessing or using <strong>eduardovarela.dev</strong> (the &ldquo;Site&rdquo;),
+                    you agree to be bound by these Terms of Use. If you do not agree to these terms, please
+                    do not use the Site.
+                </p>
+            </section>
+
+            <section class="legal__section">
+                <h2 class="legal__section-title">Intellectual Property</h2>
+                <p class="legal__para">
+                    All content on this Site &mdash; including but not limited to text, code
+                    samples, design, graphics, and case study writeups &mdash; is the intellectual
+                    property of Eduardo Varela unless otherwise noted. You may not reproduce,
+                    distribute, or create derivative works from this content without explicit
+                    written permission.
+                </p>
+                <p class="legal__para">
+                    Open-source code published in my GitHub repositories is governed by the
+                    respective license of each repository, not these terms.
+                </p>
+            </section>
+
+            <section class="legal__section">
+                <h2 class="legal__section-title">Acceptable Use</h2>
+                <p class="legal__para">You agree not to:</p>
+                <ul class="legal__list">
+                    <li class="legal__list-item">
+                        Use the Site for any unlawful purpose or in violation of any applicable laws
+                        or regulations.
+                    </li>
+                    <li class="legal__list-item">
+                        Attempt to gain unauthorized access to any part of the Site or its
+                        associated infrastructure.
+                    </li>
+                    <li class="legal__list-item">
+                        Scrape, crawl, or extract data from the Site in a manner that imposes an
+                        unreasonable burden on the servers.
+                    </li>
+                    <li class="legal__list-item">
+                        Misrepresent yourself or your affiliation in any communication sent through
+                        this Site.
+                    </li>
+                </ul>
+            </section>
+
+            <section class="legal__section">
+                <h2 class="legal__section-title">Disclaimer of Warranties</h2>
+                <p class="legal__para">
+                    This Site is provided &ldquo;as is&rdquo; and &ldquo;as available&rdquo; without
+                    warranties of any kind, express or implied. I do not warrant that the Site will
+                    be uninterrupted, error-free, or free of viruses or other harmful components.
+                </p>
+                <p class="legal__para">
+                    Content on this Site, including blog posts and case studies, is provided for
+                    informational purposes only and does not constitute professional advice.
+                </p>
+            </section>
+
+            <section class="legal__section">
+                <h2 class="legal__section-title">Limitation of Liability</h2>
+                <p class="legal__para">
+                    To the fullest extent permitted by applicable law, Eduardo Varela shall not be
+                    liable for any indirect, incidental, special, consequential, or punitive damages
+                    arising from your use of or inability to use this Site, even if advised of the
+                    possibility of such damages.
+                </p>
+            </section>
+
+            <section class="legal__section">
+                <h2 class="legal__section-title">External Links</h2>
+                <p class="legal__para">
+                    This Site may contain links to third-party websites. These links are provided
+                    for convenience only. I have no control over the content of those sites and
+                    accept no responsibility for them or for any loss or damage that may arise from
+                    your use of them.
+                </p>
+            </section>
+
+            <section class="legal__section">
+                <h2 class="legal__section-title">Governing Law</h2>
+                <p class="legal__para">
+                    These Terms shall be governed by and construed in accordance with applicable
+                    law. Any disputes arising under or in connection with these Terms shall be
+                    subject to the exclusive jurisdiction of the competent courts in the relevant
+                    jurisdiction.
+                </p>
+            </section>
+
+            <section class="legal__section">
+                <h2 class="legal__section-title">Changes to These Terms</h2>
+                <p class="legal__para">
+                    I reserve the right to modify these Terms at any time. Changes take effect
+                    immediately upon posting to the Site. The &ldquo;Last updated&rdquo; date at the
+                    top reflects the most recent revision. Continued use of the Site after changes
+                    are posted constitutes acceptance of the revised Terms.
+                </p>
+            </section>
+
+            <section class="legal__section">
+                <h2 class="legal__section-title">Contact</h2>
+                <p class="legal__para">
+                    Questions about these Terms? Reach me at{" "}
+                    <a href="mailto:hello@eduardovarela.dev" class="legal__link">
+                        hello@eduardovarela.dev
+                    </a>.
+                </p>
+            </section>
+        </div>
+    </div>
+</article>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .legal {
+        position: relative;
+        z-index: 1;
+        padding-block: 5rem 6rem;
+    }
+
+    .legal__inner {
+        max-width: 720px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    @mixin tablet-up {
+        .legal__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    /* ── Header ── */
+    .legal__header {
+        margin-bottom: 3.5rem;
+        animation: legal-fade-up 500ms ease both;
+    }
+
+    .legal__label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 1rem;
+    }
+
+    .legal__title {
+        font-size: clamp(2rem, 7vw, 3rem);
+        font-weight: 800;
+        letter-spacing: -0.05em;
+        color: var(--color-text-primary);
+        line-height: 1.05;
+        margin-bottom: 0.75rem;
+    }
+
+    .legal__meta {
+        font-size: 0.875rem;
+        color: var(--color-text-tertiary, #6b7280);
+    }
+
+    /* ── Body ── */
+    .legal__body {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+    }
+
+    /* ── Section ── */
+    .legal__section {
+        border-top: 1px solid var(--color-border);
+        padding-top: 2rem;
+        animation: legal-fade-up 540ms ease both;
+    }
+
+    .legal__section:first-child {
+        border-top: none;
+        padding-top: 0;
+    }
+
+    .legal__section-title {
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--color-text-primary);
+        margin-bottom: 1rem;
+    }
+
+    @mixin tablet-up {
+        .legal__section-title {
+            font-size: 1.05rem;
+        }
+    }
+
+    .legal__para {
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+        color: var(--color-text-secondary);
+        line-height: 1.75;
+        margin-bottom: 0.85rem;
+    }
+
+    .legal__para:last-child {
+        margin-bottom: 0;
+    }
+
+    .legal__list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        margin-top: 0.5rem;
+    }
+
+    .legal__list-item {
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+        color: var(--color-text-secondary);
+        line-height: 1.7;
+        padding-left: 1.25rem;
+        position: relative;
+    }
+
+    .legal__list-item::before {
+        content: "–";
+        position: absolute;
+        left: 0;
+        color: var(--color-accent);
+        font-weight: 700;
+    }
+
+    .legal__link {
+        color: var(--color-accent);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        transition: opacity var(--transition-base);
+    }
+
+    .legal__link:hover {
+        opacity: 0.8;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .legal__header,
+        .legal__section {
+            animation: none;
+        }
+    }
+
+    @keyframes legal-fade-up {
+        from {
+            opacity: 0;
+            transform: translateY(16px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

@@ -19,3 +19,4 @@ apps/strapi/database/data.db*
 .pnp.js
 .pnp.cjs
 nul
+.unlighthouse/

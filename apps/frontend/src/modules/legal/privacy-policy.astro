@@ -1,0 +1,235 @@
+---
+const lastUpdated = "April 22, 2025";
+---
+
+<article class="legal" aria-labelledby="legal-heading">
+    <div class="legal__inner">
+        <header class="legal__header">
+            <p class="legal__label">LEGAL</p>
+            <h1 class="legal__title" id="legal-heading">Privacy Policy</h1>
+            <p class="legal__meta">Last updated: {lastUpdated}</p>
+        </header>
+
+        <div class="legal__body">
+            <section class="legal__section">
+                <h2 class="legal__section-title">Overview</h2>
+                <p class="legal__para">
+                    This Privacy Policy describes how Eduardo Varela (&ldquo;I&rdquo;,
+                    &ldquo;me&rdquo;, or &ldquo;my&rdquo;) handles information in connection with
+                    this portfolio website (<strong>eduardovarela.dev</strong>). I take privacy
+                    seriously and aim to be transparent about the minimal data practices in place.
+                </p>
+            </section>
+
+            <section class="legal__section">
+                <h2 class="legal__section-title">Information I Collect</h2>
+                <p class="legal__para">
+                    This site does not collect, store, or process any personally identifiable
+                    information (PII) directly. There are no user accounts, sign-up forms, or
+                    databases connected to this website.
+                </p>
+                <p class="legal__para">
+                    If you choose to contact me via the contact form or directly by email, your name
+                    and email address will be used solely to respond to your inquiry and will not be
+                    shared with any third party.
+                </p>
+            </section>
+
+            <section class="legal__section">
+                <h2 class="legal__section-title">Analytics</h2>
+                <p class="legal__para">
+                    This site may use anonymous, aggregate analytics (such as page views and
+                    referrer data) to understand general traffic patterns. No personally
+                    identifiable information is collected through analytics. Data is not sold or
+                    shared with advertisers.
+                </p>
+            </section>
+
+            <section class="legal__section">
+                <h2 class="legal__section-title">Cookies</h2>
+                <p class="legal__para">
+                    This site does not use tracking cookies or advertising cookies. Any cookies
+                    present are strictly necessary for site functionality (e.g. theme preference)
+                    and do not track individuals across websites.
+                </p>
+            </section>
+
+            <section class="legal__section">
+                <h2 class="legal__section-title">Third-Party Services</h2>
+                <p class="legal__para">
+                    This site is hosted on AWS CloudFront / S3. AWS may collect standard server log
+                    data (IP addresses, request timestamps, user agents) as part of normal CDN
+                    operation. This data is governed by{" "}
+                    <a
+                        href="https://aws.amazon.com/privacy/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="legal__link"
+                    >
+                        AWS&rsquo;s Privacy Policy
+                    </a>.
+                </p>
+                <p class="legal__para">
+                    Any embedded fonts (e.g. Google Fonts, if used) may result in requests to
+                    third-party servers. Where possible, fonts are self-hosted to avoid this.
+                </p>
+            </section>
+
+            <section class="legal__section">
+                <h2 class="legal__section-title">Data Retention</h2>
+                <p class="legal__para">
+                    As this site does not store personal data, there is no retention policy
+                    applicable beyond what is described in Third-Party Services above. Contact
+                    emails are retained only as long as needed to address the inquiry.
+                </p>
+            </section>
+
+            <section class="legal__section">
+                <h2 class="legal__section-title">Your Rights</h2>
+                <p class="legal__para">
+                    Depending on your jurisdiction, you may have rights regarding access,
+                    correction, or deletion of personal data. Since this site collects essentially
+                    no personal data, most requests will be trivially fulfilled. For any
+                    privacy-related inquiries, contact me at{" "}
+                    <a href="mailto:hello@eduardovarela.dev" class="legal__link">
+                        hello@eduardovarela.dev
+                    </a>.
+                </p>
+            </section>
+
+            <section class="legal__section">
+                <h2 class="legal__section-title">Changes to This Policy</h2>
+                <p class="legal__para">
+                    I may update this policy occasionally. The &ldquo;Last updated&rdquo; date at
+                    the top of this page reflects the most recent revision. Continued use of the
+                    site after changes constitutes acceptance of the updated policy.
+                </p>
+            </section>
+        </div>
+    </div>
+</article>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .legal {
+        position: relative;
+        z-index: 1;
+        padding-block: 5rem 6rem;
+    }
+
+    .legal__inner {
+        max-width: 720px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    @mixin tablet-up {
+        .legal__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    /* ── Header ── */
+    .legal__header {
+        margin-bottom: 3.5rem;
+        animation: legal-fade-up 500ms ease both;
+    }
+
+    .legal__label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 1rem;
+    }
+
+    .legal__title {
+        font-size: clamp(2rem, 7vw, 3rem);
+        font-weight: 800;
+        letter-spacing: -0.05em;
+        color: var(--color-text-primary);
+        line-height: 1.05;
+        margin-bottom: 0.75rem;
+    }
+
+    .legal__meta {
+        font-size: 0.875rem;
+        color: var(--color-text-tertiary, #6b7280);
+    }
+
+    /* ── Body ── */
+    .legal__body {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+    }
+
+    /* ── Section ── */
+    .legal__section {
+        border-top: 1px solid var(--color-border);
+        padding-top: 2rem;
+        animation: legal-fade-up 540ms ease both;
+    }
+
+    .legal__section:first-child {
+        border-top: none;
+        padding-top: 0;
+    }
+
+    .legal__section-title {
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--color-text-primary);
+        margin-bottom: 1rem;
+    }
+
+    @mixin tablet-up {
+        .legal__section-title {
+            font-size: 1.05rem;
+        }
+    }
+
+    .legal__para {
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+        color: var(--color-text-secondary);
+        line-height: 1.75;
+        margin-bottom: 0.85rem;
+    }
+
+    .legal__para:last-child {
+        margin-bottom: 0;
+    }
+
+    .legal__link {
+        color: var(--color-accent);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        transition: opacity var(--transition-base);
+    }
+
+    .legal__link:hover {
+        opacity: 0.8;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .legal__header,
+        .legal__section {
+            animation: none;
+        }
+    }
+
+    @keyframes legal-fade-up {
+        from {
+            opacity: 0;
+            transform: translateY(16px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

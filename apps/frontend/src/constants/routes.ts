@@ -10,11 +10,7 @@ export const routes: Route[] = [
     { label: "Blog", href: "/blog" },
 ];
 
-export const footerMoreLinks: Route[] = [
-    { label: "Uses (Tech Stack)", href: "/uses" },
-    { label: "Resources", href: "/resources" },
-    { label: "AI Assistant", href: "/ai" },
-];
+export const footerMoreLinks: Route[] = [{ label: "Uses (Tech Stack)", href: "/uses" }];
 
 export const footerCapabilitiesLinks: Route[] = [
     { label: "Product-Focused Development", href: "/about#capabilities" },
@@ -25,8 +21,8 @@ export const footerCapabilitiesLinks: Route[] = [
 
 export const footerConnectLinks: Route[] = [
     { label: "Schedule a Call", href: "/contact" },
-    { label: "LinkedIn", href: "https://linkedin.com" },
-    { label: "GitHub", href: "https://github.com" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/eduardov-dev" },
+    { label: "GitHub", href: "https://www.github.com/EduardoV-dev" },
     { label: "Email", href: "mailto:hello@eduardovarela.dev" },
     { label: "Resume", href: "/resume" },
 ];

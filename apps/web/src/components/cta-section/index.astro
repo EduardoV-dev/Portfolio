@@ -1,5 +1,7 @@
 <section class="cta-section" aria-label="Call to action">
     <div class="cta-section__inner">
+        <div class="cta-section__glow" aria-hidden="true"></div>
+
         <h2 class="cta-section__heading" data-animate data-animate-delay="1">
             Building something ambitious?
             <span class="cta-section__accent">Let's architect it right</span>
@@ -23,9 +25,11 @@
         position: relative;
         z-index: 1;
         padding-block: 5rem 6rem;
+        overflow: hidden;
     }
 
     .cta-section__inner {
+        position: relative;
         max-width: 1280px;
         margin: 0 auto;
         padding-inline: 1rem;
@@ -36,7 +40,29 @@
         gap: 1.5rem;
     }
 
+    /* Radial halo behind the CTA content */
+    .cta-section__glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 60vw;
+        max-width: 700px;
+        aspect-ratio: 1 / 1;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(
+            circle,
+            rgba(0, 204, 255, 0.07) 0%,
+            rgba(0, 204, 255, 0.03) 40%,
+            transparent 70%
+        );
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+    }
+
     .cta-section__heading {
+        position: relative;
+        z-index: 1;
         font-size: clamp(1.9rem, 8vw, 3rem);
         font-weight: 760;
         letter-spacing: -0.04em;
@@ -51,6 +77,8 @@
     }
 
     .cta-section__subtext {
+        position: relative;
+        z-index: 1;
         color: var(--color-text-secondary);
         font-size: clamp(0.95rem, 2.5vw, 1.05rem);
         line-height: 1.65;
@@ -59,6 +87,8 @@
     }
 
     .cta-section__btn {
+        position: relative;
+        z-index: 1;
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -67,11 +97,11 @@
         min-height: 3.9rem;
         border-radius: 0.95rem;
         border: 1px solid transparent;
-        color: #04131f;
-        background: linear-gradient(135deg, #44b7ff 0%, #38bdf8 52%, #3cb4ff 100%);
+        color: var(--color-cta-text, #021018);
+        background: linear-gradient(135deg, #33d9ff 0%, #00ccff 52%, #00c2f0 100%);
         box-shadow:
-            0 12px 30px rgba(56, 189, 248, 0.25),
-            inset 0 -1px 0 rgba(255, 255, 255, 0.25);
+            0 12px 30px rgba(0, 204, 255, 0.22),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.2);
         font-size: 1.03rem;
         font-weight: 650;
         letter-spacing: -0.01em;
@@ -79,18 +109,18 @@
         transition:
             transform var(--transition-fast),
             box-shadow var(--transition-base);
-        will-change: transform;
+        touch-action: manipulation;
     }
 
     .cta-section__btn:hover {
         transform: translateY(-2px);
         box-shadow:
-            0 15px 34px rgba(56, 189, 248, 0.35),
-            inset 0 -1px 0 rgba(255, 255, 255, 0.3);
+            0 15px 34px rgba(0, 204, 255, 0.32),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.25);
     }
 
     .cta-section__btn:focus-visible {
-        outline: 2px solid rgba(56, 189, 248, 0.95);
+        outline: 2px solid rgba(0, 204, 255, 0.9);
         outline-offset: 2px;
     }
 

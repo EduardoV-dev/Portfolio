@@ -29,10 +29,10 @@
     left: 0;
     width: 100%;
     height: 1px;
-    background: var(--color-accent, #38bdf8);
+    background: var(--color-accent);
     transform: scaleX(0);
     transform-origin: center;
-    transition: transform 200ms ease;
+    transition: transform 200ms var(--ease-out-quint);
 }
 
 .nav__link:hover,

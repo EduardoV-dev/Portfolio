@@ -104,16 +104,17 @@
     background: transparent;
     cursor: pointer;
     transition:
-        border-color 150ms ease,
-        color 150ms ease,
-        background 150ms ease;
+        border-color 150ms var(--ease-out-quint),
+        color 150ms var(--ease-out-quint),
+        background 150ms var(--ease-out-quint);
     line-height: 1.4;
+    touch-action: manipulation;
 }
 
 .externalPromptBtn:hover {
-    border-color: rgba(56, 189, 248, 0.4);
+    border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
     color: var(--color-text-primary);
-    background: rgba(56, 189, 248, 0.06);
+    background: color-mix(in srgb, var(--color-accent) 6%, transparent);
 }
 
 /* ── Right column ── */

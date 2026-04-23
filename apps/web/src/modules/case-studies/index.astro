@@ -119,7 +119,7 @@ const gridProjects = projects.slice(1);
         height: 6px;
         border-radius: 50%;
         background: var(--color-accent);
-        box-shadow: 0 0 6px 2px rgba(56, 189, 248, 0.5);
+        box-shadow: 0 0 6px 2px color-mix(in srgb, var(--color-accent) 50%, transparent);
         flex-shrink: 0;
     }
 
@@ -130,6 +130,7 @@ const gridProjects = projects.slice(1);
         line-height: 1.05;
         color: var(--color-text-primary);
         margin-bottom: 0.85rem;
+        text-wrap: balance;
     }
 
     .csw-section__subheading {
@@ -165,21 +166,22 @@ const gridProjects = projects.slice(1);
             border-color var(--transition-fast),
             background var(--transition-fast);
         font-family: var(--font-sans);
+        touch-action: manipulation;
     }
 
     .csw-filter-btn:hover {
         color: var(--color-text-primary);
-        border-color: rgba(56, 189, 248, 0.3);
+        border-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
     }
 
     .csw-filter-btn[aria-pressed="true"] {
         color: var(--color-accent);
-        border-color: rgba(56, 189, 248, 0.45);
-        background: rgba(56, 189, 248, 0.08);
+        border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
+        background: color-mix(in srgb, var(--color-accent) 8%, transparent);
     }
 
     .csw-filter-btn:focus-visible {
-        outline: 2px solid rgba(56, 189, 248, 0.9);
+        outline: 2px solid var(--color-accent);
         outline-offset: 2px;
     }
 

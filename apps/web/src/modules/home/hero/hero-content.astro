@@ -37,14 +37,14 @@ import HeroActions from "./hero-actions.astro";
         align-self: flex-start;
         padding: 0.42rem 0.86rem;
         border-radius: 999px;
-        border: 1px solid rgba(56, 189, 248, 0.42);
+        border: 1px solid rgba(0, 204, 255, 0.4);
         color: var(--color-accent);
         font-size: 0.86rem;
         font-weight: 700;
         letter-spacing: 0.01em;
         line-height: 1;
-        background: linear-gradient(90deg, rgba(56, 189, 248, 0.15), rgba(56, 189, 248, 0.04));
-        animation: hero-fade-up 500ms ease both;
+        background: linear-gradient(90deg, rgba(0, 204, 255, 0.13), rgba(0, 204, 255, 0.04));
+        animation: hero-fade-up 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
         animation-delay: 40ms;
     }
 
@@ -56,24 +56,25 @@ import HeroActions from "./hero-actions.astro";
         margin-right: 0.55rem;
         border-radius: 50%;
         background: var(--color-accent);
-        box-shadow: 0 0 0 6px rgba(56, 189, 248, 0.14);
+        box-shadow: 0 0 0 6px rgba(0, 204, 255, 0.12);
         vertical-align: middle;
     }
 
     .hero-title {
         font-size: clamp(2.2rem, 11vw, 3.2rem);
-        line-height: 0.96;
-        letter-spacing: -0.04em;
-        font-weight: 760;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        font-weight: 700;
+        font-optical-sizing: auto;
         color: #e9eef4;
         text-wrap: balance;
-        animation: hero-fade-up 560ms ease both;
+        animation: hero-fade-up 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
         animation-delay: 120ms;
     }
 
     .hero-title span {
-        color: #40b9ff;
-        text-shadow: 0 0 22px rgba(64, 185, 255, 0.18);
+        color: #00ccff;
+        text-shadow: 0 0 24px rgba(0, 204, 255, 0.2);
     }
 
     .hero-description {
@@ -83,7 +84,7 @@ import HeroActions from "./hero-actions.astro";
         line-height: 1.52;
         letter-spacing: -0.012em;
         text-wrap: pretty;
-        animation: hero-fade-up 520ms ease both;
+        animation: hero-fade-up 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
         animation-delay: 200ms;
     }
 
@@ -93,7 +94,7 @@ import HeroActions from "./hero-actions.astro";
         }
 
         .hero-title {
-            line-height: 0.98;
+            line-height: 1;
             font-size: clamp(2.35rem, 11.8vw, 3.75rem);
         }
 
@@ -115,7 +116,7 @@ import HeroActions from "./hero-actions.astro";
 
         .hero-title {
             font-size: clamp(2.45rem, 3.8vw, 3.8rem);
-            line-height: 0.97;
+            line-height: 1;
         }
 
         .hero-description {

@@ -49,6 +49,9 @@ const footerNavColumns: FooterNavColumn[] = [
                                 ]}
                                 target={link.external ? "_blank" : undefined}
                                 rel={link.external ? "noopener noreferrer" : undefined}
+                                aria-label={
+                                    link.external ? `${link.label} (opens in new tab)` : undefined
+                                }
                             >
                                 {link.label}
                             </a>
@@ -96,12 +99,12 @@ const footerNavColumns: FooterNavColumn[] = [
     }
 
     .footer-nav__link--accent {
-        color: var(--color-accent, #38bdf8);
+        color: var(--color-accent);
         font-weight: 500;
     }
 
     .footer-nav__link--accent:hover {
-        color: var(--color-accent, #38bdf8);
+        color: var(--color-accent);
         opacity: 0.8;
     }
 

@@ -36,6 +36,32 @@ const { iconSrc, iconWidth, iconHeight, title, description } = Astro.props;
         background: var(--color-surface);
         border: 1px solid var(--color-border);
         border-radius: 1rem;
+        transition:
+            transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+            border-color 220ms ease,
+            box-shadow 220ms ease;
+    }
+
+    .phil-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(0, 204, 255, 0.3);
+        box-shadow:
+            0 12px 32px rgba(0, 0, 0, 0.3),
+            0 0 0 1px rgba(0, 204, 255, 0.08) inset;
+    }
+
+    .phil-card:hover .phil-card__icon-box {
+        border-color: rgba(0, 204, 255, 0.55);
+        box-shadow:
+            0 0 0 1px rgba(255, 255, 255, 0.02) inset,
+            0 8px 20px rgba(2, 7, 13, 0.45),
+            0 0 12px rgba(0, 204, 255, 0.18);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .phil-card {
+            transition: none;
+        }
     }
 
     @mixin desktop-up {
@@ -51,7 +77,7 @@ const { iconSrc, iconWidth, iconHeight, title, description } = Astro.props;
         width: 3.5rem;
         height: 3.5rem;
         border-radius: 0.9rem;
-        border: 1.5px solid rgba(58, 176, 248, 0.32);
+        border: 1.5px solid rgba(0, 204, 255, 0.28);
         background: linear-gradient(180deg, rgba(8, 14, 21, 0.97), rgba(6, 11, 18, 0.99));
         display: grid;
         place-items: center;
@@ -67,7 +93,7 @@ const { iconSrc, iconWidth, iconHeight, title, description } = Astro.props;
         width: 60%;
         aspect-ratio: 1 / 1;
         border-radius: 50%;
-        background: rgba(19, 65, 97, 0.55);
+        background: rgba(0, 60, 80, 0.55);
         pointer-events: none;
     }
 

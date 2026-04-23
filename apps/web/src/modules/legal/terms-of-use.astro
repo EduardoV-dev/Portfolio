@@ -148,7 +148,7 @@ const lastUpdated = "April 22, 2025";
     /* ── Header ── */
     .legal__header {
         margin-bottom: 3.5rem;
-        animation: legal-fade-up 500ms ease both;
+        animation: legal-fade-up 500ms var(--ease-out-quint) both;
     }
 
     .legal__label {
@@ -167,6 +167,7 @@ const lastUpdated = "April 22, 2025";
         color: var(--color-text-primary);
         line-height: 1.05;
         margin-bottom: 0.75rem;
+        text-wrap: balance;
     }
 
     .legal__meta {
@@ -185,7 +186,7 @@ const lastUpdated = "April 22, 2025";
     .legal__section {
         border-top: 1px solid var(--color-border);
         padding-top: 2rem;
-        animation: legal-fade-up 540ms ease both;
+        animation: legal-fade-up 540ms var(--ease-out-quint) both;
     }
 
     .legal__section:first-child {
@@ -199,6 +200,7 @@ const lastUpdated = "April 22, 2025";
         letter-spacing: -0.02em;
         color: var(--color-text-primary);
         margin-bottom: 1rem;
+        text-wrap: balance;
     }
 
     @mixin tablet-up {

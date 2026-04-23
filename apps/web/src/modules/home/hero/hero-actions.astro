@@ -34,19 +34,19 @@
         font-size: 1.03rem;
         font-weight: 650;
         letter-spacing: -0.01em;
+        touch-action: manipulation;
         transition:
             transform var(--transition-fast),
             box-shadow var(--transition-base),
             border-color var(--transition-fast),
             background var(--transition-fast);
-        will-change: transform;
     }
 
     .hero-btn--primary {
         color: #04131f;
-        background: linear-gradient(135deg, #44b7ff 0%, #38bdf8 52%, #3cb4ff 100%);
+        background: linear-gradient(135deg, #33ddff 0%, #00ccff 52%, #00d5ff 100%);
         box-shadow:
-            0 12px 30px rgba(56, 189, 248, 0.25),
+            0 12px 30px rgba(0, 204, 255, 0.25),
             inset 0 -1px 0 rgba(255, 255, 255, 0.25);
     }
 
@@ -63,17 +63,17 @@
 
     .hero-btn--primary:hover {
         box-shadow:
-            0 15px 34px rgba(56, 189, 248, 0.35),
+            0 15px 34px rgba(0, 204, 255, 0.35),
             inset 0 -1px 0 rgba(255, 255, 255, 0.3);
     }
 
     .hero-btn--secondary:hover {
-        border-color: rgba(56, 189, 248, 0.45);
+        border-color: rgba(0, 204, 255, 0.45);
         box-shadow: 0 14px 28px rgba(6, 14, 22, 0.4);
     }
 
     .hero-btn:focus-visible {
-        outline: 2px solid rgba(56, 189, 248, 0.95);
+        outline: 2px solid rgba(0, 204, 255, 0.95);
         outline-offset: 2px;
     }
 

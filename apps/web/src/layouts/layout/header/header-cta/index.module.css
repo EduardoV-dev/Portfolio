@@ -5,7 +5,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.55rem 1.15rem;
-    background: var(--color-cta-bg, #38bdf8);
+    background: var(--color-cta-bg);
     color: var(--color-cta-text, #0a0a0a);
     font-size: 0.75rem;
     font-weight: 700;
@@ -13,6 +13,7 @@
     border-radius: 6px;
     white-space: nowrap;
     flex-shrink: 0;
+    touch-action: manipulation;
     transition:
         background 150ms ease,
         transform 150ms ease;

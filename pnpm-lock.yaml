@@ -42,7 +42,47 @@ importers:
         specifier: ^8.26.1
         version: 8.57.1(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
 
-  apps/frontend:
+  apps/headless-cms:
+    dependencies:
+      '@strapi/plugin-cloud':
+        specifier: 5.37.1
+        version: 5.37.1(1be9de7f2e207980a8f3a4b9c487f65a)
+      '@strapi/plugin-users-permissions':
+        specifier: 5.37.1
+        version: 5.37.1(880844ff07a1d522253ec4cb4f1e2d80)
+      '@strapi/strapi':
+        specifier: 5.37.1
+        version: 5.37.1(@babel/runtime@7.29.2)(@codemirror/autocomplete@6.20.1)(@codemirror/language@6.12.2)(@codemirror/lint@6.9.5)(@codemirror/search@6.6.0)(@codemirror/state@6.6.0)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.40.0)(@emotion/is-prop-valid@1.4.0)(@swc/helpers@0.5.19)(@types/hoist-non-react-statics@3.3.7(@types/react@18.3.28))(@types/node@20.19.37)(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(better-sqlite3@12.4.1)(codemirror@5.65.21)(esbuild@0.27.4)(koa@2.16.3)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.30.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(redux@4.2.1)(styled-components@6.3.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.1)(type-fest@4.41.0)
+      better-sqlite3:
+        specifier: 12.4.1
+        version: 12.4.1
+      react:
+        specifier: ^18.0.0
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.0.0
+        version: 18.3.1(react@18.3.1)
+      react-router-dom:
+        specifier: ^6.0.0
+        version: 6.30.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      styled-components:
+        specifier: ^6.0.0
+        version: 6.3.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+    devDependencies:
+      '@types/node':
+        specifier: ^20
+        version: 20.19.37
+      '@types/react':
+        specifier: ^18
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18
+        version: 18.3.7(@types/react@18.3.28)
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+
+  apps/web:
     dependencies:
       '@astrojs/react':
         specifier: ^4.4.2
@@ -96,46 +136,6 @@ importers:
       postcss-mixins:
         specifier: ^12.1.2
         version: 12.1.2(postcss@8.5.8)
-
-  apps/strapi:
-    dependencies:
-      '@strapi/plugin-cloud':
-        specifier: 5.37.1
-        version: 5.37.1(1be9de7f2e207980a8f3a4b9c487f65a)
-      '@strapi/plugin-users-permissions':
-        specifier: 5.37.1
-        version: 5.37.1(880844ff07a1d522253ec4cb4f1e2d80)
-      '@strapi/strapi':
-        specifier: 5.37.1
-        version: 5.37.1(@babel/runtime@7.29.2)(@codemirror/autocomplete@6.20.1)(@codemirror/language@6.12.2)(@codemirror/lint@6.9.5)(@codemirror/search@6.6.0)(@codemirror/state@6.6.0)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.40.0)(@emotion/is-prop-valid@1.4.0)(@swc/helpers@0.5.19)(@types/hoist-non-react-statics@3.3.7(@types/react@18.3.28))(@types/node@20.19.37)(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(better-sqlite3@12.4.1)(codemirror@5.65.21)(esbuild@0.27.4)(koa@2.16.3)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.30.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(redux@4.2.1)(styled-components@6.3.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.1)(type-fest@4.41.0)
-      better-sqlite3:
-        specifier: 12.4.1
-        version: 12.4.1
-      react:
-        specifier: ^18.0.0
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.0.0
-        version: 18.3.1(react@18.3.1)
-      react-router-dom:
-        specifier: ^6.0.0
-        version: 6.30.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      styled-components:
-        specifier: ^6.0.0
-        version: 6.3.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-    devDependencies:
-      '@types/node':
-        specifier: ^20
-        version: 20.19.37
-      '@types/react':
-        specifier: ^18
-        version: 18.3.28
-      '@types/react-dom':
-        specifier: ^18
-        version: 18.3.7(@types/react@18.3.28)
-      typescript:
-        specifier: ^5
-        version: 5.9.3
 
 packages:
 
@@ -10248,8 +10248,8 @@ snapshots:
 
   '@koa/router@12.0.2':
     dependencies:
-      debug: 4.3.4
-      http-errors: 2.0.0
+      debug: 4.4.3(supports-color@5.5.0)
+      http-errors: 2.0.1
       koa-compose: 4.1.0
       methods: 1.1.2
       path-to-regexp: 6.3.0
@@ -11244,7 +11244,7 @@ snapshots:
       '@strapi/design-system': 2.1.2(@babel/runtime@7.29.2)(@codemirror/autocomplete@6.20.1)(@codemirror/language@6.12.2)(@codemirror/lint@6.9.5)(@codemirror/search@6.6.0)(@codemirror/state@6.6.0)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.40.0)(@strapi/icons@2.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.3.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(codemirror@5.65.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.3.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@strapi/icons': 2.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.3.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@strapi/permissions': 5.37.1
-      '@strapi/types': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(typescript@5.9.3)
+      '@strapi/types': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(typescript@5.4.4)
       '@strapi/typescript-utils': 5.37.1
       '@strapi/utils': 5.37.1
       '@testing-library/dom': 10.4.1
@@ -11442,7 +11442,7 @@ snapshots:
       '@strapi/database': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)
       '@strapi/design-system': 2.1.2(@babel/runtime@7.29.2)(@codemirror/autocomplete@6.20.1)(@codemirror/language@6.12.2)(@codemirror/lint@6.9.5)(@codemirror/search@6.6.0)(@codemirror/state@6.6.0)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.40.0)(@strapi/icons@2.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.3.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(codemirror@5.65.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.3.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@strapi/icons': 2.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.3.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      '@strapi/types': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(typescript@5.9.3)
+      '@strapi/types': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(typescript@5.4.4)
       '@strapi/utils': 5.37.1
       date-fns: 2.30.0
       date-fns-tz: 2.0.1(date-fns@2.30.0)
@@ -11543,7 +11543,7 @@ snapshots:
       '@strapi/generators': 5.37.1(@types/node@20.19.37)
       '@strapi/logger': 5.37.1
       '@strapi/permissions': 5.37.1
-      '@strapi/types': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(typescript@5.9.3)
+      '@strapi/types': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(typescript@5.4.4)
       '@strapi/typescript-utils': 5.37.1
       '@strapi/utils': 5.37.1
       '@vercel/stega': 0.1.2
@@ -11978,7 +11978,7 @@ snapshots:
       '@strapi/openapi': 5.37.1
       '@strapi/permissions': 5.37.1
       '@strapi/review-workflows': 5.37.1(1e1ecb28b9a137391eea08fc72688fa3)
-      '@strapi/types': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(typescript@5.9.3)
+      '@strapi/types': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(typescript@5.4.4)
       '@strapi/typescript-utils': 5.37.1
       '@strapi/upload': 5.37.1(f1ce37440854c2f3beb4462559fdb2c5)
       '@strapi/utils': 5.37.1
@@ -12081,6 +12081,36 @@ snapshots:
       - webpack-cli
       - webpack-dev-server
       - webpack-plugin-serve
+
+  '@strapi/types@5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(typescript@5.4.4)':
+    dependencies:
+      '@casl/ability': 6.7.5
+      '@koa/cors': 5.0.0
+      '@koa/router': 12.0.2
+      '@strapi/database': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)
+      '@strapi/logger': 5.37.1
+      '@strapi/permissions': 5.37.1
+      '@strapi/utils': 5.37.1
+      commander: 8.3.0
+      json-logic-js: 2.0.5
+      koa: 2.16.3
+      koa-body: 6.0.1
+      node-schedule: 2.1.1
+      typedoc: 0.25.10(typescript@5.4.4)
+      typedoc-github-wiki-theme: 1.1.0(typedoc-plugin-markdown@3.17.1(typedoc@0.25.10(typescript@5.9.3)))(typedoc@0.25.10(typescript@5.9.3))
+      typedoc-plugin-markdown: 3.17.1(typedoc@0.25.10(typescript@5.9.3))
+      zod: 3.25.67
+    transitivePeerDependencies:
+      - '@types/node'
+      - better-sqlite3
+      - mysql
+      - mysql2
+      - pg
+      - pg-native
+      - sqlite3
+      - supports-color
+      - tedious
+      - typescript
 
   '@strapi/types@5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(typescript@5.9.3)':
     dependencies:
@@ -13577,7 +13607,7 @@ snapshots:
     dependencies:
       '@hapi/bourne': 3.0.0
       inflation: 2.1.0
-      qs: 6.14.2
+      qs: 6.15.0
       raw-body: 2.5.3
       type-is: 1.6.18
 
@@ -13807,7 +13837,7 @@ snapshots:
       postcss-modules-scope: 3.2.1(postcss@8.5.8)
       postcss-modules-values: 4.0.0(postcss@8.5.8)
       postcss-value-parser: 4.2.0
-      semver: 7.5.4
+      semver: 7.7.4
     optionalDependencies:
       webpack: 5.105.4(esbuild@0.27.4)
 
@@ -14729,7 +14759,7 @@ snapshots:
       minimatch: 3.1.5
       node-abort-controller: 3.1.1
       schema-utils: 3.3.0
-      semver: 7.5.4
+      semver: 7.7.4
       tapable: 2.3.0
       typescript: 5.4.4
       webpack: 5.105.4(esbuild@0.27.4)
@@ -14747,7 +14777,7 @@ snapshots:
       '@paralleldrive/cuid2': 2.2.2
       dezalgo: 1.0.4
       once: 1.4.0
-      qs: 6.14.2
+      qs: 6.15.0
 
   formik@2.4.5(@types/react@18.3.28)(react@18.3.1):
     dependencies:
@@ -14860,7 +14890,7 @@ snapshots:
       get-it: 8.7.0
       registry-auth-token: 5.1.1
       registry-url: 5.1.0
-      semver: 7.5.4
+      semver: 7.7.4
     transitivePeerDependencies:
       - debug
 
@@ -14946,7 +14976,7 @@ snapshots:
       es6-error: 4.1.1
       matcher: 3.0.0
       roarr: 2.15.4
-      semver: 7.5.4
+      semver: 7.7.4
       serialize-error: 7.0.1
 
   global-directory@4.0.1:
@@ -15854,7 +15884,7 @@ snapshots:
       '@types/koa': 2.15.0
       co-body: 6.2.0
       formidable: 2.1.5
-      zod: 3.25.67
+      zod: 3.25.76
 
   koa-compose@4.1.0: {}
 
@@ -15898,7 +15928,7 @@ snapshots:
 
   koa-send@5.0.1:
     dependencies:
-      debug: 4.3.4
+      debug: 4.4.3(supports-color@5.5.0)
       http-errors: 1.8.1
       resolve-path: 1.4.0
     transitivePeerDependencies:
@@ -15907,7 +15937,7 @@ snapshots:
   koa-session@6.4.0:
     dependencies:
       crc: 3.8.0
-      debug: 4.3.4
+      debug: 4.4.3(supports-color@5.5.0)
       is-type-of: 1.4.0
       uuid: 8.3.2
     transitivePeerDependencies:
@@ -16785,7 +16815,7 @@ snapshots:
       ignore-by-default: 1.0.1
       minimatch: 3.1.5
       pstree.remy: 1.1.8
-      semver: 7.5.4
+      semver: 7.7.4
       simple-update-notifier: 2.0.0
       supports-color: 5.5.0
       touch: 3.1.1
@@ -17041,7 +17071,7 @@ snapshots:
       got: 11.8.6
       registry-auth-token: 4.2.2
       registry-url: 5.1.0
-      semver: 7.5.4
+      semver: 7.7.4
 
   package-manager-detector@1.6.0: {}
 
@@ -18734,6 +18764,14 @@ snapshots:
     dependencies:
       handlebars: 4.7.8
       typedoc: 0.25.10(typescript@5.9.3)
+
+  typedoc@0.25.10(typescript@5.4.4):
+    dependencies:
+      lunr: 2.3.9
+      marked: 4.3.0
+      minimatch: 9.0.9
+      shiki: 0.14.7
+      typescript: 5.4.4
 
   typedoc@0.25.10(typescript@5.9.3):
     dependencies:

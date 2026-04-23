@@ -87,3 +87,10 @@
     border-bottom: none;
     border-right: none;
 }
+
+@media (prefers-reduced-motion: reduce) {
+    .tooltip-box {
+        transition: none;
+        animation: none;
+    }
+}

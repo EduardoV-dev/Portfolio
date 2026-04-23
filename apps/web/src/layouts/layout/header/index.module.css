@@ -46,6 +46,7 @@
     cursor: pointer;
     font-family: inherit;
     border-radius: 6px;
+    touch-action: manipulation;
     transition: background 150ms ease;
 }
 

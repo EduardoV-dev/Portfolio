@@ -97,9 +97,9 @@ import logo from "@/assets/logo.png";
         width: 7px;
         height: 7px;
         border-radius: 50%;
-        background: var(--color-accent, #38bdf8);
+        background: var(--color-accent, #00ccff);
         flex-shrink: 0;
-        box-shadow: 0 0 6px var(--color-accent, #38bdf8);
+        box-shadow: 0 0 6px var(--color-accent, #00ccff);
         animation: pulse 2.5s ease-in-out infinite;
     }
 
@@ -108,7 +108,7 @@ import logo from "@/assets/logo.png";
         font-weight: 600;
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        color: var(--color-accent, #38bdf8);
+        color: var(--color-accent, #00ccff);
     }
 
     @keyframes pulse {
@@ -118,6 +118,12 @@ import logo from "@/assets/logo.png";
         }
         50% {
             opacity: 0.4;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .badge__dot {
+            animation: none;
         }
     }
 </style>

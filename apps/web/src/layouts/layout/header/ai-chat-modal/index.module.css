@@ -75,3 +75,13 @@
 .backdrop--closing {
     animation: backdropOut 160ms ease forwards;
 }
+
+@media (prefers-reduced-motion: reduce) {
+    .modal,
+    .modal--closing,
+    .backdrop,
+    .backdrop--closing {
+        animation: none;
+        transition: none;
+    }
+}

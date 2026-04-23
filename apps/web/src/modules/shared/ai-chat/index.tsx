@@ -153,7 +153,12 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
             )}
 
             {/* Messages area */}
-            <div className={styles.messages} ref={messagesContainerRef}>
+            <div
+                className={styles.messages}
+                ref={messagesContainerRef}
+                aria-live="polite"
+                aria-label="Chat messages"
+            >
                 {messages.map((msg) => (
                     <div
                         key={msg.id}
@@ -166,8 +171,8 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                                             <path
                                                 d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"
-                                                fill="var(--color-accent,#38bdf8)"
-                                                stroke="var(--color-accent,#38bdf8)"
+                                                fill="var(--color-accent)"
+                                                stroke="var(--color-accent)"
                                                 strokeWidth="1.5"
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
@@ -221,8 +226,8 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                                         <path
                                             d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"
-                                            fill="var(--color-accent,#38bdf8)"
-                                            stroke="var(--color-accent,#38bdf8)"
+                                            fill="var(--color-accent)"
+                                            stroke="var(--color-accent)"
                                             strokeWidth="1.5"
                                             strokeLinecap="round"
                                             strokeLinejoin="round"
@@ -268,7 +273,7 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
                     ref={inputRef}
                     className={styles.input}
                     type="text"
-                    placeholder="Type your message..."
+                    placeholder="Type your message…"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}

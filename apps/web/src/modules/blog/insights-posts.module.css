@@ -44,6 +44,7 @@
     border-radius: 6px;
     padding: 0.4rem 0.9rem;
     cursor: pointer;
+    touch-action: manipulation;
     transition:
         color var(--transition-fast),
         background var(--transition-fast),
@@ -68,7 +69,7 @@
 }
 
 .ip__filter:focus-visible {
-    outline: 2px solid rgba(56, 189, 248, 0.9);
+    outline: 2px solid var(--color-accent);
     outline-offset: 2px;
     border-radius: 6px;
 }
@@ -99,7 +100,7 @@
 
 .ip__card:hover {
     transform: translateY(-3px);
-    border-color: rgba(56, 189, 248, 0.22);
+    border-color: color-mix(in srgb, var(--color-accent) 22%, transparent);
     box-shadow: 0 10px 32px rgba(0, 0, 0, 0.3);
 }
 
@@ -108,7 +109,7 @@
 }
 
 .ip__card:focus-visible {
-    outline: 2px solid rgba(56, 189, 248, 0.9);
+    outline: 2px solid var(--color-accent);
     outline-offset: 2px;
     border-radius: 10px;
 }
@@ -130,8 +131,8 @@
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--color-accent);
-    background: rgba(56, 189, 248, 0.08);
-    border: 1px solid rgba(56, 189, 248, 0.14);
+    background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 14%, transparent);
     border-radius: 4px;
     padding: 0.18rem 0.5rem;
 }

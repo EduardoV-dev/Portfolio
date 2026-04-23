@@ -40,6 +40,7 @@
     letter-spacing: -0.04em;
     color: var(--color-text-primary);
     line-height: 1.1;
+    text-wrap: balance;
 }
 
 /* ── Grid ── */
@@ -72,38 +73,45 @@
 }
 
 .co__card:hover {
-    will-change: transform;
     transform: translateY(-4px);
     box-shadow:
-        0 0 0 1px rgba(56, 189, 248, 0.15),
+        0 0 0 1px color-mix(in srgb, var(--color-accent) 15%, transparent),
         0 16px 40px rgba(0, 0, 0, 0.45),
-        0 0 32px rgba(56, 189, 248, 0.07);
-    border-color: rgba(56, 189, 248, 0.18);
+        0 0 32px color-mix(in srgb, var(--color-accent) 7%, transparent);
+    border-color: color-mix(in srgb, var(--color-accent) 18%, transparent);
 }
 
 .co__card--primary {
-    border-color: rgba(56, 189, 248, 0.25);
-    background: linear-gradient(160deg, rgba(56, 189, 248, 0.06) 0%, var(--color-surface) 60%);
+    border-color: color-mix(in srgb, var(--color-accent) 25%, transparent);
+    background: linear-gradient(
+        160deg,
+        color-mix(in srgb, var(--color-accent) 6%, transparent) 0%,
+        var(--color-surface) 60%
+    );
 }
 
 .co__card--primary:hover {
-    border-color: rgba(56, 189, 248, 0.4);
+    border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
     box-shadow:
-        0 0 0 1px rgba(56, 189, 248, 0.2),
+        0 0 0 1px color-mix(in srgb, var(--color-accent) 20%, transparent),
         0 16px 48px rgba(0, 0, 0, 0.5),
-        0 0 48px rgba(56, 189, 248, 0.1);
+        0 0 48px color-mix(in srgb, var(--color-accent) 10%, transparent);
 }
 
 /* Email card active (form open) */
 .co__card--email-active {
-    border-color: rgba(56, 189, 248, 0.35);
-    background: linear-gradient(160deg, rgba(56, 189, 248, 0.06) 0%, var(--color-surface) 60%);
+    border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+    background: linear-gradient(
+        160deg,
+        color-mix(in srgb, var(--color-accent) 6%, transparent) 0%,
+        var(--color-surface) 60%
+    );
     transform: none !important;
 }
 
 .co__card--email-active:hover {
     transform: none;
-    border-color: rgba(56, 189, 248, 0.35);
+    border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
 }
 
 @mixin desktop-up {
@@ -120,7 +128,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 0.65rem;
-    background: rgba(56, 189, 248, 0.1);
+    background: color-mix(in srgb, var(--color-accent) 10%, transparent);
     color: var(--color-accent);
     flex-shrink: 0;
 }
@@ -189,6 +197,7 @@
     color: var(--color-text-primary);
     cursor: pointer;
     text-decoration: none;
+    touch-action: manipulation;
     transition:
         background 150ms ease,
         border-color 150ms ease,
@@ -204,7 +213,7 @@
 }
 
 .co__card-btn:focus-visible {
-    outline: 2px solid rgba(56, 189, 248, 0.95);
+    outline: 2px solid var(--color-accent);
     outline-offset: 2px;
 }
 
@@ -214,16 +223,21 @@
 
 .co__card-btn--primary {
     color: #04131f;
-    background: linear-gradient(135deg, #44b7ff 0%, #38bdf8 52%, #3cb4ff 100%);
+    background: linear-gradient(
+        135deg,
+        var(--color-accent-hover) 0%,
+        var(--color-accent) 52%,
+        var(--color-accent-hover) 100%
+    );
     border-color: transparent;
     box-shadow:
-        0 8px 24px rgba(56, 189, 248, 0.25),
+        0 8px 24px color-mix(in srgb, var(--color-accent) 25%, transparent),
         inset 0 -1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .co__card-btn--primary:hover {
     box-shadow:
-        0 12px 32px rgba(56, 189, 248, 0.35),
+        0 12px 32px color-mix(in srgb, var(--color-accent) 35%, transparent),
         inset 0 -1px 0 rgba(255, 255, 255, 0.25);
     transform: translateY(-2px);
 }
@@ -231,14 +245,29 @@
 /* "Write a Message" trigger button on email card */
 .co__card-btn--email {
     color: var(--color-accent);
-    background: rgba(56, 189, 248, 0.08);
-    border-color: rgba(56, 189, 248, 0.25);
+    background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+    border-color: color-mix(in srgb, var(--color-accent) 25%, transparent);
 }
 
 .co__card-btn--email:hover {
-    background: rgba(56, 189, 248, 0.14);
-    border-color: rgba(56, 189, 248, 0.4);
+    background: color-mix(in srgb, var(--color-accent) 14%, transparent);
+    border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
     color: var(--color-accent);
+}
+
+.co__card-btn--email-open {
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+    border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+}
+
+/* Arrow icon that rotates on toggle */
+.co__card-btn-arrow {
+    display: inline-block;
+    transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.co__card-btn-arrow--up {
+    transform: rotate(-180deg);
 }
 
 /* Copy button */
@@ -251,10 +280,11 @@
     font-weight: 650;
     font-family: inherit;
     letter-spacing: -0.01em;
-    border: 1px solid rgba(56, 189, 248, 0.2);
-    background: rgba(56, 189, 248, 0.06);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
+    background: color-mix(in srgb, var(--color-accent) 6%, transparent);
     color: var(--color-accent);
     cursor: pointer;
+    touch-action: manipulation;
     transition:
         background 150ms ease,
         border-color 150ms ease,
@@ -262,13 +292,13 @@
 }
 
 .co__card-copy:hover {
-    background: rgba(56, 189, 248, 0.12);
-    border-color: rgba(56, 189, 248, 0.35);
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+    border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
     transform: translateY(-1px);
 }
 
 .co__card-copy:focus-visible {
-    outline: 2px solid rgba(56, 189, 248, 0.95);
+    outline: 2px solid var(--color-accent);
     outline-offset: 2px;
 }
 
@@ -281,7 +311,7 @@
     margin-top: 1.5rem;
     padding: 2rem;
     background: var(--color-surface);
-    border: 1px solid rgba(56, 189, 248, 0.2);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
     border-radius: 1rem;
     animation: panel-reveal 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -314,6 +344,7 @@
     font-size: 1.1rem;
     line-height: 1;
     cursor: pointer;
+    touch-action: manipulation;
     transition:
         background 150ms ease,
         border-color 150ms ease,
@@ -328,7 +359,7 @@
 }
 
 .co__form-panel-close:focus-visible {
-    outline: 2px solid rgba(56, 189, 248, 0.95);
+    outline: 2px solid var(--color-accent);
     outline-offset: 2px;
 }
 
@@ -342,6 +373,22 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+@keyframes panel-conceal {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+}
+
+.co__form-panel--closing {
+    animation: panel-conceal 240ms cubic-bezier(0.4, 0, 1, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -360,5 +407,13 @@
 
     .co__form-panel {
         animation: none;
+    }
+
+    .co__form-panel--closing {
+        animation: none;
+    }
+
+    .co__card-btn-arrow {
+        transition: none;
     }
 }

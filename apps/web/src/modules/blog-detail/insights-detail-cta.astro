@@ -55,10 +55,16 @@
         font-size: 0.875rem;
         font-weight: 700;
         color: var(--color-cta-text);
-        background: linear-gradient(135deg, #44b7ff, #38bdf8, #3cb4ff);
+        background: linear-gradient(
+            135deg,
+            var(--color-accent-hover),
+            var(--color-accent),
+            var(--color-accent-hover)
+        );
         border-radius: 8px;
         padding: 0.7rem 1.5rem;
         text-decoration: none;
+        touch-action: manipulation;
         transition:
             background var(--transition-fast),
             transform var(--transition-fast),
@@ -68,11 +74,11 @@
     .idc__btn:hover {
         background: linear-gradient(135deg, #5ec0ff, #7dd3fc, #5dc0ff);
         transform: translateY(-1px);
-        box-shadow: 0 6px 20px rgba(56, 189, 248, 0.3);
+        box-shadow: 0 6px 20px color-mix(in srgb, var(--color-accent) 30%, transparent);
     }
 
     .idc__btn:focus-visible {
-        outline: 2px solid rgba(56, 189, 248, 0.9);
+        outline: 2px solid var(--color-accent);
         outline-offset: 3px;
         border-radius: 8px;
     }

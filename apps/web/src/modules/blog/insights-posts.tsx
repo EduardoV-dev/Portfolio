@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { type Post, formatPostDate } from "@/data/posts";
 import styles from "./insights-posts.module.css";
 
@@ -17,7 +17,26 @@ interface Props {
 }
 
 export default function InsightsPosts({ posts }: Props) {
-    const [active, setActive] = useState<Category>("all");
+    const [active, setActive] = useState<Category>(() => {
+        if (typeof window !== "undefined") {
+            const param = new URLSearchParams(window.location.search).get("category");
+            if (param && FILTERS.some((f) => f.value === param)) return param as Category;
+        }
+        return "all";
+    });
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        if (active === "all") {
+            params.delete("category");
+        } else {
+            params.set("category", active);
+        }
+        const newUrl = params.toString()
+            ? `${window.location.pathname}?${params.toString()}`
+            : window.location.pathname;
+        history.replaceState(null, "", newUrl);
+    }, [active]);
 
     const filtered = active === "all" ? posts : posts.filter((p) => p.category === active);
 

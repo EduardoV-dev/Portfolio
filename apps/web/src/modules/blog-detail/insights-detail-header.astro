@@ -54,6 +54,7 @@ const { post, displayDate } = Astro.props;
         color: var(--color-text-secondary);
         text-decoration: none;
         margin-bottom: 2rem;
+        touch-action: manipulation;
         transition: color var(--transition-fast);
     }
 
@@ -62,7 +63,7 @@ const { post, displayDate } = Astro.props;
     }
 
     .idh__back:focus-visible {
-        outline: 2px solid rgba(56, 189, 248, 0.9);
+        outline: 2px solid var(--color-accent);
         outline-offset: 3px;
         border-radius: 3px;
     }
@@ -80,8 +81,8 @@ const { post, displayDate } = Astro.props;
         letter-spacing: 0.06em;
         text-transform: uppercase;
         color: var(--color-accent);
-        background: rgba(56, 189, 248, 0.08);
-        border: 1px solid rgba(56, 189, 248, 0.15);
+        background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+        border: 1px solid color-mix(in srgb, var(--color-accent) 15%, transparent);
         border-radius: 4px;
         padding: 0.2rem 0.55rem;
     }

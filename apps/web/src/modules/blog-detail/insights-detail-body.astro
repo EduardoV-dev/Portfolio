@@ -100,6 +100,7 @@ const blocks: ContentBlock[] = post.body;
         line-height: 1.2;
         margin-top: 2.75rem;
         margin-bottom: 1rem;
+        text-wrap: balance;
     }
 
     .idb__h3 {
@@ -110,6 +111,7 @@ const blocks: ContentBlock[] = post.body;
         line-height: 1.3;
         margin-top: 2rem;
         margin-bottom: 0.75rem;
+        text-wrap: balance;
     }
 
     /* ── Code block ── */
@@ -143,6 +145,7 @@ const blocks: ContentBlock[] = post.body;
         padding: 1.25rem 1.25rem;
         background: #0d1117;
         overflow-x: auto;
+        overscroll-behavior: contain;
     }
 
     .idb__code {
@@ -186,7 +189,7 @@ const blocks: ContentBlock[] = post.body;
         margin: 0 0 1.75rem;
         padding: 1.25rem 1.5rem;
         border-left: 3px solid var(--color-accent);
-        background: rgba(56, 189, 248, 0.04);
+        background: color-mix(in srgb, var(--color-accent) 4%, transparent);
         border-radius: 0 6px 6px 0;
     }
 

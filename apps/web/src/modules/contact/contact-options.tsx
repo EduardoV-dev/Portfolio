@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import ContactForm from "./contact-form";
 import styles from "./contact-options.module.css";
 
@@ -10,16 +10,33 @@ type CopyStatus = "idle" | "copied";
 
 export default function ContactOptions() {
     const [formOpen, setFormOpen] = useState(false);
+    const [isClosing, setIsClosing] = useState(false);
     const [copyStatus, setCopyStatus] = useState<CopyStatus>("idle");
     const formPanelRef = useRef<HTMLDivElement>(null);
     const openedViaHash = useRef(false);
 
-    function openForm() {
+    const openForm = useCallback(() => {
+        setIsClosing(false);
         setFormOpen(true);
+    }, []);
+
+    const closeForm = useCallback(() => {
+        setIsClosing(true);
+    }, []);
+
+    function toggleForm() {
+        if (formOpen && !isClosing) {
+            closeForm();
+        } else if (!formOpen) {
+            openForm();
+        }
     }
 
-    function closeForm() {
-        setFormOpen(false);
+    function handlePanelAnimationEnd(e: React.AnimationEvent<HTMLDivElement>) {
+        if (e.animationName.includes("panel-conceal")) {
+            setFormOpen(false);
+            setIsClosing(false);
+        }
     }
 
     function handleCopy() {
@@ -35,11 +52,11 @@ export default function ContactOptions() {
             openedViaHash.current = true;
             openForm();
         }
-    }, []);
+    }, [openForm]);
 
     // After form renders: focus first field; if opened via hash, scroll panel into view
     useEffect(() => {
-        if (!formOpen || !formPanelRef.current) return;
+        if (!formOpen || isClosing || !formPanelRef.current) return;
 
         if (openedViaHash.current) {
             formPanelRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -50,7 +67,9 @@ export default function ContactOptions() {
             "button, input, textarea, [tabindex]",
         );
         firstFocusable?.focus();
-    }, [formOpen]);
+    }, [formOpen, isClosing]);
+
+    const isFormVisible = formOpen || isClosing;
 
     return (
         <section className={styles.co} id="contact-options" aria-labelledby="co-heading">
@@ -93,6 +112,7 @@ export default function ContactOptions() {
                                 href={CALENDLY_URL}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                aria-label="Book a call (opens in new tab)"
                                 className={
                                     styles["co__card-btn"] + " " + styles["co__card-btn--primary"]
                                 }
@@ -107,7 +127,7 @@ export default function ContactOptions() {
                         id="send-email"
                         className={
                             styles["co__card"] +
-                            (formOpen ? " " + styles["co__card--email-active"] : "")
+                            (isFormVisible ? " " + styles["co__card--email-active"] : "")
                         }
                     >
                         <div className={styles["co__card-icon"]} aria-hidden="true">
@@ -132,13 +152,31 @@ export default function ContactOptions() {
                                 <button
                                     type="button"
                                     className={
-                                        styles["co__card-btn"] + " " + styles["co__card-btn--email"]
+                                        styles["co__card-btn"] +
+                                        " " +
+                                        styles["co__card-btn--email"] +
+                                        (isFormVisible
+                                            ? " " + styles["co__card-btn--email-open"]
+                                            : "")
                                     }
-                                    onClick={openForm}
-                                    aria-expanded={formOpen}
+                                    onClick={toggleForm}
+                                    aria-expanded={isFormVisible}
                                     aria-controls="email-form-panel"
                                 >
-                                    Write a Message <span aria-hidden="true">↓</span>
+                                    <span>
+                                        {isFormVisible ? "Close Message" : "Write a Message"}
+                                    </span>
+                                    <span
+                                        className={
+                                            styles["co__card-btn-arrow"] +
+                                            (isFormVisible
+                                                ? " " + styles["co__card-btn-arrow--up"]
+                                                : "")
+                                        }
+                                        aria-hidden="true"
+                                    >
+                                        ↓
+                                    </span>
                                 </button>
                                 <button
                                     type="button"
@@ -179,6 +217,7 @@ export default function ContactOptions() {
                                 href={LINKEDIN_URL}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                aria-label="LinkedIn profile (opens in new tab)"
                                 className={styles["co__card-btn"]}
                             >
                                 View Profile <span aria-hidden="true">→</span>
@@ -188,13 +227,17 @@ export default function ContactOptions() {
                 </div>
 
                 {/* ── Inline form panel ── */}
-                {formOpen && (
+                {isFormVisible && (
                     <div
                         id="email-form-panel"
-                        className={styles["co__form-panel"]}
+                        className={
+                            styles["co__form-panel"] +
+                            (isClosing ? " " + styles["co__form-panel--closing"] : "")
+                        }
                         ref={formPanelRef}
                         role="region"
                         aria-label="Send a message form"
+                        onAnimationEnd={handlePanelAnimationEnd}
                     >
                         <div className={styles["co__form-panel-header"]}>
                             <p className={styles["co__form-panel-title"]}>Send a message</p>

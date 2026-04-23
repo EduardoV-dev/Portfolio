@@ -77,6 +77,7 @@ const { prev, next } = Astro.props;
         gap: 0.3rem;
         text-decoration: none;
         max-width: 320px;
+        touch-action: manipulation;
     }
 
     .idn__link-dir {
@@ -100,7 +101,7 @@ const { prev, next } = Astro.props;
     }
 
     .idn__link:focus-visible {
-        outline: 2px solid rgba(56, 189, 248, 0.9);
+        outline: 2px solid var(--color-accent);
         outline-offset: 3px;
         border-radius: 3px;
     }
@@ -117,6 +118,7 @@ const { prev, next } = Astro.props;
         color: var(--color-text-secondary);
         text-decoration: underline;
         text-decoration-color: transparent;
+        touch-action: manipulation;
         transition:
             color var(--transition-fast),
             text-decoration-color var(--transition-fast);
@@ -128,7 +130,7 @@ const { prev, next } = Astro.props;
     }
 
     .idn__back-list:focus-visible {
-        outline: 2px solid rgba(56, 189, 248, 0.9);
+        outline: 2px solid var(--color-accent);
         outline-offset: 3px;
         border-radius: 3px;
     }

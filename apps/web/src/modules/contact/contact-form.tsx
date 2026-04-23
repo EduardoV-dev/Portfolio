@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./contact-form.module.css";
 
 const WEB3FORMS_ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY;
@@ -68,6 +68,7 @@ export default function ContactForm({ onClose }: ContactFormProps) {
     const [form, setForm] = useState<FormState>({ name: "", email: "", message: "" });
     const [errors, setErrors] = useState<FormErrors>({});
     const [status, setStatus] = useState<SubmitStatus>("idle");
+    const formRef = useRef<HTMLFormElement>(null);
 
     // Load reCAPTCHA v3 script on mount
     useEffect(() => {
@@ -87,6 +88,10 @@ export default function ContactForm({ onClose }: ContactFormProps) {
         const validationErrors = validate(form);
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
+            const firstInvalid = formRef.current?.querySelector(
+                '[aria-invalid="true"]',
+            ) as HTMLElement;
+            firstInvalid?.focus();
             return;
         }
 
@@ -134,8 +139,17 @@ export default function ContactForm({ onClose }: ContactFormProps) {
     }
 
     return (
-        <form className={styles.form} onSubmit={handleSubmit} noValidate aria-label="Contact form">
-            <div className={styles["form__field"]}>
+        <form
+            className={styles.form}
+            onSubmit={handleSubmit}
+            noValidate
+            aria-label="Contact form"
+            ref={formRef}
+        >
+            <div
+                className={styles["form__field"]}
+                style={{ "--field-index": 0 } as React.CSSProperties}
+            >
                 <label htmlFor="cf-name" className={styles["form__label"]}>
                     Name
                 </label>
@@ -158,7 +172,10 @@ export default function ContactForm({ onClose }: ContactFormProps) {
                 )}
             </div>
 
-            <div className={styles["form__field"]}>
+            <div
+                className={styles["form__field"]}
+                style={{ "--field-index": 1 } as React.CSSProperties}
+            >
                 <label htmlFor="cf-email" className={styles["form__label"]}>
                     Email
                 </label>
@@ -167,6 +184,7 @@ export default function ContactForm({ onClose }: ContactFormProps) {
                     type="email"
                     name="email"
                     autoComplete="email"
+                    spellCheck={false}
                     placeholder="you@example.com"
                     className={`${styles["form__input"]}${errors.email ? ` ${styles["form__input--error"]}` : ""}`}
                     value={form.email}
@@ -181,7 +199,10 @@ export default function ContactForm({ onClose }: ContactFormProps) {
                 )}
             </div>
 
-            <div className={styles["form__field"]}>
+            <div
+                className={styles["form__field"]}
+                style={{ "--field-index": 2 } as React.CSSProperties}
+            >
                 <label htmlFor="cf-message" className={styles["form__label"]}>
                     Message
                 </label>
@@ -189,6 +210,7 @@ export default function ContactForm({ onClose }: ContactFormProps) {
                     id="cf-message"
                     name="message"
                     rows={5}
+                    autoComplete="off"
                     placeholder="Tell me about your project or opportunity…"
                     className={`${styles["form__textarea"]}${errors.message ? ` ${styles["form__input--error"]}` : ""}`}
                     value={form.message}

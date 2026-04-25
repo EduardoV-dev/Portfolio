@@ -1,61 +1,78 @@
-# 🚀 Getting started with Strapi
+# Headless CMS — `apps/headless-cms`
 
-Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
+Strapi 5 content backend for the portfolio. Currently scaffolded and not yet wired to the frontend.
 
-### `develop`
+## Tech stack
 
-Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
+| Concern | Tool |
+|---|---|
+| CMS | Strapi 5 |
+| Language | TypeScript |
+| Database (Docker) | PostgreSQL 16 |
+| Database (local) | SQLite (default fallback) |
 
-```
-npm run develop
-# or
-yarn develop
-```
+## Prerequisites
 
-### `start`
+- Node.js `>=22.0.0`
+- pnpm `10`
+- A running PostgreSQL instance (provided automatically via Docker Compose)
 
-Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
+## Environment variables
 
-```
-npm run start
-# or
-yarn start
-```
+Copy the example file before starting:
 
-### `build`
-
-Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
-
-```
-npm run build
-# or
-yarn build
+```bash
+cp .env.example .env
 ```
 
-## ⚙️ Deployment
+| Variable | Description |
+|---|---|
+| `ADMIN_JWT_SECRET` | Secret for Strapi admin panel JWTs |
+| `APP_KEYS` | Comma-separated session keys (four values) |
+| `API_TOKEN_SALT` | Salt used to generate API tokens |
+| `JWT_SECRET` | Secret for content API JWTs |
+| `DATABASE_CLIENT` | `postgres` or `sqlite` |
+| `DATABASE_HOST` | DB host — `127.0.0.1` locally, `postgres` in Docker |
+| `DATABASE_PORT` | DB port — `5432` |
+| `DATABASE_NAME` | Database name — `portfolio` |
+| `DATABASE_USERNAME` | DB user — `portfolio` |
+| `DATABASE_PASSWORD` | DB password — `portfolio` |
+| `DATABASE_SSL` | `false` for local/Docker |
 
-Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
+> When running via Docker Compose, the `DATABASE_HOST` and other database variables are overridden by the values in `docker-compose.yml`. The `.env` values apply for local development only.
 
+## Getting started
+
+### Via Docker Compose (recommended)
+
+Start from the monorepo root — Strapi, PostgreSQL, and the frontend all start together:
+
+```bash
+docker compose up
 ```
-yarn strapi deploy
+
+Strapi admin panel: http://localhost:1337/admin
+
+### Via pnpm (local)
+
+Ensure a PostgreSQL instance is reachable at the coordinates in your `.env`, then from the monorepo root:
+
+```bash
+pnpm dev:strapi
 ```
 
-## 📚 Learn more
+Or start everything at once:
 
-- [Resource center](https://strapi.io/resource-center) - Strapi resource center.
-- [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.
-- [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.
-- [Strapi blog](https://strapi.io/blog) - Official Strapi blog containing articles made by the Strapi team and the community.
-- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.
+```bash
+pnpm dev
+```
 
-Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
+## Scripts
 
-## ✨ Community
+Run from the monorepo root via `--filter headless-cms`, or directly from this directory:
 
-- [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
-- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
-- [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
-
----
-
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
+| Script | Description |
+|---|---|
+| `pnpm dev` | Start Strapi with auto-reload enabled |
+| `pnpm start` | Start Strapi with auto-reload disabled (production-like) |
+| `pnpm build` | Build the Strapi admin panel |

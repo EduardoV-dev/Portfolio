@@ -9,4 +9,7 @@ WORKDIR /app
 COPY package.json ./
 RUN pnpm install
 
-CMD ["pnpm", "dev"]
+# Expose Astro's default dev port
+EXPOSE 4321
+
+CMD ["pnpm", "dev", "--host", "0.0.0.0"]

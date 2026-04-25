@@ -1,49 +1,73 @@
 services:
-  strapi:
-    build:
-      context: ./apps/headless-cms
-      dockerfile: Dockerfile.dev
-    restart: unless-stopped
-    env_file: ./apps/headless-cms/.env
-    environment:
-      DATABASE_CLIENT: postgres
-      DATABASE_HOST: postgres
-      DATABASE_PORT: 5432
-      DATABASE_NAME: ${POSTGRES_DB:-strapi}
-      DATABASE_USERNAME: ${POSTGRES_USER:-strapi}
-      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-strapi}
-      # Uncomment if file watching doesn't trigger on your host (common on Windows/macOS):
-      # CHOKIDAR_USEPOLLING: "true"
-    ports:
-      - "1337:1337"
-    volumes:
-      # Mount source for hot reload
-      - ./apps/headless-cms:/app
-      # Named volumes so container's node_modules/dist are not overwritten by the bind mount
-      - strapi_node_modules:/app/node_modules
-      - strapi_dist:/app/dist
-    depends_on:
-      postgres:
-        condition: service_healthy
+    web:
+        build:
+            context: ./apps/web
+            dockerfile: Dockerfile.dev
+        restart: unless-stopped
+        env_file:
+            - path: ./apps/web/.env
+        ports:
+            - "4321:4321"
+        volumes:
+            # Mount source for hot reload
+            - ./apps/web:/app
+            # Named volume so container's node_modules are not overwritten by the bind mount
+            - web_node_modules:/app/node_modules
+        depends_on:
+            - headless-cms
 
-  postgres:
-    image: postgres:16-alpine
-    restart: unless-stopped
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB:-strapi}
-      POSTGRES_USER: ${POSTGRES_USER:-strapi}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-strapi}
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-strapi} -d ${POSTGRES_DB:-strapi}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    headless-cms:
+        build:
+            context: ./apps/headless-cms
+            dockerfile: Dockerfile.dev
+        restart: unless-stopped
+        env_file: ./apps/headless-cms/.env
+        environment:
+            DATABASE_HOST: postgres
+            DATABASE_PORT: "5432"
+            DATABASE_NAME: portfolio
+            DATABASE_USERNAME: portfolio
+            DATABASE_PASSWORD: portfolio
+            DATABASE_CLIENT: postgres
+            DATABASE_SSL: "false"
+            # Uncomment if file watching doesn't trigger on your host (common on Windows/macOS):
+            # CHOKIDAR_USEPOLLING: "true"
+        ports:
+            - "1337:1337"
+        volumes:
+            # Mount source for hot reload
+            - ./apps/headless-cms:/app
+            # Named volumes so container's node_modules/dist are not overwritten by the bind mount
+            - headless-cms_node_modules:/app/node_modules
+            - headless-cms_dist:/app/dist
+        depends_on:
+            postgres:
+                condition: service_healthy
+
+    postgres:
+        image: postgres:16-alpine
+        restart: unless-stopped
+        environment:
+            POSTGRES_DB: portfolio
+            POSTGRES_USER: portfolio
+            POSTGRES_PASSWORD: portfolio
+        ports:
+            - "5432:5432"
+
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        healthcheck:
+            test:
+                [
+                    "CMD-SHELL",
+                    "pg_isready -U portfolio -d portfolio",
+                ]
+            interval: 10s
+            timeout: 5s
+            retries: 5
 
 volumes:
-  strapi_node_modules:
-  strapi_dist:
-  postgres_data:
+    web_node_modules:
+    headless-cms_node_modules:
+    headless-cms_dist:
+    postgres_data:

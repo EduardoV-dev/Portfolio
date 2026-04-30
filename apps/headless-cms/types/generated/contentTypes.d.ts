@@ -501,6 +501,7 @@ export interface ApiProjectDetailProjectDetail
     draftAndPublish: true;
   };
   attributes: {
+    architecture: Schema.Attribute.Component<'project.architecture', false>;
     challenge: Schema.Attribute.Text & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -549,6 +550,10 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text & Schema.Attribute.Required;
+    detail: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::project-detail.project-detail'
+    >;
     images: Schema.Attribute.Media<'images' | 'files', true> &
       Schema.Attribute.Required;
     impact: Schema.Attribute.String & Schema.Attribute.Required;
@@ -637,6 +642,10 @@ export interface ApiTechnologyTechnology extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    category: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::technology-category.technology-category'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

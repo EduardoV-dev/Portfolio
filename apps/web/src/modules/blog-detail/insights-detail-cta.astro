@@ -1,10 +1,14 @@
+---
+import { APP_ROUTES } from "@/constants/routes";
+---
+
 <section class="idc" aria-labelledby="idc-heading">
     <div class="idc__inner" data-animate>
         <p class="idc__eyebrow">ENJOYED THIS?</p>
         <h2 class="idc__heading" id="idc-heading">
             Let's talk about how to apply it to your project.
         </h2>
-        <a href="/contact" class="idc__btn">Start a Conversation</a>
+        <a href={APP_ROUTES.CONTACT} class="idc__btn">Start a Conversation</a>
     </div>
 </section>
 

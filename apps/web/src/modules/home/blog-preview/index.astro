@@ -1,5 +1,6 @@
 ---
 import { posts, formatPostDate } from "@/data/posts";
+import { APP_ROUTES } from "@/constants/routes";
 
 const previewPosts = posts.slice(0, 3);
 
@@ -30,7 +31,7 @@ const categoryLabels: Record<string, string> = {
                     Writing on system design, performance, and engineering practice.
                 </p>
             </div>
-            <a href="/blog" class="bp__cta-link" data-animate data-animate-delay="3">
+            <a href={APP_ROUTES.BLOG.ROOT} class="bp__cta-link" data-animate data-animate-delay="3">
                 View all posts <span aria-hidden="true">→</span>
             </a>
         </header>
@@ -40,7 +41,7 @@ const categoryLabels: Record<string, string> = {
                 previewPosts.map((post, i) => (
                     <li class="bp__card" data-animate data-animate-delay={i + 1}>
                         <a
-                            href={`/blog/${post.slug}`}
+                            href={APP_ROUTES.BLOG.DETAIL(post.slug)}
                             class="bp__card-link"
                             tabindex="-1"
                             aria-hidden="true"
@@ -54,7 +55,7 @@ const categoryLabels: Record<string, string> = {
                             </span>
                         </div>
                         <h3 class="bp__card-title">
-                            <a href={`/blog/${post.slug}`} class="bp__card-title-link">
+                            <a href={APP_ROUTES.BLOG.DETAIL(post.slug)} class="bp__card-title-link">
                                 {post.title}
                             </a>
                         </h3>
@@ -74,7 +75,7 @@ const categoryLabels: Record<string, string> = {
         </ul>
 
         <div class="bp__cta-mobile">
-            <a href="/blog" class="bp__cta-link">
+            <a href={APP_ROUTES.BLOG.ROOT} class="bp__cta-link">
                 View all posts <span aria-hidden="true">→</span>
             </a>
         </div>

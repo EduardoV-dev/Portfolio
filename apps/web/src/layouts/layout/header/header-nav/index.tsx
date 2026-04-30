@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { routes } from "@/constants/routes";
+import { HEADER_NAV_ITEMS } from "@/constants/routes";
 import styles from "./index.module.css";
 
 interface HeaderNavProps {
@@ -10,7 +10,7 @@ export default function HeaderNav({ currentPath }: HeaderNavProps) {
     return (
         <nav className={styles.nav} aria-label="Main navigation">
             <ul className={styles["nav__list"]}>
-                {routes.map(({ label, href }) => (
+                {HEADER_NAV_ITEMS.map(({ label, href }) => (
                     <li key={href}>
                         <a
                             href={href}

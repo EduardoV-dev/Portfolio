@@ -2,6 +2,7 @@
 import Layout from "@/layouts/layout/index.astro";
 import InsightsDetail from "@/modules/blog-detail/index.astro";
 import { getPostBySlug, getAllSlugs, getAdjacentPosts, formatPostDate } from "@/data/posts";
+import { APP_ROUTES } from "@/constants/routes";
 
 export function getStaticPaths() {
     return getAllSlugs().map((slug) => ({ params: { slug } }));
@@ -11,7 +12,7 @@ const { slug } = Astro.params;
 const post = getPostBySlug(slug);
 
 if (!post) {
-    return Astro.redirect("/blog");
+    return Astro.redirect(APP_ROUTES.BLOG.ROOT);
 }
 
 const adjacent = getAdjacentPosts(slug);

@@ -1,3 +1,7 @@
+---
+import { APP_ROUTES } from "@/constants/routes";
+---
+
 <section class="ic" aria-labelledby="ic-heading">
     <div class="ic__inner" data-animate>
         <div class="ic__content">
@@ -6,7 +10,7 @@
             </h2>
             <p class="ic__sub">Let's build scalable systems together.</p>
         </div>
-        <a href="/contact" class="ic__btn">Get in Touch</a>
+        <a href={APP_ROUTES.CONTACT} class="ic__btn">Get in Touch</a>
     </div>
 </section>
 

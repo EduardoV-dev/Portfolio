@@ -29,6 +29,11 @@
       "type": "text",
       "required": true
     },
+    "architecture": {
+      "type": "component",
+      "component": "project.architecture",
+      "repeatable": false
+    },
     "highlights": {
       "type": "component",
       "component": "project.highlight",

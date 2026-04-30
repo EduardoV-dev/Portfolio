@@ -59,6 +59,11 @@
       "target": "api::tag.tag",
       "inversedBy": "projects"
     },
+    "detail": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::project-detail.project-detail"
+    },
     "isFeatured": {
       "type": "boolean"
     }

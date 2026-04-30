@@ -1,18 +1,20 @@
 ---
 import Layout from "@/layouts/layout/index.astro";
 import CaseStudyDetail from "@/modules/case-study-detail/index.astro";
-import { getProjectBySlug, getAllSlugs } from "@/data/projects";
+import { APP_ROUTES } from "@/constants/routes";
+import { projectServices } from "@/api/projects";
 
-export function getStaticPaths() {
-    return getAllSlugs().map((slug) => ({ params: { slug } }));
+export async function getStaticPaths() {
+    const projectSlugs: string[] = await projectServices.findAllSlugsOnly();
+    return projectSlugs.map((slug) => ({ params: { slug } }));
 }
 
 const { slug } = Astro.params;
-const project = getProjectBySlug(slug);
+const project = await projectServices.findBySlug(slug);
 
 // Shouldn't happen with getStaticPaths, but guard for type safety
 if (!project) {
-    return Astro.redirect("/case-studies");
+    return Astro.redirect(APP_ROUTES.CASE_STUDIES.ROOT);
 }
 
 const pageTitle = `${project.title} – Case Study – Eduardo Varela`;

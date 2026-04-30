@@ -1,0 +1,247 @@
+---
+import type { Project } from "@/types/strapi";
+import { APP_ROUTES } from "@/constants/routes";
+
+export interface Props {
+    project: Project;
+}
+
+const { project } = Astro.props;
+const { detail } = project;
+---
+
+<section class="csd-hero" aria-label="Project overview">
+    <a href={APP_ROUTES.CASE_STUDIES.ROOT} class="csd-hero__back" aria-label="Back to case studies">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="13"
+            height="13"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+        >
+            <path d="M19 12H5M12 5l-7 7 7 7"></path>
+        </svg>
+        All Case Studies
+    </a>
+
+    <div class="csd-hero__tags">
+        {project.tags.map((tag) => <span class="csd-tag">{tag}</span>)}
+    </div>
+
+    <h1 class="csd-hero__title" data-animate>{project.title}</h1>
+    <p class="csd-hero__impact" data-animate data-animate-delay="1">{project.impact}</p>
+    <p class="csd-hero__desc" data-animate data-animate-delay="2">
+        {project.description}
+    </p>
+
+    <!-- Key metrics -->
+    <div class="csd-hero__metrics" data-animate data-animate-delay="3">
+        {
+            detail.metrics.map((m) => (
+                <div class="csd-metric">
+                    <span class="csd-metric__value">{m.value}</span>
+                    <span class="csd-metric__label">{m.label}</span>
+                </div>
+            ))
+        }
+    </div>
+
+    <!-- Action links -->
+    <div class="csd-hero__actions" data-animate data-animate-delay="4">
+        <a href={project.sourceHref} class="csd-hero__action-link">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+            >
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            Source Code
+        </a>
+        <a href={project.liveHref} class="csd-hero__action-link">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+            >
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+            Live Project
+        </a>
+    </div>
+</section>
+
+<style>
+    @import "../../../styles/mixins.css";
+
+    .csd-hero {
+        padding-bottom: 3rem;
+    }
+
+    .csd-hero__back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        margin-bottom: 1.75rem;
+        transition: color var(--transition-fast);
+    }
+
+    .csd-hero__back:hover {
+        color: var(--color-text-primary);
+    }
+
+    /* Hide back link on desktop — nav handles it */
+    @mixin desktop-up {
+        .csd-hero__back {
+            display: none;
+        }
+    }
+
+    .csd-hero__tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .csd-tag {
+        display: inline-block;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.2rem 0.55rem;
+        border-radius: 0.3rem;
+        border: 1px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
+        background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+        color: var(--color-accent);
+    }
+
+    .csd-hero__title {
+        font-size: clamp(2rem, 6vw, 3.25rem);
+        font-weight: 780;
+        letter-spacing: -0.04em;
+        line-height: 1.05;
+        color: var(--color-text-primary);
+        margin-bottom: 0.85rem;
+        text-wrap: balance;
+    }
+
+    .csd-hero__impact {
+        font-size: clamp(0.95rem, 2vw, 1.05rem);
+        font-weight: 500;
+        color: var(--color-accent);
+        line-height: 1.55;
+        margin-bottom: 0.65rem;
+    }
+
+    .csd-hero__desc {
+        font-size: 0.95rem;
+        color: var(--color-text-secondary);
+        line-height: 1.7;
+        max-width: 60ch;
+        margin-bottom: 2rem;
+    }
+
+    /* Metrics bar */
+    .csd-hero__metrics {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1px;
+        background: var(--color-border);
+        border: 1px solid var(--color-border);
+        border-radius: 0.75rem;
+        overflow: hidden;
+        margin-bottom: 1.75rem;
+    }
+
+    @mixin tablet-up {
+        .csd-hero__metrics {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    .csd-metric {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        padding: 1.25rem 1.5rem;
+        background: var(--color-surface);
+    }
+
+    .csd-metric__value {
+        font-size: clamp(1.3rem, 3vw, 1.65rem);
+        font-weight: 760;
+        letter-spacing: -0.03em;
+        color: var(--color-text-primary);
+        line-height: 1;
+    }
+
+    .csd-metric__label {
+        font-size: 0.72rem;
+        font-weight: 500;
+        color: var(--color-text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        line-height: 1.4;
+    }
+
+    /* Action links */
+    .csd-hero__actions {
+        display: flex;
+        gap: 1.25rem;
+        flex-wrap: wrap;
+    }
+
+    .csd-hero__action-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: color var(--transition-fast);
+        touch-action: manipulation;
+    }
+
+    .csd-hero__action-link:hover {
+        color: var(--color-text-primary);
+    }
+
+    .csd-hero__action-link:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 3px;
+        border-radius: 2px;
+    }
+</style>

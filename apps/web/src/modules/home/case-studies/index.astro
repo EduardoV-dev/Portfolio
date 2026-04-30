@@ -1,9 +1,9 @@
 ---
 import CaseStudyCard from "@/components/case-study-card/index.astro";
 import { projectServices } from "@/api/projects";
+import { APP_ROUTES } from "@/constants/routes";
 
 const caseStudies = await projectServices.findOnlyTwo();
-console.log("Case studies fetched for homepage:", JSON.stringify(caseStudies, null, 4));
 ---
 
 <section class="cs-section" aria-labelledby="cs-heading">
@@ -14,7 +14,7 @@ console.log("Case studies fetched for homepage:", JSON.stringify(caseStudies, nu
                 <p class="cs-section__label">PORTFOLIO</p>
                 <h2 class="cs-section__heading" id="cs-heading">Selected Case Studies</h2>
             </div>
-            <a href="/case-studies" class="cs-section__view-all">
+            <a href={APP_ROUTES.CASE_STUDIES.ROOT} class="cs-section__view-all">
                 View all projects <span aria-hidden="true">&#x2197;</span>
             </a>
         </div>

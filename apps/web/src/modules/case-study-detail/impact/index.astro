@@ -1,0 +1,93 @@
+---
+import type { ProjectDetail } from "@/types/strapi";
+
+export interface Props {
+    impactDetails: ProjectDetail["impactDetails"];
+}
+
+const { impactDetails } = Astro.props;
+---
+
+<section class="csd-section" id="impact" data-animate aria-labelledby="impact-heading">
+    <p class="csd-section__label">06</p>
+    <h2 class="csd-section__heading" id="impact-heading">Impact</h2>
+
+    <ul class="csd-impact-list" role="list">
+        {
+            impactDetails.map((item) => (
+                <li class="csd-impact-item">
+                    <svg
+                        class="csd-impact-item__icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="15"
+                        height="15"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                        <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                    {item}
+                </li>
+            ))
+        }
+    </ul>
+</section>
+
+<style>
+    @import "../../../styles/mixins.css";
+
+    .csd-section {
+        padding-block: 3rem;
+        border-bottom: 1px solid var(--color-border);
+        scroll-margin-top: calc(var(--header-height, 68px) + 1.5rem);
+    }
+
+    .csd-section__label {
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 0.6rem;
+        opacity: 0.7;
+    }
+
+    .csd-section__heading {
+        font-size: clamp(1.35rem, 3.5vw, 1.75rem);
+        font-weight: 740;
+        letter-spacing: -0.035em;
+        line-height: 1.15;
+        color: var(--color-text-primary);
+        margin-bottom: 1.5rem;
+    }
+
+    .csd-impact-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .csd-impact-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        font-size: 0.95rem;
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+    }
+
+    .csd-impact-item__icon {
+        color: var(--color-accent);
+        flex-shrink: 0;
+        margin-top: 0.2rem;
+    }
+</style>

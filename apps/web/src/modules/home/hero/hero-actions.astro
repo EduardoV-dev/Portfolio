@@ -1,9 +1,13 @@
+---
+import { APP_ROUTES } from "@/constants/routes";
+---
+
 <div class="hero-actions">
-    <a href="/case-studies" class="hero-btn hero-btn--primary">
+    <a href={APP_ROUTES.CASE_STUDIES.ROOT} class="hero-btn hero-btn--primary">
         <span>View Case Studies</span>
         <span aria-hidden="true">&rarr;</span>
     </a>
-    <a href="/contact" class="hero-btn hero-btn--secondary">
+    <a href={APP_ROUTES.CONTACT} class="hero-btn hero-btn--secondary">
         <span>Let's Build Something</span>
     </a>
 </div>

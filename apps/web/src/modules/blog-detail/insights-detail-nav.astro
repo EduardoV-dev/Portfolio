@@ -1,5 +1,6 @@
 ---
 import { type Post, formatPostDate } from "@/data/posts";
+import { APP_ROUTES } from "@/constants/routes";
 
 interface Props {
     prev: Post | null;
@@ -16,7 +17,7 @@ const { prev, next } = Astro.props;
         <div class="idn__links">
             {
                 prev ? (
-                    <a href={`/blog/${prev.slug}`} class="idn__link idn__link--prev">
+                    <a href={APP_ROUTES.BLOG.DETAIL(prev.slug)} class="idn__link idn__link--prev">
                         <span class="idn__link-dir">← Previous</span>
                         <span class="idn__link-title">{prev.title}</span>
                         <span class="idn__link-meta">{formatPostDate(prev.date)}</span>
@@ -26,11 +27,11 @@ const { prev, next } = Astro.props;
                 )
             }
 
-            <a href="/blog" class="idn__back-list">All Articles</a>
+            <a href={APP_ROUTES.BLOG.ROOT} class="idn__back-list">All Articles</a>
 
             {
                 next ? (
-                    <a href={`/blog/${next.slug}`} class="idn__link idn__link--next">
+                    <a href={APP_ROUTES.BLOG.DETAIL(next.slug)} class="idn__link idn__link--next">
                         <span class="idn__link-dir">Next →</span>
                         <span class="idn__link-title">{next.title}</span>
                         <span class="idn__link-meta">{formatPostDate(next.date)}</span>

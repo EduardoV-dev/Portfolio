@@ -1,5 +1,9 @@
 ---
-import { footerCapabilitiesLinks, footerConnectLinks, routes } from "@/constants/routes";
+import {
+    FOOTER_CAPABILITIES_LINKS,
+    FOOTER_CONNECT_LINKS,
+    HEADER_NAV_ITEMS,
+} from "@/constants/routes";
 
 interface FooterLink {
     label: string;
@@ -16,15 +20,15 @@ interface FooterNavColumn {
 const footerNavColumns: FooterNavColumn[] = [
     {
         heading: "Navigation",
-        links: routes,
+        links: HEADER_NAV_ITEMS,
     },
     {
         heading: "Capabilities",
-        links: footerCapabilitiesLinks,
+        links: FOOTER_CAPABILITIES_LINKS,
     },
     {
         heading: "Connect",
-        links: footerConnectLinks.map((link) => ({
+        links: FOOTER_CONNECT_LINKS.map((link) => ({
             ...link,
             accent: link.label === "Schedule a Call",
             external: link.href.startsWith("http"),

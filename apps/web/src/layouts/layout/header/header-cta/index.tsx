@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { APP_ROUTES } from "@/constants/routes";
 import styles from "./index.module.css";
 
 interface HeaderCtaProps {
@@ -11,7 +12,7 @@ export default function HeaderCta({ className = "", id, mobile = false }: Header
     const classes = clsx(styles["cta-btn"], mobile && styles["cta-btn--mobile"], className);
 
     return (
-        <a href="/contact" className={classes} id={id}>
+        <a href={APP_ROUTES.CONTACT} className={classes} id={id}>
             SCHEDULE A CALL
         </a>
     );

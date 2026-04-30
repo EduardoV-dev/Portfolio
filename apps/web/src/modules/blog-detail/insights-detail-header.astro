@@ -1,5 +1,6 @@
 ---
 import { type Post } from "@/data/posts";
+import { APP_ROUTES } from "@/constants/routes";
 
 interface Props {
     post: Post;
@@ -11,7 +12,7 @@ const { post, displayDate } = Astro.props;
 
 <header class="idh" aria-labelledby="idh-heading">
     <div class="idh__inner">
-        <a href="/blog" class="idh__back">
+        <a href={APP_ROUTES.BLOG.ROOT} class="idh__back">
             <span aria-hidden="true">←</span> Back to Blog
         </a>
 

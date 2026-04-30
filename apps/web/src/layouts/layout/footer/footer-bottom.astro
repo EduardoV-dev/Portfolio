@@ -1,12 +1,14 @@
 ---
+import { APP_ROUTES } from "@/constants/routes";
+
 const year = new Date().getFullYear();
 ---
 
 <div class="footer-bottom">
     <div class="footer-bottom__inner">
         <div class="footer-bottom__legal">
-            <a href="/privacy-policy" class="footer-bottom__link">Privacy Policy</a>
-            <a href="/terms-of-use" class="footer-bottom__link">Terms of Use</a>
+            <a href={APP_ROUTES.PRIVACY_POLICY} class="footer-bottom__link">Privacy Policy</a>
+            <a href={APP_ROUTES.TERMS_OF_USE} class="footer-bottom__link">Terms of Use</a>
         </div>
 
         <p class="footer-bottom__copy">

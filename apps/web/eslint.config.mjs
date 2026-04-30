@@ -44,6 +44,8 @@ export default [
             "react/react-in-jsx-scope": "off",
             "react/prop-types": "off",
             "jsx-a11y/control-has-associated-label": "off",
+            "no-console": ["error", { allow: ["warn", "error"] }],
+            "max-lines": ["error", { max: 500, skipBlankLines: false, skipComments: false }],
         },
     },
     ...astroPlugin.configs["flat/recommended"],
@@ -62,6 +64,8 @@ export default [
         rules: {
             "astro/no-set-html-directive": "error",
             "astro/no-unused-css-selector": "warn",
+            "no-console": ["error", { allow: ["warn", "error"] }],
+            "max-lines": ["error", { max: 500, skipBlankLines: false, skipComments: false }],
         },
     },
 ];

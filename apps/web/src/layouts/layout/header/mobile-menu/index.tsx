@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { routes } from "@/constants/routes";
+import { HEADER_NAV_ITEMS } from "@/constants/routes";
 import { useChatStore } from "@/store/chat";
 import AiButton from "../ai-button";
 import HeaderCta from "../header-cta";
@@ -58,7 +58,7 @@ export default function MobileMenu({ currentPath, isOpen, onClose }: MobileMenuP
 
                 <nav className={styles["mobile-nav"]} aria-label="Mobile navigation">
                     <ul className={styles["mobile-nav__list"]}>
-                        {routes.map(({ label, href }) => (
+                        {HEADER_NAV_ITEMS.map(({ label, href }) => (
                             <li
                                 key={href}
                                 className={clsx(styles["mobile-nav__item"], {

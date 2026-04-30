@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/layout/index.astro";
+import { APP_ROUTES } from "@/constants/routes";
 ---
 
 <Layout
@@ -31,11 +32,14 @@ import Layout from "@/layouts/layout/index.astro";
             </p>
 
             <div class="not-found__actions">
-                <a href="/" class="not-found__btn not-found__btn--primary">
+                <a href={APP_ROUTES.HOME} class="not-found__btn not-found__btn--primary">
                     <span aria-hidden="true">←</span>
                     <span>Back to Home</span>
                 </a>
-                <a href="/case-studies" class="not-found__btn not-found__btn--secondary">
+                <a
+                    href={APP_ROUTES.CASE_STUDIES.ROOT}
+                    class="not-found__btn not-found__btn--secondary"
+                >
                     <span>View My Work</span>
                     <span aria-hidden="true">→</span>
                 </a>

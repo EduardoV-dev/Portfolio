@@ -4,18 +4,24 @@
   "info": {
     "singularName": "project",
     "pluralName": "projects",
-    "displayName": "Projects"
+    "displayName": "Project"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "isFeatured": {
-      "type": "boolean"
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
     },
     "title": {
       "type": "string",
+      "required": true
+    },
+    "bullets": {
+      "type": "json",
       "required": true
     },
     "impact": {
@@ -24,10 +30,6 @@
     },
     "description": {
       "type": "text",
-      "required": true
-    },
-    "href": {
-      "type": "string",
       "required": true
     },
     "sourceHref": {
@@ -44,6 +46,21 @@
         "images",
         "files"
       ]
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::project-category.project-category",
+      "mappedBy": "projects"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "projects"
+    },
+    "isFeatured": {
+      "type": "boolean"
     }
   }
 }

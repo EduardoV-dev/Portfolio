@@ -430,12 +430,13 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiProjectProject extends Struct.CollectionTypeSchema {
-  collectionName: 'projects';
+export interface ApiArchitectureComponentArchitectureComponent
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'architecture_components';
   info: {
-    displayName: 'Projects';
-    pluralName: 'projects';
-    singularName: 'project';
+    displayName: 'Architecture Component';
+    pluralName: 'architecture-components';
+    singularName: 'architecture-component';
   };
   options: {
     draftAndPublish: true;
@@ -444,8 +445,110 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::architecture-component.architecture-component'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiProjectCategoryProjectCategory
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'project_categories';
+  info: {
+    displayName: 'Project Category';
+    pluralName: 'project-categories';
+    singularName: 'project-category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::project-category.project-category'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    projects: Schema.Attribute.Relation<'manyToMany', 'api::project.project'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiProjectDetailProjectDetail
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'project_details';
+  info: {
+    displayName: 'Project Detail';
+    pluralName: 'project-details';
+    singularName: 'project-detail';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    challenge: Schema.Attribute.Text & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    highlights: Schema.Attribute.Component<'project.highlight', true>;
+    impactDetails: Schema.Attribute.JSON & Schema.Attribute.Required;
+    learnings: Schema.Attribute.JSON & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::project-detail.project-detail'
+    > &
+      Schema.Attribute.Private;
+    metrics: Schema.Attribute.Component<'project.metric', true> &
+      Schema.Attribute.Required;
+    overview: Schema.Attribute.Text & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    solution: Schema.Attribute.Text & Schema.Attribute.Required;
+    technologies: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::technology.technology'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiProjectProject extends Struct.CollectionTypeSchema {
+  collectionName: 'projects';
+  info: {
+    displayName: 'Project';
+    pluralName: 'projects';
+    singularName: 'project';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    bullets: Schema.Attribute.JSON & Schema.Attribute.Required;
+    categories: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::project-category.project-category'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
     description: Schema.Attribute.Text & Schema.Attribute.Required;
-    href: Schema.Attribute.String & Schema.Attribute.Required;
     images: Schema.Attribute.Media<'images' | 'files', true> &
       Schema.Attribute.Required;
     impact: Schema.Attribute.String & Schema.Attribute.Required;
@@ -458,7 +561,9 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     sourceHref: Schema.Attribute.String;
+    tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -482,6 +587,36 @@ export interface ApiTagTag extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::tag.tag'> &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    projects: Schema.Attribute.Relation<'manyToMany', 'api::project.project'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTechnologyCategoryTechnologyCategory
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'technology_categories';
+  info: {
+    displayName: 'Technology Category';
+    pluralName: 'technology-categories';
+    singularName: 'technology-category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::technology-category.technology-category'
+    > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
@@ -1030,8 +1165,12 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::architecture-component.architecture-component': ApiArchitectureComponentArchitectureComponent;
+      'api::project-category.project-category': ApiProjectCategoryProjectCategory;
+      'api::project-detail.project-detail': ApiProjectDetailProjectDetail;
       'api::project.project': ApiProjectProject;
       'api::tag.tag': ApiTagTag;
+      'api::technology-category.technology-category': ApiTechnologyCategoryTechnologyCategory;
       'api::technology.technology': ApiTechnologyTechnology;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

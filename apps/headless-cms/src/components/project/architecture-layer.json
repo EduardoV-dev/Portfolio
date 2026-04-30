@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_project_architecture_layers",
+  "info": {
+    "displayName": "architecture-layer"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "components": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::architecture-component.architecture-component"
+    }
+  },
+  "config": {}
+}

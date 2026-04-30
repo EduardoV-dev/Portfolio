@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_project_highlights",
+  "info": {
+    "displayName": "highlight"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "code": {
+      "type": "component",
+      "component": "project.highlight-code",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

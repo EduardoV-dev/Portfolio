@@ -1,39 +1,35 @@
 ---
+import { ENVS } from "@/constants/environment-variables";
+import type { Project } from "@/types/strapi";
+
 export interface Props {
-    title: string;
-    impact?: string;
-    description: string;
-    tags: string[];
-    bullets: string[];
-    tech: string[];
-    href?: string;
-    sourceHref?: string;
-    liveHref?: string;
-    image?: string;
+    caseStudy: Project;
     [key: string]: unknown;
 }
 
+const { caseStudy, ...rest } = Astro.props;
 const {
+    slug = "",
     title,
     impact,
     description,
-    tags,
     bullets,
-    href = "#",
     sourceHref = "#",
     liveHref = "#",
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    tech: _tech,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    image: _image,
-    ...rest
-} = Astro.props;
+    images,
+    tags,
+} = caseStudy;
 ---
 
 <article class="csc-card" {...rest}>
     <!-- Image placeholder -->
     <div class="csc-card__image" aria-hidden="true">
-        <div class="csc-card__image-inner"></div>
+        <div class="csc-card__image-inner">
+            <img
+                src={`${ENVS.PUBLIC_STRAPI_API_URL.replace("/api", "")}${images[0]?.url}`}
+                alt={images[0]?.alternativeText || ""}
+            />
+        </div>
         <div class="csc-card__image-overlay"></div>
     </div>
 
@@ -41,7 +37,7 @@ const {
     <div class="csc-card__body">
         <!-- Tech tags -->
         <div class="csc-card__tags">
-            {tags.map((tag) => <span class="csc-card__tag">{tag}</span>)}
+            {tags.map((tag) => <span class="csc-card__tag">{tag.name}</span>)}
         </div>
 
         <!-- Title -->
@@ -132,7 +128,11 @@ const {
                 LIVE PROJECT
             </a>
         </div>
-        <a href={href} class="csc-card__details-link" aria-label={`Case study details: ${title}`}>
+        <a
+            href={`/case-study/${slug}`}
+            class="csc-card__details-link"
+            aria-label={`Case study details: ${title}`}
+        >
             Case Study Details
             <svg
                 xmlns="http://www.w3.org/2000/svg"

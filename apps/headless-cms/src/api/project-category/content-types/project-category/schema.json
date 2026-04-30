@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "tags",
+  "collectionName": "project_categories",
   "info": {
-    "singularName": "tag",
-    "pluralName": "tags",
-    "displayName": "Tags"
+    "singularName": "project-category",
+    "pluralName": "project-categories",
+    "displayName": "Project Category"
   },
   "options": {
     "draftAndPublish": true
@@ -19,7 +19,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::project.project",
-      "mappedBy": "tags"
+      "inversedBy": "categories"
     }
   }
 }

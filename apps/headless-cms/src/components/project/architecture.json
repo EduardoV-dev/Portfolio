@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_project_architectures",
+  "info": {
+    "displayName": "architecture"
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "layers": {
+      "type": "component",
+      "component": "project.architecture-layer",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

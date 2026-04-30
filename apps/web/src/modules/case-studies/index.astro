@@ -1,10 +1,12 @@
 ---
+import { projectServices } from "@/api/projects";
 import CaseStudyCard from "@/components/case-study-card/index.astro";
 import FeaturedProjectCard from "@/components/featured-project-card/index.astro";
-import { projects } from "@/data/projects";
 
-const featuredProject = projects[0];
-const gridProjects = projects.slice(1);
+const projects = await projectServices.findAll();
+
+const featuredProject = projects.find((project) => project.isFeatured);
+const gridProjects = projects.filter((project) => !project.isFeatured);
 ---
 
 <section class="csw-section" aria-labelledby="csw-heading">
@@ -22,13 +24,13 @@ const gridProjects = projects.slice(1);
             </p>
         </header>
 
-        <!-- Featured project -->
-        <div data-animate data-animate-delay="1">
-            <FeaturedProjectCard
-                {...featuredProject}
-                href={`/case-studies/${featuredProject.slug}`}
-            />
-        </div>
+        {
+            featuredProject && (
+                <div data-animate data-animate-delay="1">
+                    <FeaturedProjectCard caseStudy={featuredProject} />
+                </div>
+            )
+        }
 
         <!-- Filter bar -->
         <div class="csw-section__filters" role="group" aria-label="Filter projects by category">
@@ -50,11 +52,11 @@ const gridProjects = projects.slice(1);
             {
                 gridProjects.map((project, i) => (
                     <CaseStudyCard
-                        {...project}
+                        caseStudy={project}
                         href={`/case-studies/${project.slug}`}
                         data-animate
                         data-animate-delay={String(i + 2)}
-                        data-category={project.category}
+                        data-category={project.category.name}
                     />
                 ))
             }

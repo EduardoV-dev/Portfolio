@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "architecture_components",
+  "info": {
+    "singularName": "architecture-component",
+    "pluralName": "architecture-components",
+    "displayName": "Architecture Component"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

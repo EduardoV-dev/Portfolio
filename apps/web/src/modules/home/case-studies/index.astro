@@ -1,36 +1,9 @@
 ---
 import CaseStudyCard from "@/components/case-study-card/index.astro";
+import { projectServices } from "@/api/projects";
 
-const caseStudies = [
-    {
-        title: "Marketing Platform – Now Optics",
-        description:
-            "Built scalable marketing websites and APIs using React, Next.js, and Node.js. Optimized performance, accessibility, and deployment pipelines using AWS infrastructure.",
-        tags: ["E-COMMERCE", "SAAS"],
-        bullets: [
-            "40% performance improvement across marketing properties.",
-            "Production-ready AWS infrastructure with automated CI/CD pipeline.",
-        ],
-        tech: ["React", "Next.js", "Node.js", "AWS", "CI/CD"],
-        href: "/case-studies",
-        sourceHref: "#",
-        liveHref: "#",
-    },
-    {
-        title: "Real-Time Analytics Dashboard",
-        description:
-            "Architected a real-time analytics dashboard processing thousands of events per second. Built with WebSocket-driven updates, D3.js visualizations, and a distributed Node.js backend.",
-        tags: ["ANALYTICS", "INTERNAL TOOLS"],
-        bullets: [
-            "Sub-100ms data latency with 99.9% uptime SLA.",
-            "Reduced analyst report generation time by 60%.",
-        ],
-        tech: ["Node.js", "D3.js", "WebSockets", "PostgreSQL", "Docker"],
-        href: "/case-studies",
-        sourceHref: "#",
-        liveHref: "#",
-    },
-];
+const caseStudies = await projectServices.findOnlyTwo();
+console.log("Case studies fetched for homepage:", JSON.stringify(caseStudies, null, 4));
 ---
 
 <section class="cs-section" aria-labelledby="cs-heading">
@@ -50,7 +23,11 @@ const caseStudies = [
         <div class="cs-section__grid">
             {
                 caseStudies.map((study, i) => (
-                    <CaseStudyCard {...study} data-animate data-animate-delay={String(i + 1)} />
+                    <CaseStudyCard
+                        caseStudy={study}
+                        data-animate
+                        data-animate-delay={String(i + 1)}
+                    />
                 ))
             }
         </div>

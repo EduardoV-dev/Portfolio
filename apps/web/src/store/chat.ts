@@ -11,20 +11,22 @@ export interface Message {
 const INITIAL_MESSAGE: Message = {
     id: "init",
     role: "assistant",
-    text: "I'm Eduardo's AI assistant. Ask me about his technical experience, projects, or how he approaches system design.",
+    text: "I'm Eduardo's AI assistant. Ask me about his experience, projects, or how he approaches building digital products.",
 };
 
 const RESPONSES: Record<string, string> = {
     "what aws services have you used in production":
-        "Eduardo has production experience with Lambda, EKS (Kubernetes), S3, CloudFront, RDS, SQS, SNS, and Terraform for IaC. He's worked on migrations from monolithic apps to serverless architectures, contributing to 40% reductions in operational costs.",
+        "Eduardo has production experience with EC2, App Runner, Lambda, S3, CloudFront, Route 53, RDS, API Gateway, IAM, and CodeBuild. He's partnered with DevOps teams on deployment workflows to maintain reliable releases and stable website performance.",
     "what's the most complex system you've built":
-        "One notable project was the full marketing platform for Now Optics, a nationwide optical retail chain. Eduardo built the entire system using React, Next.js, and Node.js, including high-traffic landing pages, A/B testing infrastructure, and a CI/CD pipeline on AWS that cut deploy times by 60%.",
+        "One standout project was architecting a tailored headless CMS at Now Optics to streamline content operations for the Marketing team. Eduardo led the design and planning, collaborating with stakeholders and engineers to align technical direction, implementation priorities, and usability requirements.",
     "how do you approach system design":
-        "Eduardo starts with the business constraint (scale, cost, or latency) and works backward into the architecture. He favors event-driven patterns for async workloads, cloud-native services over custom infrastructure, and instruments observability from day one rather than as a retrofit.",
+        "Eduardo starts with the business or product constraint, conversion goals, content flexibility, performance budgets, and works backward into the architecture. He bridges engineering, product, and marketing teams to ensure technical decisions map directly to user needs and business outcomes.",
+    "what tech stack do you use":
+        "Eduardo's core stack is React, Next.js, Svelte, and Astro on the frontend; Node.js, Express, NestJS, and Go on the backend; PostgreSQL, MySQL, and MongoDB for data; and AWS (EC2, Lambda, S3, CloudFront, RDS) for infrastructure. He also works with GraphQL, gRPC, Docker, Jest, and Cypress.",
 };
 
 const FALLBACK_RESPONSE =
-    "Eduardo has broad experience across full-stack development, cloud infrastructure, and system design. Feel free to ask about a specific project, technology, or how he works.";
+    "Eduardo has broad experience across full-stack development, cloud infrastructure, and product-focused engineering. Feel free to ask about a specific project, technology, or how he works.";
 
 export function getSimulatedResponse(input: string): string {
     const key = input.trim().toLowerCase().replace(/^"|"$/g, "");
@@ -39,7 +41,7 @@ export function getSimulatedResponse(input: string): string {
 export const DEFAULT_PROMPTS = [
     "What AWS services have you used in production?",
     "What's the most complex system you've built?",
-    "How do you approach system design?",
+    "What tech stack do you use?",
 ];
 
 interface ChatState {

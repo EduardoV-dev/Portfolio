@@ -4,6 +4,9 @@ dist/
 # generated types
 .astro/
 
+# astro check temp files
+*.astro.tsx
+
 # dependencies
 node_modules/
 

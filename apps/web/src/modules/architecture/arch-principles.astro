@@ -6,25 +6,25 @@ const principles = [
         iconName: "scalability" as const,
         title: "Scalability First",
         description:
-            "Systems designed to grow with demand, horizontally and vertically, without requiring fundamental rework as traffic and data scale.",
+            "Systems designed to grow with demand, both horizontally and vertically, without requiring fundamental rework as traffic and data volumes increase.",
     },
     {
         iconName: "resilience" as const,
         title: "Resilience & Reliability",
         description:
-            "Built to handle failures gracefully. Redundancy, circuit breakers, and graceful degradation keep services running so they degrade gracefully instead of cascading.",
+            "Built to handle failures without panic. Redundancy, circuit breakers, and graceful degradation keep services running instead of letting a single failure cascade.",
     },
     {
         iconName: "performance" as const,
         title: "Performance-Oriented",
         description:
-            "Optimized at every layer: query efficiency, cache hit rates, payload size, and infrastructure right-sizing, to deliver fast, efficient systems.",
+            "Optimized at every layer: query efficiency, cache hit rates, payload sizes, and infrastructure right-sizing. The goal is fast, predictable performance under real load.",
     },
     {
         iconName: "maintainability" as const,
         title: "Maintainability",
         description:
-            "Clear module boundaries, defined contracts, and consistent patterns ensure systems can evolve cleanly for years without accruing design debt.",
+            "Clear module boundaries, defined contracts, and consistent patterns ensure systems can evolve cleanly for years without accumulating design debt.",
     },
 ];
 ---
@@ -44,7 +44,7 @@ const principles = [
                 How I Approach System Design
             </h2>
             <p class="arch-principles__subtext" data-animate data-animate-delay="3">
-                These are the lenses I apply to every system decision; trade-offs are always
+                These are the lenses I apply to every system decision. Trade-offs are always
                 explicit, never hidden.
             </p>
         </header>

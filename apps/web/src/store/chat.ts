@@ -11,20 +11,20 @@ export interface Message {
 const INITIAL_MESSAGE: Message = {
     id: "init",
     role: "assistant",
-    text: "I'm Eduardo's AI assistant. Ask me about his technical experience, projects, or architecture decisions.",
+    text: "I'm Eduardo's AI assistant. Ask me about his technical experience, projects, or how he approaches system design.",
 };
 
 const RESPONSES: Record<string, string> = {
-    "explain your aws experience":
-        "The engineer has 5+ years of experience with AWS, focusing on EKS (Kubernetes), Lambda, and Terraform for Infrastructure as Code. They have led migrations of monolithic apps to serverless architectures, reducing operational costs by 40%.",
-    "tell me about now optics project":
-        "Now Optics is a nationwide optical retail chain. The engineer built their full marketing platform using React, Next.js, and Node.js — including high-traffic landing pages, A/B testing infrastructure, and a CI/CD pipeline on AWS that reduced deploy times by 60%.",
-    "what backend stacks have you used?":
-        "The engineer has worked extensively with Node.js (Express, Fastify), Go, and PostgreSQL. They've built REST and GraphQL APIs, event-driven systems with AWS SQS/SNS, and real-time features with WebSockets.",
+    "what aws services have you used in production":
+        "Eduardo has production experience with Lambda, EKS (Kubernetes), S3, CloudFront, RDS, SQS, SNS, and Terraform for IaC. He's worked on migrations from monolithic apps to serverless architectures, contributing to 40% reductions in operational costs.",
+    "what's the most complex system you've built":
+        "One notable project was the full marketing platform for Now Optics, a nationwide optical retail chain. Eduardo built the entire system using React, Next.js, and Node.js, including high-traffic landing pages, A/B testing infrastructure, and a CI/CD pipeline on AWS that cut deploy times by 60%.",
+    "how do you approach system design":
+        "Eduardo starts with the business constraint (scale, cost, or latency) and works backward into the architecture. He favors event-driven patterns for async workloads, cloud-native services over custom infrastructure, and instruments observability from day one rather than as a retrofit.",
 };
 
 const FALLBACK_RESPONSE =
-    "The engineer has broad experience across full-stack development, cloud infrastructure, and system design. Feel free to ask about a specific project or technology.";
+    "Eduardo has broad experience across full-stack development, cloud infrastructure, and system design. Feel free to ask about a specific project, technology, or how he works.";
 
 export function getSimulatedResponse(input: string): string {
     const key = input.trim().toLowerCase().replace(/^"|"$/g, "");
@@ -37,9 +37,9 @@ export function getSimulatedResponse(input: string): string {
 }
 
 export const DEFAULT_PROMPTS = [
-    "Explain your AWS experience",
-    "Tell me about Now Optics project",
-    "What backend stacks have you used?",
+    "What AWS services have you used in production?",
+    "What's the most complex system you've built?",
+    "How do you approach system design?",
 ];
 
 interface ChatState {

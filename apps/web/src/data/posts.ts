@@ -22,7 +22,7 @@ export const posts: Post[] = [
         slug: "scalable-api-design",
         title: "How I Design Scalable APIs",
         description:
-            "A practical look at the principles and patterns I rely on when designing APIs that need to grow with a product — from contract-first thinking to versioning strategies.",
+            "A practical look at the principles and patterns I rely on when designing APIs that need to grow with a product, from contract-first thinking to versioning strategies.",
         date: "2025-03-15",
         readingTime: 8,
         tags: ["API Design", "Backend", "TypeScript", "REST"],
@@ -31,7 +31,7 @@ export const posts: Post[] = [
         body: [
             {
                 type: "paragraph",
-                text: "Most API problems I've encountered in production weren't caused by bad code — they were caused by missing contracts. Teams shipped fast, endpoints proliferated, and six months later no one was sure which fields were still in use or whether removing a property would break a mobile app in the wild.",
+                text: "Most API problems I've encountered in production weren't caused by bad code; they were caused by missing contracts. Teams shipped fast, endpoints proliferated, and six months later no one was sure which fields were still in use or whether removing a property would break a mobile app in the wild.",
             },
             {
                 type: "paragraph",
@@ -44,7 +44,7 @@ export const posts: Post[] = [
             },
             {
                 type: "paragraph",
-                text: "Before writing a single route handler, I define the shape of every request and response in TypeScript. This isn't just type safety — it's a forcing function. It forces you to think about what data the consumer actually needs, not what the database happens to store.",
+                text: "Before writing a single route handler, I define the shape of every request and response in TypeScript. This isn't just type safety; it's a forcing function. It forces you to think about what data the consumer actually needs, not what the database happens to store.",
             },
             {
                 type: "code",
@@ -81,7 +81,7 @@ async function createOrder(
             },
             {
                 type: "paragraph",
-                text: "I always include a version prefix in the URL — even on the first release. Not because I expect to need v2 immediately, but because it's trivially cheap to do upfront and extremely expensive to retrofit. `/api/v1/orders` costs nothing. Migrating ten clients away from `/api/orders` costs weeks.",
+                text: "I always include a version prefix in the URL, even on the first release. Not because I expect to need v2 immediately, but because it's trivially cheap to do upfront and extremely expensive to retrofit. `/api/v1/orders` costs nothing. Migrating ten clients away from `/api/orders` costs weeks.",
             },
             {
                 type: "heading",
@@ -91,11 +91,11 @@ async function createOrder(
             {
                 type: "list",
                 items: [
-                    "Pagination is not optional — any collection endpoint that could return more than 20 items gets cursor-based pagination from day one.",
-                    "Errors are data — return structured error bodies with a machine-readable code, a human-readable message, and a request ID for tracing.",
-                    "Idempotency keys for mutations — any operation that charges money, sends a notification, or creates a resource should accept an idempotency key.",
-                    "Never break the contract — add fields freely, but never remove or rename them in a minor version. Use a deprecation period.",
-                    "Document the unhappy paths — the 200 response is obvious. Document every 4xx and 5xx with examples.",
+                    "Pagination is not optional: any collection endpoint that could return more than 20 items gets cursor-based pagination from day one.",
+                    "Errors are data: return structured error bodies with a machine-readable code, a human-readable message, and a request ID for tracing.",
+                    "Idempotency keys for mutations: any operation that charges money, sends a notification, or creates a resource should accept an idempotency key.",
+                    "Never break the contract: add fields freely, but never remove or rename them in a minor version. Use a deprecation period.",
+                    "Document the unhappy paths: the 200 response is obvious. Document every 4xx and 5xx with examples.",
                 ],
             },
             {
@@ -121,7 +121,7 @@ async function createOrder(
             },
             {
                 type: "paragraph",
-                text: "Here's what I've learned from the moments where things went wrong — and sometimes from the near-misses that almost did.",
+                text: "Here's what I've learned from the moments where things went wrong, and sometimes from the near-misses that almost did.",
             },
             {
                 type: "heading",
@@ -130,15 +130,15 @@ async function createOrder(
             },
             {
                 type: "paragraph",
-                text: "The first time a production incident wakes you up at 2 AM and you have no structured logs, no trace IDs, and no metrics — you will never skip observability again. It's not a nice-to-have. It's the difference between a 15-minute fix and a 3-hour guessing game.",
+                text: "The first time a production incident wakes you up at 2 AM and you have no structured logs, no trace IDs, and no metrics. You will never skip observability again. It's not a nice-to-have. It's the difference between a 15-minute fix and a 3-hour guessing game.",
             },
             {
                 type: "list",
                 items: [
-                    "Structured logs with a consistent schema — every log line includes service name, request ID, and severity.",
-                    "Distributed tracing across service boundaries — a single trace ID propagated through every hop.",
-                    "Business-level metrics, not just infrastructure — track order completions and checkout errors, not just CPU utilization.",
-                    "Alerts on symptoms, not causes — page on 'error rate > 1%' rather than 'CPU > 80%'.",
+                    "Structured logs with a consistent schema: every log line includes service name, request ID, and severity.",
+                    "Distributed tracing across service boundaries: a single trace ID propagated through every hop.",
+                    "Business-level metrics, not just infrastructure: track order completions and checkout errors, not just CPU utilization.",
+                    "Alerts on symptoms, not causes: page on 'error rate > 1%' rather than 'CPU > 80%'.",
                 ],
             },
             {
@@ -148,7 +148,7 @@ async function createOrder(
             },
             {
                 type: "paragraph",
-                text: "Every external call will eventually fail. Every database will occasionally be slow. Every third-party service will have an outage. The question isn't whether these things will happen — it's whether your system degrades gracefully or collapses.",
+                text: "Every external call will eventually fail. Every database will occasionally be slow. Every third-party service will have an outage. The question isn't whether these things will happen; it's whether your system degrades gracefully or collapses.",
             },
             {
                 type: "code",
@@ -190,7 +190,7 @@ class CircuitBreaker {
         slug: "nodejs-performance",
         title: "Optimizing Performance in Node.js Applications",
         description:
-            "Node.js performance pitfalls are often subtle. This covers the patterns I've used to diagnose and fix bottlenecks — from event loop blockage to memory leaks under load.",
+            "Node.js performance pitfalls are often subtle. This covers the patterns I've used to diagnose and fix bottlenecks, from event loop blockage to memory leaks under load.",
         date: "2025-01-10",
         readingTime: 7,
         tags: ["Node.js", "Performance", "Optimization", "Backend"],
@@ -211,7 +211,7 @@ class CircuitBreaker {
             },
             {
                 type: "paragraph",
-                text: "Synchronous operations on large datasets are the most common offender. JSON.parse on a 2MB payload, a deep recursive function, or a synchronous file read — all of these park the event loop while they run, starving every concurrent request of CPU time.",
+                text: "Synchronous operations on large datasets are the most common offender. JSON.parse on a 2MB payload, a deep recursive function, or a synchronous file read; all of these park the event loop while they run, starving every concurrent request of CPU time.",
             },
             {
                 type: "code",
@@ -255,12 +255,12 @@ app.get("/report", async (req, res) => {
             {
                 type: "list",
                 items: [
-                    "Use streaming for large payloads — pipe responses instead of buffering entire bodies in memory.",
-                    "Cache aggressively at the right layer — in-process LRU caches for hot data, Redis for shared state.",
-                    "Batch database queries — N+1 query patterns are as expensive in Node.js as anywhere else.",
-                    "Pool your connections — database and HTTP connection pools prevent handshake overhead on every request.",
-                    "Set and tune timeouts — every outbound call needs a timeout; unbounded waits cause cascading slowdowns.",
-                    "Profile memory under load — the V8 heap profiler will catch memory leaks that only appear at scale.",
+                    "Use streaming for large payloads: pipe responses instead of buffering entire bodies in memory.",
+                    "Cache aggressively at the right layer: in-process LRU caches for hot data, Redis for shared state.",
+                    "Batch database queries: N+1 query patterns are as expensive in Node.js as anywhere else.",
+                    "Pool your connections: database and HTTP connection pools prevent handshake overhead on every request.",
+                    "Set and tune timeouts: every outbound call needs a timeout; unbounded waits cause cascading slowdowns.",
+                    "Profile memory under load: the V8 heap profiler will catch memory leaks that only appear at scale.",
                 ],
             },
         ],
@@ -277,7 +277,7 @@ app.get("/report", async (req, res) => {
         body: [
             {
                 type: "paragraph",
-                text: "I've built systems as monoliths and I've worked on systems that started as microservices. The honest answer to 'which is better' is: it depends on things most architecture articles don't talk about — your team size, your deployment maturity, and how well-understood your domain boundaries actually are.",
+                text: "I've built systems as monoliths and I've worked on systems that started as microservices. The honest answer to 'which is better' is: it depends on things most architecture articles don't talk about: your team size, your deployment maturity, and how well-understood your domain boundaries actually are.",
             },
             {
                 type: "heading",
@@ -286,7 +286,7 @@ app.get("/report", async (req, res) => {
             },
             {
                 type: "paragraph",
-                text: "In the early stages of a product, your understanding of the domain is incomplete. The boundaries that seem obvious at the start — user service, order service, payment service — often turn out to be wrong once you've shipped real features. Splitting prematurely locks in bad boundaries that become expensive to cross.",
+                text: "In the early stages of a product, your understanding of the domain is incomplete. The boundaries that seem obvious at the start (user service, order service, payment service) often turn out to be wrong once you've shipped real features. Splitting prematurely locks in bad boundaries that become expensive to cross.",
             },
             {
                 type: "quote",
@@ -295,7 +295,7 @@ app.get("/report", async (req, res) => {
             },
             {
                 type: "paragraph",
-                text: "A well-structured monolith with clear internal module boundaries is not a step backward. It's a system that can be extracted into services once you genuinely understand the seams — instead of guessing at them.",
+                text: "A well-structured monolith with clear internal module boundaries is not a step backward. It's a system that can be extracted into services once you genuinely understand the seams, rather than guessing at them.",
             },
             {
                 type: "heading",
@@ -309,10 +309,10 @@ app.get("/report", async (req, res) => {
             {
                 type: "list",
                 items: [
-                    "Teams larger than 8-10 engineers working on the same codebase consistently — Conway's Law will create the split anyway.",
-                    "Wildly different scaling requirements — a checkout flow and a reporting service don't need to scale together.",
-                    "Independent release cadences — if the marketing team's A/B tests block the payments team's deploys, that's a structural problem.",
-                    "Compliance or security isolation — some data genuinely needs to live behind stricter boundaries.",
+                    "Teams larger than 8-10 engineers working on the same codebase consistently: Conway's Law will create the split anyway.",
+                    "Wildly different scaling requirements: a checkout flow and a reporting service don't need to scale together.",
+                    "Independent release cadences: if the marketing team's A/B tests block the payments team's deploys, that's a structural problem.",
+                    "Compliance or security isolation: some data genuinely needs to live behind stricter boundaries.",
                 ],
             },
             {
@@ -330,7 +330,7 @@ app.get("/report", async (req, res) => {
         slug: "scale-from-day-one",
         title: "Designing Systems for Scale from Day One",
         description:
-            "Scalability isn't about premature optimization — it's about avoiding architectural decisions that become impossible to undo. Here are the patterns I build into every system from the start.",
+            "Scalability isn't about premature optimization; it's about avoiding architectural decisions that become impossible to undo. Here are the patterns I build into every system from the start.",
         date: "2024-11-18",
         readingTime: 6,
         tags: ["Cloud", "AWS", "Scalability", "Infrastructure"],
@@ -338,7 +338,7 @@ app.get("/report", async (req, res) => {
         body: [
             {
                 type: "paragraph",
-                text: "There's a reasonable instinct to avoid 'premature optimization' — and most of the time, it's correct. But there's a difference between optimizing prematurely and making architectural decisions that are cheap now but catastrophically expensive to undo later.",
+                text: "There's a reasonable instinct to avoid 'premature optimization', and most of the time, it's correct. But there's a difference between optimizing prematurely and making architectural decisions that are cheap now but catastrophically expensive to undo later.",
             },
             {
                 type: "paragraph",
@@ -351,7 +351,7 @@ app.get("/report", async (req, res) => {
             },
             {
                 type: "paragraph",
-                text: "If a service stores state in memory — user sessions, in-flight request context, local caches that aren't synchronized — you've created a dependency on a specific instance. Horizontal scaling becomes complicated. Deployments become risky. The fix is to externalize all state from day one.",
+                text: "If a service stores state in memory (user sessions, in-flight request context, local caches that aren't synchronized) you've created a dependency on a specific instance. Horizontal scaling becomes complicated. Deployments become risky. The fix is to externalize all state from day one.",
             },
             {
                 type: "code",
@@ -381,7 +381,7 @@ export const handler = async (event: APIGatewayEvent) => {
             },
             {
                 type: "paragraph",
-                text: "Any operation that doesn't need to complete before the HTTP response is returned should be asynchronous. Sending a confirmation email, updating analytics, triggering downstream workflows — none of these belong in the critical path of a request. An event-driven approach here costs almost nothing to implement early and saves enormous headaches later.",
+                text: "Any operation that doesn't need to complete before the HTTP response is returned should be asynchronous. Sending a confirmation email, updating analytics, triggering downstream workflows: none of these belong in the critical path of a request. An event-driven approach here costs almost nothing to implement early and saves enormous headaches later.",
             },
             {
                 type: "heading",

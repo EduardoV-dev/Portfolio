@@ -16,11 +16,11 @@ export default function AiAssistantSection() {
                     {/* Left column */}
                     <div className={styles.left}>
                         <h2 className={styles.heading} id="ai-heading">
-                            Meet My AI Assistant
+                            Ask Me Anything
                         </h2>
                         <p className={styles.description}>
-                            Ask about my experience, architecture decisions, or tech stack. This
-                            assistant is trained on my real project work.
+                            Short on time? Ask directly about my stack, past systems, or how I work.
+                            Trained on my real project history.
                         </p>
 
                         {/* External suggested prompts — desktop only */}

@@ -11,7 +11,7 @@
                 Example System Design
             </h2>
             <p class="arch-diagram__subtext" data-animate data-animate-delay="3">
-                A reference architecture showing a production-grade request path — from client to
+                A reference architecture showing a production-grade request path, from client to
                 data layer.
             </p>
         </header>
@@ -226,15 +226,20 @@
         padding-inline: 1rem;
     }
 
+    .arch-diagram__header {
+        margin-bottom: 3rem;
+    }
+
     @mixin tablet-up {
         .arch-diagram__inner {
             padding-inline: 1.5rem;
         }
-    }
-
-    /* ── Section header ── */
-    .arch-diagram__header {
-        margin-bottom: 3rem;
+        .arch-diagram__canvas {
+            padding: 3rem 2.5rem;
+        }
+        .arch-diagram__row {
+            gap: 1.25rem;
+        }
     }
 
     @mixin desktop-up {
@@ -270,7 +275,6 @@
         max-width: 48rem;
     }
 
-    /* ── Canvas ── */
     .arch-diagram__canvas {
         position: relative;
         border: 1px solid var(--color-border);
@@ -295,12 +299,6 @@
         overflow: hidden;
     }
 
-    @mixin tablet-up {
-        .arch-diagram__canvas {
-            padding: 3rem 2.5rem;
-        }
-    }
-
     .arch-diagram__glow {
         position: absolute;
         top: 30%;
@@ -318,33 +316,25 @@
         filter: blur(24px);
     }
 
-    /* ── Rows ── */
     .arch-diagram__row {
         position: relative;
         z-index: 1;
         display: flex;
         justify-content: center;
         gap: 0.75rem;
+        animation: row-in 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-
-    @mixin tablet-up {
-        .arch-diagram__row {
-            gap: 1.25rem;
-        }
-    }
-
-    /* Row staggered fade-in */
     .arch-diagram__row--0 {
-        animation: row-in 480ms cubic-bezier(0.22, 1, 0.36, 1) both 200ms;
+        animation-delay: 200ms;
     }
     .arch-diagram__row--1 {
-        animation: row-in 480ms cubic-bezier(0.22, 1, 0.36, 1) both 380ms;
+        animation-delay: 380ms;
     }
     .arch-diagram__row--2 {
-        animation: row-in 480ms cubic-bezier(0.22, 1, 0.36, 1) both 540ms;
+        animation-delay: 540ms;
     }
     .arch-diagram__row--3 {
-        animation: row-in 480ms cubic-bezier(0.22, 1, 0.36, 1) both 700ms;
+        animation-delay: 700ms;
     }
 
     @keyframes row-in {
@@ -358,15 +348,21 @@
         }
     }
 
-    /* ── Connectors ── */
     .arch-diagram__connector {
-        position: relative;
-        z-index: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 0;
         padding-block: 0.1rem;
+        animation: row-in 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .arch-diagram__connector--0 {
+        animation-delay: 300ms;
+    }
+    .arch-diagram__connector--1 {
+        animation-delay: 460ms;
+    }
+    .arch-diagram__connector--2 {
+        animation-delay: 620ms;
     }
 
     .arch-diagram__connector-line {
@@ -403,18 +399,6 @@
         margin-top: 0.35rem;
     }
 
-    /* Connectors fade in after rows */
-    .arch-diagram__connector--0 {
-        animation: row-in 380ms cubic-bezier(0.22, 1, 0.36, 1) both 300ms;
-    }
-    .arch-diagram__connector--1 {
-        animation: row-in 380ms cubic-bezier(0.22, 1, 0.36, 1) both 460ms;
-    }
-    .arch-diagram__connector--2 {
-        animation: row-in 380ms cubic-bezier(0.22, 1, 0.36, 1) both 620ms;
-    }
-
-    /* ── Nodes ── */
     .arch-diagram__node {
         display: flex;
         flex-direction: column;
@@ -425,8 +409,6 @@
         background: var(--color-bg-elevated);
         border: 1px solid var(--color-border);
         border-radius: 0.75rem;
-        cursor: default;
-        touch-action: manipulation;
         transition:
             border-color var(--transition-fast),
             box-shadow var(--transition-fast),
@@ -439,6 +421,12 @@
             min-width: 7rem;
             border-radius: 0.85rem;
         }
+        .arch-diagram__node-icon svg {
+            width: 1.25rem;
+        }
+        .arch-diagram__node-label {
+            font-size: 0.75rem;
+        }
     }
 
     .arch-diagram__node:hover {
@@ -447,7 +435,6 @@
         transform: translateY(-2px);
     }
 
-    /* Accent treatment for key nodes */
     .arch-diagram__node--gateway,
     .arch-diagram__node--client {
         border-color: color-mix(in srgb, var(--color-accent) 22%, transparent);
@@ -474,14 +461,6 @@
 
     .arch-diagram__node-icon svg {
         width: 1.1rem;
-        height: 1.1rem;
-    }
-
-    @mixin tablet-up {
-        .arch-diagram__node-icon svg {
-            width: 1.25rem;
-            height: 1.25rem;
-        }
     }
 
     .arch-diagram__node--client .arch-diagram__node-icon,
@@ -498,12 +477,6 @@
         white-space: nowrap;
     }
 
-    @mixin tablet-up {
-        .arch-diagram__node-label {
-            font-size: 0.75rem;
-        }
-    }
-
     .arch-diagram__node--client .arch-diagram__node-label,
     .arch-diagram__node--gateway .arch-diagram__node-label {
         color: var(--color-text-primary);
@@ -512,16 +485,6 @@
     @media (prefers-reduced-motion: reduce) {
         .arch-diagram__row,
         .arch-diagram__connector {
-            animation: none;
-        }
-
-        .arch-diagram__row--0,
-        .arch-diagram__row--1,
-        .arch-diagram__row--2,
-        .arch-diagram__row--3,
-        .arch-diagram__connector--0,
-        .arch-diagram__connector--1,
-        .arch-diagram__connector--2 {
             animation: none;
         }
 

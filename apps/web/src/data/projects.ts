@@ -73,12 +73,12 @@ export const projects: Project[] = [
             overview:
                 "Neural Grid Orchestrator is a distributed event-processing platform built for real-time ingestion and routing of sensory telemetry from edge devices across geographically distributed clusters. It serves IoT platform operators and data engineering teams who need sub-100ms processing guarantees at scale without managing per-node infrastructure complexity. The system abstracts away node topology and exposes a unified event API, letting consumers subscribe to processed streams without concern for underlying cluster state.",
             challenge:
-                "The core challenge was processing 40M+ heterogeneous events per day across nodes with wildly different hardware profiles and network conditions — from high-bandwidth data-center nodes to constrained edge devices with intermittent connectivity. Existing message queue solutions introduced unacceptable fan-out latency once the node count exceeded 80. Additionally, partial node failures had to degrade gracefully without data loss, ruling out simple round-robin dispatch. The system also needed to be provisioned and torn down dynamically as cluster topology changed, with zero manual intervention.",
+                "The core challenge was processing 40M+ heterogeneous events per day across nodes with wildly different hardware profiles and network conditions, from high-bandwidth data-center nodes to constrained edge devices with intermittent connectivity. Existing message queue solutions introduced unacceptable fan-out latency once the node count exceeded 80. Additionally, partial node failures had to degrade gracefully without data loss, ruling out simple round-robin dispatch. The system also needed to be provisioned and torn down dynamically as cluster topology changed, with zero manual intervention.",
             solution:
                 "The solution uses a two-tier routing model: a lightweight edge agent on each node handles local buffering and heartbeats, while a central orchestration layer makes routing decisions based on real-time node health scores. Events are written to Redis Streams partitioned by region, consumed by Lambda workers that apply routing logic, and flushed to TimescaleDB for time-series querying. Dead-letter queues absorb failed deliveries and replay them automatically with exponential backoff. Terraform modules encode the entire cluster topology as code, so spinning up a new region is a single `apply` command.",
             architecture: {
                 description:
-                    "The system is split into four layers. The API layer handles inbound telemetry and outbound subscriptions. The services layer contains the orchestration logic — routing decisions, health scoring, and dead-letter replay. The data layer separates hot (Redis), warm (TimescaleDB), and cold (S3) storage tiers. Infrastructure is fully managed by Terraform with Lambda auto-scaling per region.",
+                    "The system is split into four layers. The API layer handles inbound telemetry and outbound subscriptions. The services layer contains the orchestration logic: routing decisions, health scoring, and dead-letter replay. The data layer separates hot (Redis), warm (TimescaleDB), and cold (S3) storage tiers. Infrastructure is fully managed by Terraform with Lambda auto-scaling per region.",
                 layers: [
                     {
                         name: "API Layer",
@@ -172,7 +172,7 @@ async function replayWithBackoff(event: DeadEvent): Promise<void> {
                 },
             ],
             impactDetails: [
-                "Reduced P99 event processing latency from 210ms to 126ms — a 40% improvement — without hardware changes.",
+                "Reduced P99 event processing latency from 210ms to 126ms (a 40% improvement) without hardware changes.",
                 "Eliminated manual deployment steps across 200+ Lambda functions via Terraform-managed CI/CD pipelines.",
                 "Achieved 99.97% uptime over 6 months in production, with zero data-loss incidents.",
                 "DLQ replay mechanism recovered 100% of events from 3 partial cluster outages.",
@@ -185,10 +185,10 @@ async function replayWithBackoff(event: DeadEvent): Promise<void> {
                 tools: ["GitHub Actions", "Docker", "Datadog", "Jest"],
             },
             learnings: [
-                "Consistent-hash routing solves the hot-node problem elegantly, but the health-weight layer on top required careful tuning — an overly aggressive penalty caused oscillation between nodes under bursty load.",
+                "Consistent-hash routing solves the hot-node problem elegantly, but the health-weight layer on top required careful tuning; an overly aggressive penalty caused oscillation between nodes under bursty load.",
                 "Terraform modules are powerful but the blast radius of a bad `apply` is large. Per-environment state isolation and mandatory plan reviews in CI prevented two near-misses.",
                 "Redis Streams as an event bus works well at this scale, but XREADGROUP consumer group rebalancing during Lambda cold starts introduced duplicate deliveries. Idempotency keys at the processor level were non-negotiable.",
-                "Observability should be designed before the first line of service code, not retrofitted. The CloudWatch alarms that caught the partial outages were built in week one — the ones added later were less precise.",
+                "Observability should be designed before the first line of service code, not retrofitted. The CloudWatch alarms that caught the partial outages were built in week one; the ones added later were less precise.",
             ],
         },
     },
@@ -217,7 +217,7 @@ async function replayWithBackoff(event: DeadEvent): Promise<void> {
             overview:
                 "Vortex Data Integrity is a cryptographic verification platform for financial transaction ledgers. It provides tamper-evident audit trails by chaining SHA-256 hashes across transaction records, making retroactive data manipulation detectable at any point in the chain. The platform serves fintech operators and compliance teams who need provable data lineage for regulatory audits without the complexity of a full blockchain solution.",
             challenge:
-                "The existing system stored 50TB of transaction records in a legacy relational schema with no integrity verification layer. Any actor with database access could silently modify historical records — a SOC2 and PCI-DSS audit risk. The migration had to preserve every record with cryptographic fidelity while the system remained live, handling 800+ transactions per second during business hours. A single missed or mismatched record would invalidate the entire audit chain.",
+                "The existing system stored 50TB of transaction records in a legacy relational schema with no integrity verification layer. Any actor with database access could silently modify historical records, a SOC2 and PCI-DSS audit risk. The migration had to preserve every record with cryptographic fidelity while the system remained live, handling 800+ transactions per second during business hours. A single missed or mismatched record would invalidate the entire audit chain.",
             solution:
                 "The migration used a dual-write strategy: for 72 hours, every new transaction was written to both the legacy system and the new vault, producing matching hash chains in parallel. A continuous reconciliation job compared checksums in batches of 10,000 records. Once reconciliation reached 100%, a blue-green cutover switched traffic to the vault in under 200ms. The hash chain algorithm computes each record's hash as `SHA-256(prevHash + recordPayload + timestamp)`, stored as an indexed column alongside the record.",
             architecture: {
@@ -312,7 +312,7 @@ async function reconcileBatch(offset: number, limit = 10_000) {
             impactDetails: [
                 "Completed 50TB historical data migration with zero minutes of downtime and no records lost or mismatched.",
                 "Cryptographic audit trail detected a simulated tampering test in under 2 seconds during compliance review.",
-                "SOC2 Type II audit passed on first attempt — chain integrity logs provided automatic evidence collection.",
+                "SOC2 Type II audit passed on first attempt; chain integrity logs provided automatic evidence collection.",
                 "Write throughput sustained at 800+ transactions/second under peak load with P99 latency under 45ms.",
                 "Redis chain-head caching eliminated 99% of sequential read queries on ledger append operations.",
             ],
@@ -323,7 +323,7 @@ async function reconcileBatch(offset: number, limit = 10_000) {
                 tools: ["GitHub Actions", "Docker", "Datadog", "Jest", "Playwright"],
             },
             learnings: [
-                "Dual-write migrations are reliable but operationally intensive — the reconciliation job consumed more engineering time than the vault itself. A shadow-read validation layer would have surfaced edge cases earlier.",
+                "Dual-write migrations are reliable but operationally intensive; the reconciliation job consumed more engineering time than the vault itself. A shadow-read validation layer would have surfaced edge cases earlier.",
                 "Row-level encryption in PostgreSQL via pgcrypto works well but adds ~8ms per encrypted read. Caching decrypted read-models in Redis recovered the latency for hot records.",
                 "SOC2 evidence collection is vastly easier when infrastructure emits structured, queryable logs from day one. Retrofitting CloudTrail log formats to match auditor expectations cost two weeks.",
                 "Redis distributed locks work, but contention under high write concurrency created a queue. A per-ledger lock key (rather than a global one) reduced contention by 94% and was the right granularity from the start.",
@@ -449,7 +449,7 @@ return 1`,
             ],
             impactDetails: [
                 "Client round-trip time for composed queries dropped from 320ms to under 80ms through parallel resolver execution.",
-                "API payload size reduced 65% — clients request exactly the fields they need, eliminating over-fetching.",
+                "API payload size reduced 65%; clients request exactly the fields they need, eliminating over-fetching.",
                 "Centralized rate limiting blocked 99.8% of abuse traffic that previously reached individual microservices.",
                 "Cache hit rate of 72% on read-heavy query types reduced upstream load by more than half during peak traffic.",
                 "18 independent API contracts unified behind one versioned schema, decoupling frontend and backend release cycles.",
@@ -460,9 +460,9 @@ return 1`,
                 tools: ["Datadog", "GitHub Actions", "Jest", "k6 (load testing)"],
             },
             learnings: [
-                "Schema stitching is powerful but fragile at startup — a single upstream service returning a malformed OpenAPI spec would crash the gateway. A validation-and-fallback layer at schema compilation time became essential.",
+                "Schema stitching is powerful but fragile at startup; a single upstream service returning a malformed OpenAPI spec would crash the gateway. A validation-and-fallback layer at schema compilation time became essential.",
                 "DataLoader is the correct pattern for N+1 query prevention inside GraphQL resolvers. Implementing it as an afterthought required refactoring 40% of resolvers. It should be the default from day one.",
-                "Circuit breakers need carefully tuned thresholds per service. A globally applied 5% error-rate threshold was too aggressive for a payment service that legitimately returns errors for invalid card inputs — leading to false trips.",
+                "Circuit breakers need carefully tuned thresholds per service. A globally applied 5% error-rate threshold was too aggressive for a payment service that legitimately returns errors for invalid card inputs, leading to false trips.",
                 "Load testing with k6 before launch surfaced a Redis connection pool exhaustion bug under 10k concurrent connections that never appeared in unit or integration tests. Production-like load tests are not optional.",
             ],
         },
@@ -595,14 +595,14 @@ function renderFrame() {
                 {
                     title: "Incremental BVH rebuild for moving bodies",
                     description:
-                        "Rebuilding the full BVH tree every frame is O(n log n). By tracking a dirty flag per body and only re-inserting moved nodes, the effective rebuild cost is proportional to moving body count — typically 5–15% of the scene — reducing broad-phase collision time by 74%.",
+                        "Rebuilding the full BVH tree every frame is O(n log n). By tracking a dirty flag per body and only re-inserting moved nodes, the effective rebuild cost is proportional to moving body count (typically 5–15% of the scene), reducing broad-phase collision time by 74%.",
                 },
             ],
             impactDetails: [
-                "Simulation throughput of 10,000 rigid bodies at 60fps achieved — 10× improvement over the JavaScript baseline.",
+                "Simulation throughput of 10,000 rigid bodies at 60fps achieved, a 10× improvement over the JavaScript baseline.",
                 "Performance delta vs native C++ desktop build measured at ≤3% across all benchmark scenes.",
-                "WASM binary size held to 180KB gzipped — fits in a single HTTP/2 frame, initializing in under 40ms on a mid-range device.",
-                "Main thread frame time reduced to <1ms — rendering is the bottleneck, not physics.",
+                "WASM binary size held to 180KB gzipped, fits in a single HTTP/2 frame, initializing in under 40ms on a mid-range device.",
+                "Main thread frame time reduced to <1ms; rendering is the bottleneck, not physics.",
                 "SharedArrayBuffer zero-copy eliminated 4.2ms of per-frame serialization overhead present in the postMessage prototype.",
             ],
             techStack: {
@@ -613,9 +613,9 @@ function renderFrame() {
             },
             learnings: [
                 "SoA layout is essential for SIMD, but it complicates single-body access patterns (deleting a body requires updating 6 arrays). An index-based tombstone scheme avoided the O(n) compaction cost.",
-                "SharedArrayBuffer requires `Cross-Origin-Opener-Policy: same-origin` and `Cross-Origin-Embedder-Policy: require-corp` headers. Missing these in staging caused a confusing silent failure — both headers should be validated in CI.",
+                "SharedArrayBuffer requires `Cross-Origin-Opener-Policy: same-origin` and `Cross-Origin-Embedder-Policy: require-corp` headers. Missing these in staging caused a confusing silent failure; both headers should be validated in CI.",
                 "WASM memory growth (calling `memory.grow`) causes a GC pause in V8 of ~2ms. Pre-allocating a fixed arena at initialization with a bump allocator eliminated all mid-simulation growth pauses.",
-                "`wasm-opt` level 3 reduced binary size by 42% and improved throughput by ~8% — it should always be part of the release build pipeline, not optional.",
+                "`wasm-opt` level 3 reduced binary size by 42% and improved throughput by ~8%; it should always be part of the release build pipeline, not optional.",
             ],
         },
     },

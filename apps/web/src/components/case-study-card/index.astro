@@ -27,7 +27,7 @@ const {
     <div class="csc-card__image" aria-hidden="true">
         <div class="csc-card__image-inner">
             <img
-                src={`${ENVS.PUBLIC_STRAPI_API_URL.replace("/api", "")}${images[0]?.url}`}
+                src={`${ENVS.STRAPI_API_URL.replace("/api", "")}${images[0]?.url}`}
                 alt={images[0]?.alternativeText || ""}
             />
         </div>

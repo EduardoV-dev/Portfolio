@@ -16,16 +16,16 @@ export default function AiAssistantSection() {
                     {/* Left column */}
                     <div className={styles.left}>
                         <h2 className={styles.heading} id="ai-heading">
-                            Ask Me Anything
+                            AI Assistant — Coming Soon
                         </h2>
                         <p className={styles.description}>
-                            Short on time? Ask directly about my stack, past systems, or how I work.
-                            Trained on my real project history.
+                            LLM integration is on the roadmap. Soon you&apos;ll be able to ask
+                            directly about my stack, past systems, and how I work.
                         </p>
 
                         {/* External suggested prompts — desktop only */}
                         <div className={styles.externalPrompts}>
-                            <p className={styles.externalPromptsLabel}>SUGGESTED PROMPTS</p>
+                            <p className={styles.externalPromptsLabel}>COMING SOON</p>
                             <div className={styles.externalPromptsList}>
                                 {DEFAULT_PROMPTS.map((prompt) => (
                                     <button
@@ -33,6 +33,7 @@ export default function AiAssistantSection() {
                                         className={styles.externalPromptBtn}
                                         onClick={() => handlePromptClick(prompt)}
                                         type="button"
+                                        disabled
                                     >
                                         {prompt}
                                     </button>

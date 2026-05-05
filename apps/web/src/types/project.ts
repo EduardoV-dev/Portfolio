@@ -1,20 +1,6 @@
 import type { ArchitectureLayer } from "./architecture";
+import type { Image, ProjectCategory, Tag } from "./common";
 import type { Technology } from "./technology";
-
-// TODO: Move to another file
-interface Tag extends StrapiEntity {
-    name: string;
-}
-
-interface ProjectCategory extends StrapiEntity {
-    name: string;
-}
-
-// TODO: Move to another file
-interface Image extends StrapiEntity {
-    url: string;
-    alternativeText: string;
-}
 
 interface ProjectMetric {
     label: string;

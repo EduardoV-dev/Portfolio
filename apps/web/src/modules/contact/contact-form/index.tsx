@@ -1,18 +1,7 @@
-import { useState, useEffect, useRef } from "react";
-import styles from "./contact-form.module.css";
+import { useState, useRef } from "react";
+import styles from "./index.module.css";
 
 const WEB3FORMS_ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY;
-const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
-
-// Extend window with grecaptcha global
-declare global {
-    interface Window {
-        grecaptcha: {
-            ready: (cb: () => void) => void;
-            execute: (siteKey: string, options: { action: string }) => Promise<string>;
-        };
-    }
-}
 
 interface FormState {
     name: string;
@@ -44,36 +33,11 @@ function validate(form: FormState): FormErrors {
     return errors;
 }
 
-function loadRecaptcha() {
-    if (document.querySelector(`script[data-recaptcha]`)) return;
-    const script = document.createElement("script");
-    script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
-    script.async = true;
-    script.dataset.recaptcha = "true";
-    document.head.appendChild(script);
-}
-
-function getRecaptchaToken(): Promise<string> {
-    return new Promise((resolve, reject) => {
-        window.grecaptcha.ready(() => {
-            window.grecaptcha
-                .execute(RECAPTCHA_SITE_KEY, { action: "contact" })
-                .then(resolve)
-                .catch(reject);
-        });
-    });
-}
-
 export default function ContactForm({ onClose }: ContactFormProps) {
     const [form, setForm] = useState<FormState>({ name: "", email: "", message: "" });
     const [errors, setErrors] = useState<FormErrors>({});
     const [status, setStatus] = useState<SubmitStatus>("idle");
     const formRef = useRef<HTMLFormElement>(null);
-
-    // Load reCAPTCHA v3 script on mount
-    useEffect(() => {
-        loadRecaptcha();
-    }, []);
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         const { name, value } = e.target;
@@ -97,8 +61,6 @@ export default function ContactForm({ onClose }: ContactFormProps) {
 
         setStatus("submitting");
         try {
-            const recaptchaToken = await getRecaptchaToken();
-
             const res = await fetch("https://api.web3forms.com/submit", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", Accept: "application/json" },
@@ -108,7 +70,6 @@ export default function ContactForm({ onClose }: ContactFormProps) {
                     email: form.email,
                     message: form.message,
                     subject: `Portfolio contact from ${form.name}`,
-                    "g-recaptcha-response": recaptchaToken,
                 }),
             });
 
@@ -227,8 +188,7 @@ export default function ContactForm({ onClose }: ContactFormProps) {
 
             {status === "error" && (
                 <p className={styles["form__submit-error"]} role="alert">
-                    Something went wrong. Try emailing directly at{" "}
-                    <a href="mailto:eduardovarela139@gmail.com">eduardovarela139@gmail.com</a>.
+                    Something went wrong. Please try again or reach out via LinkedIn.
                 </p>
             )}
 
@@ -241,17 +201,6 @@ export default function ContactForm({ onClose }: ContactFormProps) {
                 >
                     {status === "submitting" ? "Sending…" : "Send Message"}
                 </button>
-                <p className={styles["form__recaptcha-notice"]}>
-                    Protected by{" "}
-                    <a
-                        href="https://policies.google.com/privacy"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        reCAPTCHA
-                    </a>
-                    .
-                </p>
             </div>
         </form>
     );

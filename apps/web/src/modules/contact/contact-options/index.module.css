@@ -1,4 +1,4 @@
-@import "../../styles/mixins.css";
+@import "../../../styles/mixins.css";
 
 /* ── Section ── */
 .co {
@@ -96,6 +96,38 @@
         0 0 0 1px color-mix(in srgb, var(--color-accent) 20%, transparent),
         0 16px 48px rgba(0, 0, 0, 0.5),
         0 0 48px color-mix(in srgb, var(--color-accent) 10%, transparent);
+}
+
+/* Calendly card active (scheduler open) */
+.co__card--calendly-active {
+    border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+    transform: none !important;
+}
+
+.co__card--calendly-active:hover {
+    transform: none;
+    border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+}
+
+/* Primary button open state */
+.co__card-btn--primary-open {
+    background: linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--color-accent) 18%, var(--color-surface)) 0%,
+        color-mix(in srgb, var(--color-accent) 10%, var(--color-surface)) 100%
+    );
+    color: var(--color-accent);
+    border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+    box-shadow: none;
+}
+
+.co__card-btn--primary-open:hover {
+    background: linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--color-accent) 22%, var(--color-surface)) 0%,
+        color-mix(in srgb, var(--color-accent) 14%, var(--color-surface)) 100%
+    );
+    box-shadow: none;
 }
 
 /* Email card active (form open) */
@@ -233,13 +265,25 @@
     box-shadow:
         0 8px 24px color-mix(in srgb, var(--color-accent) 25%, transparent),
         inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+    transition:
+        filter 150ms ease,
+        transform 150ms ease,
+        box-shadow 150ms ease;
 }
 
 .co__card-btn--primary:hover {
+    background: linear-gradient(
+        135deg,
+        var(--color-accent-hover) 0%,
+        var(--color-accent) 52%,
+        var(--color-accent-hover) 100%
+    );
+    border-color: transparent;
+    filter: brightness(1.12);
+    transform: translateY(-1px);
     box-shadow:
-        0 12px 32px color-mix(in srgb, var(--color-accent) 35%, transparent),
+        0 10px 28px color-mix(in srgb, var(--color-accent) 30%, transparent),
         inset 0 -1px 0 rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px);
 }
 
 /* "Write a Message" trigger button on email card */
@@ -391,6 +435,50 @@
     animation: panel-conceal 240ms cubic-bezier(0.4, 0, 1, 1) both;
 }
 
+.co__calendly-panel .co__form-panel-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 12%, transparent);
+    margin-bottom: 0;
+}
+
+@mixin tablet-up {
+    .co__calendly-panel .co__form-panel-header {
+        padding: 1.5rem 2rem;
+    }
+}
+
+/* ── Calendly panel ── */
+.co__calendly-panel {
+    margin-top: 1.5rem;
+    background: var(--color-surface);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
+    border-radius: 1rem;
+    overflow: hidden;
+    animation: panel-reveal 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.co__calendly-panel--closing {
+    animation: panel-conceal 240ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+.co__calendly-widget-wrap {
+    height: 600px;
+    border-radius: 0 0 1rem 1rem;
+    overflow: hidden;
+}
+
+@mixin tablet-up {
+    .co__calendly-widget-wrap {
+        height: 700px;
+    }
+}
+
+/* Calendly iframes load with a white bg by default — clip to our border-radius */
+.co__calendly-widget-wrap :global(.calendly-inline-widget) {
+    border-radius: 0 0 1rem 1rem;
+    overflow: hidden;
+}
+
 @media (prefers-reduced-motion: reduce) {
     .co__card,
     .co__card-btn,
@@ -403,6 +491,7 @@
     .co__card-btn:hover,
     .co__card-copy:hover {
         transform: none;
+        filter: none;
     }
 
     .co__form-panel {
@@ -410,6 +499,14 @@
     }
 
     .co__form-panel--closing {
+        animation: none;
+    }
+
+    .co__calendly-panel {
+        animation: none;
+    }
+
+    .co__calendly-panel--closing {
         animation: none;
     }
 

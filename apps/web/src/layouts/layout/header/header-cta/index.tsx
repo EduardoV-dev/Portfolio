@@ -12,7 +12,7 @@ export default function HeaderCta({ className = "", id, mobile = false }: Header
     const classes = clsx(styles["cta-btn"], mobile && styles["cta-btn--mobile"], className);
 
     return (
-        <a href={APP_ROUTES.CONTACT} className={classes} id={id}>
+        <a href={`${APP_ROUTES.CONTACT}#book-a-call`} className={classes} id={id}>
             SCHEDULE A CALL
         </a>
     );

@@ -11,7 +11,7 @@ export interface Message {
 const INITIAL_MESSAGE: Message = {
     id: "init",
     role: "assistant",
-    text: "I'm Eduardo's AI assistant. Ask me about his experience, projects, or how he approaches building digital products.",
+    text: "LLM integration is on the roadmap. Soon you'll be able to ask about Eduardo's experience, projects, and how he approaches building digital products.",
 };
 
 const RESPONSES: Record<string, string> = {

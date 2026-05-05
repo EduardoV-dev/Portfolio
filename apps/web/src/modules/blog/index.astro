@@ -1,15 +1,62 @@
 ---
 import InsightsHero from "./insights-hero.astro";
-import InsightsFeatured from "./insights-featured.astro";
-import InsightsPosts from "./insights-posts";
 import CtaSection from "@/components/cta-section/index.astro";
-import { getFeaturedPost, getNonFeaturedPosts } from "@/data/posts";
-
-const featured = getFeaturedPost();
-const rest = getNonFeaturedPosts();
 ---
 
 <InsightsHero />
-{featured && <InsightsFeatured post={featured} />}
-<InsightsPosts posts={rest} client:visible />
+
+<section class="insights-empty" aria-label="Blog content">
+    <div class="insights-empty__inner">
+        <div class="insights-empty__card">
+            <p class="insights-empty__text">
+                No articles published yet. This blog will cover engineering topics — architecture
+                decisions, performance patterns, and lessons from building systems in production.
+                Come back soon.
+            </p>
+        </div>
+    </div>
+</section>
+
 <CtaSection />
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .insights-empty {
+        padding-block: 4rem;
+    }
+
+    .insights-empty__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    @mixin tablet-up {
+        .insights-empty__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    .insights-empty__card {
+        padding: 3.5rem 2rem;
+        border: 1px solid var(--color-border);
+        border-radius: 1rem;
+        background: var(--color-surface);
+        text-align: center;
+    }
+
+    @mixin tablet-up {
+        .insights-empty__card {
+            padding: 5rem 3rem;
+        }
+    }
+
+    .insights-empty__text {
+        font-size: clamp(0.95rem, 2vw, 1.1rem);
+        color: var(--color-text-secondary);
+        line-height: 1.7;
+        max-width: 58ch;
+        margin: 0 auto;
+    }
+</style>

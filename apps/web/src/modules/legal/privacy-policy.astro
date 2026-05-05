@@ -1,5 +1,5 @@
 ---
-const lastUpdated = "May 04, 2026";
+import { LAST_UPDATED, SITE_URL } from "@/constants/common";
 ---
 
 <article class="legal" aria-labelledby="legal-heading">
@@ -7,7 +7,7 @@ const lastUpdated = "May 04, 2026";
         <header class="legal__header">
             <p class="legal__label">LEGAL</p>
             <h1 class="legal__title" id="legal-heading">Privacy Policy</h1>
-            <p class="legal__meta">Last updated: {lastUpdated}</p>
+            <p class="legal__meta">Last updated: {LAST_UPDATED}</p>
         </header>
 
         <div class="legal__body">
@@ -16,8 +16,8 @@ const lastUpdated = "May 04, 2026";
                 <p class="legal__para">
                     This Privacy Policy describes how Eduardo Varela (&ldquo;I&rdquo;,
                     &ldquo;me&rdquo;, or &ldquo;my&rdquo;) handles information in connection with
-                    this portfolio website (<strong>eduardovarela.dev</strong>). I take privacy
-                    seriously and aim to be transparent about the minimal data practices in place.
+                    this portfolio website (<strong>{SITE_URL}</strong>). I take privacy seriously
+                    and aim to be transparent about the minimal data practices in place.
                 </p>
             </section>
 
@@ -91,10 +91,8 @@ const lastUpdated = "May 04, 2026";
                     Depending on your jurisdiction, you may have rights regarding access,
                     correction, or deletion of personal data. Since this site collects essentially
                     no personal data, most requests will be trivially fulfilled. For any
-                    privacy-related inquiries, contact me at{" "}
-                    <a href="mailto:eduardovarela139@gmail.com" class="legal__link">
-                        eduardovarela139@gmail.com
-                    </a>.
+                    privacy-related inquiries, use the contact form on the{" "}
+                    <a href="/contact" class="legal__link">contact page</a>.
                 </p>
             </section>
 

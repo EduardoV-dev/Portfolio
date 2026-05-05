@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
-import { useChatStore, getSimulatedResponse, DEFAULT_PROMPTS } from "@/store/chat";
+import { useChatStore, DEFAULT_PROMPTS } from "@/store/chat";
 import styles from "./index.module.css";
 
 interface AiChatProps {
@@ -50,19 +50,9 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [inlinePendingPrompt]);
 
-    function submitMessage(text: string) {
-        const trimmed = text.trim();
-        if (!trimmed) return;
-
-        addMessage({ role: "user", text: trimmed });
-        setInput("");
-        setIsTyping(true);
-
-        // Simulate assistant typing delay
-        setTimeout(() => {
-            setIsTyping(false);
-            addMessage({ role: "assistant", text: getSimulatedResponse(trimmed) });
-        }, 900);
+    function submitMessage(_text: string) {
+        // LLM integration coming soon — submissions disabled
+        return;
     }
 
     function handleSend() {
@@ -91,7 +81,7 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
                             <p className={styles.chatTitle}>
                                 Eduardo&apos;s AI Engineering Assistant
                             </p>
-                            <p className={styles.chatStatus}>STATUS: ONLINE</p>
+                            <p className={styles.chatStatus}>STATUS: COMING SOON</p>
                         </div>
                     </div>
                     <div className={styles.chatHeaderRight}>
@@ -248,10 +238,10 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
                 )}
             </div>
 
-            {/* Suggested prompts — shown until first user message */}
+            {/* Suggested prompts — shown until first user message; disabled until LLM is live */}
             {!hasUserMessages && (
                 <div className={styles.prompts}>
-                    <p className={styles.promptsLabel}>SUGGESTED PROMPTS</p>
+                    <p className={styles.promptsLabel}>COMING SOON</p>
                     <div className={styles.promptsList}>
                         {DEFAULT_PROMPTS.map((prompt) => (
                             <button
@@ -259,6 +249,7 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
                                 className={styles.promptBtn}
                                 onClick={() => handlePromptClick(prompt)}
                                 type="button"
+                                disabled
                             >
                                 {prompt}
                             </button>
@@ -273,16 +264,17 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
                     ref={inputRef}
                     className={styles.input}
                     type="text"
-                    placeholder="Type your message…"
+                    placeholder="Chat coming soon…"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
                     aria-label="Chat input"
+                    disabled
                 />
                 <button
                     className={styles.sendBtn}
                     onClick={handleSend}
-                    disabled={!input.trim() || isTyping}
+                    disabled
                     aria-label="Send message"
                     type="button"
                 >

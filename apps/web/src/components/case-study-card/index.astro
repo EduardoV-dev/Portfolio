@@ -1,5 +1,6 @@
 ---
 import { ENVS } from "@/constants/environment-variables";
+import { APP_ROUTES } from "@/constants/routes";
 import type { Project } from "@/types/strapi";
 
 export interface Props {
@@ -129,7 +130,7 @@ const {
             </a>
         </div>
         <a
-            href={`/case-study/${slug}`}
+            href={APP_ROUTES.CASE_STUDIES.DETAIL(slug)}
             class="csc-card__details-link"
             aria-label={`Case study details: ${title}`}
         >

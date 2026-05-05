@@ -29,6 +29,8 @@ jobs:
             S3_BUCKET: ${{ vars.S3_BUCKET }}
             CLOUDFRONT_DISTRIBUTION_ID: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
             SITE_URL: ${{ vars.SITE_URL }}
+            PUBLIC_STRAPI_API_URL: ${{ vars.PUBLIC_STRAPI_API_URL }}
+            PUBLIC_WEB3FORMS_ACCESS_KEY: ${{ vars.PUBLIC_WEB3FORMS_ACCESS_KEY }}
 
         steps:
             - name: Checkout code

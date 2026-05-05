@@ -10,6 +10,7 @@ interface FooterLink {
     href: string;
     accent?: boolean;
     external?: boolean;
+    newTab?: boolean;
 }
 
 interface FooterNavColumn {
@@ -32,6 +33,7 @@ const footerNavColumns: FooterNavColumn[] = [
             ...link,
             accent: link.label === "Schedule a Call",
             external: link.href.startsWith("http"),
+            newTab: link.newTab ?? link.href.startsWith("http"),
         })),
     },
 ];
@@ -51,10 +53,10 @@ const footerNavColumns: FooterNavColumn[] = [
                                     "footer-nav__link",
                                     { "footer-nav__link--accent": link.accent },
                                 ]}
-                                target={link.external ? "_blank" : undefined}
-                                rel={link.external ? "noopener noreferrer" : undefined}
+                                target={link.newTab ? "_blank" : undefined}
+                                rel={link.newTab ? "noopener noreferrer" : undefined}
                                 aria-label={
-                                    link.external ? `${link.label} (opens in new tab)` : undefined
+                                    link.newTab ? `${link.label} (opens in new tab)` : undefined
                                 }
                             >
                                 {link.label}

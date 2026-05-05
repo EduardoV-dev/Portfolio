@@ -8,11 +8,11 @@
                 data-animate
                 data-animate-delay="2"
             >
-                Example System Design
+                Production Request Path
             </h2>
             <p class="arch-diagram__subtext" data-animate data-animate-delay="3">
-                A reference architecture showing a production-grade request path, from client to
-                data layer.
+                A reference architecture showing a production-grade request path — from client to
+                data layer — covering auth, routing, caching, and async messaging.
             </p>
         </header>
 
@@ -107,7 +107,7 @@
                                 points="8 6 2 12 8 18"></polyline></svg
                         >
                     </span>
-                    <span class="arch-diagram__node-label">Service A</span>
+                    <span class="arch-diagram__node-label">REST API</span>
                 </div>
                 <div class="arch-diagram__node arch-diagram__node--service">
                     <span class="arch-diagram__node-icon">
@@ -124,7 +124,7 @@
                             ></path></svg
                         >
                     </span>
-                    <span class="arch-diagram__node-label">Service B</span>
+                    <span class="arch-diagram__node-label">Worker</span>
                 </div>
                 <div class="arch-diagram__node arch-diagram__node--cache">
                     <span class="arch-diagram__node-icon">

@@ -1,4 +1,4 @@
-@import "../../styles/mixins.css";
+@import "../../../styles/mixins.css";
 
 /* ── Section wrapper ── */
 .cfs {
@@ -209,28 +209,11 @@
     cursor: not-allowed;
 }
 
-/* ── Form footer (submit + recaptcha notice) ── */
+/* ── Form footer ── */
 .form__footer {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-}
-
-.form__recaptcha-notice {
-    font-size: 0.75rem;
-    color: var(--color-text-secondary);
-    opacity: 0.6;
-    line-height: 1.5;
-}
-
-.form__recaptcha-notice a {
-    color: inherit;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-}
-
-.form__recaptcha-notice a:hover {
-    opacity: 0.9;
 }
 
 /* ── Success state ── */

@@ -1,6 +1,7 @@
 export interface Route {
     label: string;
     href: string;
+    newTab?: boolean;
 }
 
 export const APP_ROUTES = Object.freeze({
@@ -36,9 +37,9 @@ export const FOOTER_CAPABILITIES_LINKS: Route[] = [
 ];
 
 export const FOOTER_CONNECT_LINKS: Route[] = [
-    { label: "Schedule a Call", href: APP_ROUTES.CONTACT },
+    { label: "Schedule a Call", href: `${APP_ROUTES.CONTACT}#book-a-call` },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/eduardov-dev" },
     { label: "GitHub", href: "https://www.github.com/EduardoV-dev" },
     { label: "Email", href: `${APP_ROUTES.CONTACT}#send-email` },
-    { label: "Resume", href: "#" },
+    { label: "Resume", href: "/Eduardo_Varela_CV.pdf", newTab: true },
 ];

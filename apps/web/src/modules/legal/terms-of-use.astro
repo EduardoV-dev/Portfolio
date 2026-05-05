@@ -1,5 +1,5 @@
 ---
-const lastUpdated = "April 22, 2025";
+import { SITE_URL, LAST_UPDATED } from "@/constants/common";
 ---
 
 <article class="legal" aria-labelledby="legal-heading">
@@ -7,16 +7,16 @@ const lastUpdated = "April 22, 2025";
         <header class="legal__header">
             <p class="legal__label">LEGAL</p>
             <h1 class="legal__title" id="legal-heading">Terms of Use</h1>
-            <p class="legal__meta">Last updated: {lastUpdated}</p>
+            <p class="legal__meta">Last updated: {LAST_UPDATED}</p>
         </header>
 
         <div class="legal__body">
             <section class="legal__section">
                 <h2 class="legal__section-title">Acceptance of Terms</h2>
                 <p class="legal__para">
-                    By accessing or using <strong>eduardovarela.dev</strong> (the &ldquo;Site&rdquo;),
-                    you agree to be bound by these Terms of Use. If you do not agree to these terms, please
-                    do not use the Site.
+                    By accessing or using <strong>{SITE_URL}</strong> (the &ldquo;Site&rdquo;), you agree
+                    to be bound by these Terms of Use. If you do not agree to these terms, please do not
+                    use the Site.
                 </p>
             </section>
 
@@ -114,10 +114,8 @@ const lastUpdated = "April 22, 2025";
             <section class="legal__section">
                 <h2 class="legal__section-title">Contact</h2>
                 <p class="legal__para">
-                    Questions about these Terms? Reach me at{" "}
-                    <a href="mailto:eduardovarela139@gmail.com" class="legal__link">
-                        eduardovarela139@gmail.com
-                    </a>.
+                    Questions about these Terms? Reach me via the{" "}
+                    <a href="/contact" class="legal__link">contact page</a>.
                 </p>
             </section>
         </div>

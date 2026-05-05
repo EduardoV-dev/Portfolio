@@ -48,13 +48,6 @@ jobs:
                   node-version: 22
                   cache: pnpm
 
-            - name: Log env vars
-              run: |
-                  echo "STRAPI_API_URL=$STRAPI_API_URL"
-                  echo "STRAPI_API_TOKEN=$([ -n "$STRAPI_API_TOKEN" ] && echo "set" || echo "NOT SET")"
-                  echo "SITE_URL=$SITE_URL"
-                  echo "PUBLIC_WEB3FORMS_ACCESS_KEY=$([ -n "$PUBLIC_WEB3FORMS_ACCESS_KEY" ] && echo "set" || echo "NOT SET")"
-
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
 

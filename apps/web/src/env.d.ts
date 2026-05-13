@@ -6,6 +6,7 @@ interface ImportMetaEnv {
     readonly SENTRY_AUTH_TOKEN: string;
     readonly STRAPI_API_TOKEN: string;
     readonly STRAPI_API_URL: string;
+    readonly STRAPI_CMS_OPTIONAL: string;
 
     // Client-accessible (PUBLIC_ prefix required by Astro)
     readonly PUBLIC_SENTRY_ENABLED: string;

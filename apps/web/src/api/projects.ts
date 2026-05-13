@@ -1,5 +1,13 @@
 import { strapiClient } from "@/lib/strapi";
-import type { Project } from "@/types/strapi";
+import { resolveCmsService } from "@/utils/cms-fallback";
+import { type Project } from "@/types/strapi";
+
+interface ProjectServices {
+    findOnlyTwo: () => Promise<Project[]>;
+    findAll: () => Promise<Project[]>;
+    findAllSlugsOnly: () => Promise<string[]>;
+    findBySlug: (slug: string) => Promise<Project | undefined>;
+}
 
 const projects = strapiClient.collection("projects");
 
@@ -37,24 +45,26 @@ const findBySlugPopulate = {
  * and they are the most recent ones.
  * @returns A promise that resolves to an array of two Project objects.
  */
-const findOnlyTwo = async () =>
-    (
+const findOnlyTwo = async () => {
+    return (
         await projects.find({
             pagination: { limit: 2 },
             populate: findAllPopulate,
         })
     ).data as Project[];
+};
 
 /**
  * Fetches all projects from the Strapi API, this is used in the case studies page.
  * @returns A promise that resolves to an array of Project objects.
  */
-const findAll = async () =>
-    (
+const findAll = async () => {
+    return (
         await projects.find({
             populate: findAllPopulate,
         })
     ).data as Project[];
+};
 
 /**
  * Fetches only the slugs of all projects from the Strapi API.
@@ -82,12 +92,21 @@ const findBySlug = async (slug: string) => {
     return result.length > 0 ? result[0] : undefined;
 };
 
-/**
- * An object that contains all the services related to projects, such as fetching projects from the Strapi API.
- */
-export const projectServices = {
+const projectServicesDefault: ProjectServices = {
     findOnlyTwo,
     findAll,
     findAllSlugsOnly,
     findBySlug,
 };
+
+const projectServicesFallback: ProjectServices = {
+    findOnlyTwo: async () => [],
+    findAll: async () => [],
+    findAllSlugsOnly: async () => [],
+    findBySlug: async () => undefined,
+};
+
+/**
+ * An object that contains all the services related to projects, such as fetching projects from the Strapi API.
+ */
+export const projectServices = resolveCmsService(projectServicesDefault, projectServicesFallback);

@@ -7,4 +7,5 @@ export const ENVS = Object.freeze({
     PUBLIC_WEB3FORMS_ACCESS_KEY: import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY || "",
     STRAPI_API_URL: import.meta.env.STRAPI_API_URL || "http://localhost:1337/api",
     STRAPI_API_TOKEN: import.meta.env.STRAPI_API_TOKEN || "",
+    STRAPI_CMS_OPTIONAL: import.meta.env.STRAPI_CMS_OPTIONAL === "true",
 });

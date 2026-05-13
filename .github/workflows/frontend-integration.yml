@@ -6,12 +6,17 @@ on:
             - main
 
 jobs:
-    frontend:
-        name: Frontend
+    integration:
+        name: Frontend + Strapi
         runs-on: ubuntu-latest
-        defaults:
-            run:
-                working-directory: apps/web
+        env:
+            STRAPI_CMS_OPTIONAL: "true"
+            APP_KEYS: key1,key2,key3,key4
+            ADMIN_JWT_SECRET: ci-admin-jwt-secret
+            API_TOKEN_SALT: ci-api-token-salt
+            TRANSFER_TOKEN_SALT: ci-transfer-token-salt
+            JWT_SECRET: ci-jwt-secret
+            ENCRYPTION_KEY: ci-encryption-key
 
         steps:
             - name: Checkout
@@ -31,14 +36,17 @@ jobs:
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
 
-            - name: Lint
-              run: pnpm lint
+            - name: Frontend lint
+              run: pnpm --filter web lint
 
-            - name: Typecheck
-              run: pnpm typecheck
+            - name: Frontend typecheck
+              run: pnpm --filter web typecheck
 
-            - name: Format
-              run: pnpm formatcheck
+            - name: Frontend format
+              run: pnpm --filter web formatcheck
 
-            - name: Build
-              run: pnpm build
+            - name: Frontend build
+              run: pnpm --filter web build
+
+            - name: Strapi build
+              run: pnpm --filter headless-cms build

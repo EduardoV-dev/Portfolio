@@ -1,0 +1,228 @@
+/* Small desktop: labels overlap nodes due to narrower column — push them down */
+@media (min-width: 1025px) and (max-width: 1279px) {
+    .diagram__label--top {
+        top: 20%;
+    }
+
+    .diagram__label--left {
+        top: 42%;
+    }
+
+    .diagram__label--right {
+        top: 42%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-visual,
+    .hero-visual__glow,
+    .diagram__axis,
+    .diagram__axis::after,
+    .diagram__orbit,
+    .diagram__node,
+    .diagram__node--top,
+    .diagram__node--bottom,
+    .diagram__label,
+    .diagram__core,
+    .diagram__core-inner,
+    .diagram__core-inner::after {
+        animation: none;
+    }
+
+    .hero-visual__glow {
+        opacity: 0.82;
+    }
+
+    .diagram__orbit {
+        opacity: 0.96;
+    }
+
+    .diagram__node--top,
+    .diagram__node--bottom {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes hero-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glow-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 0.82;
+    }
+}
+
+@keyframes glow-breathe {
+    0%,
+    100% {
+        opacity: 0.65;
+    }
+
+    50% {
+        opacity: 0.88;
+    }
+}
+
+@keyframes orbit-enter {
+    from {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+
+    to {
+        opacity: 0.96;
+        transform: scale(1);
+    }
+}
+
+@keyframes orbit-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes node-enter {
+    from {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes node-enter-centered {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+@keyframes node-float {
+    0%,
+    100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 -5px;
+    }
+}
+
+@keyframes label-fade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes core-enter {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes core-pulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.045);
+    }
+}
+
+@keyframes core-glow {
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes axis-reveal {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 0.95;
+    }
+}
+
+@keyframes particle-travel {
+    0% {
+        transform: translateX(0px) translateY(-50%);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    85% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(115px) translateY(-50%);
+        opacity: 0;
+    }
+}
+
+@keyframes particle-travel-vertical {
+    0% {
+        transform: translateX(-50%) translateY(0px);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    85% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(420px);
+        opacity: 0;
+    }
+}

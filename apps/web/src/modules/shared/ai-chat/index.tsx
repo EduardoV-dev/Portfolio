@@ -13,13 +13,12 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
         messages,
         pendingPrompt,
         inlinePendingPrompt,
-        addMessage,
         setPendingPrompt,
         setInlinePendingPrompt,
         resetMessages,
     } = useChatStore();
     const [input, setInput] = useState("");
-    const [isTyping, setIsTyping] = useState(false);
+    const isTyping = false;
     const messagesContainerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -35,28 +34,30 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
     // Consume pendingPrompt — only in popup mode to avoid double-submission
     useEffect(() => {
         if (!pendingPrompt || mode !== "popup") return;
-        const prompt = pendingPrompt;
         setPendingPrompt(null);
-        submitMessage(prompt);
+        submitMessage();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pendingPrompt]);
 
     // Consume inlinePendingPrompt — only in inline mode
     useEffect(() => {
         if (!inlinePendingPrompt || mode !== "inline") return;
-        const prompt = inlinePendingPrompt;
         setInlinePendingPrompt(null);
-        submitMessage(prompt);
+        submitMessage();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [inlinePendingPrompt]);
 
-    function submitMessage(_text: string) {
+    function submitMessage() {
         // LLM integration coming soon — submissions disabled
         return;
     }
 
     function handleSend() {
-        submitMessage(input);
+        if (!input.trim()) {
+            return;
+        }
+
+        submitMessage();
     }
 
     function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -67,7 +68,11 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
     }
 
     function handlePromptClick(prompt: string) {
-        submitMessage(prompt);
+        if (!prompt.trim()) {
+            return;
+        }
+
+        submitMessage();
     }
 
     return (

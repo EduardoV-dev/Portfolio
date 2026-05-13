@@ -10,6 +10,9 @@ import { fileURLToPath } from "url";
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 export default [
+    {
+        ignores: ["dist/**", ".astro/**", ".amplify-hosting/**"],
+    },
     ...rootConfig,
     {
         files: ["**/*.{tsx,jsx}"],

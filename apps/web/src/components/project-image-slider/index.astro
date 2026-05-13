@@ -85,6 +85,7 @@ const baseMediaUrl = ENVS.STRAPI_API_URL.replace("/api", "");
                             type="button"
                             data-slider-dot={String(index)}
                             aria-label={`Go to slide ${index + 1}`}
+                            aria-pressed={index === 0 ? "true" : "false"}
                         />
                     ))}
                 </div>
@@ -240,7 +241,7 @@ const baseMediaUrl = ENVS.STRAPI_API_URL.replace("/api", "");
             background var(--transition-fast);
     }
 
-    .pis__dot[data-active="true"] {
+    .pis__dot[aria-pressed="true"] {
         background: var(--color-accent);
         opacity: 1;
         transform: scale(1.15);
@@ -322,6 +323,7 @@ const baseMediaUrl = ENVS.STRAPI_API_URL.replace("/api", "");
             track.style.transform = `translateX(-${baseOffset}%)`;
             dots.forEach((dot, index) => {
                 dot.setAttribute("data-active", index === currentIndex ? "true" : "false");
+                dot.setAttribute("aria-pressed", index === currentIndex ? "true" : "false");
             });
             if (currentIndicator) {
                 currentIndicator.textContent = String(currentIndex + 1);

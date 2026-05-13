@@ -35,13 +35,13 @@ const { items, backHref = "/case-studies" } = Astro.props;
     <!-- Section list -->
     <ul class="csn-nav__list" role="list">
         {
-            items.map((item) => (
+            items.map((item, index) => (
                 <li class="csn-nav__item">
                     <a
                         href={`#${item.id}`}
                         class="csn-nav__link"
                         data-nav-id={item.id}
-                        aria-current="false"
+                        aria-current={index === 0 ? "true" : "false"}
                     >
                         <span class="csn-nav__indicator" aria-hidden="true" />
                         {item.label}
@@ -134,7 +134,7 @@ const { items, backHref = "/case-studies" } = Astro.props;
     }
 
     /* Active state */
-    .csn-nav__link.is-active {
+    .csn-nav__link[aria-current="true"] {
         color: var(--color-accent);
     }
 
@@ -151,7 +151,7 @@ const { items, backHref = "/case-studies" } = Astro.props;
             height var(--transition-fast);
     }
 
-    .csn-nav__link.is-active .csn-nav__indicator {
+    .csn-nav__link[aria-current="true"] .csn-nav__indicator {
         background: var(--color-accent);
         height: 18px;
     }
@@ -186,13 +186,11 @@ const { items, backHref = "/case-studies" } = Astro.props;
                 if (activeId) {
                     const prev = sectionMap.get(activeId);
                     prev?.setAttribute("aria-current", "false");
-                    prev?.classList.remove("is-active");
                 }
                 // Set new
                 activeId = newId;
                 const next = sectionMap.get(activeId);
                 next?.setAttribute("aria-current", "true");
-                next?.classList.add("is-active");
             },
             {
                 rootMargin: "-10% 0px -60% 0px",

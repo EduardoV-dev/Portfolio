@@ -1,5 +1,5 @@
 ---
-import type { Project } from "@/types/strapi";
+import { type Project } from "@/types/strapi";
 import ProjectImageSlider from "@/components/project-image-slider/index.astro";
 
 export interface Props {
@@ -21,7 +21,7 @@ const projectBullets = Array.isArray(bullets) ? bullets : [];
 <article class="fpc-card" {...restProps}>
     <!-- Image -->
     <div class="fpc-card__image">
-        <ProjectImageSlider images={projectImages} projectTitle={title} class="fpc-card__slider" />
+        <ProjectImageSlider images={projectImages} projectTitle={title} />
         <span class="fpc-card__featured-badge">Featured Project</span>
     </div>
 
@@ -207,12 +207,6 @@ const projectBullets = Array.isArray(bullets) ? bullets : [];
         .fpc-card__image {
             min-height: 260px;
         }
-    }
-
-    .fpc-card__slider {
-        width: 100%;
-        height: 100%;
-        border-radius: 0;
     }
 
     /* Featured badge */

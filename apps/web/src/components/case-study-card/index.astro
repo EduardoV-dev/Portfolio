@@ -1,6 +1,6 @@
 ---
 import { APP_ROUTES } from "@/constants/routes";
-import type { Project } from "@/types/strapi";
+import { type Project } from "@/types/strapi";
 import ProjectImageSlider from "@/components/project-image-slider/index.astro";
 
 export interface Props {
@@ -31,7 +31,7 @@ const projectBullets = Array.isArray(bullets) ? bullets : [];
 <article class="csc-card" {...rest}>
     <!-- Image placeholder -->
     <div class="csc-card__image">
-        <ProjectImageSlider images={projectImages} projectTitle={title} class="csc-card__slider" />
+        <ProjectImageSlider images={projectImages} projectTitle={title} />
     </div>
 
     <!-- Content -->
@@ -215,11 +215,6 @@ const projectBullets = Array.isArray(bullets) ? bullets : [];
         .csc-card__image {
             height: 220px;
         }
-    }
-
-    .csc-card__slider {
-        width: 100%;
-        height: 100%;
     }
 
     /* ── Body ── */

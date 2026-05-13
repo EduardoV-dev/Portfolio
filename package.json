@@ -6,12 +6,9 @@
     },
     "scripts": {
         "prepare": "husky",
-        "lint": "eslint .",
-        "format": "prettier . --write",
-        "check": "pnpm run lint && prettier . --check",
-        "dev:frontend": "pnpm --filter apps-frontend dev",
-        "dev:strapi": "pnpm --filter strapi dev",
-        "dev": "concurrently \"pnpm run dev:frontend\" \"pnpm run dev:strapi\""
+        "dev:web": "pnpm --filter web dev",
+        "dev:headless-cms": "pnpm --filter headless-cms dev",
+        "dev": "concurrently \"pnpm run dev:web\" \"pnpm run dev:headless-cms\""
     },
     "devDependencies": {
         "@commitlint/cli": "^19.6.0",

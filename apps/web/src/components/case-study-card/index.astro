@@ -1,0 +1,369 @@
+---
+import { APP_ROUTES } from "@/constants/routes";
+import { type Project } from "@/types/strapi";
+import ProjectImageSlider from "@/components/project-image-slider/index.astro";
+
+export interface Props {
+    caseStudy: Project;
+    [key: string]: unknown;
+}
+
+const { caseStudy, ...rest } = Astro.props;
+const {
+    slug = "",
+    title,
+    impact,
+    description,
+    bullets,
+    sourceHref,
+    liveHref,
+    images,
+    tags,
+} = caseStudy;
+
+const hasSourceHref = typeof sourceHref === "string" && sourceHref.trim().length > 0;
+const hasLiveHref = typeof liveHref === "string" && liveHref.trim().length > 0;
+const projectImages = Array.isArray(images) ? images : [];
+const projectTags = Array.isArray(tags) ? tags : [];
+const projectBullets = Array.isArray(bullets) ? bullets : [];
+---
+
+<article class="csc-card" {...rest}>
+    <!-- Image placeholder -->
+    <div class="csc-card__image">
+        <ProjectImageSlider images={projectImages} projectTitle={title} />
+    </div>
+
+    <!-- Content -->
+    <div class="csc-card__body">
+        <!-- Tech tags -->
+        <div class="csc-card__tags">
+            {projectTags.map((tag) => <span class="csc-card__tag">{tag.name}</span>)}
+        </div>
+
+        <!-- Title -->
+        <h3 class="csc-card__title">{title}</h3>
+
+        <!-- Impact statement -->
+        {impact && <p class="csc-card__impact">{impact}</p>}
+
+        <!-- Description -->
+        <p class="csc-card__desc">{description}</p>
+
+        <!-- Bullet points -->
+        <ul class="csc-card__bullets" role="list">
+            {
+                projectBullets.map((b) => (
+                    <li class="csc-card__bullet">
+                        <svg
+                            class="csc-card__bullet-icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                            <polyline points="22 4 12 14.01 9 11.01" />
+                        </svg>
+                        {b}
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+
+    <!-- Footer -->
+    <div class="csc-card__footer">
+        <div class="csc-card__footer-links">
+            {
+                hasSourceHref && (
+                    <a
+                        href={sourceHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="csc-card__footer-link"
+                        aria-label="Source code"
+                        onclick="event.stopPropagation()"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="12"
+                            height="12"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <polyline points="16 18 22 12 16 6" />
+                            <polyline points="8 6 2 12 8 18" />
+                        </svg>
+                        SOURCE CODE
+                    </a>
+                )
+            }
+            {
+                hasLiveHref && (
+                    <a
+                        href={liveHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="csc-card__footer-link"
+                        aria-label="Live project"
+                        onclick="event.stopPropagation()"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="12"
+                            height="12"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                            <polyline points="15 3 21 3 21 9" />
+                            <line x1="10" y1="14" x2="21" y2="3" />
+                        </svg>
+                        LIVE PROJECT
+                    </a>
+                )
+            }
+        </div>
+        <a
+            href={APP_ROUTES.CASE_STUDIES.DETAIL(slug)}
+            class="csc-card__details-link"
+            aria-label={`Case study details: ${title}`}
+        >
+            Case Study Details
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+            >
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+        </a>
+    </div>
+</article>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    /* ── Card shell ── */
+    .csc-card {
+        display: flex;
+        flex-direction: column;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 0.875rem;
+        overflow: hidden;
+        color: inherit;
+        transition:
+            border-color var(--transition-fast),
+            transform var(--transition-fast),
+            box-shadow var(--transition-base);
+    }
+
+    .csc-card:hover {
+        border-color: rgba(0, 204, 255, 0.28);
+        transform: translateY(-3px);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .csc-card:focus-within {
+        outline: 2px solid rgba(0, 204, 255, 0.85);
+        outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .csc-card {
+            transition: border-color var(--transition-fast);
+        }
+        .csc-card:hover {
+            transform: none;
+        }
+    }
+
+    /* ── Image area ── */
+    .csc-card__image {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+
+    @mixin tablet-up {
+        .csc-card__image {
+            height: 220px;
+        }
+    }
+
+    /* ── Body ── */
+    .csc-card__body {
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+        padding: 1.75rem 1.75rem 1.5rem;
+        flex: 1;
+    }
+
+    /* ── Tags ── */
+    .csc-card__tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .csc-card__tag {
+        display: inline-block;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.2rem 0.55rem;
+        border-radius: 0.3rem;
+        border: 1px solid rgba(0, 204, 255, 0.22);
+        background: rgba(0, 204, 255, 0.07);
+        color: var(--color-accent);
+    }
+
+    /* ── Title ── */
+    .csc-card__title {
+        font-size: clamp(1.1rem, 3vw, 1.3rem);
+        font-weight: 700;
+        color: var(--color-text-primary);
+        letter-spacing: -0.03em;
+        line-height: 1.2;
+        margin: 0;
+    }
+
+    /* ── Impact ── */
+    .csc-card__impact {
+        font-size: 0.84rem;
+        font-weight: 500;
+        color: var(--color-accent);
+        line-height: 1.55;
+        margin: 0;
+        opacity: 0.9;
+    }
+
+    /* ── Description ── */
+    .csc-card__desc {
+        font-size: 0.875rem;
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+        margin: 0;
+    }
+
+    /* ── Bullets ── */
+    .csc-card__bullets {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    .csc-card__bullet {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        font-size: 0.84rem;
+        color: var(--color-text-secondary);
+        line-height: 1.5;
+    }
+
+    .csc-card__bullet-icon {
+        color: var(--color-accent);
+        flex-shrink: 0;
+        margin-top: 0.15rem;
+    }
+
+    /* ── Footer ── */
+    .csc-card__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding: 1.1rem 1.75rem;
+        border-top: 1px solid var(--color-border);
+        flex-wrap: wrap;
+    }
+
+    .csc-card__footer-links {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .csc-card__footer-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        cursor: pointer;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: color var(--transition-fast);
+    }
+
+    .csc-card__footer-link:hover {
+        color: var(--color-text-primary);
+    }
+
+    .csc-card__footer-link:focus-visible {
+        outline: 2px solid rgba(0, 204, 255, 0.85);
+        outline-offset: 2px;
+        border-radius: 2px;
+    }
+
+    /* ── Case study details link ── */
+    .csc-card__details-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.78rem;
+        font-weight: 650;
+        color: var(--color-accent);
+        text-decoration: none;
+        letter-spacing: -0.01em;
+        transition:
+            gap var(--transition-fast),
+            opacity var(--transition-fast);
+        white-space: nowrap;
+    }
+
+    .csc-card__details-link:hover {
+        gap: 0.55rem;
+        opacity: 0.85;
+    }
+
+    .csc-card__details-link:focus-visible {
+        outline: 2px solid rgba(0, 204, 255, 0.85);
+        outline-offset: 2px;
+        border-radius: 2px;
+    }
+</style>

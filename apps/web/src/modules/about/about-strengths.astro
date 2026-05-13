@@ -1,0 +1,237 @@
+---
+const categories = [
+    {
+        title: "Full-Stack Engineering",
+        skills: [
+            "API Design",
+            "Component Architecture",
+            "Database Modeling",
+            "Performance Optimization",
+            "Accessibility",
+            "Feature Implementation",
+        ],
+    },
+    {
+        title: "Cloud & Infrastructure",
+        skills: [
+            "AWS Deployment",
+            "CI/CD Pipelines",
+            "Zero-Downtime Releases",
+            "Cost Optimization",
+            "Security Practices",
+            "Monitoring & Observability",
+        ],
+    },
+    {
+        title: "Product & Collaboration",
+        skills: [
+            "Cross-Team Communication",
+            "Feature Ideation",
+            "Requirement Translation",
+            "Stakeholder Alignment",
+            "Agile Workflows",
+            "Technical Documentation",
+        ],
+    },
+    {
+        title: "Engineering Practices",
+        skills: [
+            "Code Review",
+            "Testing Strategy",
+            "Maintainable Patterns",
+            "Responsive Design",
+            "Core Web Vitals",
+            "Headless CMS Architecture",
+        ],
+    },
+];
+---
+
+<section class="about-str" id="capabilities" aria-labelledby="about-str-heading">
+    <div class="about-str__inner">
+        <header class="about-str__header">
+            <p class="about-str__label" data-animate data-animate-delay="1">CORE STRENGTHS</p>
+            <h2
+                class="about-str__heading"
+                id="about-str-heading"
+                data-animate
+                data-animate-delay="2"
+            >
+                What I Bring to a Team
+            </h2>
+            <p class="about-str__subtext" data-animate data-animate-delay="3">
+                The capabilities I bring to a team, independent of any specific tool or framework.
+            </p>
+        </header>
+
+        <ul class="about-str__grid" role="list">
+            {
+                categories.map((cat, i) => (
+                    <li class="about-str__card" data-animate data-animate-delay={i + 1}>
+                        <h3 class="about-str__card-title">{cat.title}</h3>
+                        <ul class="about-str__tags" role="list">
+                            {cat.skills.map((skill) => (
+                                <li class="about-str__tag">{skill}</li>
+                            ))}
+                        </ul>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</section>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .about-str {
+        position: relative;
+        z-index: 1;
+        padding-block: 4rem;
+    }
+
+    .about-str__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    @mixin tablet-up {
+        .about-str__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    /* ── Header ── */
+    .about-str__header {
+        margin-bottom: 3rem;
+    }
+
+    @mixin desktop-up {
+        .about-str__header {
+            max-width: 52rem;
+            margin-bottom: 3.5rem;
+        }
+    }
+
+    .about-str__label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 0.75rem;
+    }
+
+    .about-str__heading {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        font-weight: 760;
+        letter-spacing: -0.04em;
+        color: var(--color-text-primary);
+        line-height: 1.1;
+        margin-bottom: 1.25rem;
+        text-wrap: balance;
+    }
+
+    .about-str__subtext {
+        font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+        max-width: 48ch;
+    }
+
+    /* ── Grid ── */
+    .about-str__grid {
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    @mixin tablet-up {
+        .about-str__grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+    }
+
+    /* ── Card ── */
+    .about-str__card {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        padding: 1.75rem;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 1rem;
+        transition:
+            transform var(--transition-base),
+            box-shadow var(--transition-base),
+            border-color var(--transition-base);
+    }
+
+    .about-str__card:hover {
+        transform: translateY(-4px);
+        box-shadow:
+            0 0 0 1px color-mix(in srgb, var(--color-accent) 15%, transparent),
+            0 16px 40px rgba(0, 0, 0, 0.45),
+            0 0 32px color-mix(in srgb, var(--color-accent) 7%, transparent);
+        border-color: color-mix(in srgb, var(--color-accent) 18%, transparent);
+    }
+
+    @mixin desktop-up {
+        .about-str__card {
+            padding: 2rem;
+        }
+    }
+
+    .about-str__card-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        letter-spacing: -0.02em;
+        line-height: 1.3;
+        text-wrap: balance;
+    }
+
+    @mixin desktop-up {
+        .about-str__card-title {
+            font-size: 1.05rem;
+        }
+    }
+
+    /* ── Tags ── */
+    .about-str__tags {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .about-str__tag {
+        padding: 0.3rem 0.75rem;
+        border-radius: 999px;
+        border: 1px solid color-mix(in srgb, var(--color-accent) 18%, transparent);
+        background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+        color: var(--color-accent);
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        line-height: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .about-str__card {
+            transition: none;
+        }
+
+        .about-str__card:hover {
+            transform: none;
+        }
+    }
+</style>
+
+<script>
+    import { initScrollReveal } from "@/utils/animations";
+    initScrollReveal();
+</script>

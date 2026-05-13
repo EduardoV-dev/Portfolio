@@ -1,0 +1,28 @@
+---
+export const prerender = true;
+
+import Layout from "@/layouts/layout/index.astro";
+import CaseStudyDetail from "@/modules/case-study-detail/index.astro";
+import { APP_ROUTES } from "@/constants/routes";
+import { projectServices } from "@/api/projects";
+
+export async function getStaticPaths() {
+    const projectSlugs: string[] = await projectServices.findAllSlugsOnly();
+    return projectSlugs.map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const project = await projectServices.findBySlug(slug);
+
+// Shouldn't happen with getStaticPaths, but guard for type safety
+if (!project) {
+    return Astro.redirect(APP_ROUTES.CASE_STUDIES.ROOT);
+}
+
+const pageTitle = `${project.title} – Case Study – Eduardo Varela`;
+const pageDescription = project.description;
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+    <CaseStudyDetail project={project} />
+</Layout>

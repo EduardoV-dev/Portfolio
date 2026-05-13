@@ -1,0 +1,300 @@
+---
+import { projectCategoryServices } from "@/api/project-categories";
+import { projectServices } from "@/api/projects";
+import CaseStudyCard from "@/components/case-study-card/index.astro";
+import FeaturedProjectCard from "@/components/featured-project-card/index.astro";
+
+const [projects, categories] = await Promise.all([
+    projectServices.findAll(),
+    projectCategoryServices.findAll(),
+]);
+
+function toCategoryFilterValue(value: string) {
+    return value
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, "")
+        .replace(/\s+/g, "-");
+}
+
+const categoryFilters = categories
+    .map((category) => ({
+        label: category.name,
+        value: toCategoryFilterValue(category.name),
+    }))
+    .filter(
+        (category, index, allCategories) =>
+            category.value.length > 0 &&
+            allCategories.findIndex((item) => item.value === category.value) === index,
+    );
+
+const firstFeaturedProject = projects.find((project) => project.isFeatured) || null;
+const gridProjects =
+    projects.filter((project) => !project.isFeatured || project.id !== firstFeaturedProject?.id) ||
+    [];
+---
+
+<section class="csw-section" aria-labelledby="csw-heading">
+    <div class="csw-section__inner">
+        <!-- Page header -->
+        <header class="csw-section__header" data-animate>
+            <p class="csw-section__label">
+                <span class="csw-section__label-dot" aria-hidden="true"></span>
+                PORTFOLIO
+            </p>
+            <h1 class="csw-section__heading" id="csw-heading">Selected Work</h1>
+            <p class="csw-section__subheading">
+                A selection of systems I've designed and built, focused on scalability, performance,
+                and real-world impact.
+            </p>
+        </header>
+
+        {
+            firstFeaturedProject && (
+                <div
+                    data-animate
+                    data-animate-delay="1"
+                    data-featured-project
+                    data-categories={(firstFeaturedProject.categories ?? [])
+                        .map((category) => toCategoryFilterValue(category.name))
+                        .filter(
+                            (name, index, allNames) =>
+                                name.length > 0 && allNames.indexOf(name) === index,
+                        )
+                        .join(",")}
+                >
+                    <FeaturedProjectCard caseStudy={firstFeaturedProject} />
+                </div>
+            )
+        }
+
+        <!-- Filter bar -->
+        <div class="csw-section__filters" role="group" aria-label="Filter projects by category">
+            <button class="csw-filter-btn" data-filter="all" aria-pressed="true">All</button>
+            {
+                categoryFilters.map((category) => (
+                    <button
+                        class="csw-filter-btn"
+                        data-filter={category.value}
+                        aria-pressed="false"
+                    >
+                        {category.label}
+                    </button>
+                ))
+            }
+        </div>
+
+        <!-- Projects grid -->
+        <div class="csw-section__grid" id="csw-grid">
+            {
+                gridProjects.map((project, i) => (
+                    <CaseStudyCard
+                        caseStudy={project}
+                        href={`/case-studies/${project.slug}`}
+                        data-animate
+                        data-animate-delay={String(i + 2)}
+                        data-categories={(project.categories ?? [])
+                            .map((category) => category.name)
+                            .map((name) => toCategoryFilterValue(name))
+                            .filter(
+                                (name, index, allNames) =>
+                                    name.length > 0 && allNames.indexOf(name) === index,
+                            )
+                            .join(",")}
+                    />
+                ))
+            }
+        </div>
+
+        <!-- Empty state (shown when filter has no matches) -->
+        <div class="csw-section__empty" id="csw-empty" aria-live="polite" hidden>
+            <p class="csw-section__empty-text">
+                No projects in this category yet. Check back soon.
+            </p>
+        </div>
+    </div>
+</section>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .csw-section {
+        position: relative;
+        z-index: 1;
+        padding-block: 4rem 2rem;
+    }
+
+    .csw-section__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    @mixin tablet-up {
+        .csw-section__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    /* ── Page header ── */
+    .csw-section__header {
+        margin-bottom: 3rem;
+    }
+
+    @mixin tablet-up {
+        .csw-section__header {
+            margin-bottom: 3.5rem;
+        }
+    }
+
+    .csw-section__label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 0.85rem;
+    }
+
+    .csw-section__label-dot {
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--color-accent);
+        box-shadow: 0 0 6px 2px color-mix(in srgb, var(--color-accent) 50%, transparent);
+        flex-shrink: 0;
+    }
+
+    .csw-section__heading {
+        font-size: clamp(2.25rem, 8vw, 3.5rem);
+        font-weight: 780;
+        letter-spacing: -0.04em;
+        line-height: 1.05;
+        color: var(--color-text-primary);
+        margin-bottom: 0.85rem;
+        text-wrap: balance;
+    }
+
+    .csw-section__subheading {
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+        max-width: 52ch;
+        text-wrap: pretty;
+    }
+
+    /* ── Filter bar ── */
+    .csw-section__filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-block: 2.5rem 1.75rem;
+    }
+
+    .csw-filter-btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.45rem 1rem;
+        border-radius: 99px;
+        border: 1px solid var(--color-border);
+        background: transparent;
+        color: var(--color-text-secondary);
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        cursor: pointer;
+        transition:
+            color var(--transition-fast),
+            border-color var(--transition-fast),
+            background var(--transition-fast);
+        font-family: var(--font-sans);
+        touch-action: manipulation;
+    }
+
+    .csw-filter-btn:hover {
+        color: var(--color-text-primary);
+        border-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
+    }
+
+    .csw-filter-btn[aria-pressed="true"] {
+        color: var(--color-accent);
+        border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
+        background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+    }
+
+    .csw-filter-btn:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 2px;
+    }
+
+    /* ── Grid ── */
+    .csw-section__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    @mixin tablet-up {
+        .csw-section__grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+    }
+
+    /* ── Empty state ── */
+    .csw-section__empty {
+        padding-block: 4rem;
+        text-align: center;
+    }
+
+    .csw-section__empty-text {
+        color: var(--color-text-secondary);
+        font-size: 0.95rem;
+    }
+
+    /* ── Card hide/show transitions ── */
+    :global(.csw-card-hidden) {
+        display: none !important;
+    }
+</style>
+
+<script>
+    import { initScrollReveal } from "@/utils/animations";
+    initScrollReveal();
+
+    // ── Filter logic ──
+    const buttons = document.querySelectorAll<HTMLButtonElement>(".csw-filter-btn");
+    const emptyState = document.getElementById("csw-empty")!;
+
+    function applyFilter(category: string) {
+        const cards = document.querySelectorAll<HTMLElement>("[data-categories]");
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+            const categoryValues = (card.dataset.categories ?? "")
+                .split(",")
+                .filter((value) => value.length > 0);
+            const matches = category === "all" || categoryValues.includes(category);
+            if (matches) {
+                card.classList.remove("csw-card-hidden");
+                visibleCount++;
+            } else {
+                card.classList.add("csw-card-hidden");
+            }
+        });
+
+        emptyState.hidden = visibleCount > 0;
+    }
+
+    buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            buttons.forEach((b) => b.setAttribute("aria-pressed", "false"));
+            btn.setAttribute("aria-pressed", "true");
+            applyFilter(btn.dataset.filter ?? "all");
+        });
+    });
+</script>

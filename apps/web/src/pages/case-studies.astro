@@ -1,0 +1,15 @@
+---
+export const prerender = true;
+
+import Layout from "@/layouts/layout/index.astro";
+import CaseStudiesModule from "@/modules/case-studies/index.astro";
+import CtaSection from "@/components/cta-section/index.astro";
+---
+
+<Layout
+    title="Selected Work – Eduardo Varela"
+    description="Case studies from Eduardo Varela covering architecture decisions, implementation details, and measurable engineering outcomes."
+>
+    <CaseStudiesModule />
+    <CtaSection />
+</Layout>

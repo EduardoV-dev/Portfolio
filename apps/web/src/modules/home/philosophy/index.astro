@@ -1,0 +1,132 @@
+---
+import productDrivenIcon from "../assets/product-driven-development.svg";
+import scalableArchIcon from "../assets/scalable-architecture.svg";
+import perfReliabilityIcon from "../assets/performance-and-reliability.svg";
+import PhilosophyCard from "./philosophy-card.astro";
+
+const cards = [
+    {
+        iconSrc: productDrivenIcon.src,
+        iconWidth: productDrivenIcon.width,
+        iconHeight: productDrivenIcon.height,
+        title: "Product-Driven Development",
+        description:
+            "Every technical decision maps to a user need or a business outcome. I don't write code for its own sake.",
+    },
+    {
+        iconSrc: scalableArchIcon.src,
+        iconWidth: scalableArchIcon.width,
+        iconHeight: scalableArchIcon.height,
+        title: "Reliable by Default",
+        description:
+            "Cloud-native from day one, built to grow without rewrites, and resilient enough to handle the unexpected.",
+    },
+    {
+        iconSrc: perfReliabilityIcon.src,
+        iconWidth: perfReliabilityIcon.width,
+        iconHeight: perfReliabilityIcon.height,
+        title: "Performance That Ships",
+        description:
+            "Speed and accessibility aren't polish. They're requirements. I optimize before things break, not after.",
+    },
+];
+---
+
+<section class="phil-section" aria-labelledby="phil-heading">
+    <div class="phil-section__inner">
+        <!-- Header -->
+        <div class="phil-section__header">
+            <p class="phil-section__label">MY PHILOSOPHY</p>
+            <h2 class="phil-section__heading" id="phil-heading">Engineering with Purpose</h2>
+            <p class="phil-section__subtext">
+                Good engineering isn't just clean code. It's the right tradeoffs at the right time,
+                made with the business outcome in mind.
+            </p>
+        </div>
+
+        <!-- Cards grid -->
+        <ul class="phil-section__grid" role="list">
+            {cards.map((card) => <PhilosophyCard {...card} />)}
+        </ul>
+    </div>
+</section>
+
+<style>
+    @import "../../../styles/mixins.css";
+
+    .phil-section {
+        position: relative;
+        z-index: 1;
+        padding-block: 5rem 4rem;
+    }
+
+    .phil-section__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    @mixin tablet-up {
+        .phil-section__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    /* ── Header ── */
+    .phil-section__header {
+        margin-bottom: 3rem;
+    }
+
+    @mixin desktop-up {
+        .phil-section__header {
+            max-width: 52rem;
+            margin-bottom: 3.5rem;
+        }
+    }
+
+    .phil-section__label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 0.75rem;
+    }
+
+    .phil-section__heading {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        font-weight: 760;
+        letter-spacing: -0.04em;
+        color: var(--color-text-primary);
+        line-height: 1.1;
+        margin-bottom: 1.25rem;
+    }
+
+    .phil-section__subtext {
+        font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+        max-width: 48rem;
+    }
+
+    /* ── Cards grid ── */
+    .phil-section__grid {
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    @mixin tablet-up {
+        .phil-section__grid {
+            gap: 1.25rem;
+        }
+    }
+
+    @mixin desktop-up {
+        .phil-section__grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+    }
+</style>

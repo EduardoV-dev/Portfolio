@@ -1,0 +1,162 @@
+---
+import { type Post, formatPostDate } from "@/types/post";
+import { APP_ROUTES } from "@/constants/routes";
+
+interface Props {
+    prev: Post | null;
+    next: Post | null;
+}
+
+const { prev, next } = Astro.props;
+---
+
+<nav class="idn" aria-label="Article navigation">
+    <div class="idn__inner">
+        <div class="idn__divider"></div>
+
+        <div class="idn__links">
+            {
+                prev ? (
+                    <a href={APP_ROUTES.BLOG.DETAIL(prev.slug)} class="idn__link idn__link--prev">
+                        <span class="idn__link-dir">← Previous</span>
+                        <span class="idn__link-title">{prev.title}</span>
+                        <span class="idn__link-meta">{formatPostDate(prev.date)}</span>
+                    </a>
+                ) : (
+                    <div />
+                )
+            }
+
+            <a href={APP_ROUTES.BLOG.ROOT} class="idn__back-list">All Articles</a>
+
+            {
+                next ? (
+                    <a href={APP_ROUTES.BLOG.DETAIL(next.slug)} class="idn__link idn__link--next">
+                        <span class="idn__link-dir">Next →</span>
+                        <span class="idn__link-title">{next.title}</span>
+                        <span class="idn__link-meta">{formatPostDate(next.date)}</span>
+                    </a>
+                ) : (
+                    <div />
+                )
+            }
+        </div>
+    </div>
+</nav>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .idn {
+        position: relative;
+        z-index: 1;
+        padding-block: 2rem 3rem;
+    }
+
+    .idn__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    .idn__divider {
+        height: 1px;
+        background: var(--color-border);
+        margin-bottom: 2rem;
+    }
+
+    .idn__links {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: flex-start;
+    }
+
+    .idn__link {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        text-decoration: none;
+        max-width: 320px;
+        touch-action: manipulation;
+    }
+
+    .idn__link-dir {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+    }
+
+    .idn__link-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--color-text-primary);
+        line-height: 1.35;
+        transition: color var(--transition-fast);
+    }
+
+    .idn__link:hover .idn__link-title {
+        color: var(--color-accent);
+    }
+
+    .idn__link:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 3px;
+        border-radius: 3px;
+    }
+
+    .idn__link-meta {
+        font-size: 0.775rem;
+        color: var(--color-text-secondary);
+        opacity: 0.6;
+    }
+
+    .idn__back-list {
+        font-size: 0.825rem;
+        font-weight: 600;
+        color: var(--color-text-secondary);
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        touch-action: manipulation;
+        transition:
+            color var(--transition-fast),
+            text-decoration-color var(--transition-fast);
+    }
+
+    .idn__back-list:hover {
+        color: var(--color-accent);
+        text-decoration-color: var(--color-accent);
+    }
+
+    .idn__back-list:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 3px;
+        border-radius: 3px;
+    }
+
+    @mixin tablet-up {
+        .idn__inner {
+            padding-inline: 1.5rem;
+        }
+
+        .idn__links {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .idn__link--next {
+            text-align: right;
+            align-items: flex-end;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .idn__link-title,
+        .idn__back-list {
+            transition: none;
+        }
+    }
+</style>

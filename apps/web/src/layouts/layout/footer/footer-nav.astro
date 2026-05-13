@@ -1,0 +1,124 @@
+---
+import {
+    FOOTER_CAPABILITIES_LINKS,
+    FOOTER_CONNECT_LINKS,
+    HEADER_NAV_ITEMS,
+} from "@/constants/routes";
+
+interface FooterLink {
+    label: string;
+    href: string;
+    accent?: boolean;
+    external?: boolean;
+    newTab?: boolean;
+}
+
+interface FooterNavColumn {
+    heading: string;
+    links: FooterLink[];
+}
+
+const footerNavColumns: FooterNavColumn[] = [
+    {
+        heading: "Navigation",
+        links: HEADER_NAV_ITEMS,
+    },
+    {
+        heading: "Capabilities",
+        links: FOOTER_CAPABILITIES_LINKS,
+    },
+    {
+        heading: "Connect",
+        links: FOOTER_CONNECT_LINKS.map((link) => ({
+            ...link,
+            accent: link.label === "Schedule a Call",
+            external: link.href.startsWith("http"),
+            newTab: link.newTab ?? link.href.startsWith("http"),
+        })),
+    },
+];
+---
+
+<nav class="footer-nav" aria-label="Footer navigation">
+    {
+        footerNavColumns.map((col) => (
+            <div class="footer-nav__col">
+                <h3 class="footer-nav__heading">{col.heading}</h3>
+                <ul class="footer-nav__list" role="list">
+                    {col.links.map((link) => (
+                        <li>
+                            <a
+                                href={link.href}
+                                class:list={[
+                                    "footer-nav__link",
+                                    { "footer-nav__link--accent": link.accent },
+                                ]}
+                                target={link.newTab ? "_blank" : undefined}
+                                rel={link.newTab ? "noopener noreferrer" : undefined}
+                                aria-label={
+                                    link.newTab ? `${link.label} (opens in new tab)` : undefined
+                                }
+                            >
+                                {link.label}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        ))
+    }
+</nav>
+
+<style>
+    @import "../../../styles/mixins.css";
+
+    .footer-nav {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .footer-nav__heading {
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        color: var(--color-text-primary, #fff);
+        margin-bottom: 1.25rem;
+    }
+
+    .footer-nav__list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+    }
+
+    .footer-nav__link {
+        font-size: 0.8rem;
+        color: var(--color-text-secondary, rgba(255, 255, 255, 0.55));
+        transition: color 150ms ease;
+        line-height: 1.4;
+    }
+
+    .footer-nav__link:hover {
+        color: var(--color-text-primary, #fff);
+    }
+
+    .footer-nav__link--accent {
+        color: var(--color-accent);
+        font-weight: 500;
+    }
+
+    .footer-nav__link--accent:hover {
+        color: var(--color-accent);
+        opacity: 0.8;
+    }
+
+    @mixin tablet-up {
+        .footer-nav {
+            grid-column: span 3;
+            grid-template-columns: subgrid;
+            gap: 0;
+        }
+    }
+</style>

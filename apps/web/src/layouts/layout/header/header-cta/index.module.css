@@ -1,0 +1,46 @@
+@import "../../../../styles/mixins.css";
+
+.cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1.15rem;
+    background: var(--color-cta-bg);
+    color: var(--color-cta-text, #0a0a0a);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    border-radius: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    touch-action: manipulation;
+    transition:
+        background 150ms ease,
+        transform 150ms ease;
+}
+
+.cta-btn:hover {
+    background: var(--color-cta-hover, #7dd3fc);
+    transform: translateY(-1px);
+}
+
+.cta-btn:active {
+    transform: translateY(0);
+}
+
+.cta-btn--mobile {
+    justify-content: center;
+    padding: 0.9rem 1.8rem;
+    font-size: 0.85rem;
+    border-radius: 8px;
+}
+
+a.cta-btn:not(.cta-btn--mobile) {
+    display: none !important;
+}
+
+@mixin tablet-up {
+    a.cta-btn:not(.cta-btn--mobile) {
+        display: inline-flex !important;
+    }
+}

@@ -1,0 +1,85 @@
+---
+import type { ProjectDetail } from "@/types/strapi";
+
+export interface Props {
+    learnings: ProjectDetail["learnings"];
+}
+
+const { learnings } = Astro.props;
+---
+
+<section class="csd-section" id="learnings" data-animate aria-labelledby="learnings-heading">
+    <p class="csd-section__label">07</p>
+    <h2 class="csd-section__heading" id="learnings-heading">Key Learnings</h2>
+
+    <div class="csd-learnings">
+        {
+            learnings.map((l, i) => (
+                <div class="csd-learning">
+                    <span class="csd-learning__num" aria-hidden="true">
+                        {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <p class="csd-learning__text">{l}</p>
+                </div>
+            ))
+        }
+    </div>
+</section>
+
+<style>
+    @import "../../../styles/mixins.css";
+
+    .csd-section {
+        padding-block: 3rem;
+        border-bottom: 1px solid var(--color-border);
+        scroll-margin-top: calc(var(--header-height, 68px) + 1.5rem);
+    }
+
+    .csd-section__label {
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 0.6rem;
+        opacity: 0.7;
+    }
+
+    .csd-section__heading {
+        font-size: clamp(1.35rem, 3.5vw, 1.75rem);
+        font-weight: 740;
+        letter-spacing: -0.035em;
+        line-height: 1.15;
+        color: var(--color-text-primary);
+        margin-bottom: 1.5rem;
+    }
+
+    .csd-learnings {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .csd-learning {
+        display: grid;
+        grid-template-columns: 2.5rem 1fr;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .csd-learning__num {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        color: var(--color-accent);
+        opacity: 0.6;
+        padding-top: 0.2rem;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .csd-learning__text {
+        font-size: 0.92rem;
+        color: var(--color-text-secondary);
+        line-height: 1.72;
+    }
+</style>

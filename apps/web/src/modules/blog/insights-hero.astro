@@ -1,0 +1,93 @@
+<section class="ih" aria-labelledby="insights-hero-heading">
+    <div class="ih__inner">
+        <p class="ih__label">BLOG</p>
+        <h1 class="ih__title" id="insights-hero-heading">Engineering Blog</h1>
+        <p class="ih__subtext">
+            Thoughts on building products, system design, and the engineering decisions that
+            actually matter in production.
+        </p>
+    </div>
+</section>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .ih {
+        position: relative;
+        z-index: 1;
+        padding-block: 5rem 3rem;
+        text-align: center;
+    }
+
+    .ih__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ih__label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 1rem;
+        animation: ih-fade-up 500ms var(--ease-out-quint) both;
+        animation-delay: 40ms;
+    }
+
+    .ih__title {
+        font-size: clamp(2.5rem, 8vw, 4.5rem);
+        font-weight: 800;
+        letter-spacing: -0.05em;
+        color: var(--color-text-primary);
+        line-height: 1.05;
+        margin-bottom: 1.25rem;
+        text-wrap: balance;
+        animation: ih-fade-up 560ms var(--ease-out-quint) both;
+        animation-delay: 120ms;
+    }
+
+    .ih__subtext {
+        font-size: clamp(1rem, 2.5vw, 1.2rem);
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+        max-width: 48ch;
+        text-wrap: pretty;
+        animation: ih-fade-up 520ms var(--ease-out-quint) both;
+        animation-delay: 200ms;
+    }
+
+    @mixin tablet-up {
+        .ih {
+            padding-block: 6rem 3.5rem;
+        }
+
+        .ih__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .ih__label,
+        .ih__title,
+        .ih__subtext {
+            animation: none;
+        }
+    }
+
+    @keyframes ih-fade-up {
+        from {
+            opacity: 0;
+            transform: translateY(18px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

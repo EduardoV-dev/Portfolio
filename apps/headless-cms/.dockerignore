@@ -1,0 +1,12 @@
+node_modules
+dist
+.tmp
+build
+.strapi
+.strapi-cloud.json
+.strapi-updater.json
+.env
+*.log
+*.sqlite
+*.sqlite3
+coverage

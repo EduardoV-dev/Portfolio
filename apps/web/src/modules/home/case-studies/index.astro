@@ -1,0 +1,130 @@
+---
+import CaseStudyCard from "@/components/case-study-card/index.astro";
+import { projectServices } from "@/api/projects";
+import { APP_ROUTES } from "@/constants/routes";
+
+const caseStudies = await projectServices.findOnlyTwo();
+---
+
+<section class="cs-section" aria-labelledby="cs-heading">
+    <div class="cs-section__inner">
+        <!-- Section header -->
+        <div class="cs-section__header" data-animate>
+            <div class="cs-section__meta">
+                <p class="cs-section__label">PORTFOLIO</p>
+                <h2 class="cs-section__heading" id="cs-heading">Selected Case Studies</h2>
+            </div>
+            <a href={APP_ROUTES.CASE_STUDIES.ROOT} class="cs-section__view-all">
+                View all projects <span aria-hidden="true">&#x2197;</span>
+            </a>
+        </div>
+
+        <!-- Cards grid -->
+        <div class="cs-section__grid">
+            {
+                caseStudies.map((study, i) => (
+                    <CaseStudyCard
+                        caseStudy={study}
+                        data-animate
+                        data-animate-delay={String(i + 1)}
+                    />
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    @import "../../../styles/mixins.css";
+
+    .cs-section {
+        position: relative;
+        z-index: 1;
+        padding-block: 5rem 4rem;
+    }
+
+    .cs-section__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    @mixin tablet-up {
+        .cs-section__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    /* ── Section header ── */
+    .cs-section__header {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-bottom: 2.5rem;
+    }
+
+    @mixin tablet-up {
+        .cs-section__header {
+            flex-direction: row;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+    }
+
+    .cs-section__label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 0.5rem;
+    }
+
+    .cs-section__heading {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        font-weight: 760;
+        letter-spacing: -0.04em;
+        color: var(--color-text-primary);
+        line-height: 1.1;
+        text-wrap: balance;
+    }
+
+    .cs-section__view-all {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition: color var(--transition-fast);
+        padding-bottom: 0.15rem;
+    }
+
+    .cs-section__view-all:hover {
+        color: var(--color-text-primary);
+    }
+
+    /* ── Cards grid ── */
+    .cs-section__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    @mixin tablet-up {
+        .cs-section__grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+    }
+</style>
+
+<script>
+    import { initScrollReveal } from "@/utils/animations";
+    initScrollReveal();
+</script>

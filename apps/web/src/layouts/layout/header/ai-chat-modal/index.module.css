@@ -1,0 +1,92 @@
+/* ── Backdrop ── */
+.backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    background: rgba(0, 0, 0, 0.5);
+    border: 0;
+    padding: 0;
+    cursor: default;
+    backdrop-filter: blur(2px);
+}
+
+.backdrop[hidden] {
+    display: none;
+}
+
+.backdrop:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* ── Modal panel ── */
+.modal {
+    position: fixed;
+    top: calc(var(--header-height, 68px) + 0.75rem);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+    width: min(580px, calc(100vw - 2rem));
+    height: min(520px, calc(100dvh - var(--header-height, 68px) - 2rem));
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.875rem;
+    overflow: hidden;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.06);
+    animation: modalIn 180ms ease forwards;
+}
+
+.modal[hidden] {
+    display: none;
+}
+
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-8px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+}
+
+@keyframes modalOut {
+    from {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-6px) scale(0.97);
+    }
+}
+
+.modal--closing {
+    animation: modalOut 160ms ease forwards;
+}
+
+@keyframes backdropOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.backdrop--closing {
+    animation: backdropOut 160ms ease forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .modal,
+    .modal--closing,
+    .backdrop,
+    .backdrop--closing {
+        animation: none;
+        transition: none;
+    }
+}

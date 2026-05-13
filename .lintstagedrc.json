@@ -1,12 +1,8 @@
 {
-    "apps/frontend/**/*.{js,ts,jsx,tsx,mjs,astro}": [
-        "pnpm --filter apps-frontend exec eslint",
-        "pnpm --filter apps-frontend exec prettier --check"
+    "apps/web/**/*.{js,ts,jsx,tsx,mjs,astro}": [
+        "pnpm --filter web exec eslint",
+        "pnpm --filter web exec prettier --check"
     ],
-    "apps/frontend/**/*.{json,css}": [
-        "pnpm --filter apps-frontend exec prettier --check"
-    ],
-    "apps/frontend/**/*.{ts,tsx,astro}": [
-        "pnpm --filter apps-frontend typecheck"
-    ]
+    "apps/web/**/*.{json,css}": ["pnpm --filter web exec prettier --check"],
+    "apps/web/**/*.{ts,tsx,astro}": ["pnpm --filter web typecheck"]
 }

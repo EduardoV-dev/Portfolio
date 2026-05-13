@@ -1,0 +1,417 @@
+---
+import { type Project } from "@/types/strapi";
+import { APP_ROUTES } from "@/constants/routes";
+import { ENVS } from "@/constants/environment-variables";
+import ProjectImageSlider from "@/components/project-image-slider/index.astro";
+
+export interface Props {
+    project: Project;
+}
+
+const { project } = Astro.props;
+const { detail } = project;
+const projectImages = Array.isArray(project.images) ? project.images : [];
+const projectTags = Array.isArray(project.tags) ? project.tags : [];
+const baseMediaUrl = ENVS.STRAPI_API_URL.replace("/api", "");
+const lightboxImages = projectImages
+    .filter((image) => typeof image?.url === "string" && image.url.length > 0)
+    .map((image, index) => ({
+        src: `${baseMediaUrl}${image.url}`,
+        alt: image.alternativeText || `${project.title} preview ${index + 1}`,
+    }));
+const hasSourceHref =
+    typeof project.sourceHref === "string" && project.sourceHref.trim().length > 0;
+const hasLiveHref = typeof project.liveHref === "string" && project.liveHref.trim().length > 0;
+---
+
+<section class="csd-hero" aria-label="Project overview">
+    <a href={APP_ROUTES.CASE_STUDIES.ROOT} class="csd-hero__back" aria-label="Back to case studies">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="13"
+            height="13"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+        >
+            <path d="M19 12H5M12 5l-7 7 7 7"></path>
+        </svg>
+        All Case Studies
+    </a>
+
+    <div class="csd-hero__tags">
+        {projectTags.map((tag) => <span class="csd-tag">{tag.name}</span>)}
+    </div>
+
+    <div
+        class="csd-hero__media"
+        data-animate
+        data-animate-delay="1"
+        data-detail-lightbox-images={JSON.stringify(lightboxImages)}
+    >
+        <ProjectImageSlider images={projectImages} projectTitle={project.title} variant="detail" />
+    </div>
+
+    {
+        lightboxImages.length > 0 && (
+            <div class="csd-lightbox" data-detail-lightbox hidden>
+                <button
+                    class="csd-lightbox__close"
+                    type="button"
+                    data-detail-lightbox-close
+                    aria-label="Close image preview"
+                >
+                    <span class="csd-lightbox__close-icon" aria-hidden="true">
+                        &times;
+                    </span>
+                </button>
+                <figure class="csd-lightbox__figure">
+                    <img class="csd-lightbox__image" data-detail-lightbox-image src="" alt="" />
+                </figure>
+            </div>
+        )
+    }
+
+    <h1 class="csd-hero__title" data-animate data-animate-delay="2">{project.title}</h1>
+    <p class="csd-hero__impact" data-animate data-animate-delay="3">{project.impact}</p>
+    <p class="csd-hero__desc" data-animate data-animate-delay="4">
+        {project.description}
+    </p>
+
+    <!-- Key metrics -->
+    <div class="csd-hero__metrics" data-animate data-animate-delay="5">
+        {
+            detail.metrics.map((m) => (
+                <div class="csd-metric">
+                    <span class="csd-metric__value">{m.value}</span>
+                    <span class="csd-metric__label">{m.label}</span>
+                </div>
+            ))
+        }
+    </div>
+
+    <!-- Action links -->
+    {
+        (hasSourceHref || hasLiveHref) && (
+            <div class="csd-hero__actions" data-animate data-animate-delay="6">
+                {hasSourceHref && (
+                    <a
+                        href={project.sourceHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="csd-hero__action-link"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <polyline points="16 18 22 12 16 6" />
+                            <polyline points="8 6 2 12 8 18" />
+                        </svg>
+                        Source Code
+                    </a>
+                )}
+                {hasLiveHref && (
+                    <a
+                        href={project.liveHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="csd-hero__action-link"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                            <polyline points="15 3 21 3 21 9" />
+                            <line x1="10" y1="14" x2="21" y2="3" />
+                        </svg>
+                        Live Project
+                    </a>
+                )}
+            </div>
+        )
+    }
+</section>
+
+<style>
+    @import "../../../styles/mixins.css";
+
+    .csd-hero {
+        padding-bottom: 3rem;
+    }
+
+    .csd-hero__back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        margin-bottom: 1.75rem;
+        transition: color var(--transition-fast);
+    }
+
+    .csd-hero__back:hover {
+        color: var(--color-text-primary);
+    }
+
+    /* Hide back link on desktop — nav handles it */
+    @mixin desktop-up {
+        .csd-hero__back {
+            display: none;
+        }
+    }
+
+    .csd-hero__tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .csd-hero__media {
+        margin-bottom: 1.5rem;
+        border: 1px solid color-mix(in srgb, var(--color-accent) 24%, transparent);
+        border-radius: 0.9rem;
+        overflow: hidden;
+        background: color-mix(in srgb, var(--color-accent) 5%, var(--color-surface));
+        aspect-ratio: 16 / 10;
+        min-height: 260px;
+        max-height: 520px;
+        cursor: zoom-in;
+    }
+
+    .csd-tag {
+        display: inline-block;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.2rem 0.55rem;
+        border-radius: 0.3rem;
+        border: 1px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
+        background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+        color: var(--color-accent);
+    }
+
+    .csd-hero__title {
+        font-size: clamp(2rem, 6vw, 3.25rem);
+        font-weight: 780;
+        letter-spacing: -0.04em;
+        line-height: 1.05;
+        color: var(--color-text-primary);
+        margin-bottom: 0.85rem;
+        text-wrap: balance;
+    }
+
+    .csd-hero__impact {
+        font-size: clamp(0.95rem, 2vw, 1.05rem);
+        font-weight: 500;
+        color: var(--color-accent);
+        line-height: 1.55;
+        margin-bottom: 0.65rem;
+    }
+
+    .csd-hero__desc {
+        font-size: 0.95rem;
+        color: var(--color-text-secondary);
+        line-height: 1.7;
+        max-width: 60ch;
+        margin-bottom: 2rem;
+    }
+
+    /* Metrics bar */
+    .csd-hero__metrics {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 1px;
+        background: var(--color-border);
+        border: 1px solid var(--color-border);
+        border-radius: 0.75rem;
+        overflow: hidden;
+        margin-bottom: 1.75rem;
+        width: fit-content;
+        max-width: 100%;
+    }
+
+    .csd-metric {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 150px;
+        gap: 0.3rem;
+        padding: 1.25rem 1.5rem;
+        background: var(--color-surface);
+        min-width: 0;
+    }
+
+    @mixin tablet-up {
+        .csd-metric {
+            flex-basis: 180px;
+        }
+    }
+
+    .csd-metric__value {
+        font-size: clamp(1.3rem, 3vw, 1.65rem);
+        font-weight: 760;
+        letter-spacing: -0.03em;
+        color: var(--color-text-primary);
+        line-height: 1;
+    }
+
+    .csd-metric__label {
+        font-size: 0.72rem;
+        font-weight: 500;
+        color: var(--color-text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        line-height: 1.4;
+    }
+
+    /* Action links */
+    .csd-hero__actions {
+        display: flex;
+        gap: 1.25rem;
+        flex-wrap: wrap;
+    }
+
+    .csd-hero__action-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        cursor: pointer;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: color var(--transition-fast);
+        touch-action: manipulation;
+    }
+
+    .csd-hero__action-link:hover {
+        color: var(--color-text-primary);
+    }
+
+    .csd-hero__action-link:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 3px;
+        border-radius: 2px;
+    }
+
+    .csd-lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 1200;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        background:
+            radial-gradient(circle at 16% 20%, rgba(0, 204, 255, 0.18) 0%, transparent 38%),
+            radial-gradient(circle at 82% 18%, rgba(35, 120, 255, 0.16) 0%, transparent 42%),
+            rgba(2, 8, 18, 0.82);
+        backdrop-filter: blur(10px) saturate(120%);
+    }
+
+    .csd-lightbox[hidden] {
+        display: none !important;
+    }
+
+    .csd-lightbox__figure {
+        margin: 0;
+        width: min(94vw, 1400px);
+        height: min(90vh, 980px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: clamp(0.7rem, 2vw, 1.4rem);
+        border-radius: 1rem;
+        background:
+            linear-gradient(145deg, rgba(5, 17, 34, 0.95) 0%, rgba(4, 10, 20, 0.95) 100%),
+            radial-gradient(circle at 22% 28%, rgba(0, 204, 255, 0.26) 0%, transparent 42%),
+            radial-gradient(circle at 78% 72%, rgba(29, 85, 210, 0.28) 0%, transparent 44%);
+        border: 1px solid color-mix(in srgb, var(--color-accent) 28%, transparent);
+        box-shadow:
+            0 24px 64px rgba(0, 0, 0, 0.56),
+            inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .csd-lightbox__image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        border-radius: 0.65rem;
+        border: 1px solid color-mix(in srgb, var(--color-accent) 24%, transparent);
+        background: #02070f;
+    }
+
+    .csd-lightbox__close {
+        position: fixed;
+        top: 1.1rem;
+        right: 1.1rem;
+        width: 2.55rem;
+        height: 2.55rem;
+        z-index: 1300;
+        border: 1px solid color-mix(in srgb, var(--color-accent) 38%, transparent);
+        background: rgba(5, 13, 26, 0.94);
+        color: #f4fbff;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1.3rem;
+        font-weight: 700;
+        line-height: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+        transition:
+            background var(--transition-fast),
+            border-color var(--transition-fast),
+            color var(--transition-fast);
+    }
+
+    .csd-lightbox__close-icon {
+        display: inline-block;
+        transform: translateY(-1px);
+        pointer-events: none;
+    }
+
+    .csd-lightbox__close:hover {
+        background: rgba(6, 19, 35, 0.96);
+        border-color: color-mix(in srgb, var(--color-accent) 65%, transparent);
+        color: var(--color-accent);
+    }
+
+    .csd-lightbox__close:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 2px;
+    }
+</style>
+
+<script src="./lightbox.ts"></script>

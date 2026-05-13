@@ -1,0 +1,186 @@
+---
+import productionIcon from "../assets/production-engineering.svg";
+import awsIcon from "../assets/aws-cloud.svg";
+import architectureIcon from "../assets/system-architecture.svg";
+import remoteIcon from "../assets/remote-first.svg";
+import HighlightsCarousel from "./highlights-carousel";
+import { YEARS_OF_PROFESSIONAL_EXPERIENCE } from "@/constants/common";
+
+const items = [
+    {
+        icon: productionIcon,
+        title: "Full Stack Ownership",
+        description: `${YEARS_OF_PROFESSIONAL_EXPERIENCE}+ years shipping end-to-end digital products`,
+    },
+    {
+        icon: awsIcon,
+        title: "AWS Cloud & DevOps",
+        description: "Reliable deployments, stable performance, CI/CD pipelines",
+    },
+    {
+        icon: architectureIcon,
+        title: "Product & Marketing Focus",
+        description: "Bridging engineering, product, and marketing teams",
+    },
+    {
+        icon: remoteIcon,
+        title: "US Remote Ready",
+        description: "Async-first, timezone-aligned with US teams",
+    },
+];
+
+const carouselItems = items.map((item) => ({
+    iconSrc: item.icon.src,
+    iconWidth: item.icon.width,
+    iconHeight: item.icon.height,
+    title: item.title,
+    description: item.description,
+}));
+---
+
+<section class="highlights" aria-label="Key highlights">
+    <div class="highlights__inner">
+        {/* Mobile: Embla carousel */}
+        <div class="highlights__carousel">
+            <HighlightsCarousel client:load items={carouselItems} />
+        </div>
+
+        {/* Desktop: CSS grid */}
+        <ul class="highlights__grid" role="list">
+            {
+                items.map((item) => (
+                    <li class="highlights__item">
+                        <div class="highlights__icon-box" aria-hidden="true">
+                            <img
+                                src={item.icon.src}
+                                alt=""
+                                width={item.icon.width}
+                                height={item.icon.height}
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <div class="highlights__text">
+                            <p class="highlights__title">{item.title}</p>
+                            <p class="highlights__desc">{item.description}</p>
+                        </div>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</section>
+
+<style>
+    @import "../../../styles/mixins.css";
+
+    .highlights {
+        position: relative;
+        z-index: 1;
+        margin-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .highlights__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    /* ── Mobile: show carousel, hide grid ── */
+    .highlights__carousel {
+        display: block;
+        padding-block: 2.75rem;
+    }
+
+    .highlights__grid {
+        display: none;
+    }
+
+    /* ── Desktop: hide carousel, show grid ── */
+    @mixin desktop-up {
+        .highlights__carousel {
+            display: none;
+        }
+
+        .highlights__grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            list-style: none;
+            gap: 0;
+        }
+
+        .highlights__item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 1rem;
+            padding: 2.75rem 2rem;
+        }
+    }
+
+    @mixin tablet-up {
+        .highlights {
+            margin-top: 1.5rem;
+        }
+
+        .highlights__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    /* Icon box — desktop grid */
+    .highlights__icon-box {
+        position: relative;
+        flex-shrink: 0;
+        width: 3.2rem;
+        height: 3.2rem;
+        border-radius: 0.85rem;
+        border: 1.5px solid color-mix(in srgb, var(--color-accent) 32%, transparent);
+        background: linear-gradient(180deg, rgba(8, 14, 21, 0.97), rgba(6, 11, 18, 0.99));
+        display: grid;
+        place-items: center;
+        box-shadow:
+            0 0 0 1px rgba(255, 255, 255, 0.015) inset,
+            0 8px 20px rgba(2, 7, 13, 0.45);
+    }
+
+    .highlights__icon-box::before {
+        content: "";
+        position: absolute;
+        width: 60%;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        background: rgba(19, 65, 97, 0.55);
+        pointer-events: none;
+    }
+
+    .highlights__icon-box img {
+        position: relative;
+        z-index: 1;
+        width: 1.25rem;
+        height: 1.25rem;
+        object-fit: contain;
+    }
+
+    .highlights__text {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .highlights__title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        letter-spacing: -0.015em;
+        line-height: 1.2;
+    }
+
+    .highlights__desc {
+        font-size: 0.82rem;
+        color: var(--color-text-secondary);
+        line-height: 1.4;
+    }
+</style>

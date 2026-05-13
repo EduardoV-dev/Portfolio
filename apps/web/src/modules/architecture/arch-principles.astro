@@ -1,0 +1,143 @@
+---
+import ArchPrinciplesCard from "./arch-principles-card.astro";
+
+const principles = [
+    {
+        iconName: "scalability" as const,
+        title: "Scalability First",
+        description:
+            "Systems designed to grow with demand, both horizontally and vertically, without requiring fundamental rework as traffic and data volumes increase.",
+    },
+    {
+        iconName: "resilience" as const,
+        title: "Resilience & Reliability",
+        description:
+            "Built to handle failures without panic. Redundancy, circuit breakers, and graceful degradation keep services running instead of letting a single failure cascade.",
+    },
+    {
+        iconName: "performance" as const,
+        title: "Performance-Oriented",
+        description:
+            "Optimized at every layer: query efficiency, cache hit rates, payload sizes, and infrastructure right-sizing. The goal is fast, predictable performance under real load.",
+    },
+    {
+        iconName: "maintainability" as const,
+        title: "Maintainability",
+        description:
+            "Clear module boundaries, defined contracts, and consistent patterns ensure systems can evolve cleanly for years without accumulating design debt.",
+    },
+];
+---
+
+<section class="arch-principles" aria-labelledby="arch-principles-heading">
+    <div class="arch-principles__inner">
+        <header class="arch-principles__header">
+            <p class="arch-principles__label" data-animate data-animate-delay="1">
+                CORE PRINCIPLES
+            </p>
+            <h2
+                class="arch-principles__heading"
+                id="arch-principles-heading"
+                data-animate
+                data-animate-delay="2"
+            >
+                How I Approach System Design
+            </h2>
+            <p class="arch-principles__subtext" data-animate data-animate-delay="3">
+                These are the lenses I apply to every system decision. Trade-offs are always
+                explicit, never hidden.
+            </p>
+        </header>
+
+        <ul class="arch-principles__grid" role="list">
+            {principles.map((p, i) => <ArchPrinciplesCard {...p} delay={i + 1} />)}
+        </ul>
+    </div>
+</section>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .arch-principles {
+        position: relative;
+        z-index: 1;
+        padding-block: 4rem;
+    }
+
+    .arch-principles__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    @mixin tablet-up {
+        .arch-principles__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    /* ── Header ── */
+    .arch-principles__header {
+        margin-bottom: 3rem;
+    }
+
+    @mixin desktop-up {
+        .arch-principles__header {
+            max-width: 52rem;
+            margin-bottom: 3.5rem;
+        }
+    }
+
+    .arch-principles__label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 0.75rem;
+    }
+
+    .arch-principles__heading {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        font-weight: 760;
+        letter-spacing: -0.04em;
+        color: var(--color-text-primary);
+        line-height: 1.1;
+        margin-bottom: 1.25rem;
+        text-wrap: balance;
+    }
+
+    .arch-principles__subtext {
+        font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+        max-width: 48rem;
+    }
+
+    /* ── Grid ── */
+    .arch-principles__grid {
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    @mixin tablet-up {
+        .arch-principles__grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+    }
+
+    @mixin desktop-up {
+        .arch-principles__grid {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+    }
+</style>
+
+<script>
+    import { initScrollReveal } from "@/utils/animations";
+    initScrollReveal();
+</script>

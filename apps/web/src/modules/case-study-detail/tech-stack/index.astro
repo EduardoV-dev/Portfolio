@@ -1,0 +1,114 @@
+---
+import type { ProjectDetail } from "@/types/strapi";
+
+export interface Props {
+    skills: ProjectDetail["skills"];
+}
+
+const { skills } = Astro.props;
+
+const techStack = skills.reduce(
+    (acc, skill) => {
+        const category = skill.category.name.toLowerCase();
+        if (!acc[category]) {
+            acc[category] = [];
+        }
+        acc[category].push(skill.name);
+        return acc;
+    },
+    {} as Record<string, string[]>,
+);
+---
+
+<section class="csd-section" id="tech-stack" data-animate aria-labelledby="tech-heading">
+    <p class="csd-section__label">06</p>
+    <h2 class="csd-section__heading" id="tech-heading">Tech Stack</h2>
+
+    <div class="csd-techstack">
+        {
+            Object.entries(techStack).map(([category, techs]) => (
+                <div class="csd-techstack__group">
+                    <p class="csd-techstack__group-label">{category}</p>
+                    <div class="csd-techstack__chips">
+                        {techs.map((t) => (
+                            <span class="csd-tech-chip">{t}</span>
+                        ))}
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+</section>
+
+<style>
+    @import "../../../styles/mixins.css";
+
+    .csd-section {
+        padding-block: 3rem;
+        border-bottom: 1px solid var(--color-border);
+        scroll-margin-top: calc(var(--header-height, 68px) + 1.5rem);
+    }
+
+    .csd-section__label {
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 0.6rem;
+        opacity: 0.7;
+    }
+
+    .csd-section__heading {
+        font-size: clamp(1.35rem, 3.5vw, 1.75rem);
+        font-weight: 740;
+        letter-spacing: -0.035em;
+        line-height: 1.15;
+        color: var(--color-text-primary);
+        margin-bottom: 1.5rem;
+    }
+
+    .csd-techstack {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    @mixin tablet-up {
+        .csd-techstack {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .csd-techstack__group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+    }
+
+    .csd-techstack__group-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-text-secondary);
+        opacity: 0.7;
+    }
+
+    .csd-techstack__chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .csd-tech-chip {
+        display: inline-block;
+        font-size: 0.78rem;
+        font-weight: 500;
+        padding: 0.3rem 0.75rem;
+        border-radius: 0.4rem;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-primary);
+    }
+</style>

@@ -1,0 +1,241 @@
+---
+import { APP_ROUTES } from "@/constants/routes";
+---
+
+<section class="arch-rw" aria-labelledby="arch-rw-heading">
+    <div class="arch-rw__inner">
+        <div class="arch-rw__content">
+            <header class="arch-rw__header">
+                <p class="arch-rw__label" data-animate data-animate-delay="1">APPLIED WORK</p>
+                <h2
+                    class="arch-rw__heading"
+                    id="arch-rw-heading"
+                    data-animate
+                    data-animate-delay="2"
+                >
+                    Applied in Real Projects
+                </h2>
+            </header>
+
+            <p class="arch-rw__body" data-animate data-animate-delay="3">
+                These aren't theoretical patterns. I've applied them while building and shipping
+                full-stack products in production, making trade-off decisions that held under real
+                load and evolved cleanly as requirements changed.
+            </p>
+
+            <a
+                href={APP_ROUTES.CASE_STUDIES.ROOT}
+                class="arch-rw__link"
+                data-animate
+                data-animate-delay="4"
+            >
+                <span>View Case Studies</span>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </a>
+        </div>
+
+        <div class="arch-rw__stats" data-animate data-animate-delay="3">
+            <div class="arch-rw__stat">
+                <span class="arch-rw__stat-value">4+</span>
+                <span class="arch-rw__stat-label">Production systems architected</span>
+            </div>
+            <div class="arch-rw__stat">
+                <span class="arch-rw__stat-value">3+</span>
+                <span class="arch-rw__stat-label">Years building production systems</span>
+            </div>
+            <div class="arch-rw__stat">
+                <span class="arch-rw__stat-value">5</span>
+                <span class="arch-rw__stat-label">Architecture domains mastered</span>
+            </div>
+            <div class="arch-rw__stat">
+                <span class="arch-rw__stat-value">100%</span>
+                <span class="arch-rw__stat-label">Cloud-native deployments</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .arch-rw {
+        position: relative;
+        z-index: 1;
+        padding-block: 4rem;
+    }
+
+    .arch-rw__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    @mixin tablet-up {
+        .arch-rw__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    .arch-rw__content {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 1.25rem;
+    }
+
+    @mixin tablet-up {
+        .arch-rw__content {
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 3rem;
+            padding: 2.5rem;
+        }
+    }
+
+    @mixin desktop-up {
+        .arch-rw__content {
+            gap: 4rem;
+            padding: 3rem;
+        }
+    }
+
+    /* ── Left: text ── */
+    .arch-rw__header {
+        margin-bottom: 1.25rem;
+    }
+
+    .arch-rw__label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 0.75rem;
+    }
+
+    .arch-rw__heading {
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        font-weight: 760;
+        letter-spacing: -0.04em;
+        color: var(--color-text-primary);
+        line-height: 1.15;
+        text-wrap: balance;
+    }
+
+    .arch-rw__body {
+        font-size: clamp(0.9rem, 2vw, 1rem);
+        color: var(--color-text-secondary);
+        line-height: 1.75;
+        margin-bottom: 1.75rem;
+    }
+
+    @mixin tablet-up {
+        .arch-rw__body,
+        .arch-rw__header,
+        .arch-rw__link {
+            max-width: 44ch;
+        }
+    }
+
+    .arch-rw__link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.925rem;
+        font-weight: 600;
+        color: var(--color-accent);
+        text-decoration: none;
+        letter-spacing: -0.01em;
+        touch-action: manipulation;
+        transition: gap var(--transition-fast);
+    }
+
+    .arch-rw__link svg {
+        width: 1rem;
+        height: 1rem;
+        transition: transform var(--transition-fast);
+    }
+
+    .arch-rw__link:hover {
+        gap: 0.75rem;
+    }
+
+    .arch-rw__link:hover svg {
+        transform: translateX(3px);
+    }
+
+    .arch-rw__link:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 3px;
+        border-radius: 2px;
+    }
+
+    /* ── Right: stats ── */
+    .arch-rw__stats {
+        margin-top: 4rem;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: row;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    @mixin tablet-up {
+        .arch-rw__stats {
+            flex-direction: column;
+            gap: 2rem;
+            min-width: 12rem;
+            padding-left: 2.5rem;
+            border-left: 1px solid var(--color-border);
+            flex-wrap: nowrap;
+        }
+    }
+
+    .arch-rw__stat {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+
+    .arch-rw__stat-value {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+        font-weight: 760;
+        letter-spacing: -0.04em;
+        color: var(--color-accent);
+        line-height: 1;
+    }
+
+    .arch-rw__stat-label {
+        font-size: 0.8rem;
+        color: var(--color-text-secondary);
+        line-height: 1.4;
+        max-width: 14ch;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .arch-rw__link,
+        .arch-rw__link svg {
+            transition: none;
+        }
+    }
+</style>
+
+<script>
+    import { initScrollReveal } from "@/utils/animations";
+    initScrollReveal();
+</script>

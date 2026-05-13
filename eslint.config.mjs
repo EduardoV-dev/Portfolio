@@ -48,7 +48,7 @@ export default [
         },
     },
     {
-        files: ["apps/strapi/**/*.{js,ts,mjs,cjs}"],
+        files: ["apps/headless-cms/**/*.{js,ts,mjs,cjs}"],
         rules: {
             "no-console": "off",
             "@typescript-eslint/no-unused-vars": "off",

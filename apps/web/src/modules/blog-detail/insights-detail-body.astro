@@ -1,0 +1,222 @@
+---
+import { type Post, type ContentBlock } from "@/types/post";
+
+interface Props {
+    post: Post;
+}
+
+const { post } = Astro.props;
+const blocks: ContentBlock[] = post.body;
+---
+
+<article class="idb" aria-label={`Article: ${post.title}`}>
+    <div class="idb__inner">
+        {
+            blocks.map((block) => {
+                if (block.type === "paragraph") {
+                    return <p class="idb__p">{block.text}</p>;
+                }
+                if (block.type === "heading" && block.level === 2) {
+                    return <h2 class="idb__h2">{block.text}</h2>;
+                }
+                if (block.type === "heading" && block.level === 3) {
+                    return <h3 class="idb__h3">{block.text}</h3>;
+                }
+                if (block.type === "code") {
+                    return (
+                        <div class="idb__code-wrap">
+                            <div class="idb__code-header">
+                                <span class="idb__code-lang">{block.language}</span>
+                            </div>
+                            <pre class="idb__pre">
+                                <code class="idb__code">{block.snippet}</code>
+                            </pre>
+                        </div>
+                    );
+                }
+                if (block.type === "list") {
+                    return (
+                        <ul class="idb__list">
+                            {block.items.map((item) => (
+                                <li class="idb__li">{item}</li>
+                            ))}
+                        </ul>
+                    );
+                }
+                if (block.type === "quote") {
+                    return (
+                        <blockquote class="idb__blockquote">
+                            <p class="idb__quote-text">{block.text}</p>
+                            {block.attribution && (
+                                <cite class="idb__cite">, {block.attribution}</cite>
+                            )}
+                        </blockquote>
+                    );
+                }
+                return null;
+            })
+        }
+    </div>
+</article>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .idb {
+        position: relative;
+        z-index: 1;
+        padding-block: 3.5rem 3rem;
+    }
+
+    .idb__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+
+        /* Readable column for prose */
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    /* Prose max-width applied to all direct children */
+    .idb__inner > * {
+        max-width: 720px;
+    }
+
+    /* ── Paragraphs ── */
+    .idb__p {
+        font-size: clamp(1rem, 2vw, 1.075rem);
+        color: var(--color-text-secondary);
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+    }
+
+    /* ── Headings ── */
+    .idb__h2 {
+        font-size: clamp(1.3rem, 3.5vw, 1.65rem);
+        font-weight: 760;
+        letter-spacing: -0.03em;
+        color: var(--color-text-primary);
+        line-height: 1.2;
+        margin-top: 2.75rem;
+        margin-bottom: 1rem;
+        text-wrap: balance;
+    }
+
+    .idb__h3 {
+        font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--color-text-primary);
+        line-height: 1.3;
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+        text-wrap: balance;
+    }
+
+    /* ── Code block ── */
+    .idb__code-wrap {
+        margin-bottom: 1.75rem;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid var(--color-border);
+        max-width: 720px;
+    }
+
+    .idb__code-header {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        background: rgba(255, 255, 255, 0.03);
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .idb__code-lang {
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--color-text-secondary);
+        opacity: 0.6;
+    }
+
+    .idb__pre {
+        margin: 0;
+        padding: 1.25rem 1.25rem;
+        background: #0d1117;
+        overflow-x: auto;
+        overscroll-behavior: contain;
+    }
+
+    .idb__code {
+        font-family: "Fira Code", "Cascadia Code", "Consolas", "Monaco", monospace;
+        font-size: 0.845rem;
+        line-height: 1.7;
+        color: #e6edf3;
+        white-space: pre;
+        tab-size: 4;
+    }
+
+    /* ── List ── */
+    .idb__list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+        margin-bottom: 1.5rem;
+        padding-left: 0;
+    }
+
+    .idb__li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        font-size: clamp(0.9rem, 2vw, 1rem);
+        color: var(--color-text-secondary);
+        line-height: 1.7;
+    }
+
+    .idb__li::before {
+        content: "→";
+        color: var(--color-accent);
+        font-weight: 700;
+        flex-shrink: 0;
+        margin-top: 0.05em;
+    }
+
+    /* ── Blockquote ── */
+    .idb__blockquote {
+        margin: 0 0 1.75rem;
+        padding: 1.25rem 1.5rem;
+        border-left: 3px solid var(--color-accent);
+        background: color-mix(in srgb, var(--color-accent) 4%, transparent);
+        border-radius: 0 6px 6px 0;
+    }
+
+    .idb__quote-text {
+        font-size: clamp(1rem, 2.5vw, 1.1rem);
+        font-style: italic;
+        color: var(--color-text-primary);
+        line-height: 1.65;
+        opacity: 0.9;
+    }
+
+    .idb__cite {
+        display: block;
+        margin-top: 0.6rem;
+        font-size: 0.825rem;
+        font-style: normal;
+        color: var(--color-text-secondary);
+        opacity: 0.65;
+    }
+
+    @mixin tablet-up {
+        .idb {
+            padding-block: 4rem 3.5rem;
+        }
+
+        .idb__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+</style>

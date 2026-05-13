@@ -1,2 +1,2 @@
 npx lint-staged
-pnpm --filter apps-frontend build
+pnpm --filter web build

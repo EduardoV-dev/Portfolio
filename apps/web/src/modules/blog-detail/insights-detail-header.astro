@@ -1,0 +1,126 @@
+---
+import { type Post } from "@/types/post";
+import { APP_ROUTES } from "@/constants/routes";
+
+interface Props {
+    post: Post;
+    displayDate: string;
+}
+
+const { post, displayDate } = Astro.props;
+---
+
+<header class="idh" aria-labelledby="idh-heading">
+    <div class="idh__inner">
+        <a href={APP_ROUTES.BLOG.ROOT} class="idh__back">
+            <span aria-hidden="true">←</span> Back to Blog
+        </a>
+
+        <div class="idh__meta-top">
+            {post.tags.map((tag) => <span class="idh__tag">{tag}</span>)}
+        </div>
+
+        <h1 class="idh__title" id="idh-heading">{post.title}</h1>
+
+        <div class="idh__meta">
+            <span class="idh__meta-date">{displayDate}</span>
+            <span class="idh__meta-sep" aria-hidden="true">·</span>
+            <span class="idh__meta-time">{post.readingTime} min read</span>
+        </div>
+    </div>
+</header>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .idh {
+        position: relative;
+        z-index: 1;
+        padding-block: 4rem 2.5rem;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .idh__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    .idh__back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        margin-bottom: 2rem;
+        touch-action: manipulation;
+        transition: color var(--transition-fast);
+    }
+
+    .idh__back:hover {
+        color: var(--color-accent);
+    }
+
+    .idh__back:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 3px;
+        border-radius: 3px;
+    }
+
+    .idh__meta-top {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .idh__tag {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+        border: 1px solid color-mix(in srgb, var(--color-accent) 15%, transparent);
+        border-radius: 4px;
+        padding: 0.2rem 0.55rem;
+    }
+
+    .idh__title {
+        font-size: clamp(2rem, 6vw, 3.25rem);
+        font-weight: 800;
+        letter-spacing: -0.045em;
+        color: var(--color-text-primary);
+        line-height: 1.1;
+        margin-bottom: 1.25rem;
+        text-wrap: balance;
+        max-width: 22ch;
+    }
+
+    .idh__meta {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        color: var(--color-text-secondary);
+        opacity: 0.7;
+    }
+
+    @mixin tablet-up {
+        .idh {
+            padding-block: 5rem 3rem;
+        }
+
+        .idh__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .idh__back {
+            transition: none;
+        }
+    }
+</style>

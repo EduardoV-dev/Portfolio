@@ -1,0 +1,62 @@
+{
+  "kind": "collectionType",
+  "collectionName": "project_details",
+  "info": {
+    "singularName": "project-detail",
+    "pluralName": "project-details",
+    "displayName": "Project Detail"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "slug": {
+      "type": "uid",
+      "private": true,
+      "required": true
+    },
+    "metrics": {
+      "type": "component",
+      "component": "project.metric",
+      "repeatable": true,
+      "required": true
+    },
+    "overview": {
+      "type": "text",
+      "required": true
+    },
+    "challenge": {
+      "type": "text",
+      "required": true
+    },
+    "solution": {
+      "type": "text",
+      "required": true
+    },
+    "highlights": {
+      "type": "component",
+      "component": "project.highlight",
+      "repeatable": true
+    },
+    "skills": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::skill.skill"
+    },
+    "impactDetails": {
+      "type": "json",
+      "required": true
+    },
+    "learnings": {
+      "type": "json",
+      "required": true
+    },
+    "project": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::project.project",
+      "inversedBy": "detail"
+    }
+  }
+}

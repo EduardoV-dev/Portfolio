@@ -1,0 +1,25 @@
+---
+export const prerender = true;
+
+import Layout from "@/layouts/layout/index.astro";
+import HeroSection from "@/modules/home/hero/index.astro";
+import HighlightsSection from "@/modules/home/highlights/index.astro";
+import CaseStudiesSection from "@/modules/home/case-studies/index.astro";
+import PhilosophySection from "@/modules/home/philosophy/index.astro";
+import BlogPreview from "@/modules/home/blog-preview/index.astro";
+import AiAssistantSection from "@/modules/home/ai-assistant/index";
+import CtaSection from "@/components/cta-section/index.astro";
+---
+
+<Layout
+    title="Eduardo Varela – Full Stack Engineer"
+    description="Full stack engineer portfolio focused on scalable backend systems, cloud architecture, and production-grade web applications."
+>
+    <HeroSection />
+    <HighlightsSection />
+    <CaseStudiesSection />
+    <PhilosophySection />
+    <BlogPreview />
+    <AiAssistantSection client:load />
+    <CtaSection />
+</Layout>

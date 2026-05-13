@@ -1,0 +1,393 @@
+---
+export const prerender = true;
+
+import Layout from "@/layouts/layout/index.astro";
+import { APP_ROUTES } from "@/constants/routes";
+---
+
+<Layout
+    title="404 – Page Not Found | Eduardo Varela"
+    description="The page you're looking for doesn't exist. Head back to the homepage."
+    robots="noindex,follow"
+>
+    <section class="not-found" aria-label="Page not found">
+        <!-- Decorative background: grid + glow + ghost 404 + radar rings -->
+        <div class="not-found__bg" aria-hidden="true">
+            <div class="not-found__grid"></div>
+            <div class="not-found__glow"></div>
+            <span class="not-found__code">404</span>
+            <span class="not-found__ring not-found__ring--1"></span>
+            <span class="not-found__ring not-found__ring--2"></span>
+            <span class="not-found__ring not-found__ring--3"></span>
+        </div>
+
+        <!-- Foreground content -->
+        <div class="not-found__inner">
+            <p class="not-found__badge">ROUTE NOT FOUND</p>
+
+            <h1 class="not-found__heading">
+                You've reached a <span class="not-found__accent">dead end.</span>
+            </h1>
+
+            <p class="not-found__body">
+                The page you're looking for isn't part of this system. The URL may be incorrect, or
+                this resource has been removed.
+            </p>
+
+            <div class="not-found__actions">
+                <a href={APP_ROUTES.HOME} class="not-found__btn not-found__btn--primary">
+                    <span aria-hidden="true">←</span>
+                    <span>Back to Home</span>
+                </a>
+                <a
+                    href={APP_ROUTES.CASE_STUDIES.ROOT}
+                    class="not-found__btn not-found__btn--secondary"
+                >
+                    <span>View My Work</span>
+                    <span aria-hidden="true">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    @import "../styles/mixins.css";
+
+    /* ── Section shell ── */
+    .not-found {
+        position: relative;
+        z-index: 1;
+        min-height: calc(100vh - var(--header-height, 68px));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: clip;
+        padding-block: 5rem;
+    }
+
+    /* ────────────────────────────────────────────
+       Background layer
+    ──────────────────────────────────────────── */
+    .not-found__bg {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    /* Blueprint grid — fades toward edges */
+    .not-found__grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+            repeating-linear-gradient(
+                90deg,
+                color-mix(in srgb, var(--color-accent) 5%, transparent) 0,
+                color-mix(in srgb, var(--color-accent) 5%, transparent) 1px,
+                transparent 1px,
+                transparent 64px
+            ),
+            repeating-linear-gradient(
+                0deg,
+                color-mix(in srgb, var(--color-accent) 5%, transparent) 0,
+                color-mix(in srgb, var(--color-accent) 5%, transparent) 1px,
+                transparent 1px,
+                transparent 64px
+            );
+        mask-image: radial-gradient(ellipse 80% 75% at 50% 50%, black 20%, transparent 100%);
+    }
+
+    /* Central radial glow */
+    .not-found__glow {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+            ellipse 65% 55% at 50% 50%,
+            color-mix(in srgb, var(--color-accent) 9%, transparent) 0%,
+            transparent 70%
+        );
+    }
+
+    /* Ghost "404" — large, translucent, floating */
+    .not-found__code {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: clamp(10rem, 38vw, 28rem);
+        font-weight: 800;
+        letter-spacing: -0.065em;
+        line-height: 1;
+        white-space: nowrap;
+        color: color-mix(in srgb, var(--color-accent) 4%, transparent);
+        -webkit-text-stroke: 1px color-mix(in srgb, var(--color-accent) 13%, transparent);
+        user-select: none;
+        animation: code-float 9s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+    }
+
+    /* Radar ping rings */
+    .not-found__ring {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: min(38vw, 380px);
+        height: min(38vw, 380px);
+        border-radius: 50%;
+        border: 1px solid color-mix(in srgb, var(--color-accent) 22%, transparent);
+        animation: ring-expand 4.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+
+    .not-found__ring--2 {
+        animation-delay: 1.6s;
+    }
+
+    .not-found__ring--3 {
+        animation-delay: 3.2s;
+    }
+
+    /* ────────────────────────────────────────────
+       Foreground content
+    ──────────────────────────────────────────── */
+    .not-found__inner {
+        position: relative;
+        z-index: 1;
+        max-width: 1280px;
+        width: 100%;
+        padding-inline: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.3rem;
+    }
+
+    /* Badge — matches hero-status exactly */
+    .not-found__badge {
+        align-self: center;
+        padding: 0.42rem 0.86rem;
+        border-radius: 999px;
+        border: 1px solid color-mix(in srgb, var(--color-accent) 42%, transparent);
+        color: var(--color-accent);
+        font-size: 0.86rem;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        line-height: 1;
+        background: linear-gradient(
+            90deg,
+            color-mix(in srgb, var(--color-accent) 15%, transparent),
+            color-mix(in srgb, var(--color-accent) 4%, transparent)
+        );
+        animation: fade-up 500ms cubic-bezier(0.22, 1, 0.36, 1) both 40ms;
+    }
+
+    .not-found__badge::before {
+        content: "";
+        display: inline-block;
+        width: 0.45rem;
+        height: 0.45rem;
+        margin-right: 0.55rem;
+        border-radius: 50%;
+        background: var(--color-accent);
+        box-shadow: 0 0 0 6px color-mix(in srgb, var(--color-accent) 14%, transparent);
+        vertical-align: middle;
+    }
+
+    /* Heading — matches hero-title weight and tracking */
+    .not-found__heading {
+        font-size: clamp(2rem, 8.5vw, 3.6rem);
+        font-weight: 760;
+        letter-spacing: -0.04em;
+        line-height: 1.05;
+        color: #e9eef4;
+        text-wrap: balance;
+        max-width: 22ch;
+        animation: fade-up 560ms cubic-bezier(0.22, 1, 0.36, 1) both 120ms;
+    }
+
+    .not-found__accent {
+        color: var(--color-accent);
+        text-shadow: 0 0 24px color-mix(in srgb, var(--color-accent) 20%, transparent);
+    }
+
+    /* Body */
+    .not-found__body {
+        font-size: clamp(0.95rem, 2.5vw, 1.08rem);
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+        max-width: 44ch;
+        text-wrap: pretty;
+        animation: fade-up 520ms cubic-bezier(0.22, 1, 0.36, 1) both 200ms;
+    }
+
+    /* Actions row */
+    .not-found__actions {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.85rem;
+        width: 100%;
+        margin-top: 0.5rem;
+        animation: fade-up 480ms cubic-bezier(0.22, 1, 0.36, 1) both 280ms;
+    }
+
+    /* ── Buttons — match hero-actions exactly ── */
+    .not-found__btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.55rem;
+        min-height: 3.9rem;
+        padding: 0.95rem 1.8rem;
+        border-radius: 0.95rem;
+        border: 1px solid transparent;
+        font-size: 1.03rem;
+        font-weight: 650;
+        letter-spacing: -0.01em;
+        text-decoration: none;
+        transition:
+            transform var(--transition-fast),
+            box-shadow var(--transition-base),
+            border-color var(--transition-fast),
+            background var(--transition-fast);
+        touch-action: manipulation;
+    }
+
+    .not-found__btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .not-found__btn:active {
+        transform: translateY(0);
+    }
+
+    .not-found__btn:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 2px;
+    }
+
+    /* Primary — sky-blue gradient (matches hero-btn--primary) */
+    .not-found__btn--primary {
+        color: #04131f;
+        background: linear-gradient(
+            135deg,
+            var(--color-accent-hover) 0%,
+            var(--color-accent) 52%,
+            var(--color-accent-hover) 100%
+        );
+        box-shadow:
+            0 12px 30px color-mix(in srgb, var(--color-accent) 25%, transparent),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.25);
+    }
+
+    .not-found__btn--primary:hover {
+        box-shadow:
+            0 15px 34px color-mix(in srgb, var(--color-accent) 35%, transparent),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    /* Secondary — dark glass (matches hero-btn--secondary) */
+    .not-found__btn--secondary {
+        color: var(--color-text-primary);
+        background: linear-gradient(180deg, rgba(26, 30, 36, 0.8) 0%, rgba(20, 23, 28, 0.94) 100%);
+        border-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+    }
+
+    .not-found__btn--secondary:hover {
+        border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
+        box-shadow: 0 14px 28px rgba(6, 14, 22, 0.4);
+    }
+
+    /* ── Keyframes ── */
+    @keyframes fade-up {
+        from {
+            opacity: 0;
+            transform: translateY(18px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes code-float {
+        0%,
+        100% {
+            transform: translate(-50%, -50%);
+        }
+
+        50% {
+            transform: translate(-50%, calc(-50% - 10px));
+        }
+    }
+
+    @keyframes ring-expand {
+        0% {
+            transform: translate(-50%, -50%) scale(0.25);
+            opacity: 0.8;
+        }
+
+        75% {
+            opacity: 0.12;
+        }
+
+        100% {
+            transform: translate(-50%, -50%) scale(3);
+            opacity: 0;
+        }
+    }
+
+    /* ── Responsive ── */
+    @mixin tablet-up {
+        .not-found__inner {
+            padding-inline: 1.5rem;
+            gap: 1.5rem;
+        }
+
+        .not-found__badge {
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
+            padding: 0.42rem 1rem;
+        }
+
+        .not-found__actions {
+            flex-direction: row;
+            align-items: center;
+            width: auto;
+            justify-content: center;
+        }
+
+        .not-found__btn {
+            min-height: 3.7rem;
+            border-radius: 0.85rem;
+            font-size: 1.05rem;
+        }
+    }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+        .not-found__badge,
+        .not-found__heading,
+        .not-found__body,
+        .not-found__actions {
+            animation: none;
+        }
+
+        .not-found__code {
+            animation: none;
+            will-change: auto;
+        }
+
+        .not-found__ring {
+            display: none;
+            will-change: auto;
+        }
+
+        .not-found__btn {
+            transition: none;
+            will-change: auto;
+        }
+    }
+</style>

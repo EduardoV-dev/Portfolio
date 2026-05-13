@@ -1,0 +1,48 @@
+.ai-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    touch-action: manipulation;
+    /* Explicit properties instead of `all` — avoids style recalc on every frame */
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.ai-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.ai-button:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+    transform: scale(1.05);
+}
+
+.ai-button:hover::before {
+    opacity: 1;
+}
+
+.ai-button:active {
+    transform: scale(0.95);
+}
+
+.ai-button svg {
+    filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.4));
+}

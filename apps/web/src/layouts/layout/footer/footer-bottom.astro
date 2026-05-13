@@ -1,0 +1,74 @@
+---
+import { APP_ROUTES } from "@/constants/routes";
+
+const year = new Date().getFullYear();
+---
+
+<div class="footer-bottom">
+    <div class="footer-bottom__inner">
+        <div class="footer-bottom__legal">
+            <a href={APP_ROUTES.PRIVACY_POLICY} class="footer-bottom__link">Privacy Policy</a>
+            <a href={APP_ROUTES.TERMS_OF_USE} class="footer-bottom__link">Terms of Use</a>
+        </div>
+
+        <p class="footer-bottom__copy">
+            &copy; {year} Eduardo Varela. All rights reserved.
+        </p>
+    </div>
+</div>
+
+<style>
+    @import "../../../styles/mixins.css";
+
+    .footer-bottom {
+        border-top: 1px solid var(--color-border, rgba(255, 255, 255, 0.05));
+        padding: 1.25rem 0;
+    }
+
+    .footer-bottom__inner {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+        gap: 0.75rem;
+        text-align: center;
+    }
+
+    .footer-bottom__copy {
+        font-size: 0.75rem;
+        color: var(--color-text-secondary, rgba(255, 255, 255, 0.55));
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .footer-bottom__legal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        order: 1;
+    }
+
+    .footer-bottom__link {
+        font-size: 0.75rem;
+        color: var(--color-text-secondary, rgba(255, 255, 255, 0.55));
+        transition: color 150ms ease;
+        white-space: nowrap;
+    }
+
+    .footer-bottom__link:hover {
+        color: var(--color-text-primary, #fff);
+    }
+
+    @mixin tablet-up {
+        .footer-bottom__inner {
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1rem;
+            text-align: initial;
+        }
+
+        .footer-bottom__legal {
+            order: unset;
+            justify-content: flex-start;
+        }
+    }
+</style>

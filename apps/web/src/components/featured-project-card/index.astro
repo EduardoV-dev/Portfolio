@@ -1,0 +1,403 @@
+---
+import { type Project } from "@/types/strapi";
+import ProjectImageSlider from "@/components/project-image-slider/index.astro";
+
+export interface Props {
+    caseStudy: Project;
+    [key: string]: unknown;
+}
+
+const { caseStudy, ...restProps } = Astro.props;
+
+const { title, slug, impact, description, tags, bullets, sourceHref, liveHref, images } = caseStudy;
+
+const hasSourceHref = typeof sourceHref === "string" && sourceHref.trim().length > 0;
+const hasLiveHref = typeof liveHref === "string" && liveHref.trim().length > 0;
+const projectImages = Array.isArray(images) ? images : [];
+const projectTags = Array.isArray(tags) ? tags : [];
+const projectBullets = Array.isArray(bullets) ? bullets : [];
+---
+
+<article class="fpc-card" {...restProps}>
+    <!-- Image -->
+    <div class="fpc-card__image">
+        <ProjectImageSlider images={projectImages} projectTitle={title} />
+        <span class="fpc-card__featured-badge">Featured Project</span>
+    </div>
+
+    <!-- Content -->
+    <div class="fpc-card__content">
+        <!-- Tags -->
+        <div class="fpc-card__tags">
+            {projectTags.map((tag) => <span class="fpc-card__tag">{tag.name}</span>)}
+        </div>
+
+        <!-- Title -->
+        <h2 class="fpc-card__title">{title}</h2>
+
+        <!-- Impact statement -->
+        <p class="fpc-card__impact">{impact}</p>
+
+        <!-- Description -->
+        <p class="fpc-card__desc">{description}</p>
+
+        <!-- Bullets -->
+        <ul class="fpc-card__bullets" role="list">
+            {
+                projectBullets.map((b) => (
+                    <li class="fpc-card__bullet">
+                        <svg
+                            class="fpc-card__bullet-icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                            <polyline points="22 4 12 14.01 9 11.01" />
+                        </svg>
+                        {b}
+                    </li>
+                ))
+            }
+        </ul>
+
+        <!-- Footer links + CTA -->
+        <div class="fpc-card__footer">
+            <div class="fpc-card__links">
+                {
+                    hasSourceHref && (
+                        <a
+                            href={sourceHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="fpc-card__link"
+                            aria-label="Source code"
+                            onclick="event.stopPropagation()"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="12"
+                                height="12"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <polyline points="16 18 22 12 16 6" />
+                                <polyline points="8 6 2 12 8 18" />
+                            </svg>
+                            SOURCE CODE
+                        </a>
+                    )
+                }
+                {
+                    hasLiveHref && (
+                        <a
+                            href={liveHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="fpc-card__link"
+                            aria-label="Live project"
+                            onclick="event.stopPropagation()"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="12"
+                                height="12"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                <polyline points="15 3 21 3 21 9" />
+                                <line x1="10" y1="14" x2="21" y2="3" />
+                            </svg>
+                            LIVE PROJECT
+                        </a>
+                    )
+                }
+            </div>
+            <a
+                href={`/case-studies/${slug}`}
+                class="fpc-card__cta"
+                aria-label={`View case study: ${title}`}
+            >
+                View Case Study
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+            </a>
+        </div>
+    </div>
+</article>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    /* ── Card shell ── */
+    .fpc-card {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 1rem;
+        overflow: hidden;
+        margin-bottom: 2.5rem;
+        transition:
+            border-color var(--transition-fast),
+            transform var(--transition-base),
+            box-shadow var(--transition-base);
+    }
+
+    .fpc-card:hover {
+        border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+        transform: scale(1.01);
+        box-shadow:
+            0 0 0 1px color-mix(in srgb, var(--color-accent) 15%, transparent),
+            0 20px 60px rgba(0, 0, 0, 0.4),
+            0 0 40px color-mix(in srgb, var(--color-accent) 6%, transparent);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .fpc-card {
+            transition: border-color var(--transition-fast);
+        }
+        .fpc-card:hover {
+            transform: none;
+        }
+    }
+
+    /* ── Image ── */
+    .fpc-card__image {
+        position: relative;
+        min-height: 220px;
+        overflow: hidden;
+        flex-shrink: 0;
+        height: clamp(220px, 30vw, 360px);
+        background: #071020;
+    }
+
+    @mixin tablet-up {
+        .fpc-card__image {
+            min-height: 260px;
+        }
+    }
+
+    /* Featured badge */
+    .fpc-card__featured-badge {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.25rem 0.65rem;
+        border-radius: 99px;
+        background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+        border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+        color: var(--color-accent);
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    /* ── Content ── */
+    .fpc-card__content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.1rem;
+        padding: 2rem 1.75rem;
+    }
+
+    @mixin tablet-up {
+        .fpc-card__content {
+            padding: 2.25rem 2.25rem 2.4rem;
+        }
+    }
+
+    /* ── Tags ── */
+    .fpc-card__tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .fpc-card__tag {
+        display: inline-block;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.2rem 0.55rem;
+        border-radius: 0.3rem;
+        border: 1px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
+        background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+        color: var(--color-accent);
+    }
+
+    /* ── Title ── */
+    .fpc-card__title {
+        font-size: clamp(1.5rem, 4vw, 2.1rem);
+        font-weight: 760;
+        letter-spacing: -0.04em;
+        line-height: 1.1;
+        color: var(--color-text-primary);
+        margin: 0;
+        text-wrap: balance;
+    }
+
+    /* ── Impact ── */
+    .fpc-card__impact {
+        font-size: clamp(0.88rem, 2vw, 0.95rem);
+        font-weight: 500;
+        color: var(--color-accent);
+        line-height: 1.55;
+        margin: 0;
+        opacity: 0.9;
+    }
+
+    /* ── Description ── */
+    .fpc-card__desc {
+        font-size: 0.875rem;
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+        margin: 0;
+    }
+
+    /* ── Bullets ── */
+    .fpc-card__bullets {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    .fpc-card__bullet {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        font-size: 0.84rem;
+        color: var(--color-text-secondary);
+        line-height: 1.5;
+    }
+
+    .fpc-card__bullet-icon {
+        color: var(--color-accent);
+        flex-shrink: 0;
+        margin-top: 0.15rem;
+    }
+
+    /* ── Footer ── */
+    .fpc-card__footer {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding-top: 0.5rem;
+        margin-top: 0.25rem;
+        border-top: 1px solid var(--color-border);
+    }
+
+    .fpc-card__links {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex: 1;
+    }
+
+    .fpc-card__link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        cursor: pointer;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: color var(--transition-fast);
+    }
+
+    .fpc-card__link:hover {
+        color: var(--color-text-primary);
+    }
+
+    .fpc-card__link:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 2px;
+        border-radius: 2px;
+    }
+
+    /* ── CTA ── */
+    .fpc-card__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.55rem 1.1rem;
+        border-radius: 0.55rem;
+        border: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+        background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+        color: var(--color-accent);
+        font-size: 0.82rem;
+        font-weight: 650;
+        letter-spacing: -0.01em;
+        text-decoration: none;
+        transition:
+            background var(--transition-fast),
+            border-color var(--transition-fast),
+            transform var(--transition-fast);
+        white-space: nowrap;
+    }
+
+    .fpc-card__cta:hover {
+        background: color-mix(in srgb, var(--color-accent) 14%, transparent);
+        border-color: color-mix(in srgb, var(--color-accent) 55%, transparent);
+        transform: translateY(-1px);
+    }
+
+    .fpc-card__cta:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .fpc-card__cta {
+            transition:
+                background var(--transition-fast),
+                border-color var(--transition-fast);
+        }
+        .fpc-card__cta:hover {
+            transform: none;
+        }
+    }
+</style>

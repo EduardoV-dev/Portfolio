@@ -1,0 +1,21 @@
+---
+import InsightsDetailHeader from "./insights-detail-header.astro";
+import InsightsDetailBody from "./insights-detail-body.astro";
+import InsightsDetailNav from "./insights-detail-nav.astro";
+import InsightsDetailCta from "./insights-detail-cta.astro";
+import { type Post } from "@/types/post";
+
+interface Props {
+    post: Post;
+    displayDate: string;
+    prev: Post | null;
+    next: Post | null;
+}
+
+const { post, displayDate, prev, next } = Astro.props;
+---
+
+<InsightsDetailHeader post={post} displayDate={displayDate} />
+<InsightsDetailBody post={post} />
+<InsightsDetailNav prev={prev} next={next} />
+<InsightsDetailCta />

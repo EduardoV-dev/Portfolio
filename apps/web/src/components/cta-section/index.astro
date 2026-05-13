@@ -1,0 +1,158 @@
+<section class="cta-section" aria-label="Call to action">
+    <div class="cta-section__inner">
+        <div class="cta-section__glow" aria-hidden="true"></div>
+
+        <h2 class="cta-section__heading" data-animate data-animate-delay="1">
+            Need someone who
+            <span class="cta-section__accent">owns the full stack,</span>
+            not just a slice of it?
+        </h2>
+
+        <p class="cta-section__subtext" data-animate data-animate-delay="2">
+            I work with teams to design, build, and ship polished digital products, from interfaces
+            to infrastructure, with direct business impact.
+        </p>
+
+        <a href="/contact" class="cta-section__btn" data-animate data-animate-delay="3">
+            Book a Strategy Call
+        </a>
+    </div>
+</section>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .cta-section {
+        position: relative;
+        z-index: 1;
+        padding-block: 5rem 6rem;
+        overflow: hidden;
+    }
+
+    .cta-section__inner {
+        position: relative;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.5rem;
+    }
+
+    /* Radial halo behind the CTA content */
+    .cta-section__glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 60vw;
+        max-width: 700px;
+        aspect-ratio: 1 / 1;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(
+            circle,
+            rgba(0, 204, 255, 0.07) 0%,
+            rgba(0, 204, 255, 0.03) 40%,
+            transparent 70%
+        );
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .cta-section__heading {
+        position: relative;
+        z-index: 1;
+        font-size: clamp(1.9rem, 8vw, 3rem);
+        font-weight: 760;
+        letter-spacing: -0.04em;
+        line-height: 1.1;
+        color: var(--color-text-primary);
+        text-wrap: balance;
+        max-width: 18ch;
+    }
+
+    .cta-section__accent {
+        color: var(--color-accent);
+    }
+
+    .cta-section__subtext {
+        position: relative;
+        z-index: 1;
+        color: var(--color-text-secondary);
+        font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+        line-height: 1.65;
+        max-width: 42ch;
+        text-wrap: pretty;
+    }
+
+    .cta-section__btn {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0.5rem;
+        padding: 0.95rem 2rem;
+        min-height: 3.9rem;
+        border-radius: 0.95rem;
+        border: 1px solid transparent;
+        color: var(--color-cta-text, #021018);
+        background: linear-gradient(135deg, #33d9ff 0%, #00ccff 52%, #00c2f0 100%);
+        box-shadow:
+            0 12px 30px rgba(0, 204, 255, 0.22),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+        font-size: 1.03rem;
+        font-weight: 650;
+        letter-spacing: -0.01em;
+        text-decoration: none;
+        transition:
+            transform var(--transition-fast),
+            box-shadow var(--transition-base);
+        touch-action: manipulation;
+    }
+
+    .cta-section__btn:hover {
+        transform: translateY(-2px);
+        box-shadow:
+            0 15px 34px rgba(0, 204, 255, 0.32),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.25);
+    }
+
+    .cta-section__btn:focus-visible {
+        outline: 2px solid rgba(0, 204, 255, 0.9);
+        outline-offset: 2px;
+    }
+
+    .cta-section__btn:active {
+        transform: translateY(0);
+    }
+
+    @mixin tablet-up {
+        .cta-section__inner {
+            padding-inline: 1.5rem;
+        }
+
+        .cta-section__heading {
+            font-size: clamp(2.2rem, 5vw, 3rem);
+        }
+
+        .cta-section__btn {
+            min-height: 3.7rem;
+            border-radius: 0.85rem;
+            font-size: 1.05rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .cta-section__btn {
+            transition: none;
+        }
+    }
+</style>
+
+<script>
+    import { initScrollReveal } from "@/utils/animations";
+    initScrollReveal();
+</script>

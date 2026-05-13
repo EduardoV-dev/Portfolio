@@ -1,0 +1,134 @@
+---
+import AboutPhilosophyCard from "./about-philosophy-card.astro";
+
+const items = [
+    {
+        iconName: "product" as const,
+        title: "Product Thinking",
+        description:
+            "Good engineering decisions start with understanding the product problem. I think in user outcomes first, then work backward to the technical solution.",
+    },
+    {
+        iconName: "ownership" as const,
+        title: "Full Ownership",
+        description:
+            "I'm most effective when I own a surface end-to-end, from the first interface to deployment. Ownership drives better decisions and faster iteration.",
+    },
+    {
+        iconName: "scalable" as const,
+        title: "Scale by Design",
+        description:
+            "I don't over-engineer for scale that doesn't exist yet, but I design seams that let systems grow. Premature optimization is a trap. Ignoring constraints is worse.",
+    },
+    {
+        iconName: "clarity" as const,
+        title: "Clarity Over Cleverness",
+        description:
+            "Code is read far more often than it's written. I favor explicit, straightforward solutions that any engineer can reason about over abstractions that only I can maintain.",
+    },
+];
+---
+
+<section class="about-phil" aria-labelledby="about-phil-heading">
+    <div class="about-phil__inner">
+        <header class="about-phil__header">
+            <p class="about-phil__label" data-animate data-animate-delay="1">HOW I WORK</p>
+            <h2
+                class="about-phil__heading"
+                id="about-phil-heading"
+                data-animate
+                data-animate-delay="2"
+            >
+                Engineering Philosophy
+            </h2>
+            <p class="about-phil__subtext" data-animate data-animate-delay="3">
+                The principles I return to when making technical decisions under real product
+                pressure.
+            </p>
+        </header>
+
+        <ul class="about-phil__grid" role="list">
+            {items.map((item, i) => <AboutPhilosophyCard {...item} delay={i + 1} />)}
+        </ul>
+    </div>
+</section>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .about-phil {
+        position: relative;
+        z-index: 1;
+        padding-block: 4rem;
+    }
+
+    .about-phil__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+    }
+
+    @mixin tablet-up {
+        .about-phil__inner {
+            padding-inline: 1.5rem;
+        }
+    }
+
+    /* ── Header ── */
+    .about-phil__header {
+        margin-bottom: 3rem;
+    }
+
+    @mixin desktop-up {
+        .about-phil__header {
+            max-width: 52rem;
+            margin-bottom: 3.5rem;
+        }
+    }
+
+    .about-phil__label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+        margin-bottom: 0.75rem;
+    }
+
+    .about-phil__heading {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        font-weight: 760;
+        letter-spacing: -0.04em;
+        color: var(--color-text-primary);
+        line-height: 1.1;
+        margin-bottom: 1.25rem;
+        text-wrap: balance;
+    }
+
+    .about-phil__subtext {
+        font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+        max-width: 48ch;
+    }
+
+    /* ── Grid ── */
+    .about-phil__grid {
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    @mixin tablet-up {
+        .about-phil__grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+    }
+</style>
+
+<script>
+    import { initScrollReveal } from "@/utils/animations";
+    initScrollReveal();
+</script>

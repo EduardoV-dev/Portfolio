@@ -1,0 +1,12 @@
+FROM node:22-alpine
+
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+WORKDIR /app
+
+# Install deps as a separate layer so it's cached unless package.json changes.
+# Source files are volume-mounted at runtime for hot reload.
+COPY package.json ./
+RUN pnpm install
+
+CMD ["pnpm", "dev"]

@@ -1,0 +1,122 @@
+---
+import { APP_ROUTES } from "@/constants/routes";
+---
+
+<section class="ic" aria-labelledby="ic-heading">
+    <div class="ic__inner" data-animate>
+        <div class="ic__content">
+            <h2 class="ic__heading" id="ic-heading">
+                Want to discuss these ideas<br /> in practice?
+            </h2>
+            <p class="ic__sub">Let's build scalable systems together.</p>
+        </div>
+        <a href={`${APP_ROUTES.CONTACT}#book-a-call`} class="ic__btn">Get in Touch</a>
+    </div>
+</section>
+
+<style>
+    @import "../../styles/mixins.css";
+
+    .ic {
+        position: relative;
+        z-index: 1;
+        padding-block: 2rem 6rem;
+    }
+
+    .ic__inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-inline: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2rem;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 14px;
+        padding: 2.5rem 1.75rem;
+    }
+
+    .ic__heading {
+        font-size: clamp(1.5rem, 4vw, 2.2rem);
+        font-weight: 780;
+        letter-spacing: -0.04em;
+        color: var(--color-text-primary);
+        line-height: 1.15;
+        text-wrap: balance;
+    }
+
+    .ic__sub {
+        margin-top: 0.5rem;
+        font-size: clamp(0.9rem, 2vw, 1rem);
+        color: var(--color-text-secondary);
+        line-height: 1.6;
+    }
+
+    .ic__btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--color-cta-text);
+        background: linear-gradient(
+            135deg,
+            var(--color-accent-hover),
+            var(--color-accent),
+            var(--color-accent-hover)
+        );
+        border-radius: 8px;
+        padding: 0.75rem 1.6rem;
+        text-decoration: none;
+        white-space: nowrap;
+        flex-shrink: 0;
+        touch-action: manipulation;
+        transition:
+            background var(--transition-fast),
+            transform var(--transition-fast),
+            box-shadow var(--transition-fast);
+    }
+
+    .ic__btn:hover {
+        background: linear-gradient(135deg, #5ec0ff, #7dd3fc, #5dc0ff);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px color-mix(in srgb, var(--color-accent) 30%, transparent);
+    }
+
+    .ic__btn:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 3px;
+        border-radius: 8px;
+    }
+
+    @mixin tablet-up {
+        .ic__inner {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2.75rem 2.5rem;
+        }
+
+        .ic__content {
+            flex: 1;
+        }
+    }
+
+    @mixin desktop-up {
+        .ic__inner {
+            padding: 3rem 3.5rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .ic__btn {
+            transition: none;
+        }
+    }
+</style>
+
+<script>
+    import { initScrollReveal } from "@/utils/animations";
+    initScrollReveal();
+</script>

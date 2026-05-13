@@ -1,6 +1,7 @@
 ---
-import type { Project } from "@/types/strapi";
+import { type Project } from "@/types/strapi";
 import { APP_ROUTES } from "@/constants/routes";
+import { ENVS } from "@/constants/environment-variables";
 import ProjectImageSlider from "@/components/project-image-slider/index.astro";
 
 export interface Props {
@@ -11,6 +12,13 @@ const { project } = Astro.props;
 const { detail } = project;
 const projectImages = Array.isArray(project.images) ? project.images : [];
 const projectTags = Array.isArray(project.tags) ? project.tags : [];
+const baseMediaUrl = ENVS.STRAPI_API_URL.replace("/api", "");
+const lightboxImages = projectImages
+    .filter((image) => typeof image?.url === "string" && image.url.length > 0)
+    .map((image, index) => ({
+        src: `${baseMediaUrl}${image.url}`,
+        alt: image.alternativeText || `${project.title} preview ${index + 1}`,
+    }));
 const hasSourceHref =
     typeof project.sourceHref === "string" && project.sourceHref.trim().length > 0;
 const hasLiveHref = typeof project.liveHref === "string" && project.liveHref.trim().length > 0;
@@ -39,14 +47,34 @@ const hasLiveHref = typeof project.liveHref === "string" && project.liveHref.tri
         {projectTags.map((tag) => <span class="csd-tag">{tag.name}</span>)}
     </div>
 
-    <div class="csd-hero__media" data-animate data-animate-delay="1">
-        <ProjectImageSlider
-            images={projectImages}
-            projectTitle={project.title}
-            variant="detail"
-            class="csd-hero__slider"
-        />
+    <div
+        class="csd-hero__media"
+        data-animate
+        data-animate-delay="1"
+        data-detail-lightbox-images={JSON.stringify(lightboxImages)}
+    >
+        <ProjectImageSlider images={projectImages} projectTitle={project.title} variant="detail" />
     </div>
+
+    {
+        lightboxImages.length > 0 && (
+            <div class="csd-lightbox" data-detail-lightbox hidden>
+                <button
+                    class="csd-lightbox__close"
+                    type="button"
+                    data-detail-lightbox-close
+                    aria-label="Close image preview"
+                >
+                    <span class="csd-lightbox__close-icon" aria-hidden="true">
+                        &times;
+                    </span>
+                </button>
+                <figure class="csd-lightbox__figure">
+                    <img class="csd-lightbox__image" data-detail-lightbox-image src="" alt="" />
+                </figure>
+            </div>
+        )
+    }
 
     <h1 class="csd-hero__title" data-animate data-animate-delay="2">{project.title}</h1>
     <p class="csd-hero__impact" data-animate data-animate-delay="3">{project.impact}</p>
@@ -171,10 +199,10 @@ const hasLiveHref = typeof project.liveHref === "string" && project.liveHref.tri
         border-radius: 0.9rem;
         overflow: hidden;
         background: color-mix(in srgb, var(--color-accent) 5%, var(--color-surface));
-    }
-
-    .csd-hero__slider {
-        height: clamp(220px, 42vw, 380px);
+        aspect-ratio: 16 / 10;
+        min-height: 260px;
+        max-height: 520px;
+        cursor: zoom-in;
     }
 
     .csd-tag {
@@ -218,28 +246,32 @@ const hasLiveHref = typeof project.liveHref === "string" && project.liveHref.tri
 
     /* Metrics bar */
     .csd-hero__metrics {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        display: inline-flex;
+        flex-wrap: wrap;
         gap: 1px;
         background: var(--color-border);
         border: 1px solid var(--color-border);
         border-radius: 0.75rem;
         overflow: hidden;
         margin-bottom: 1.75rem;
-    }
-
-    @mixin tablet-up {
-        .csd-hero__metrics {
-            grid-template-columns: repeat(4, 1fr);
-        }
+        width: fit-content;
+        max-width: 100%;
     }
 
     .csd-metric {
         display: flex;
         flex-direction: column;
+        flex: 1 1 150px;
         gap: 0.3rem;
         padding: 1.25rem 1.5rem;
         background: var(--color-surface);
+        min-width: 0;
+    }
+
+    @mixin tablet-up {
+        .csd-metric {
+            flex-basis: 180px;
+        }
     }
 
     .csd-metric__value {
@@ -290,4 +322,96 @@ const hasLiveHref = typeof project.liveHref === "string" && project.liveHref.tri
         outline-offset: 3px;
         border-radius: 2px;
     }
+
+    .csd-lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 1200;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        background:
+            radial-gradient(circle at 16% 20%, rgba(0, 204, 255, 0.18) 0%, transparent 38%),
+            radial-gradient(circle at 82% 18%, rgba(35, 120, 255, 0.16) 0%, transparent 42%),
+            rgba(2, 8, 18, 0.82);
+        backdrop-filter: blur(10px) saturate(120%);
+    }
+
+    .csd-lightbox[hidden] {
+        display: none !important;
+    }
+
+    .csd-lightbox__figure {
+        margin: 0;
+        width: min(94vw, 1400px);
+        height: min(90vh, 980px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: clamp(0.7rem, 2vw, 1.4rem);
+        border-radius: 1rem;
+        background:
+            linear-gradient(145deg, rgba(5, 17, 34, 0.95) 0%, rgba(4, 10, 20, 0.95) 100%),
+            radial-gradient(circle at 22% 28%, rgba(0, 204, 255, 0.26) 0%, transparent 42%),
+            radial-gradient(circle at 78% 72%, rgba(29, 85, 210, 0.28) 0%, transparent 44%);
+        border: 1px solid color-mix(in srgb, var(--color-accent) 28%, transparent);
+        box-shadow:
+            0 24px 64px rgba(0, 0, 0, 0.56),
+            inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .csd-lightbox__image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        border-radius: 0.65rem;
+        border: 1px solid color-mix(in srgb, var(--color-accent) 24%, transparent);
+        background: #02070f;
+    }
+
+    .csd-lightbox__close {
+        position: fixed;
+        top: 1.1rem;
+        right: 1.1rem;
+        width: 2.55rem;
+        height: 2.55rem;
+        z-index: 1300;
+        border: 1px solid color-mix(in srgb, var(--color-accent) 38%, transparent);
+        background: rgba(5, 13, 26, 0.94);
+        color: #f4fbff;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1.3rem;
+        font-weight: 700;
+        line-height: 1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+        transition:
+            background var(--transition-fast),
+            border-color var(--transition-fast),
+            color var(--transition-fast);
+    }
+
+    .csd-lightbox__close-icon {
+        display: inline-block;
+        transform: translateY(-1px);
+        pointer-events: none;
+    }
+
+    .csd-lightbox__close:hover {
+        background: rgba(6, 19, 35, 0.96);
+        border-color: color-mix(in srgb, var(--color-accent) 65%, transparent);
+        color: var(--color-accent);
+    }
+
+    .csd-lightbox__close:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 2px;
+    }
 </style>
+
+<script src="./lightbox.ts"></script>

@@ -10,6 +10,7 @@ jobs:
         name: Frontend + Strapi
         runs-on: ubuntu-latest
         env:
+            STRAPI_CMS_OPTIONAL: "true"
             APP_KEYS: key1,key2,key3,key4
             ADMIN_JWT_SECRET: ci-admin-jwt-secret
             API_TOKEN_SALT: ci-api-token-salt

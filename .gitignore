@@ -20,3 +20,4 @@ apps/headless-cms/database/data.db*
 .pnp.cjs
 nul
 .unlighthouse/
+.amplify-hosting/

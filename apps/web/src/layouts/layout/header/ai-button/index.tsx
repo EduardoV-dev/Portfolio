@@ -4,7 +4,7 @@ import styles from "./index.module.css";
 
 interface AiButtonProps {
     className?: string;
-    onClick?: () => void;
+    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function AiButton({ className = "", onClick }: AiButtonProps) {

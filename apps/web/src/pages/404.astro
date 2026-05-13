@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import Layout from "@/layouts/layout/index.astro";
 import { APP_ROUTES } from "@/constants/routes";
 ---
@@ -6,6 +8,7 @@ import { APP_ROUTES } from "@/constants/routes";
 <Layout
     title="404 – Page Not Found | Eduardo Varela"
     description="The page you're looking for doesn't exist. Head back to the homepage."
+    robots="noindex,follow"
 >
     <section class="not-found" aria-label="Page not found">
         <!-- Decorative background: grid + glow + ghost 404 + radar rings -->

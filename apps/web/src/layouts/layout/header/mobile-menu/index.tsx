@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import clsx from "clsx";
 import { HEADER_NAV_ITEMS } from "@/constants/routes";
 import { useChatStore } from "@/store/chat";
@@ -10,10 +11,80 @@ interface MobileMenuProps {
     currentPath: string;
     isOpen: boolean;
     onClose: () => void;
+    onRestoreFocus?: () => void;
 }
 
-export default function MobileMenu({ currentPath, isOpen, onClose }: MobileMenuProps) {
+export default function MobileMenu({
+    currentPath,
+    isOpen,
+    onClose,
+    onRestoreFocus,
+}: MobileMenuProps) {
     const { openChat } = useChatStore();
+    const menuRef = useRef<HTMLDivElement>(null);
+    const closeButtonRef = useRef<HTMLButtonElement>(null);
+    const wasOpenRef = useRef(false);
+
+    useEffect(() => {
+        if (!isOpen || !menuRef.current) {
+            return;
+        }
+
+        closeButtonRef.current?.focus();
+
+        function handleKeyDown(event: KeyboardEvent) {
+            if (event.key === "Escape") {
+                event.preventDefault();
+                onClose();
+                return;
+            }
+
+            if (event.key !== "Tab" || !menuRef.current) {
+                return;
+            }
+
+            const focusableElements = menuRef.current.querySelectorAll<HTMLElement>(
+                'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])',
+            );
+
+            if (focusableElements.length === 0) {
+                return;
+            }
+
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+            const activeElement = document.activeElement;
+
+            if (event.shiftKey && activeElement === firstElement) {
+                event.preventDefault();
+                lastElement.focus();
+                return;
+            }
+
+            if (!event.shiftKey && activeElement === lastElement) {
+                event.preventDefault();
+                firstElement.focus();
+            }
+        }
+
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [isOpen, onClose]);
+
+    useEffect(() => {
+        if (isOpen) {
+            wasOpenRef.current = true;
+            return;
+        }
+
+        if (wasOpenRef.current) {
+            onRestoreFocus?.();
+            wasOpenRef.current = false;
+        }
+    }, [isOpen, onRestoreFocus]);
 
     function handleAiClick() {
         onClose();
@@ -28,6 +99,7 @@ export default function MobileMenu({ currentPath, isOpen, onClose }: MobileMenuP
                 aria-modal="true"
                 aria-label="Mobile navigation"
                 hidden={!isOpen}
+                ref={menuRef}
             >
                 <div className={styles["mobile-menu__header"]}>
                     <HeaderLogo />
@@ -37,6 +109,7 @@ export default function MobileMenu({ currentPath, isOpen, onClose }: MobileMenuP
                         aria-label="Close menu"
                         onClick={onClose}
                         type="button"
+                        ref={closeButtonRef}
                     >
                         <svg
                             width="20"
@@ -70,6 +143,7 @@ export default function MobileMenu({ currentPath, isOpen, onClose }: MobileMenuP
                                     href={href}
                                     className={styles["mobile-nav__link"]}
                                     onClick={onClose}
+                                    aria-current={currentPath.startsWith(href) ? "page" : undefined}
                                 >
                                     {label}
                                 </a>

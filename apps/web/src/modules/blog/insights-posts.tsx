@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { type Post, formatPostDate } from "@/data/posts";
+import { type Post, formatPostDate } from "@/types/post";
 import styles from "./insights-posts.module.css";
 
 type Category = "all" | "architecture" | "backend" | "cloud" | "performance";

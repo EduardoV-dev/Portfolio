@@ -34,7 +34,7 @@ const { detail } = project;
         <CaseStudyNav items={navItems} backHref={APP_ROUTES.CASE_STUDIES.ROOT} />
 
         <!-- ─── MAIN CONTENT ─── -->
-        <main class="csd-content" id="main-content">
+        <div class="csd-content">
             <Hero project={project} />
 
             <hr class="csd-divider" />
@@ -54,7 +54,7 @@ const { detail } = project;
             <Learnings learnings={detail.learnings} />
 
             <Cta />
-        </main>
+        </div>
     </div>
 </div>
 

@@ -252,8 +252,13 @@ const baseMediaUrl = ENVS.STRAPI_API_URL.replace("/api", "");
     }
 
     .pis--detail .pis__img {
+        object-fit: cover;
         object-position: center top;
         transform: none;
+    }
+
+    .pis--detail .pis__slide {
+        background: #050d1a;
     }
 
     .pis:focus-visible {

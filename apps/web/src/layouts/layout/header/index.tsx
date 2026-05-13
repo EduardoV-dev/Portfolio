@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useChatStore } from "@/store/chat";
 import AiButton from "./ai-button";
 import AiChatModal from "./ai-chat-modal";
@@ -15,18 +15,45 @@ interface HeaderProps {
 export default function Header({ currentPath }: HeaderProps) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { isOpen: isChatOpen, openChat, closeChat } = useChatStore();
+    const lastFocusedElementRef = useRef<HTMLElement | null>(null);
+
+    const restoreFocus = useCallback(() => {
+        lastFocusedElementRef.current?.focus();
+    }, []);
+
+    const handleOpenMenu = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
+        lastFocusedElementRef.current = event.currentTarget;
+        setIsMenuOpen(true);
+    }, []);
+
+    const handleOpenChat = useCallback(
+        (event?: React.MouseEvent<HTMLButtonElement>) => {
+            if (event) {
+                lastFocusedElementRef.current = event.currentTarget;
+            } else if (document.activeElement instanceof HTMLElement) {
+                lastFocusedElementRef.current = document.activeElement;
+            }
+
+            openChat();
+        },
+        [openChat],
+    );
+
+    const handleCloseMenu = useCallback(() => {
+        setIsMenuOpen(false);
+    }, []);
 
     // Escape closes both menu and chat
     useEffect(() => {
         const onKeyDown = (event: KeyboardEvent) => {
             if (event.key === "Escape") {
-                setIsMenuOpen(false);
+                handleCloseMenu();
                 closeChat();
             }
             // Ctrl+K opens chat
             if ((event.ctrlKey || event.metaKey) && event.key === "k") {
                 event.preventDefault();
-                openChat();
+                handleOpenChat();
             }
         };
 
@@ -34,7 +61,7 @@ export default function Header({ currentPath }: HeaderProps) {
         return () => {
             document.removeEventListener("keydown", onKeyDown);
         };
-    }, [openChat, closeChat]);
+    }, [handleOpenChat, closeChat, handleCloseMenu]);
 
     // Scroll-lock when menu or chat is open
     useEffect(() => {
@@ -52,7 +79,7 @@ export default function Header({ currentPath }: HeaderProps) {
                     <HeaderNav currentPath={currentPath} />
 
                     <div className={styles["header__actions"]}>
-                        <AiButton onClick={openChat} />
+                        <AiButton onClick={handleOpenChat} />
                         <HeaderCta id="cta-desktop" />
                     </div>
 
@@ -62,7 +89,7 @@ export default function Header({ currentPath }: HeaderProps) {
                         aria-label="Open menu"
                         aria-expanded={isMenuOpen}
                         aria-controls="mobile-menu"
-                        onClick={() => setIsMenuOpen(true)}
+                        onClick={handleOpenMenu}
                         type="button"
                     >
                         <span className={styles["hamburger__bar"]} />
@@ -75,10 +102,11 @@ export default function Header({ currentPath }: HeaderProps) {
             <MobileMenu
                 currentPath={currentPath}
                 isOpen={isMenuOpen}
-                onClose={() => setIsMenuOpen(false)}
+                onClose={handleCloseMenu}
+                onRestoreFocus={restoreFocus}
             />
 
-            <AiChatModal />
+            <AiChatModal onRestoreFocus={restoreFocus} />
         </>
     );
 }

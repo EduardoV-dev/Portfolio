@@ -1,26 +1,56 @@
 {
-  "version": 1,
-  "skills": {
-    "animate": {
-      "source": "pbakaus/impeccable",
-      "sourceType": "github",
-      "computedHash": "49ccc3eccb47ab302fc5de3ef9f772dcdee1cab03c548012eb2998255a23171b"
-    },
-    "frontend-design": {
-      "source": "anthropics/skills",
-      "sourceType": "github",
-      "computedHash": "516bd2154eb843a8240e43d5b285229129853114ad7075a5e141e1c08e408c84"
-    },
-    "interface-design": {
-      "source": "dammyjay93/interface-design",
-      "sourceType": "github",
-      "skillPath": ".claude/skills/interface-design/SKILL.md",
-      "computedHash": "4d5fe1dacfebc0c1b3837b061405150ed2e4971c096543afc46c23161c5a4f7a"
-    },
-    "web-design-guidelines": {
-      "source": "vercel-labs/agent-skills",
-      "sourceType": "github",
-      "computedHash": "f3bc47f890f42a44db1007ab390709ec368e4b8c089baee6b0007182236ac474"
+    "version": 1,
+    "skills": {
+        "accessibility": {
+            "source": "addyosmani/web-quality-skills",
+            "sourceType": "autoskills-registry",
+            "computedHash": "bffe3d08cfe92ebad63699f74ce29e35c19850ebfbf474c1463183cfe34d6a09"
+        },
+        "animate": {
+            "source": "pbakaus/impeccable",
+            "sourceType": "github",
+            "computedHash": "49ccc3eccb47ab302fc5de3ef9f772dcdee1cab03c548012eb2998255a23171b"
+        },
+        "astro": {
+            "source": "astrolicious/agent-skills",
+            "sourceType": "autoskills-registry",
+            "computedHash": "2afd3a02edf4374598ce471dabb1ab5638851dbf7b82d0bb36f1019331eafb54"
+        },
+        "composition-patterns": {
+            "source": "vercel-labs/agent-skills",
+            "sourceType": "autoskills-registry",
+            "computedHash": "c124390cc3441844903ada94cb5820b23d922f2d0ad34e01e029e410197c8a32"
+        },
+        "frontend-design": {
+            "source": "anthropics/skills",
+            "sourceType": "github",
+            "computedHash": "516bd2154eb843a8240e43d5b285229129853114ad7075a5e141e1c08e408c84"
+        },
+        "interface-design": {
+            "source": "dammyjay93/interface-design",
+            "sourceType": "github",
+            "skillPath": ".claude/skills/interface-design/SKILL.md",
+            "computedHash": "4d5fe1dacfebc0c1b3837b061405150ed2e4971c096543afc46c23161c5a4f7a"
+        },
+        "react-best-practices": {
+            "source": "vercel-labs/agent-skills",
+            "sourceType": "autoskills-registry",
+            "computedHash": "502eb06700e2c3cb1bd7f710860528f72281320bd5171a2087b05a090b573dc1"
+        },
+        "seo": {
+            "source": "addyosmani/web-quality-skills",
+            "sourceType": "autoskills-registry",
+            "computedHash": "c184da724d1c61ad077f27418ea8e7e88fd54bcdf98165e18be7e4681cbd5e20"
+        },
+        "typescript-advanced-types": {
+            "source": "wshobson/agents",
+            "sourceType": "autoskills-registry",
+            "computedHash": "5ca0e177c6aaaba1889255691224daafdb7d71f317cc70bede1590d3907ded42"
+        },
+        "web-design-guidelines": {
+            "source": "vercel-labs/agent-skills",
+            "sourceType": "github",
+            "computedHash": "f3bc47f890f42a44db1007ab390709ec368e4b8c089baee6b0007182236ac474"
+        }
     }
-  }
 }

@@ -6,10 +6,16 @@ import styles from "./index.module.css";
 
 const CLOSE_DURATION = 160;
 
-export default function AiChatModal() {
+interface AiChatModalProps {
+    onRestoreFocus?: () => void;
+}
+
+export default function AiChatModal({ onRestoreFocus }: AiChatModalProps) {
     const { isOpen, closeChat } = useChatStore();
     const [isClosing, setIsClosing] = useState(false);
     const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const modalRef = useRef<HTMLDivElement>(null);
+    const wasOpenRef = useRef(false);
 
     // Cleanup timer on unmount
     useEffect(() => {
@@ -35,6 +41,65 @@ export default function AiChatModal() {
         return () => document.removeEventListener("keydown", onKeyDown);
     }, [isOpen, handleClose]);
 
+    useEffect(() => {
+        if (!isOpen || !modalRef.current) {
+            return;
+        }
+
+        const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        );
+
+        focusableElements[0]?.focus();
+
+        function handleKeyDown(event: KeyboardEvent) {
+            if (event.key !== "Tab" || !modalRef.current) {
+                return;
+            }
+
+            const elements = modalRef.current.querySelectorAll<HTMLElement>(
+                'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])',
+            );
+
+            if (elements.length === 0) {
+                return;
+            }
+
+            const firstElement = elements[0];
+            const lastElement = elements[elements.length - 1];
+            const activeElement = document.activeElement;
+
+            if (event.shiftKey && activeElement === firstElement) {
+                event.preventDefault();
+                lastElement.focus();
+                return;
+            }
+
+            if (!event.shiftKey && activeElement === lastElement) {
+                event.preventDefault();
+                firstElement.focus();
+            }
+        }
+
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [isOpen]);
+
+    useEffect(() => {
+        if (isOpen) {
+            wasOpenRef.current = true;
+            return;
+        }
+
+        if (wasOpenRef.current && !isClosing) {
+            onRestoreFocus?.();
+            wasOpenRef.current = false;
+        }
+    }, [isOpen, isClosing, onRestoreFocus]);
+
     return (
         <>
             {/* Backdrop */}
@@ -53,6 +118,7 @@ export default function AiChatModal() {
                 role="dialog"
                 aria-modal="true"
                 aria-label="AI Engineering Assistant"
+                ref={modalRef}
             >
                 <AiChat mode="popup" onClose={handleClose} />
             </div>

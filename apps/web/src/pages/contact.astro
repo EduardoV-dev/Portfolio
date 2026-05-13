@@ -1,8 +1,13 @@
 ---
+export const prerender = true;
+
 import Layout from "@/layouts/layout/index.astro";
 import ContactModule from "@/modules/contact/index.astro";
 ---
 
-<Layout title="Contact – Eduardo Varela">
+<Layout
+    title="Contact – Eduardo Varela"
+    description="Contact Eduardo Varela for engineering consulting, architecture reviews, and full stack development projects."
+>
     <ContactModule />
 </Layout>

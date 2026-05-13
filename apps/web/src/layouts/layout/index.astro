@@ -1,17 +1,37 @@
 ---
 import Header from "./header/index.tsx";
 import Footer from "./footer/index.astro";
+import { ENVS } from "@/constants/environment-variables";
 import "@/styles/global.css";
 
 interface Props {
     title?: string;
     description?: string;
+    canonical?: string;
+    robots?: string;
+    ogImage?: string;
+    ogType?: "website" | "article";
 }
 
 const {
     title = "Eduardo Varela – Full Stack Engineer",
     description = "Personal portfolio of Eduardo Varela, Full Stack Engineer.",
+    canonical,
+    robots = "index,follow",
+    ogImage = "/favicon/android-chrome-512x512.png",
+    ogType = "website",
 } = Astro.props;
+
+const SITE_NAME = "Eduardo Varela";
+const gaMeasurementId = ENVS.PUBLIC_GA_MEASUREMENT_ID;
+const siteUrl = ENVS.SITE_URL.replace(/\/$/, "");
+const canonicalPath = canonical ?? Astro.url.pathname;
+const canonicalUrl = canonicalPath.startsWith("http")
+    ? canonicalPath
+    : `${siteUrl}${canonicalPath.startsWith("/") ? canonicalPath : `/${canonicalPath}`}`;
+const ogImageUrl = ogImage.startsWith("http")
+    ? ogImage
+    : `${siteUrl}${ogImage.startsWith("/") ? ogImage : `/${ogImage}`}`;
 ---
 
 <!doctype html>
@@ -38,7 +58,59 @@ const {
         />
         <meta name="generator" content={Astro.generator} />
         <meta name="description" content={description} />
+        <meta name="robots" content={robots} />
+        <link rel="canonical" href={canonicalUrl} />
+
+        <meta property="og:type" content={ogType} />
+        <meta property="og:site_name" content={SITE_NAME} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={ogImageUrl} />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={ogImageUrl} />
+        {
+            gaMeasurementId && (
+                <>
+                    <script
+                        is:inline
+                        async
+                        src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
+                    />
+                    <script is:inline>
+                        {/* eslint-disable-next-line @typescript-eslint/no-unused-expressions */}
+                        {`window.dataLayer = window.dataLayer ?? []; function gtag(){window.dataLayer.push(arguments);} gtag("js", new Date()); gtag("config", "${gaMeasurementId}");`}
+                    </script>
+                </>
+            )
+        }
         <title>{title}</title>
+        <script is:inline type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Person",
+                        "name": "Eduardo Varela",
+                        "url": "https://eduardov.dev",
+                        "jobTitle": "Full Stack Engineer",
+                        "sameAs": [
+                            "https://www.linkedin.com/in/eduardov-dev",
+                            "https://github.com/EduardoV-dev"
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "name": "Eduardo Varela",
+                        "url": "https://eduardov.dev",
+                        "inLanguage": "en"
+                    }
+                ]
+            }
+        </script>
     </head>
     <body>
         <div class="site-ambient" aria-hidden="true">

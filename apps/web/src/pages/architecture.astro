@@ -1,10 +1,15 @@
 ---
+export const prerender = true;
+
 import Layout from "@/layouts/layout/index.astro";
 import ArchitectureModule from "@/modules/architecture/index.astro";
 import CtaSection from "@/components/cta-section/index.astro";
 ---
 
-<Layout title="System Design & Architecture – Eduardo Varela">
+<Layout
+    title="System Design & Architecture – Eduardo Varela"
+    description="Architecture principles, domain modeling patterns, and real-world system design tradeoffs from production projects."
+>
     <ArchitectureModule />
     <CtaSection />
 </Layout>

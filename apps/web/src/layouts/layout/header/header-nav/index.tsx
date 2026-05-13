@@ -10,18 +10,23 @@ export default function HeaderNav({ currentPath }: HeaderNavProps) {
     return (
         <nav className={styles.nav} aria-label="Main navigation">
             <ul className={styles["nav__list"]}>
-                {HEADER_NAV_ITEMS.map(({ label, href }) => (
-                    <li key={href}>
-                        <a
-                            href={href}
-                            className={clsx(styles["nav__link"], {
-                                [styles["nav__link--active"]]: currentPath.startsWith(href),
-                            })}
-                        >
-                            {label}
-                        </a>
-                    </li>
-                ))}
+                {HEADER_NAV_ITEMS.map(({ label, href }) => {
+                    const isActive = currentPath.startsWith(href);
+
+                    return (
+                        <li key={href}>
+                            <a
+                                href={href}
+                                className={clsx(styles["nav__link"], {
+                                    [styles["nav__link--active"]]: isActive,
+                                })}
+                                aria-current={isActive ? "page" : undefined}
+                            >
+                                {label}
+                            </a>
+                        </li>
+                    );
+                })}
             </ul>
         </nav>
     );

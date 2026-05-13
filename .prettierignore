@@ -13,3 +13,4 @@
 
 # Lockfiles and generated artifacts
 pnpm-lock.yaml
+amplify.yml

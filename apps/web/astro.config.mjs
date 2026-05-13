@@ -5,6 +5,17 @@ import sentry from "@sentry/astro";
 import react from "@astrojs/react";
 import awsAmplify from "amplify-astro-adapter";
 
+const hasSentryToken = Boolean(process.env.SENTRY_AUTH_TOKEN);
+const hasSentryOrg = Boolean(process.env.SENTRY_ORG);
+const hasSentryProject = Boolean(process.env.SENTRY_PROJECT);
+
+if (hasSentryToken && (!hasSentryOrg || !hasSentryProject)) {
+    throw new Error(
+        "SENTRY_AUTH_TOKEN is set, but SENTRY_ORG or SENTRY_PROJECT is missing. " +
+            "Set both variables or unset SENTRY_AUTH_TOKEN.",
+    );
+}
+
 // https://astro.build/config
 export default defineConfig({
     output: "server",
@@ -12,9 +23,12 @@ export default defineConfig({
     integrations: [
         react(),
         sentry({
-            org: "eduardo-varela",
-            project: "portfolio",
-            authToken: process.env.SENTRY_AUTH_TOKEN,
+            org: process.env.SENTRY_ORG,
+            project: process.env.SENTRY_PROJECT,
+            authToken: hasSentryOrg && hasSentryProject ? process.env.SENTRY_AUTH_TOKEN : undefined,
+            sourcemaps: {
+                assets: [".amplify-hosting/static/_astro/**/*.js.map"],
+            },
         }),
     ],
     site: process.env.SITE_URL,

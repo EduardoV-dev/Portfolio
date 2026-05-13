@@ -4,6 +4,8 @@ interface ImportMetaEnv {
     // Build-time / SSR (non-PUBLIC = server-only, available at build time)
     readonly SITE_URL: string;
     readonly SENTRY_AUTH_TOKEN: string;
+    readonly SENTRY_ORG: string;
+    readonly SENTRY_PROJECT: string;
     readonly STRAPI_API_TOKEN: string;
     readonly STRAPI_API_URL: string;
     readonly STRAPI_CMS_OPTIONAL: string;

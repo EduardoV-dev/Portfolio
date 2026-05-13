@@ -1,6 +1,7 @@
 ---
 import type { Project } from "@/types/strapi";
 import { APP_ROUTES } from "@/constants/routes";
+import ProjectImageSlider from "@/components/project-image-slider/index.astro";
 
 export interface Props {
     project: Project;
@@ -8,6 +9,11 @@ export interface Props {
 
 const { project } = Astro.props;
 const { detail } = project;
+const projectImages = Array.isArray(project.images) ? project.images : [];
+const projectTags = Array.isArray(project.tags) ? project.tags : [];
+const hasSourceHref =
+    typeof project.sourceHref === "string" && project.sourceHref.trim().length > 0;
+const hasLiveHref = typeof project.liveHref === "string" && project.liveHref.trim().length > 0;
 ---
 
 <section class="csd-hero" aria-label="Project overview">
@@ -30,17 +36,26 @@ const { detail } = project;
     </a>
 
     <div class="csd-hero__tags">
-        {project.tags.map((tag) => <span class="csd-tag">{tag}</span>)}
+        {projectTags.map((tag) => <span class="csd-tag">{tag.name}</span>)}
     </div>
 
-    <h1 class="csd-hero__title" data-animate>{project.title}</h1>
-    <p class="csd-hero__impact" data-animate data-animate-delay="1">{project.impact}</p>
-    <p class="csd-hero__desc" data-animate data-animate-delay="2">
+    <div class="csd-hero__media" data-animate data-animate-delay="1">
+        <ProjectImageSlider
+            images={projectImages}
+            projectTitle={project.title}
+            variant="detail"
+            class="csd-hero__slider"
+        />
+    </div>
+
+    <h1 class="csd-hero__title" data-animate data-animate-delay="2">{project.title}</h1>
+    <p class="csd-hero__impact" data-animate data-animate-delay="3">{project.impact}</p>
+    <p class="csd-hero__desc" data-animate data-animate-delay="4">
         {project.description}
     </p>
 
     <!-- Key metrics -->
-    <div class="csd-hero__metrics" data-animate data-animate-delay="3">
+    <div class="csd-hero__metrics" data-animate data-animate-delay="5">
         {
             detail.metrics.map((m) => (
                 <div class="csd-metric">
@@ -52,45 +67,63 @@ const { detail } = project;
     </div>
 
     <!-- Action links -->
-    <div class="csd-hero__actions" data-animate data-animate-delay="4">
-        <a href={project.sourceHref} class="csd-hero__action-link">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-            >
-                <polyline points="16 18 22 12 16 6"></polyline>
-                <polyline points="8 6 2 12 8 18"></polyline>
-            </svg>
-            Source Code
-        </a>
-        <a href={project.liveHref} class="csd-hero__action-link">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-            >
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
-            </svg>
-            Live Project
-        </a>
-    </div>
+    {
+        (hasSourceHref || hasLiveHref) && (
+            <div class="csd-hero__actions" data-animate data-animate-delay="6">
+                {hasSourceHref && (
+                    <a
+                        href={project.sourceHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="csd-hero__action-link"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <polyline points="16 18 22 12 16 6" />
+                            <polyline points="8 6 2 12 8 18" />
+                        </svg>
+                        Source Code
+                    </a>
+                )}
+                {hasLiveHref && (
+                    <a
+                        href={project.liveHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="csd-hero__action-link"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                            <polyline points="15 3 21 3 21 9" />
+                            <line x1="10" y1="14" x2="21" y2="3" />
+                        </svg>
+                        Live Project
+                    </a>
+                )}
+            </div>
+        )
+    }
 </section>
 
 <style>
@@ -130,6 +163,18 @@ const { detail } = project;
         flex-wrap: wrap;
         gap: 0.5rem;
         margin-bottom: 1.25rem;
+    }
+
+    .csd-hero__media {
+        margin-bottom: 1.5rem;
+        border: 1px solid color-mix(in srgb, var(--color-accent) 24%, transparent);
+        border-radius: 0.9rem;
+        overflow: hidden;
+        background: color-mix(in srgb, var(--color-accent) 5%, var(--color-surface));
+    }
+
+    .csd-hero__slider {
+        height: clamp(220px, 42vw, 380px);
     }
 
     .csd-tag {
@@ -225,6 +270,7 @@ const { detail } = project;
         display: inline-flex;
         align-items: center;
         gap: 0.4rem;
+        cursor: pointer;
         font-size: 0.78rem;
         font-weight: 600;
         letter-spacing: 0.04em;

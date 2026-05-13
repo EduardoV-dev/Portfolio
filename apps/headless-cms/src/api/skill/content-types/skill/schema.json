@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "technologies",
+  "collectionName": "skills",
   "info": {
-    "singularName": "technology",
-    "pluralName": "technologies",
-    "displayName": "Technologies"
+    "singularName": "skill",
+    "pluralName": "skills",
+    "displayName": "Skill"
   },
   "options": {
     "draftAndPublish": true
@@ -18,7 +18,7 @@
     "category": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::technology-category.technology-category"
+      "target": "api::skill-category.skill-category"
     }
   }
 }

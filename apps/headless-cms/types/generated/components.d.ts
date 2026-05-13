@@ -1,31 +1,5 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
-export interface ProjectArchitecture extends Struct.ComponentSchema {
-  collectionName: 'components_project_architectures';
-  info: {
-    displayName: 'architecture';
-  };
-  attributes: {
-    description: Schema.Attribute.Text & Schema.Attribute.Required;
-    layers: Schema.Attribute.Component<'project.architecture-layer', true>;
-  };
-}
-
-export interface ProjectArchitectureLayer extends Struct.ComponentSchema {
-  collectionName: 'components_project_architecture_layers';
-  info: {
-    displayName: 'architecture-layer';
-  };
-  attributes: {
-    components: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::architecture-component.architecture-component'
-    >;
-    description: Schema.Attribute.String & Schema.Attribute.Required;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
-  };
-}
-
 export interface ProjectHighlight extends Struct.ComponentSchema {
   collectionName: 'components_project_highlights';
   info: {
@@ -63,8 +37,6 @@ export interface ProjectMetric extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'project.architecture': ProjectArchitecture;
-      'project.architecture-layer': ProjectArchitectureLayer;
       'project.highlight': ProjectHighlight;
       'project.highlight-code': ProjectHighlightCode;
       'project.metric': ProjectMetric;

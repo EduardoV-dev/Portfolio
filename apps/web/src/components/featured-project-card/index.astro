@@ -1,6 +1,6 @@
 ---
-import { ENVS } from "@/constants/environment-variables";
 import type { Project } from "@/types/strapi";
+import ProjectImageSlider from "@/components/project-image-slider/index.astro";
 
 export interface Props {
     caseStudy: Project;
@@ -9,29 +9,19 @@ export interface Props {
 
 const { caseStudy, ...restProps } = Astro.props;
 
-const {
-    title,
-    slug,
-    impact,
-    description,
-    tags,
-    bullets,
-    sourceHref = "#",
-    liveHref = "#",
-    images,
-} = caseStudy;
+const { title, slug, impact, description, tags, bullets, sourceHref, liveHref, images } = caseStudy;
+
+const hasSourceHref = typeof sourceHref === "string" && sourceHref.trim().length > 0;
+const hasLiveHref = typeof liveHref === "string" && liveHref.trim().length > 0;
+const projectImages = Array.isArray(images) ? images : [];
+const projectTags = Array.isArray(tags) ? tags : [];
+const projectBullets = Array.isArray(bullets) ? bullets : [];
 ---
 
 <article class="fpc-card" {...restProps}>
     <!-- Image -->
-    <div class="fpc-card__image" aria-hidden="true">
-        <div class="fpc-card__image-inner">
-            <img
-                src={`${ENVS.STRAPI_API_URL.replace("/api", "")}${images[0]?.url}`}
-                alt={images[0]?.alternativeText || ""}
-            />
-        </div>
-        <div class="fpc-card__image-overlay"></div>
+    <div class="fpc-card__image">
+        <ProjectImageSlider images={projectImages} projectTitle={title} class="fpc-card__slider" />
         <span class="fpc-card__featured-badge">Featured Project</span>
     </div>
 
@@ -39,7 +29,7 @@ const {
     <div class="fpc-card__content">
         <!-- Tags -->
         <div class="fpc-card__tags">
-            {tags.map((tag) => <span class="fpc-card__tag">{tag.name}</span>)}
+            {projectTags.map((tag) => <span class="fpc-card__tag">{tag.name}</span>)}
         </div>
 
         <!-- Title -->
@@ -54,7 +44,7 @@ const {
         <!-- Bullets -->
         <ul class="fpc-card__bullets" role="list">
             {
-                bullets.map((b) => (
+                projectBullets.map((b) => (
                     <li class="fpc-card__bullet">
                         <svg
                             class="fpc-card__bullet-icon"
@@ -81,53 +71,65 @@ const {
         <!-- Footer links + CTA -->
         <div class="fpc-card__footer">
             <div class="fpc-card__links">
-                <a
-                    href={sourceHref}
-                    class="fpc-card__link"
-                    aria-label="Source code"
-                    onclick="event.stopPropagation()"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        aria-hidden="true"
-                    >
-                        <polyline points="16 18 22 12 16 6"></polyline>
-                        <polyline points="8 6 2 12 8 18"></polyline>
-                    </svg>
-                    SOURCE CODE
-                </a>
-                <a
-                    href={liveHref}
-                    class="fpc-card__link"
-                    aria-label="Live project"
-                    onclick="event.stopPropagation()"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        aria-hidden="true"
-                    >
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                        <polyline points="15 3 21 3 21 9"></polyline>
-                        <line x1="10" y1="14" x2="21" y2="3"></line>
-                    </svg>
-                    LIVE PROJECT
-                </a>
+                {
+                    hasSourceHref && (
+                        <a
+                            href={sourceHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="fpc-card__link"
+                            aria-label="Source code"
+                            onclick="event.stopPropagation()"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="12"
+                                height="12"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <polyline points="16 18 22 12 16 6" />
+                                <polyline points="8 6 2 12 8 18" />
+                            </svg>
+                            SOURCE CODE
+                        </a>
+                    )
+                }
+                {
+                    hasLiveHref && (
+                        <a
+                            href={liveHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="fpc-card__link"
+                            aria-label="Live project"
+                            onclick="event.stopPropagation()"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="12"
+                                height="12"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                <polyline points="15 3 21 3 21 9" />
+                                <line x1="10" y1="14" x2="21" y2="3" />
+                            </svg>
+                            LIVE PROJECT
+                        </a>
+                    )
+                }
             </div>
             <a
                 href={`/case-studies/${slug}`}
@@ -161,6 +163,7 @@ const {
     .fpc-card {
         display: grid;
         grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
         background: var(--color-surface);
         border: 1px solid var(--color-border);
         border-radius: 1rem;
@@ -181,12 +184,6 @@ const {
             0 0 40px color-mix(in srgb, var(--color-accent) 6%, transparent);
     }
 
-    @mixin tablet-up {
-        .fpc-card {
-            grid-template-columns: 45% 1fr;
-        }
-    }
-
     @media (prefers-reduced-motion: reduce) {
         .fpc-card {
             transition: border-color var(--transition-fast);
@@ -199,93 +196,23 @@ const {
     /* ── Image ── */
     .fpc-card__image {
         position: relative;
-        min-height: 260px;
+        min-height: 220px;
         overflow: hidden;
         flex-shrink: 0;
-        max-height: 340px;
+        height: clamp(220px, 30vw, 360px);
+        background: #071020;
     }
 
     @mixin tablet-up {
         .fpc-card__image {
-            min-height: 420px;
-            max-height: 470px;
+            min-height: 260px;
         }
     }
 
-    .fpc-card__image-inner {
+    .fpc-card__slider {
         width: 100%;
         height: 100%;
-        background:
-            radial-gradient(
-                ellipse at 25% 35%,
-                color-mix(in srgb, var(--color-accent) 22%, transparent) 0%,
-                transparent 55%
-            ),
-            radial-gradient(ellipse at 80% 70%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
-            radial-gradient(
-                ellipse at 55% 85%,
-                color-mix(in srgb, var(--color-accent) 10%, transparent) 0%,
-                transparent 45%
-            ),
-            linear-gradient(155deg, #0c1a2e 0%, #071020 45%, #050d1a 100%);
-        transition: filter var(--transition-base);
-    }
-
-    .fpc-card:hover .fpc-card__image-inner {
-        filter: brightness(1.15);
-    }
-
-    /* Circuit-board grid */
-    .fpc-card__image-inner::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background-image:
-            linear-gradient(
-                color-mix(in srgb, var(--color-accent) 7%, transparent) 1px,
-                transparent 1px
-            ),
-            linear-gradient(
-                90deg,
-                color-mix(in srgb, var(--color-accent) 7%, transparent) 1px,
-                transparent 1px
-            );
-        background-size: 36px 36px;
-    }
-
-    /* Glowing node cluster */
-    .fpc-card__image-inner::after {
-        content: "";
-        position: absolute;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: color-mix(in srgb, var(--color-accent) 85%, transparent);
-        box-shadow:
-            0 0 16px 6px color-mix(in srgb, var(--color-accent) 40%, transparent),
-            32px 28px 0 color-mix(in srgb, var(--color-accent) 50%, transparent),
-            -20px 40px 0 color-mix(in srgb, var(--color-accent) 35%, transparent),
-            60px -15px 0 color-mix(in srgb, var(--color-accent) 30%, transparent);
-        top: 35%;
-        left: 30%;
-    }
-
-    .fpc-card__image-overlay {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-    }
-
-    /* Mobile: fade bottom into content */
-    .fpc-card__image-overlay {
-        background: linear-gradient(to bottom, transparent 55%, var(--color-surface) 100%);
-    }
-
-    /* Desktop: fade right into content */
-    @mixin tablet-up {
-        .fpc-card__image-overlay {
-            background: linear-gradient(to right, transparent 50%, var(--color-surface) 100%);
-        }
+        border-radius: 0;
     }
 
     /* Featured badge */
@@ -317,8 +244,7 @@ const {
 
     @mixin tablet-up {
         .fpc-card__content {
-            padding: 2.5rem 2.25rem;
-            justify-content: center;
+            padding: 2.25rem 2.25rem 2.4rem;
         }
     }
 
@@ -418,6 +344,7 @@ const {
         display: inline-flex;
         align-items: center;
         gap: 0.35rem;
+        cursor: pointer;
         font-size: 0.7rem;
         font-weight: 600;
         letter-spacing: 0.06em;

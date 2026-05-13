@@ -2,18 +2,18 @@
 import type { ProjectDetail } from "@/types/strapi";
 
 export interface Props {
-    technologies: ProjectDetail["technologies"];
+    skills: ProjectDetail["skills"];
 }
 
-const { technologies } = Astro.props;
+const { skills } = Astro.props;
 
-const techStack = technologies.reduce(
-    (acc, tech) => {
-        const category = tech.category.name.toLowerCase();
+const techStack = skills.reduce(
+    (acc, skill) => {
+        const category = skill.category.name.toLowerCase();
         if (!acc[category]) {
             acc[category] = [];
         }
-        acc[category].push(tech.name);
+        acc[category].push(skill.name);
         return acc;
     },
     {} as Record<string, string[]>,
@@ -21,7 +21,7 @@ const techStack = technologies.reduce(
 ---
 
 <section class="csd-section" id="tech-stack" data-animate aria-labelledby="tech-heading">
-    <p class="csd-section__label">07</p>
+    <p class="csd-section__label">06</p>
     <h2 class="csd-section__heading" id="tech-heading">Tech Stack</h2>
 
     <div class="csd-techstack">

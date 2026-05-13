@@ -1,12 +1,37 @@
 ---
+import { projectCategoryServices } from "@/api/project-categories";
 import { projectServices } from "@/api/projects";
 import CaseStudyCard from "@/components/case-study-card/index.astro";
 import FeaturedProjectCard from "@/components/featured-project-card/index.astro";
 
-const projects = await projectServices.findAll();
+const [projects, categories] = await Promise.all([
+    projectServices.findAll(),
+    projectCategoryServices.findAll(),
+]);
 
-const featuredProject = projects.find((project) => project.isFeatured);
-const gridProjects = projects.filter((project) => !project.isFeatured);
+function toCategoryFilterValue(value: string) {
+    return value
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, "")
+        .replace(/\s+/g, "-");
+}
+
+const categoryFilters = categories
+    .map((category) => ({
+        label: category.name,
+        value: toCategoryFilterValue(category.name),
+    }))
+    .filter(
+        (category, index, allCategories) =>
+            category.value.length > 0 &&
+            allCategories.findIndex((item) => item.value === category.value) === index,
+    );
+
+const firstFeaturedProject = projects.find((project) => project.isFeatured) || null;
+const gridProjects =
+    projects.filter((project) => !project.isFeatured || project.id !== firstFeaturedProject?.id) ||
+    [];
 ---
 
 <section class="csw-section" aria-labelledby="csw-heading">
@@ -25,23 +50,24 @@ const gridProjects = projects.filter((project) => !project.isFeatured);
         </header>
 
         {
-            featuredProject && (
+            firstFeaturedProject && (
                 <div data-animate data-animate-delay="1">
-                    <FeaturedProjectCard caseStudy={featuredProject} />
+                    <FeaturedProjectCard caseStudy={firstFeaturedProject} />
                 </div>
             )
         }
 
         <!-- Filter bar -->
         <div class="csw-section__filters" role="group" aria-label="Filter projects by category">
+            <button class="csw-filter-btn" data-filter="all" aria-pressed="true">All</button>
             {
-                ["all", "backend", "cloud", "architecture", "performance"].map((cat) => (
+                categoryFilters.map((category) => (
                     <button
                         class="csw-filter-btn"
-                        data-filter={cat}
-                        aria-pressed={cat === "all" ? "true" : "false"}
+                        data-filter={category.value}
+                        aria-pressed="false"
                     >
-                        {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                        {category.label}
                     </button>
                 ))
             }
@@ -56,7 +82,16 @@ const gridProjects = projects.filter((project) => !project.isFeatured);
                         href={`/case-studies/${project.slug}`}
                         data-animate
                         data-animate-delay={String(i + 2)}
-                        data-category={project.category.name}
+                        data-categories={[
+                            ...(project.category?.name ? [project.category.name] : []),
+                            ...(project.categories?.map((category) => category.name) ?? []),
+                        ]
+                            .map((name) => toCategoryFilterValue(name))
+                            .filter(
+                                (name, index, allNames) =>
+                                    name.length > 0 && allNames.indexOf(name) === index,
+                            )
+                            .join(",")}
                     />
                 ))
             }
@@ -228,11 +263,14 @@ const gridProjects = projects.filter((project) => !project.isFeatured);
     const emptyState = document.getElementById("csw-empty")!;
 
     function applyFilter(category: string) {
-        const cards = grid.querySelectorAll<HTMLElement>("[data-category]");
+        const cards = grid.querySelectorAll<HTMLElement>("[data-categories]");
         let visibleCount = 0;
 
         cards.forEach((card) => {
-            const matches = category === "all" || card.dataset.category === category;
+            const categoryValues = (card.dataset.categories ?? "")
+                .split(",")
+                .filter((value) => value.length > 0);
+            const matches = category === "all" || categoryValues.includes(category);
             if (matches) {
                 card.classList.remove("csw-card-hidden");
                 visibleCount++;

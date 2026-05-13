@@ -62,7 +62,8 @@
     "detail": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::project-detail.project-detail"
+      "target": "api::project-detail.project-detail",
+      "mappedBy": "project"
     },
     "isFeatured": {
       "type": "boolean"

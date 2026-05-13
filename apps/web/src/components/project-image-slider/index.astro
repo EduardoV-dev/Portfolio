@@ -1,0 +1,459 @@
+---
+import { ENVS } from "@/constants/environment-variables";
+import type { Image } from "@/types/strapi";
+
+export interface Props {
+    images?: Image[] | null;
+    projectTitle?: string;
+    class?: string;
+    variant?: "card" | "detail";
+}
+
+const {
+    images = [],
+    projectTitle = "Project",
+    class: className = "",
+    variant = "card",
+} = Astro.props;
+
+const validImages = Array.isArray(images)
+    ? images.filter((image) => typeof image?.url === "string" && image.url.length > 0)
+    : [];
+
+const baseMediaUrl = ENVS.STRAPI_API_URL.replace("/api", "");
+---
+
+<div
+    class:list={["pis", `pis--${variant}`, className]}
+    data-project-image-slider
+    tabindex={validImages.length > 1 ? "0" : undefined}
+>
+    <div class="pis__viewport" data-slider-viewport>
+        <div class="pis__track">
+            {
+                validImages.length > 0 ? (
+                    validImages.map((image, index) => (
+                        <div class="pis__slide">
+                            <img
+                                class="pis__img"
+                                src={`${baseMediaUrl}${image.url}`}
+                                alt={
+                                    image.alternativeText || `${projectTitle} preview ${index + 1}`
+                                }
+                                loading={index === 0 ? "eager" : "lazy"}
+                                decoding="async"
+                            />
+                        </div>
+                    ))
+                ) : (
+                    <div class="pis__slide">
+                        <div class="pis__empty" aria-label="No project image available" />
+                    </div>
+                )
+            }
+        </div>
+    </div>
+
+    {
+        validImages.length > 1 && (
+            <>
+                <button
+                    class="pis__btn pis__btn--prev"
+                    type="button"
+                    data-slider-prev
+                    aria-label="Previous image"
+                >
+                    <span aria-hidden="true">&#8249;</span>
+                </button>
+                <button
+                    class="pis__btn pis__btn--next"
+                    type="button"
+                    data-slider-next
+                    aria-label="Next image"
+                >
+                    <span aria-hidden="true">&#8250;</span>
+                </button>
+                <div class="pis__count" aria-live="polite">
+                    <span data-slider-current>1</span>
+                    <span>/</span>
+                    <span>{validImages.length}</span>
+                </div>
+                <div class="pis__dots" aria-label="Select slide">
+                    {validImages.map((_image, index) => (
+                        <button
+                            class="pis__dot"
+                            type="button"
+                            data-slider-dot={String(index)}
+                            aria-label={`Go to slide ${index + 1}`}
+                        />
+                    ))}
+                </div>
+            </>
+        )
+    }
+</div>
+
+<style>
+    .pis {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        overflow: hidden;
+        touch-action: pan-y;
+        user-select: none;
+    }
+
+    .pis__viewport {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .pis__track {
+        display: flex;
+        height: 100%;
+        transition: transform var(--transition-base);
+        will-change: transform;
+    }
+
+    .pis__slide {
+        flex: 0 0 100%;
+        width: 100%;
+        height: 100%;
+        min-width: 0;
+    }
+
+    .pis__img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+        background: #04101f;
+        user-select: none;
+        -webkit-user-drag: none;
+        pointer-events: none;
+    }
+
+    .pis--card .pis__img {
+        object-fit: cover;
+        object-position: center 62%;
+        transform: none;
+        background: #050d1a;
+    }
+
+    .pis__empty {
+        width: 100%;
+        height: 100%;
+        background:
+            radial-gradient(circle at 25% 20%, rgba(0, 204, 255, 0.3) 0, transparent 45%),
+            linear-gradient(155deg, #0c1a2e 0%, #071020 45%, #050d1a 100%);
+    }
+
+    .pis__btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 2rem;
+        height: 2rem;
+        border: 1px solid color-mix(in srgb, var(--color-accent) 38%, transparent);
+        background: rgba(5, 13, 26, 0.76);
+        color: var(--color-text-primary);
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 3;
+        backdrop-filter: blur(4px);
+        transition:
+            background var(--transition-fast),
+            border-color var(--transition-fast),
+            color var(--transition-fast);
+    }
+
+    .pis__btn:hover {
+        background: rgba(6, 19, 35, 0.92);
+        border-color: color-mix(in srgb, var(--color-accent) 65%, transparent);
+        color: var(--color-accent);
+    }
+
+    .pis__btn:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 2px;
+    }
+
+    .pis__btn--prev {
+        left: 0.75rem;
+    }
+
+    .pis__btn--next {
+        right: 0.75rem;
+    }
+
+    .pis__dots {
+        position: absolute;
+        left: 50%;
+        bottom: 0.75rem;
+        transform: translateX(-50%);
+        display: inline-flex;
+        gap: 0.35rem;
+        z-index: 3;
+        padding: 0.3rem 0.45rem;
+        border-radius: 999px;
+        background: rgba(5, 13, 26, 0.68);
+        border: 1px solid color-mix(in srgb, var(--color-accent) 24%, transparent);
+    }
+
+    .pis__count {
+        position: absolute;
+        top: 0.75rem;
+        right: 0.75rem;
+        z-index: 3;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.2rem;
+        font-size: 0.66rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: var(--color-text-primary);
+        padding: 0.2rem 0.45rem;
+        border-radius: 999px;
+        background: rgba(5, 13, 26, 0.68);
+        border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
+    }
+
+    .pis__dot {
+        appearance: none;
+        border: none;
+        width: 0.42rem;
+        height: 0.42rem;
+        border-radius: 50%;
+        background: color-mix(in srgb, var(--color-text-secondary) 85%, transparent);
+        opacity: 0.6;
+        padding: 0;
+        cursor: pointer;
+        transition:
+            opacity var(--transition-fast),
+            transform var(--transition-fast),
+            background var(--transition-fast);
+    }
+
+    .pis__dot[data-active="true"] {
+        background: var(--color-accent);
+        opacity: 1;
+        transform: scale(1.15);
+    }
+
+    .pis--detail .pis__btn {
+        width: 2.3rem;
+        height: 2.3rem;
+    }
+
+    .pis--detail .pis__img {
+        object-position: center top;
+        transform: none;
+    }
+
+    .pis:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .pis__track {
+            transition: none;
+        }
+        .pis__dot {
+            transition: opacity var(--transition-fast);
+        }
+    }
+</style>
+
+<script>
+    const sliders = document.querySelectorAll<HTMLElement>("[data-project-image-slider]");
+
+    sliders.forEach((slider) => {
+        if (slider.dataset.sliderReady === "true") {
+            return;
+        }
+
+        const track = slider.querySelector<HTMLElement>(".pis__track");
+        const viewport = slider.querySelector<HTMLElement>("[data-slider-viewport]");
+        const slides = slider.querySelectorAll<HTMLElement>(".pis__slide");
+        const prevButton = slider.querySelector<HTMLButtonElement>("[data-slider-prev]");
+        const nextButton = slider.querySelector<HTMLButtonElement>("[data-slider-next]");
+        const dots = slider.querySelectorAll<HTMLElement>("[data-slider-dot]");
+        const currentIndicator = slider.querySelector<HTMLElement>("[data-slider-current]");
+
+        if (!track || !viewport || slides.length <= 1) {
+            slider.dataset.sliderReady = "true";
+            return;
+        }
+
+        const slideCount = slides.length;
+        track.style.width = `${slideCount * 100}%`;
+        slides.forEach((slide) => {
+            slide.style.width = `${100 / slideCount}%`;
+            slide.style.flex = `0 0 ${100 / slideCount}%`;
+        });
+
+        let currentIndex = 0;
+        let autoplayTimer: number | undefined;
+        let pointerStartX = 0;
+        let pointerCurrentX = 0;
+        let pointerId: number | null = null;
+        const dragResistance = 0.55;
+        const swipeThresholdRatio = 0.26;
+
+        const isCardVariant = slider.classList.contains("pis--card");
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        const getSliderWidth = () => viewport.getBoundingClientRect().width || slider.clientWidth;
+
+        const update = () => {
+            const baseOffset = (currentIndex * 100) / slideCount;
+            track.style.transform = `translateX(-${baseOffset}%)`;
+            dots.forEach((dot, index) => {
+                dot.setAttribute("data-active", index === currentIndex ? "true" : "false");
+            });
+            if (currentIndicator) {
+                currentIndicator.textContent = String(currentIndex + 1);
+            }
+        };
+
+        const clearAutoplay = () => {
+            if (autoplayTimer !== undefined) {
+                window.clearInterval(autoplayTimer);
+                autoplayTimer = undefined;
+            }
+        };
+
+        const startHoverAutoplay = () => {
+            if (!isCardVariant || prefersReducedMotion) {
+                return;
+            }
+            clearAutoplay();
+            autoplayTimer = window.setInterval(() => {
+                moveNext();
+            }, 2800);
+        };
+
+        const moveNext = () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            update();
+        };
+
+        const movePrev = () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            update();
+        };
+
+        prevButton?.addEventListener("click", movePrev);
+        nextButton?.addEventListener("click", moveNext);
+
+        slider.addEventListener("mouseenter", startHoverAutoplay);
+        slider.addEventListener("mouseleave", clearAutoplay);
+        slider.addEventListener("focusin", clearAutoplay);
+        slider.addEventListener("focusout", clearAutoplay);
+
+        slider.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowLeft") {
+                event.preventDefault();
+                movePrev();
+            }
+            if (event.key === "ArrowRight") {
+                event.preventDefault();
+                moveNext();
+            }
+        });
+
+        dots.forEach((dot) => {
+            dot.addEventListener("click", () => {
+                const index = Number(dot.dataset.sliderDot);
+                if (Number.isNaN(index)) {
+                    return;
+                }
+                currentIndex = index;
+                update();
+            });
+        });
+
+        const handlePointerMove = (event: PointerEvent) => {
+            if (pointerId === null || event.pointerId !== pointerId) {
+                return;
+            }
+
+            pointerCurrentX = event.clientX;
+            const sliderWidth = getSliderWidth();
+            if (sliderWidth <= 0) {
+                return;
+            }
+
+            const deltaX = pointerCurrentX - pointerStartX;
+            const baseOffset = (currentIndex * 100) / slideCount;
+            const dragOffset = (deltaX / sliderWidth) * 100 * dragResistance;
+            track.style.transition = "none";
+            track.style.transform = `translateX(calc(-${baseOffset}% + ${dragOffset}%))`;
+        };
+
+        const handlePointerEnd = (event: PointerEvent) => {
+            if (pointerId === null || event.pointerId !== pointerId) {
+                return;
+            }
+
+            const sliderWidth = getSliderWidth();
+            const deltaX = pointerCurrentX - pointerStartX;
+            pointerId = null;
+            track.style.transition = "";
+
+            if (sliderWidth > 0 && Math.abs(deltaX) > sliderWidth * swipeThresholdRatio) {
+                if (deltaX < 0) {
+                    moveNext();
+                } else {
+                    movePrev();
+                }
+                return;
+            }
+
+            update();
+        };
+
+        viewport.addEventListener("pointerdown", (event) => {
+            if (event.button !== 0) {
+                return;
+            }
+
+            const target = event.target;
+            if (
+                target instanceof Element &&
+                target.closest("[data-slider-prev], [data-slider-next], [data-slider-dot]")
+            ) {
+                return;
+            }
+
+            clearAutoplay();
+            pointerId = event.pointerId;
+            pointerStartX = event.clientX;
+            pointerCurrentX = event.clientX;
+            viewport.setPointerCapture(event.pointerId);
+        });
+
+        viewport.addEventListener("pointermove", handlePointerMove);
+        viewport.addEventListener("pointerup", handlePointerEnd);
+        viewport.addEventListener("pointercancel", handlePointerEnd);
+        viewport.addEventListener("lostpointercapture", () => {
+            if (pointerId !== null) {
+                pointerId = null;
+                track.style.transition = "";
+                update();
+            }
+        });
+
+        window.addEventListener("resize", update);
+
+        update();
+        slider.dataset.sliderReady = "true";
+    });
+</script>

@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "architecture_components",
+  "collectionName": "skill_categories",
   "info": {
-    "singularName": "architecture-component",
-    "pluralName": "architecture-components",
-    "displayName": "Architecture Component"
+    "singularName": "skill-category",
+    "pluralName": "skill-categories",
+    "displayName": "Skill Category"
   },
   "options": {
     "draftAndPublish": true

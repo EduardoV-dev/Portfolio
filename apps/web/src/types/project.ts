@@ -1,6 +1,6 @@
 import type { ArchitectureLayer } from "./architecture";
 import type { Image, ProjectCategory, Tag } from "./common";
-import type { Technology } from "./technology";
+import type { Skill } from "./skill";
 
 interface ProjectMetric {
     label: string;
@@ -32,12 +32,13 @@ export interface ProjectDetail extends StrapiEntity {
     metrics: ProjectMetric[];
     overview: string;
     solution: string;
-    technologies: Technology[];
+    skills: Skill[];
 }
 
 export interface Project extends StrapiEntity {
     bullets: string[];
-    category: ProjectCategory;
+    category?: ProjectCategory;
+    categories?: ProjectCategory[];
     description: string;
     detail: ProjectDetail;
     images: Image[];

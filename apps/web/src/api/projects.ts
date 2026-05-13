@@ -19,22 +19,13 @@ const findBySlugPopulate = {
     ...findAllPopulate,
     detail: {
         populate: {
-            architecture: {
-                populate: {
-                    layers: {
-                        populate: {
-                            components: "*",
-                        },
-                    },
-                },
-            },
             highlights: {
                 populate: "*",
             },
             metrics: {
                 populate: "*",
             },
-            technologies: {
+            skills: {
                 populate: { category: { fields: ["name"] } },
             },
         },
@@ -61,7 +52,6 @@ const findOnlyTwo = async () =>
 const findAll = async () =>
     (
         await projects.find({
-            pagination: { limit: -1 },
             populate: findAllPopulate,
         })
     ).data as Project[];
@@ -73,7 +63,6 @@ const findAll = async () =>
 const findAllSlugsOnly = async () => {
     const allProjects = (
         await projects.find({
-            pagination: { limit: -1 },
             fields: ["slug"],
         })
     ).data as Project[];

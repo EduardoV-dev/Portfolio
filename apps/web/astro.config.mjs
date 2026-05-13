@@ -12,9 +12,12 @@ export default defineConfig({
     integrations: [
         react(),
         sentry({
-            org: "eduardo-varela",
-            project: "portfolio",
+            org: process.env.SENTRY_ORG || "eduardo-varela",
+            project: process.env.SENTRY_PROJECT || "portfolio",
             authToken: process.env.SENTRY_AUTH_TOKEN,
+            sourcemaps: {
+                assets: [".amplify-hosting/static/_astro/**/*.js.map"],
+            },
         }),
     ],
     site: process.env.SITE_URL,

@@ -51,7 +51,18 @@ const gridProjects =
 
         {
             firstFeaturedProject && (
-                <div data-animate data-animate-delay="1">
+                <div
+                    data-animate
+                    data-animate-delay="1"
+                    data-featured-project
+                    data-categories={(firstFeaturedProject.categories ?? [])
+                        .map((category) => toCategoryFilterValue(category.name))
+                        .filter(
+                            (name, index, allNames) =>
+                                name.length > 0 && allNames.indexOf(name) === index,
+                        )
+                        .join(",")}
+                >
                     <FeaturedProjectCard caseStudy={firstFeaturedProject} />
                 </div>
             )
@@ -82,10 +93,8 @@ const gridProjects =
                         href={`/case-studies/${project.slug}`}
                         data-animate
                         data-animate-delay={String(i + 2)}
-                        data-categories={[
-                            ...(project.category?.name ? [project.category.name] : []),
-                            ...(project.categories?.map((category) => category.name) ?? []),
-                        ]
+                        data-categories={(project.categories ?? [])
+                            .map((category) => category.name)
                             .map((name) => toCategoryFilterValue(name))
                             .filter(
                                 (name, index, allNames) =>
@@ -259,11 +268,10 @@ const gridProjects =
 
     // ── Filter logic ──
     const buttons = document.querySelectorAll<HTMLButtonElement>(".csw-filter-btn");
-    const grid = document.getElementById("csw-grid")!;
     const emptyState = document.getElementById("csw-empty")!;
 
     function applyFilter(category: string) {
-        const cards = grid.querySelectorAll<HTMLElement>("[data-categories]");
+        const cards = document.querySelectorAll<HTMLElement>("[data-categories]");
         let visibleCount = 0;
 
         cards.forEach((card) => {

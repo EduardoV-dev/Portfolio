@@ -1,0 +1,22 @@
+version: 1
+applications:
+    - appRoot: apps/web
+      frontend:
+          phases:
+              preBuild:
+                  commands:
+                      - npm i -g pnpm
+                      - pnpm config set store-dir .pnpm-store
+                      - pnpm i --frozen-lockfile
+              build:
+                  commands:
+                      - env >> .env
+                      - pnpm --filter web build
+                      - mv .env ./.amplify-hosting/compute/default/.env
+          artifacts:
+              baseDirectory: apps/web/.amplify-hosting
+              files:
+                  - "**/*"
+          cache:
+              paths:
+                  - .pnpm-store/**/*

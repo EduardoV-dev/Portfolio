@@ -11,6 +11,8 @@ applications:
               build:
                   commands:
                       - pnpm run build
+                      - pnpm deploy --prod .amplify-deps
+                      - mv .amplify-deps/node_modules ./.amplify-hosting/compute/default/node_modules
           artifacts:
               baseDirectory: .amplify-hosting
               files:

@@ -154,6 +154,17 @@ pnpm dev:frontend
 
 **CD** — push to `development` deploys to AWS S3 + CloudFront via OIDC.
 
+### Strapi Cloud deploy strategy (monorepo)
+
+To avoid rebuilding Strapi on every frontend-only push:
+
+1. In Strapi Cloud, set environment branch to `cms-production`.
+2. Keep `Base directory` set to `apps/headless-cms`.
+3. Keep `Deploy on push` enabled for that environment.
+4. This repo workflow `.github/workflows/strapi-branch-sync.yml` syncs `main` -> `cms-production` only when CMS-related paths change.
+
+That means frontend-only commits to `main` do not trigger Strapi Cloud deployments.
+
 ---
 
 ## Commit conventions

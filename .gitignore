@@ -21,3 +21,4 @@ apps/headless-cms/database/data.db*
 nul
 .unlighthouse/
 .amplify-hosting/
+amplify.yml

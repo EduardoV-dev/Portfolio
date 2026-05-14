@@ -1,5 +1,7 @@
 import { type APIRoute } from "astro";
 
+export const prerender = false;
+
 function getProjectIdFromDsn(dsn: string): string {
     const dsnUrl = new URL(dsn);
     const pathnameParts = dsnUrl.pathname.split("/").filter(Boolean);

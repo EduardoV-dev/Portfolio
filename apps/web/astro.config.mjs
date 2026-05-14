@@ -2,7 +2,7 @@
 import { defineConfig } from "astro/config";
 import sentry from "@sentry/astro";
 import react from "@astrojs/react";
-import node from "@astrojs/node";
+import awsAmplify from "astro-aws-amplify";
 
 const hasSentryToken = Boolean(process.env.SENTRY_AUTH_TOKEN);
 const hasSentryOrg = Boolean(process.env.SENTRY_ORG);
@@ -17,8 +17,38 @@ if (hasSentryToken && (!hasSentryOrg || !hasSentryProject)) {
 
 // https://astro.build/config
 export default defineConfig({
-    adapter: node({
-        mode: "standalone",
+    output: "server",
+    adapter: awsAmplify({
+        customRules: [
+            { source: "/about", target: "/about/index.html", status: "200" },
+            { source: "/about/", target: "/about/index.html", status: "200" },
+            { source: "/architecture", target: "/architecture/index.html", status: "200" },
+            { source: "/architecture/", target: "/architecture/index.html", status: "200" },
+            { source: "/blog", target: "/blog/index.html", status: "200" },
+            { source: "/blog/", target: "/blog/index.html", status: "200" },
+            { source: "/blog/<slug>", target: "/blog/<slug>/index.html", status: "200" },
+            { source: "/blog/<slug>/", target: "/blog/<slug>/index.html", status: "200" },
+            { source: "/case-studies", target: "/case-studies/index.html", status: "200" },
+            { source: "/case-studies/", target: "/case-studies/index.html", status: "200" },
+            {
+                source: "/case-studies/<slug>",
+                target: "/case-studies/<slug>/index.html",
+                status: "200",
+            },
+            {
+                source: "/case-studies/<slug>/",
+                target: "/case-studies/<slug>/index.html",
+                status: "200",
+            },
+            { source: "/contact", target: "/contact/index.html", status: "200" },
+            { source: "/contact/", target: "/contact/index.html", status: "200" },
+            { source: "/privacy-policy", target: "/privacy-policy/index.html", status: "200" },
+            { source: "/privacy-policy/", target: "/privacy-policy/index.html", status: "200" },
+            { source: "/terms-of-use", target: "/terms-of-use/index.html", status: "200" },
+            { source: "/terms-of-use/", target: "/terms-of-use/index.html", status: "200" },
+            { source: "/test", target: "/test/index.html", status: "200" },
+            { source: "/test/", target: "/test/index.html", status: "200" },
+        ],
     }),
     integrations: [
         react(),

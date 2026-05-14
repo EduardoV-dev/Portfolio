@@ -11,8 +11,9 @@ applications:
               build:
                   commands:
                       - pnpm run build
-                      - pnpm --filter web --prod deploy --legacy .amplify-deps
+                      - pnpm --filter web --prod --no-optional deploy --legacy .amplify-deps
                       - mv .amplify-deps/node_modules ./.amplify-hosting/compute/default/node_modules
+                      - find ./.amplify-hosting -type f -name "*.map" -delete
           artifacts:
               baseDirectory: .amplify-hosting
               files:

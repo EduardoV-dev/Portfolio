@@ -1,0 +1,1 @@
+{"version":3,"file":"test-error.astro.mjs","sources":["../../../../../src/pages/api/test-error.ts"],"sourcesContent":["export async function GET() {\r\n    throw new Error(\"Sentry Example API Route Error\");\r\n}\r\n"],"names":[],"mappings":";;AAAA,KAAA,CAAA,QAAA,CAAsB,GAAA,CAAA,CAAA,CAAM;AACxB,CAAA,CAAA,KAAA,CAAM,GAAA,CAAI,MAAM,gCAAgC,CAAA;AACpD;;;;;;;;;"}

@@ -1,108 +1,33 @@
 # Portfolio
 
-Personal portfolio website built as a pnpm monorepo, featuring an Astro + React frontend and a Strapi CMS backend.
-
-## Structure
-
-```
-apps/
-├── web/            # Astro + React — public-facing website  (port 4321)
-└── headless-cms/   # Strapi 5 CMS — content backend (WIP)  (port 1337)
-```
+Astro + React frontend for personal portfolio website.
 
 ## Tech stack
 
 | Concern | Tool |
 |---|---|
-| Frontend framework | Astro 5 + React 19 |
-| Language | TypeScript |
-| Package manager | pnpm 10 (workspaces) |
-| CMS | Strapi 5 |
-| Database (Docker) | PostgreSQL 16 |
+| Framework | Astro 5 |
+| UI components | React 19 |
+| Language | TypeScript (strict mode) |
+| Styling | CSS Modules + PostCSS |
+| State | Zustand 5 |
+| Carousel | Embla Carousel |
 | Linting | ESLint 9 (flat config) |
 | Formatting | Prettier |
-| Pre-commit hooks | Husky + lint-staged |
-| Commit conventions | commitlint (conventional commits) |
-| CI/CD | GitHub Actions → AWS S3 + CloudFront |
+| Type checking | `astro check` |
 
 ## Prerequisites
 
 - Node.js `>=22.0.0`
-- pnpm `10` — `npm i -g pnpm`
-- Docker + Docker Compose (for the Docker workflow)
-
----
-
-## Getting started
-
-### Option A — Docker Compose (recommended)
-
-Docker Compose runs the full stack (web + Strapi + PostgreSQL) with hot reload, without needing Node or pnpm installed locally.
-
-**1. Copy the env files**
-
-```bash
-cp apps/web/.env.example        apps/web/.env
-cp apps/headless-cms/.env.example apps/headless-cms/.env
-```
-
-Fill in the real values where the examples contain placeholders (see [Environment variables](#environment-variables) below).
-
-**2. Start all services**
-
-```bash
-docker compose up
-```
-
-| Service | URL |
-|---|---|
-| Frontend (Astro) | http://localhost:4321 |
-| Strapi admin | http://localhost:1337/admin |
-| PostgreSQL | `localhost:5432` |
-
-**3. Stop**
-
-```bash
-docker compose down          # stop containers, keep volumes
-docker compose down -v       # stop and delete all volumes (wipes DB)
-```
-
-> **Windows / macOS — file watching:** if hot reload doesn't trigger, uncomment `CHOKIDAR_USEPOLLING: "true"` in `docker-compose.yml` under the `headless-cms` service.
-
----
-
-### Option B — Local pnpm
-
-**1. Copy the env files**
-
-```bash
-cp apps/web/.env.example        apps/web/.env
-cp apps/headless-cms/.env.example apps/headless-cms/.env
-```
-
-**2. Install dependencies**
-
-```bash
-pnpm install
-```
-
-**3. Start both apps in parallel**
-
-```bash
-pnpm dev
-```
-
-To start only the frontend:
-
-```bash
-pnpm dev:frontend
-```
-
----
+- pnpm `10`
 
 ## Environment variables
 
-### `apps/web/.env`
+Copy the example file before starting:
+
+```bash
+cp .env.example .env
+```
 
 | Variable | Description |
 |---|---|
@@ -110,69 +35,57 @@ pnpm dev:frontend
 | `PUBLIC_WEB3FORMS_ACCESS_KEY` | Web3Forms access key for the contact form |
 | `PUBLIC_RECAPTCHA_SITE_KEY` | reCAPTCHA v3 site key |
 
-### `apps/headless-cms/.env`
+> `SITE_URL` is required — missing it produces wrong canonical URLs in the build (no build error is thrown).
 
-| Variable | Description |
-|---|---|
-| `ADMIN_JWT_SECRET` | Secret for Strapi admin JWTs |
-| `APP_KEYS` | Comma-separated session keys |
-| `API_TOKEN_SALT` | Salt for API tokens |
-| `JWT_SECRET` | Secret for content API JWTs |
-| `DATABASE_*` | Database connection — pre-filled to match `docker-compose.yml` defaults |
+## Getting started
 
----
+Install dependencies and start locally:
+
+```bash
+pnpm install
+
+pnpm dev
+```
+
+The dev server runs at `http://localhost:4321` by default.
 
 ## Scripts
 
+Run from repository root:
+
 | Script | Description |
 |---|---|
-| `pnpm dev` | Start frontend and Strapi in parallel |
-| `pnpm dev:frontend` | Start the Astro dev server only |
-| `pnpm dev:strapi` | Start the Strapi dev server only |
+| `pnpm dev` | Start the Astro dev server |
+| `pnpm build` | Build for production (output to `dist/`) |
+| `pnpm preview` | Preview the production build locally |
+| `pnpm lint` | Run ESLint |
+| `pnpm typecheck` | Run `astro check` (TypeScript + Astro diagnostics) |
+| `pnpm formatcheck` | Check formatting with Prettier (no writes) |
 | `pnpm format` | Format all files with Prettier |
-| `pnpm check` | Lint + Prettier check (no writes) |
-| `pnpm --filter web lint` | ESLint on the frontend |
-| `pnpm --filter web typecheck` | `astro check` (TypeScript + Astro diagnostics) |
-| `pnpm --filter web build` | Production build |
+| `pnpm check` | Lint + format check + typecheck combined |
 
----
+> `astro check` requires `.astro/types.d.ts`, which is generated on first `astro dev` or `astro build`. On a fresh clone, run `pnpm dev` once before running `pnpm typecheck`.
 
-## Code quality
-
-**Pre-commit hook** (`husky` + `lint-staged`) runs on every commit:
-
-1. ESLint on staged frontend files
-2. Prettier format check on staged frontend files
-3. TypeScript check (`astro check`) on staged `.ts`/`.tsx`/`.astro` files
-4. Full frontend build (`astro build`)
-
-> Lint-staged checks format but **does not auto-fix**. If the commit is blocked by a format error, run `pnpm format`, re-stage the files, then retry.
-
-**CI** (GitHub Actions) runs on pull requests to `main` or `development`:
-
-1. Lint → Typecheck → Format check → Build
-
-**CD** — push to `development` deploys to AWS S3 + CloudFront via OIDC.
-
-### Strapi Cloud deploy strategy (monorepo)
-
-To avoid rebuilding Strapi on every frontend-only push:
-
-1. In Strapi Cloud, set environment branch to `cms-production`.
-2. Keep `Base directory` set to `apps/headless-cms`.
-3. Keep `Deploy on push` enabled for that environment.
-4. This repo workflow `.github/workflows/strapi-branch-sync.yml` syncs `main` -> `cms-production` only when CMS-related paths change.
-
-That means frontend-only commits to `main` do not trigger Strapi Cloud deployments.
-
----
-
-## Commit conventions
-
-Commits follow the [Conventional Commits](https://www.conventionalcommits.org) spec, enforced by `commitlint`.
+## Project structure
 
 ```
-feat: add hero section animation
-fix: correct mobile nav overflow
-chore: update dependencies
+src/
+├── assets/         # Static assets (images, fonts, etc.)
+├── components/     # Shared, reusable UI components
+├── constants/      # App-wide constants (e.g. route definitions)
+├── data/           # Static data sources (projects.ts, posts.ts)
+├── layouts/        # Page layout wrappers (header, footer, shell)
+├── modules/        # Page-specific feature modules (home, blog, contact, …)
+├── pages/          # Astro file-based routes
+├── store/          # Zustand stores
+└── styles/         # Global styles and PostCSS mixins
+```
+
+## Path aliases
+
+`@/*` maps to `src/*`, configured in `tsconfig.json`.
+
+```ts
+import { ROUTES } from "@/constants/routes";
+import { useChatStore } from "@/store/chat";
 ```

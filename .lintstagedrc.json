@@ -1,8 +1,5 @@
 {
-    "apps/web/**/*.{js,ts,jsx,tsx,mjs,astro}": [
-        "pnpm --filter web exec eslint",
-        "pnpm --filter web exec prettier --check"
-    ],
-    "apps/web/**/*.{json,css}": ["pnpm --filter web exec prettier --check"],
-    "apps/web/**/*.{ts,tsx,astro}": ["pnpm --filter web typecheck"]
+    "**/*.{js,ts,jsx,tsx,mjs,astro}": ["pnpm exec eslint", "pnpm exec prettier --check"],
+    "**/*.{json,css}": ["pnpm exec prettier --check"],
+    "**/*.{ts,tsx,astro}": ["pnpm typecheck"]
 }

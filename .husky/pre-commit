@@ -1,3 +1,2 @@
-npx lint-staged
-pnpm --filter web build
-pnpm --filter headless-cms build
+npx lint-staged --concurrent false
+pnpm build

@@ -3,6 +3,7 @@ dist/
 
 # generated types
 .astro/
+.amplify-hosting/
 
 # astro check temp files
 *.astro.tsx

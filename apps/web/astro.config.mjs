@@ -1,9 +1,8 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import sentry from "@sentry/astro";
-
 import react from "@astrojs/react";
-import awsAmplify from "amplify-astro-adapter";
+import node from "@astrojs/node";
 
 const hasSentryToken = Boolean(process.env.SENTRY_AUTH_TOKEN);
 const hasSentryOrg = Boolean(process.env.SENTRY_ORG);
@@ -18,17 +17,15 @@ if (hasSentryToken && (!hasSentryOrg || !hasSentryProject)) {
 
 // https://astro.build/config
 export default defineConfig({
-    output: "server",
-    adapter: awsAmplify({ runtime: "nodejs22.x" }),
+    adapter: node({
+        mode: "standalone",
+    }),
     integrations: [
         react(),
         sentry({
             org: process.env.SENTRY_ORG,
             project: process.env.SENTRY_PROJECT,
             authToken: hasSentryOrg && hasSentryProject ? process.env.SENTRY_AUTH_TOKEN : undefined,
-            sourcemaps: {
-                assets: [".amplify-hosting/static/_astro/**/*.js.map"],
-            },
         }),
     ],
     site: process.env.SITE_URL,

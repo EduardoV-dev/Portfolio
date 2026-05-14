@@ -11,10 +11,10 @@ applications:
               build:
                   commands:
                       - env >> .env
-                      - pnpm --filter web build
+                      - pnpm run build
                       - mv .env ./.amplify-hosting/compute/default/.env
           artifacts:
-              baseDirectory: apps/web/.amplify-hosting
+              baseDirectory: .amplify-hosting
               files:
                   - "**/*"
           cache:

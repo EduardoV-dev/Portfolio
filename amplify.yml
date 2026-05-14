@@ -1,0 +1,23 @@
+version: 1
+applications:
+    - appRoot: apps/web
+      frontend:
+          phases:
+              preBuild:
+                  commands:
+                      - npm i -g pnpm
+                      - pnpm config set store-dir .pnpm-store
+                      - pnpm i --frozen-lockfile
+              build:
+                  commands:
+                      - pnpm run build
+                      - pnpm --filter web --prod --no-optional deploy --legacy .amplify-deps
+                      - mv .amplify-deps/node_modules ./.amplify-hosting/compute/default/node_modules
+                      - find ./.amplify-hosting -type f -name "*.map" -delete
+          artifacts:
+              baseDirectory: .amplify-hosting
+              files:
+                  - "**/*"
+          cache:
+              paths:
+                  - .pnpm-store/**/*

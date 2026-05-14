@@ -10,9 +10,7 @@ applications:
                       - pnpm i --frozen-lockfile
               build:
                   commands:
-                      - env >> .env
                       - pnpm run build
-                      - mv .env ./.amplify-hosting/compute/default/.env
           artifacts:
               baseDirectory: .amplify-hosting
               files:

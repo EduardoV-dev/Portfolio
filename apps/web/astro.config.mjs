@@ -19,7 +19,7 @@ if (hasSentryToken && (!hasSentryOrg || !hasSentryProject)) {
 // https://astro.build/config
 export default defineConfig({
     output: "server",
-    adapter: awsAmplify(),
+    adapter: awsAmplify({ runtime: "nodejs22.x" }),
     integrations: [
         react(),
         sentry({

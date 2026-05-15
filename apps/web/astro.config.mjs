@@ -18,38 +18,7 @@ if (hasSentryToken && (!hasSentryOrg || !hasSentryProject)) {
 // https://astro.build/config
 export default defineConfig({
     output: "server",
-    adapter: awsAmplify({
-        customRules: [
-            { source: "/about", target: "/about/index.html", status: "200" },
-            { source: "/about/", target: "/about/index.html", status: "200" },
-            { source: "/architecture", target: "/architecture/index.html", status: "200" },
-            { source: "/architecture/", target: "/architecture/index.html", status: "200" },
-            { source: "/blog", target: "/blog/index.html", status: "200" },
-            { source: "/blog/", target: "/blog/index.html", status: "200" },
-            { source: "/blog/<slug>", target: "/blog/<slug>/index.html", status: "200" },
-            { source: "/blog/<slug>/", target: "/blog/<slug>/index.html", status: "200" },
-            { source: "/case-studies", target: "/case-studies/index.html", status: "200" },
-            { source: "/case-studies/", target: "/case-studies/index.html", status: "200" },
-            {
-                source: "/case-studies/<slug>",
-                target: "/case-studies/<slug>/index.html",
-                status: "200",
-            },
-            {
-                source: "/case-studies/<slug>/",
-                target: "/case-studies/<slug>/index.html",
-                status: "200",
-            },
-            { source: "/contact", target: "/contact/index.html", status: "200" },
-            { source: "/contact/", target: "/contact/index.html", status: "200" },
-            { source: "/privacy-policy", target: "/privacy-policy/index.html", status: "200" },
-            { source: "/privacy-policy/", target: "/privacy-policy/index.html", status: "200" },
-            { source: "/terms-of-use", target: "/terms-of-use/index.html", status: "200" },
-            { source: "/terms-of-use/", target: "/terms-of-use/index.html", status: "200" },
-            { source: "/test", target: "/test/index.html", status: "200" },
-            { source: "/test/", target: "/test/index.html", status: "200" },
-        ],
-    }),
+    adapter: awsAmplify(),
     integrations: [
         react(),
         sentry({

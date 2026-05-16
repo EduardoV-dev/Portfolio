@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import { trackEvent } from "@/utils/telemetry";
 import ContactForm from "../contact-form";
 import ContactOptionCards from "./contact-option-cards";
 import styles from "./index.module.css";
@@ -30,10 +31,12 @@ export default function ContactOptions() {
     const openForm = useCallback(() => {
         setIsClosing(false);
         setFormOpen(true);
+        trackEvent("contact_form_open");
     }, []);
 
     const closeForm = useCallback(() => {
         setIsClosing(true);
+        trackEvent("contact_form_close");
     }, []);
 
     function toggleForm() {
@@ -50,10 +53,12 @@ export default function ContactOptions() {
         loadCalendlyScript();
         setIsCalendlyClosing(false);
         setCalendlyOpen(true);
+        trackEvent("contact_calendly_open");
     }, []);
 
     const closeCalendly = useCallback(() => {
         setIsCalendlyClosing(true);
+        trackEvent("contact_calendly_close");
     }, []);
 
     function toggleCalendly() {
@@ -64,6 +69,10 @@ export default function ContactOptions() {
             if (formOpen && !isClosing) closeForm();
             openCalendly();
         }
+    }
+
+    function handleLinkedInClick() {
+        trackEvent("contact_linkedin_click");
     }
 
     function handlePanelAnimationEnd(e: React.AnimationEvent<HTMLDivElement>) {
@@ -161,6 +170,7 @@ export default function ContactOptions() {
                         toggleForm={toggleForm}
                         calendlyUrl={CALENDLY_URL}
                         linkedinUrl={LINKEDIN_URL}
+                        onLinkedInClick={handleLinkedInClick}
                         styles={styles}
                     />
                 </div>

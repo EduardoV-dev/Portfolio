@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { trackEvent } from "@/utils/telemetry";
 import styles from "./index.module.css";
 
 const WEB3FORMS_ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY;
@@ -52,6 +53,11 @@ export default function ContactForm({ onClose }: ContactFormProps) {
         const validationErrors = validate(form);
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
+            trackEvent("contact_submit_validation_error", {
+                has_name_error: Boolean(validationErrors.name),
+                has_email_error: Boolean(validationErrors.email),
+                has_message_error: Boolean(validationErrors.message),
+            });
             const firstInvalid = formRef.current?.querySelector(
                 '[aria-invalid="true"]',
             ) as HTMLElement;
@@ -59,7 +65,14 @@ export default function ContactForm({ onClose }: ContactFormProps) {
             return;
         }
 
+        if (!WEB3FORMS_ACCESS_KEY) {
+            setStatus("error");
+            trackEvent("contact_submit_error", { reason: "missing_access_key" });
+            return;
+        }
+
         setStatus("submitting");
+        trackEvent("contact_submit_started");
         try {
             const res = await fetch("https://api.web3forms.com/submit", {
                 method: "POST",
@@ -75,8 +88,12 @@ export default function ContactForm({ onClose }: ContactFormProps) {
 
             const data = (await res.json()) as { success: boolean };
             setStatus(data.success ? "success" : "error");
+            trackEvent(data.success ? "contact_submit_success" : "contact_submit_error", {
+                reason: data.success ? "none" : "provider_rejected",
+            });
         } catch {
             setStatus("error");
+            trackEvent("contact_submit_error", { reason: "network_failure" });
         }
     }
 

@@ -3,7 +3,7 @@ import * as Sentry from "@sentry/astro";
 const sentryTunnelPath = "/tunnel";
 
 function getAbsoluteTunnelUrl(): string {
-    const siteUrl = import.meta.env.SITE_URL;
+    const siteUrl = import.meta.env.PUBLIC_SITE_URL;
     const normalizedSiteUrl = siteUrl.endsWith("/") ? siteUrl.slice(0, -1) : siteUrl;
     return `${normalizedSiteUrl}${sentryTunnelPath}`;
 }

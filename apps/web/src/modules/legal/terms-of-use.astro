@@ -1,5 +1,8 @@
 ---
-import { SITE_URL, LAST_UPDATED } from "@/constants/common";
+import { LAST_UPDATED } from "@/constants/common";
+import { ENVS } from "@/constants/environment-variables";
+
+const siteUrl = ENVS.PUBLIC_SITE_URL.replace(/^https?:\/\//, "");
 ---
 
 <article class="legal" aria-labelledby="legal-heading">
@@ -14,9 +17,10 @@ import { SITE_URL, LAST_UPDATED } from "@/constants/common";
             <section class="legal__section">
                 <h2 class="legal__section-title">Acceptance of Terms</h2>
                 <p class="legal__para">
-                    By accessing or using <strong>{SITE_URL}</strong> (the &ldquo;Site&rdquo;), you agree
+                    By accessing or using <strong>{siteUrl}</strong> (the &ldquo;Site&rdquo;), you agree
                     to be bound by these Terms of Use. If you do not agree to these terms, please do not
-                    use the Site.
+                    use the Site. You also acknowledge use of operational telemetry and third-party infrastructure
+                    described in these terms and the Privacy Policy.
                 </p>
             </section>
 
@@ -88,6 +92,21 @@ import { SITE_URL, LAST_UPDATED } from "@/constants/common";
                     for convenience only. I have no control over the content of those sites and
                     accept no responsibility for them or for any loss or damage that may arise from
                     your use of them.
+                </p>
+            </section>
+
+            <section class="legal__section">
+                <h2 class="legal__section-title">Third-Party Services and Telemetry</h2>
+                <p class="legal__para">
+                    To operate and improve this Site, I use third-party services such as AWS
+                    (hosting/CDN), Google Analytics, Sentry, Web3Forms, Calendly, and Google Fonts.
+                    These services may process technical and interaction data under their own terms
+                    and privacy policies.
+                </p>
+                <p class="legal__para">
+                    Site telemetry may include analytics events, performance diagnostics, and error
+                    monitoring data. Contact and scheduling actions may be processed by external
+                    providers to complete those services.
                 </p>
             </section>
 

@@ -24,7 +24,7 @@ const {
 
 const SITE_NAME = "Eduardo Varela";
 const gaMeasurementId = ENVS.PUBLIC_GA_MEASUREMENT_ID;
-const siteUrl = ENVS.SITE_URL.replace(/\/$/, "");
+const siteUrl = ENVS.PUBLIC_SITE_URL.replace(/\/$/, "");
 const canonicalPath = canonical ?? Astro.url.pathname;
 const canonicalUrl = canonicalPath.startsWith("http")
     ? canonicalPath
@@ -82,7 +82,7 @@ const ogImageUrl = ogImage.startsWith("http")
                     />
                     <script is:inline>
                         {/* eslint-disable-next-line @typescript-eslint/no-unused-expressions */}
-                        {`window.dataLayer = window.dataLayer ?? []; function gtag(){window.dataLayer.push(arguments);} gtag("js", new Date()); gtag("config", "${gaMeasurementId}");`}
+                        {`window.dataLayer = window.dataLayer ?? []; function gtag(){window.dataLayer.push(arguments);} gtag("js", new Date()); gtag("config", "${gaMeasurementId}", { anonymize_ip: true });`}
                     </script>
                 </>
             )

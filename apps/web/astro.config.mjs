@@ -28,6 +28,9 @@ export default defineConfig({
         }),
     ],
     site: process.env.PUBLIC_SITE_URL,
+    security: {
+        checkOrigin: false,
+    },
     build: {
         format: "directory",
     },

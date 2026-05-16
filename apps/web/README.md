@@ -31,6 +31,7 @@ cp .env.example .env
 
 | Variable | Description |
 |---|---|
+| `PUBLIC_ENVIRONMENT` | Deployment environment: `development`, `staging`, or `production` |
 | `PUBLIC_SITE_URL` | Canonical base URL — use `http://localhost:4321` locally |
 | `PUBLIC_WEB3FORMS_ACCESS_KEY` | Web3Forms access key for the contact form |
 | `PUBLIC_RECAPTCHA_SITE_KEY` | reCAPTCHA v3 site key |

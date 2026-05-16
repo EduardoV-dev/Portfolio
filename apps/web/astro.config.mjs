@@ -27,7 +27,7 @@ export default defineConfig({
             authToken: hasSentryOrg && hasSentryProject ? process.env.SENTRY_AUTH_TOKEN : undefined,
         }),
     ],
-    site: process.env.SITE_URL,
+    site: process.env.PUBLIC_SITE_URL,
     build: {
         format: "directory",
     },

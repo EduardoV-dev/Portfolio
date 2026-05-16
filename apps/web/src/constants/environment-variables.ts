@@ -1,4 +1,5 @@
 export const ENVS = Object.freeze({
+    PUBLIC_ENVIRONMENT: import.meta.env.PUBLIC_ENVIRONMENT || "development",
     PUBLIC_SITE_URL: import.meta.env.PUBLIC_SITE_URL || "http://localhost:3000",
     SENTRY_AUTH_TOKEN: import.meta.env.SENTRY_AUTH_TOKEN || "",
     SENTRY_ORG: import.meta.env.SENTRY_ORG || "",

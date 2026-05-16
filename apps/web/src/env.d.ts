@@ -10,6 +10,7 @@ interface ImportMetaEnv {
     readonly STRAPI_CMS_OPTIONAL: string;
 
     // Client-accessible (PUBLIC_ prefix required by Astro)
+    readonly PUBLIC_ENVIRONMENT: "development" | "staging" | "production";
     readonly PUBLIC_SITE_URL: string;
     readonly PUBLIC_SENTRY_ENABLED: string;
     readonly PUBLIC_SENTRY_DSN: string;

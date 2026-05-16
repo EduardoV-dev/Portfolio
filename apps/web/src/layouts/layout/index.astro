@@ -24,7 +24,10 @@ const {
 
 const SITE_NAME = "Eduardo Varela";
 const gaMeasurementId = ENVS.PUBLIC_GA_MEASUREMENT_ID;
+const environment = ENVS.PUBLIC_ENVIRONMENT;
+const isProduction = environment === "production";
 const siteUrl = ENVS.PUBLIC_SITE_URL.replace(/\/$/, "");
+const effectiveRobots = isProduction ? robots : "noindex, nofollow";
 const canonicalPath = canonical ?? Astro.url.pathname;
 const canonicalUrl = canonicalPath.startsWith("http")
     ? canonicalPath
@@ -58,7 +61,7 @@ const ogImageUrl = ogImage.startsWith("http")
         />
         <meta name="generator" content={Astro.generator} />
         <meta name="description" content={description} />
-        <meta name="robots" content={robots} />
+        <meta name="robots" content={effectiveRobots} />
         <link rel="canonical" href={canonicalUrl} />
 
         <meta property="og:type" content={ogType} />

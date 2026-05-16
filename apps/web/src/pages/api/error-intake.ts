@@ -26,7 +26,9 @@ function getEnvelopeDsn(envelope: string): string | null {
 export const POST: APIRoute = async ({ request }) => {
     try {
         const configuredDsn = import.meta.env.PUBLIC_SENTRY_DSN;
-        const bypassUpstream = import.meta.env.PUBLIC_SENTRY_TUNNEL_BYPASS_UPSTREAM === "true";
+        const bypassUpstream =
+            process.env.PUBLIC_SENTRY_TUNNEL_BYPASS_UPSTREAM === "true" ||
+            process.env.SENTRY_TUNNEL_BYPASS_UPSTREAM === "true";
 
         if (!configuredDsn) {
             return new Response("Sentry DSN not configured", { status: 204 });

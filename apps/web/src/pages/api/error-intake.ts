@@ -26,6 +26,7 @@ function getEnvelopeDsn(envelope: string): string | null {
 export const POST: APIRoute = async ({ request }) => {
     try {
         const configuredDsn = import.meta.env.PUBLIC_SENTRY_DSN;
+        const bypassUpstream = import.meta.env.PUBLIC_SENTRY_TUNNEL_BYPASS_UPSTREAM === "true";
 
         if (!configuredDsn) {
             return new Response("Sentry DSN not configured", { status: 204 });
@@ -49,6 +50,15 @@ export const POST: APIRoute = async ({ request }) => {
             configuredProjectId !== envelopeProjectId
         ) {
             return new Response("Sentry DSN not allowed", { status: 403 });
+        }
+
+        if (bypassUpstream) {
+            return new Response(null, {
+                status: 204,
+                headers: {
+                    "x-sentry-tunnel-debug": "bypass-upstream",
+                },
+            });
         }
 
         const upstreamUrl = `${configuredDsnUrl.protocol}//${configuredDsnUrl.host}/api/${configuredProjectId}/envelope/`;

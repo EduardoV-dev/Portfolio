@@ -1,7 +1,7 @@
 ---
 import { type Project } from "@/types/strapi";
 import { APP_ROUTES } from "@/constants/routes";
-import { ENVS } from "@/constants/environment-variables";
+import { resolveStrapiMediaUrl } from "@/lib/strapi";
 import ProjectImageSlider from "@/components/project-image-slider/index.astro";
 
 export interface Props {
@@ -12,11 +12,10 @@ const { project } = Astro.props;
 const { detail } = project;
 const projectImages = Array.isArray(project.images) ? project.images : [];
 const projectTags = Array.isArray(project.tags) ? project.tags : [];
-const baseMediaUrl = ENVS.STRAPI_API_URL.replace("/api", "");
 const lightboxImages = projectImages
     .filter((image) => typeof image?.url === "string" && image.url.length > 0)
     .map((image, index) => ({
-        src: `${baseMediaUrl}${image.url}`,
+        src: resolveStrapiMediaUrl(image.url),
         alt: image.alternativeText || `${project.title} preview ${index + 1}`,
     }));
 const hasSourceHref =

@@ -1,5 +1,5 @@
 ---
-import { ENVS } from "@/constants/environment-variables";
+import { resolveStrapiMediaUrl } from "@/lib/strapi";
 import type { Image } from "@/types/strapi";
 
 export interface Props {
@@ -19,8 +19,6 @@ const {
 const validImages = Array.isArray(images)
     ? images.filter((image) => typeof image?.url === "string" && image.url.length > 0)
     : [];
-
-const baseMediaUrl = ENVS.STRAPI_API_URL.replace("/api", "");
 ---
 
 <div
@@ -36,7 +34,7 @@ const baseMediaUrl = ENVS.STRAPI_API_URL.replace("/api", "");
                         <div class="pis__slide">
                             <img
                                 class="pis__img"
-                                src={`${baseMediaUrl}${image.url}`}
+                                src={resolveStrapiMediaUrl(image.url)}
                                 alt={
                                     image.alternativeText || `${projectTitle} preview ${index + 1}`
                                 }

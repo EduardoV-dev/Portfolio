@@ -2,7 +2,7 @@
     "compatibility_date": "2026-05-17",
     "compatibility_flags": ["nodejs_compat"],
     "name": "portfolio",
-    "vars": {},
+    "main": "@astrojs/cloudflare/entrypoints/server",
     "env": {
         "staging": {
             "vars": {
@@ -20,6 +20,11 @@
                 "PUBLIC_SITE_URL": "https://www.eduardov.dev",
             },
         },
+    },
+    "assets": {
+        "binding": "ASSETS",
+        "directory": "./dist",
+        "not_found_handling": "404-page",
     },
     "observability": {
         "enabled": true,

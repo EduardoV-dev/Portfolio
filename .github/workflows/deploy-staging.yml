@@ -1,0 +1,61 @@
+name: Deploy Staging to Cloudflare
+
+on:
+    push:
+        branches:
+            - staging
+        paths:
+            - "apps/web/**"
+            - "package.json"
+            - "pnpm-lock.yaml"
+            - "pnpm-workspace.yaml"
+            - ".github/workflows/deploy-staging.yml"
+
+    workflow_dispatch:
+
+concurrency:
+    group: deploy-staging
+    cancel-in-progress: true
+
+jobs:
+    deploy-staging:
+        name: Deploy Staging
+        runs-on: ubuntu-latest
+        timeout-minutes: 15
+        environment: staging
+        env:
+            CLOUDFLARE_ENV: staging
+
+        defaults:
+            run:
+                working-directory: apps/web
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6
+
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 11
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v6
+              with:
+                  node-version: 22
+                  cache: pnpm
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+              working-directory: .
+
+            - name: Build Astro app
+              run: pnpm build
+
+            - name: Deploy to Cloudflare Staging
+              uses: cloudflare/wrangler-action@v3
+              with:
+                  apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+                  accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+                  workingDirectory: apps/web
+                  command: deploy --env staging

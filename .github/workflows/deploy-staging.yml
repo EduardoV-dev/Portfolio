@@ -25,6 +25,7 @@ jobs:
         environment: staging
         env:
             CLOUDFLARE_ENV: staging
+            STRAPI_CMS_OPTIONAL: "true"
 
         defaults:
             run:

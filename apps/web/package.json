@@ -17,13 +17,14 @@
         "check": "pnpm run lint && pnpm run formatcheck && pnpm run typecheck"
     },
     "dependencies": {
+        "@astrojs/cloudflare": "^13.5.1",
         "@astrojs/react": "^5.0.5",
         "@sentry/astro": "^10.53.1",
+        "@sentry/cloudflare": "^10.53.1",
         "@strapi/client": "^1.6.1",
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
         "astro": "^6.3.2",
-        "astro-aws-amplify": "^0.4.1",
         "clsx": "^2.1.1",
         "embla-carousel-react": "^8.6.0",
         "react": "^19.2.4",

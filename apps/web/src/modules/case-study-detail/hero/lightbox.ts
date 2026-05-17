@@ -8,7 +8,13 @@ if (media && lightbox && lightboxImage) {
     const lightboxElement = lightbox;
     const lightboxImageElement = lightboxImage;
     const imagesData = media.dataset.detailLightboxImages;
+    const dragThreshold = 8;
     let images: Array<{ src: string; alt: string }> = [];
+    let activePointerId: number | null = null;
+    let pointerStartX = 0;
+    let pointerStartY = 0;
+    let pointerMoved = false;
+    let suppressNextClick = false;
 
     if (imagesData) {
         try {
@@ -46,7 +52,55 @@ if (media && lightbox && lightboxImage) {
         document.body.style.overflow = "";
     }
 
+    mediaElement.addEventListener("pointerdown", (event) => {
+        if (event.button !== 0) {
+            return;
+        }
+
+        activePointerId = event.pointerId;
+        pointerStartX = event.clientX;
+        pointerStartY = event.clientY;
+        pointerMoved = false;
+    });
+
+    mediaElement.addEventListener("pointermove", (event) => {
+        if (activePointerId === null || event.pointerId !== activePointerId || pointerMoved) {
+            return;
+        }
+
+        const deltaX = event.clientX - pointerStartX;
+        const deltaY = event.clientY - pointerStartY;
+        if (Math.hypot(deltaX, deltaY) >= dragThreshold) {
+            pointerMoved = true;
+        }
+    });
+
+    mediaElement.addEventListener("pointerup", (event) => {
+        if (activePointerId === null || event.pointerId !== activePointerId) {
+            return;
+        }
+
+        suppressNextClick = pointerMoved;
+        activePointerId = null;
+        pointerMoved = false;
+    });
+
+    mediaElement.addEventListener("pointercancel", (event) => {
+        if (activePointerId === null || event.pointerId !== activePointerId) {
+            return;
+        }
+
+        suppressNextClick = pointerMoved;
+        activePointerId = null;
+        pointerMoved = false;
+    });
+
     mediaElement.addEventListener("click", (event) => {
+        if (suppressNextClick) {
+            suppressNextClick = false;
+            return;
+        }
+
         const target = event.target;
         if (
             target instanceof Element &&

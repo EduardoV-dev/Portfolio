@@ -8,26 +8,32 @@
     "scripts": {
         "dev": "astro dev",
         "build": "astro build",
+        "deploy": "wrangler deploy",
+        "deploy:staging": "CLOUDFLARE_ENV=staging wrangler deploy --env staging",
+        "deploy:production": "CLOUDFLARE_ENV=production wrangler deploy --env production",
         "preview": "astro preview",
         "astro": "astro",
         "lint": "eslint .",
         "formatcheck": "prettier . --check",
         "typecheck": "astro check",
         "format": "prettier . --write",
-        "check": "pnpm run lint && pnpm run formatcheck && pnpm run typecheck"
+        "check": "pnpm run lint && pnpm run formatcheck && pnpm run typecheck",
+        "generate-types": "wrangler types"
     },
     "dependencies": {
+        "@astrojs/cloudflare": "^13.5.1",
         "@astrojs/react": "^5.0.5",
         "@sentry/astro": "^10.53.1",
+        "@sentry/cloudflare": "^10.53.1",
         "@strapi/client": "^1.6.1",
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
         "astro": "^6.3.2",
-        "astro-aws-amplify": "^0.4.1",
         "clsx": "^2.1.1",
         "embla-carousel-react": "^8.6.0",
         "react": "^19.2.4",
         "react-dom": "^19.2.4",
+        "wrangler": "^4.92.0",
         "zustand": "^5.0.12"
     },
     "devDependencies": {
@@ -39,5 +45,8 @@
         "postcss": "^8.5.8",
         "postcss-import": "^16.1.1",
         "postcss-mixins": "^12.1.2"
+    },
+    "overrides": {
+        "vite": "^7"
     }
 }

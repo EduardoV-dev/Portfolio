@@ -11,9 +11,6 @@ export default defineConfig({
     }),
     integrations: [react()],
     site: process.env.PUBLIC_SITE_URL,
-    security: {
-        checkOrigin: false,
-    },
     build: {
         format: "directory",
     },

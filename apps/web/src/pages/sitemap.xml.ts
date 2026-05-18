@@ -16,19 +16,50 @@ const STATIC_ROUTES = [
 ];
 
 function createUrl(location: string): string {
-    const baseUrl = ENVS.SITE_URL.replace(/\/$/, "");
+    const baseUrl = ENVS.PUBLIC_SITE_URL.replace(/\/$/, "");
     return `${baseUrl}${location === "/" ? "" : location}`;
 }
 
-function createUrlEntry(location: string): string {
-    return `<url><loc>${createUrl(location)}</loc></url>`;
+interface UrlEntryOptions {
+    location: string;
+    changeFrequency: "daily" | "weekly" | "monthly";
+    priority: string;
+    lastModified: string;
+}
+
+function createUrlEntry({
+    location,
+    changeFrequency,
+    priority,
+    lastModified,
+}: UrlEntryOptions): string {
+    return `<url><loc>${createUrl(location)}</loc><lastmod>${lastModified}</lastmod><changefreq>${changeFrequency}</changefreq><priority>${priority}</priority></url>`;
 }
 
 export async function GET() {
     const projectSlugs = await projectServices.findAllSlugsOnly();
     const caseStudyRoutes = projectSlugs.map((slug) => APP_ROUTES.CASE_STUDIES.DETAIL(slug));
+    const now = new Date().toISOString();
 
-    const urls = [...STATIC_ROUTES, ...caseStudyRoutes].map(createUrlEntry).join("");
+    const staticEntries = STATIC_ROUTES.map((location) =>
+        createUrlEntry({
+            location,
+            changeFrequency: location === APP_ROUTES.HOME ? "weekly" : "monthly",
+            priority: location === APP_ROUTES.HOME ? "1.0" : "0.8",
+            lastModified: now,
+        }),
+    );
+
+    const caseStudyEntries = caseStudyRoutes.map((location) =>
+        createUrlEntry({
+            location,
+            changeFrequency: "monthly",
+            priority: "0.7",
+            lastModified: now,
+        }),
+    );
+
+    const urls = [...staticEntries, ...caseStudyEntries].join("");
 
     const xml = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}</urlset>`;
 

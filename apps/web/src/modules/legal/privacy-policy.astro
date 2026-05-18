@@ -1,5 +1,8 @@
 ---
-import { LAST_UPDATED, SITE_URL } from "@/constants/common";
+import { LAST_UPDATED } from "@/constants/common";
+import { ENVS } from "@/constants/environment-variables";
+
+const siteUrl = ENVS.PUBLIC_SITE_URL.replace(/^https?:\/\//, "");
 ---
 
 <article class="legal" aria-labelledby="legal-heading">
@@ -16,32 +19,49 @@ import { LAST_UPDATED, SITE_URL } from "@/constants/common";
                 <p class="legal__para">
                     This Privacy Policy describes how Eduardo Varela (&ldquo;I&rdquo;,
                     &ldquo;me&rdquo;, or &ldquo;my&rdquo;) handles information in connection with
-                    this portfolio website (<strong>{SITE_URL}</strong>). I take privacy seriously
-                    and aim to be transparent about the minimal data practices in place.
+                    this portfolio website (<strong>{siteUrl}</strong>). This page explains what
+                    telemetry, analytics, and third-party services are used to operate, monitor, and
+                    improve site reliability and user experience.
                 </p>
             </section>
 
             <section class="legal__section">
                 <h2 class="legal__section-title">Information I Collect</h2>
                 <p class="legal__para">
-                    This site does not collect, store, or process any personally identifiable
-                    information (PII) directly. There are no user accounts, sign-up forms, or
-                    databases connected to this website.
+                    This site does not provide user accounts or persistent user profiles. Most
+                    traffic can be browsed without directly submitting personal information.
                 </p>
                 <p class="legal__para">
-                    If you choose to contact me via the contact form or directly by email, your name
-                    and email address will be used solely to respond to your inquiry and will not be
-                    shared with any third party.
+                    If you choose to contact me via the contact form, the form transmits your name,
+                    email address, and message content to Web3Forms for message delivery. If you
+                    schedule a call, Calendly processes scheduling details you provide.
                 </p>
             </section>
 
             <section class="legal__section">
-                <h2 class="legal__section-title">Analytics</h2>
+                <h2 class="legal__section-title">Telemetry and Analytics</h2>
                 <p class="legal__para">
-                    This site may use anonymous, aggregate analytics (such as page views and
-                    referrer data) to understand general traffic patterns. No personally
-                    identifiable information is collected through analytics. Data is not sold or
-                    shared with advertisers.
+                    This site uses Google Analytics to understand traffic and content performance,
+                    including page views, navigation paths, referrer sources, and engagement
+                    patterns. IP anonymization is enabled in the analytics configuration.
+                </p>
+                <p class="legal__para">
+                    This site also records product telemetry events related to contact interactions,
+                    such as opening contact options, starting form submissions, validation outcomes,
+                    and submission success or failure states.
+                </p>
+            </section>
+
+            <section class="legal__section">
+                <h2 class="legal__section-title">Error Monitoring and Performance Diagnostics</h2>
+                <p class="legal__para">
+                    This site uses Sentry for error tracking and performance diagnostics. Sentry may
+                    collect technical metadata required to debug issues, such as browser/runtime
+                    context, request details, stack traces, and performance traces.
+                </p>
+                <p class="legal__para">
+                    Session Replay is enabled with sampling to investigate production issues. Replay
+                    capture is focused on diagnostics and reliability improvement.
                 </p>
             </section>
 
@@ -57,9 +77,14 @@ import { LAST_UPDATED, SITE_URL } from "@/constants/common";
             <section class="legal__section">
                 <h2 class="legal__section-title">Third-Party Services</h2>
                 <p class="legal__para">
-                    This site is hosted on AWS CloudFront / S3. AWS may collect standard server log
-                    data (IP addresses, request timestamps, user agents) as part of normal CDN
-                    operation. This data is governed by{" "}
+                    This site uses third-party providers, including AWS (hosting and CDN), Google
+                    Analytics, Sentry, Web3Forms (contact delivery), Calendly (call scheduling), and
+                    Google Fonts.
+                </p>
+                <p class="legal__para">
+                    AWS may collect standard server log data (for example IP address, user agent,
+                    request path, and timestamp) as part of normal CDN and hosting operation. This
+                    data is governed by{" "}
                     <a
                         href="https://aws.amazon.com/privacy/"
                         target="_blank"
@@ -71,8 +96,8 @@ import { LAST_UPDATED, SITE_URL } from "@/constants/common";
                     </a>.
                 </p>
                 <p class="legal__para">
-                    Any embedded fonts (e.g. Google Fonts, if used) may result in requests to
-                    third-party servers. Where possible, fonts are self-hosted to avoid this.
+                    Each third-party service processes data according to its own privacy terms and
+                    data handling practices.
                 </p>
             </section>
 

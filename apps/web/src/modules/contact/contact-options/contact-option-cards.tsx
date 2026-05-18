@@ -5,6 +5,7 @@ export interface ContactOptionCardsProps {
     toggleForm: () => void;
     calendlyUrl: string;
     linkedinUrl: string;
+    onLinkedInClick: () => void;
     styles: { readonly [key: string]: string };
 }
 
@@ -14,6 +15,7 @@ export default function ContactOptionCards({
     toggleCalendly,
     toggleForm,
     linkedinUrl,
+    onLinkedInClick,
     styles,
 }: ContactOptionCardsProps) {
     return (
@@ -166,6 +168,7 @@ export default function ContactOptionCards({
                         href={linkedinUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={onLinkedInClick}
                         aria-label="LinkedIn profile (opens in new tab)"
                         className={styles["co__card-btn"]}
                     >

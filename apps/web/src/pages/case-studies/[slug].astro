@@ -4,6 +4,7 @@ export const prerender = true;
 import Layout from "@/layouts/layout/index.astro";
 import CaseStudyDetail from "@/modules/case-study-detail/index.astro";
 import { APP_ROUTES } from "@/constants/routes";
+import { ENVS } from "@/constants/environment-variables";
 import { projectServices } from "@/api/projects";
 
 export async function getStaticPaths() {
@@ -19,10 +20,24 @@ if (!project) {
     return Astro.redirect(APP_ROUTES.CASE_STUDIES.ROOT);
 }
 
-const pageTitle = `${project.title} – Case Study – Eduardo Varela`;
+const pageTitle = `${project.title} | Engineering Case Study by Eduardo Varela`;
 const pageDescription = project.description;
+const siteUrl = ENVS.PUBLIC_SITE_URL.replace(/\/$/, "");
+const canonicalPath = APP_ROUTES.CASE_STUDIES.DETAIL(project.slug);
+const imageUrl =
+    Array.isArray(project.images) && project.images.length > 0 && project.images[0]?.url
+        ? project.images[0].url.startsWith("http")
+            ? project.images[0].url
+            : `${siteUrl}${project.images[0].url.startsWith("/") ? project.images[0].url : `/${project.images[0].url}`}`
+        : `${siteUrl}/favicon/android-chrome-512x512.png`;
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
+<Layout
+    title={pageTitle}
+    description={pageDescription}
+    canonical={canonicalPath}
+    ogImage={imageUrl}
+    ogType="article"
+>
     <CaseStudyDetail project={project} />
 </Layout>

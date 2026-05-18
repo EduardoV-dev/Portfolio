@@ -2,7 +2,6 @@
 
 interface ImportMetaEnv {
     // Build-time / SSR (non-PUBLIC = server-only, available at build time)
-    readonly SITE_URL: string;
     readonly SENTRY_AUTH_TOKEN: string;
     readonly SENTRY_ORG: string;
     readonly SENTRY_PROJECT: string;
@@ -11,6 +10,8 @@ interface ImportMetaEnv {
     readonly STRAPI_CMS_OPTIONAL: string;
 
     // Client-accessible (PUBLIC_ prefix required by Astro)
+    readonly PUBLIC_ENVIRONMENT: "development" | "staging" | "production";
+    readonly PUBLIC_SITE_URL: string;
     readonly PUBLIC_SENTRY_ENABLED: string;
     readonly PUBLIC_SENTRY_DSN: string;
     readonly PUBLIC_GA_MEASUREMENT_ID: string;

@@ -1,6 +1,7 @@
 import * as Sentry from "@sentry/astro";
 
-const sentryTunnelPath = "/tunnel";
+const sentryTunnelPath = "/api/error-intake";
+const isStaging = import.meta.env.PUBLIC_ENVIRONMENT === "staging";
 
 if (import.meta.env.PUBLIC_SENTRY_ENABLED === "true" && import.meta.env.PUBLIC_SENTRY_DSN) {
     Sentry.init({
@@ -11,5 +12,6 @@ if (import.meta.env.PUBLIC_SENTRY_ENABLED === "true" && import.meta.env.PUBLIC_S
         tracesSampleRate: 0.2,
         replaysSessionSampleRate: 0.1,
         replaysOnErrorSampleRate: 1.0,
+        debug: isStaging,
     });
 }

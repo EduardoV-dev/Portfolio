@@ -29,5 +29,5 @@ jobs:
               with:
                   fetch-depth: 0
 
-            - name: Push commit to cms-production
-              run: git push origin HEAD:refs/heads/cms-production
+            - name: Force-sync cms-production with main
+              run: git push --force-with-lease origin HEAD:refs/heads/cms-production

@@ -11,6 +11,16 @@ on:
             - "pnpm-workspace.yaml"
             - ".github/workflows/deploy-production.yml"
 
+    pull_request:
+        branches:
+            - main
+        paths:
+            - "apps/web/**"
+            - "package.json"
+            - "pnpm-lock.yaml"
+            - "pnpm-workspace.yaml"
+            - ".github/workflows/deploy-production.yml"
+
     workflow_dispatch:
 
 concurrency:

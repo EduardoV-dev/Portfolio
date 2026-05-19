@@ -53,6 +53,9 @@ jobs:
                 working-directory: apps/web
 
         steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6
+
             - name: Wake up Strapi
               run: |
                   STRAPI_PING_URL="${STRAPI_API_URL%/}/ping"
@@ -63,9 +66,6 @@ jobs:
                     --max-time 20 \
                     --header "Authorization: Bearer ${STRAPI_API_TOKEN}" \
                     "$STRAPI_PING_URL"
-
-            - name: Checkout repository
-              uses: actions/checkout@v6
 
             - name: Setup pnpm
               uses: pnpm/action-setup@v4

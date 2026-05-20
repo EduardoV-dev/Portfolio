@@ -11,6 +11,16 @@ on:
             - "pnpm-workspace.yaml"
             - ".github/workflows/deploy-production.yml"
 
+    pull_request:
+        branches:
+            - main
+        paths:
+            - "apps/web/**"
+            - "package.json"
+            - "pnpm-lock.yaml"
+            - "pnpm-workspace.yaml"
+            - ".github/workflows/deploy-production.yml"
+
     workflow_dispatch:
 
 concurrency:
@@ -45,6 +55,17 @@ jobs:
         steps:
             - name: Checkout repository
               uses: actions/checkout@v6
+
+            - name: Wake up Strapi
+              run: |
+                  STRAPI_PING_URL="${STRAPI_API_URL%/}/ping"
+                  curl --fail --silent --show-error \
+                    --retry 8 \
+                    --retry-all-errors \
+                    --retry-delay 5 \
+                    --max-time 20 \
+                    --header "Authorization: Bearer ${STRAPI_API_TOKEN}" \
+                    "$STRAPI_PING_URL"
 
             - name: Setup pnpm
               uses: pnpm/action-setup@v4

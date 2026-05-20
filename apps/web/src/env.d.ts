@@ -5,6 +5,13 @@ interface ImportMetaEnv {
     readonly SENTRY_AUTH_TOKEN: string;
     readonly SENTRY_ORG: string;
     readonly SENTRY_PROJECT: string;
+    readonly SENTRY_DSN: string;
+    readonly SENTRY_RELEASE: string;
+    readonly SENTRY_ENVIRONMENT: "development" | "staging" | "production";
+    readonly SENTRY_SAMPLE_RATE: string;
+    readonly SENTRY_TRACES_SAMPLE_RATE: string;
+    readonly SENTRY_PROFILES_SAMPLE_RATE: string;
+    readonly SENTRY_DEBUG: string;
     readonly STRAPI_API_TOKEN: string;
     readonly STRAPI_API_URL: string;
     readonly STRAPI_CMS_OPTIONAL: string;
@@ -19,7 +26,6 @@ interface ImportMetaEnv {
     readonly PUBLIC_ENVIRONMENT: "development" | "staging" | "production";
     readonly PUBLIC_SITE_URL: string;
     readonly PUBLIC_SENTRY_ENABLED: string;
-    readonly PUBLIC_SENTRY_DSN: string;
     readonly PUBLIC_GA_MEASUREMENT_ID: string;
     readonly PUBLIC_WEB3FORMS_ACCESS_KEY: string;
 }

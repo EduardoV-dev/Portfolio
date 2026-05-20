@@ -1,6 +1,14 @@
 import { type APIRoute } from "astro";
+import { HTTP_STATUS_CODES } from "@/server-src/constants/http-status-codes";
+import { ApiResponse } from "@/server-src/utils/api-response";
+import { env } from "cloudflare:workers";
+import { logger } from "@/utils/logger";
 
 export const prerender = false;
+
+function resolveConfiguredDsn(): string {
+    return env.SENTRY_DSN || "";
+}
 
 function getProjectIdFromDsn(dsn: string): string {
     const dsnUrl = new URL(dsn);
@@ -25,13 +33,13 @@ function getEnvelopeDsn(envelope: string): string | null {
 
 export const POST: APIRoute = async ({ request }) => {
     try {
-        const configuredDsn = import.meta.env.PUBLIC_SENTRY_DSN;
-        const bypassUpstream =
-            process.env.PUBLIC_SENTRY_TUNNEL_BYPASS_UPSTREAM === "true" ||
-            process.env.SENTRY_TUNNEL_BYPASS_UPSTREAM === "true";
+        const configuredDsn = resolveConfiguredDsn();
 
         if (!configuredDsn) {
-            return new Response("Sentry DSN not configured", { status: 204 });
+            return new ApiResponse(
+                HTTP_STATUS_CODES.NO_CONTENT,
+                "Sentry DSN not configured",
+            ).toResponse();
         }
 
         const bodyBuffer = await request.arrayBuffer();
@@ -39,7 +47,10 @@ export const POST: APIRoute = async ({ request }) => {
         const envelopeDsn = getEnvelopeDsn(bodyText);
 
         if (!envelopeDsn) {
-            return new Response("Invalid Sentry envelope", { status: 400 });
+            return new ApiResponse(
+                HTTP_STATUS_CODES.BAD_REQUEST,
+                "Invalid Sentry envelope",
+            ).toResponse();
         }
 
         const configuredDsnUrl = new URL(configuredDsn);
@@ -51,16 +62,10 @@ export const POST: APIRoute = async ({ request }) => {
             configuredDsnUrl.hostname !== envelopeDsnUrl.hostname ||
             configuredProjectId !== envelopeProjectId
         ) {
-            return new Response("Sentry DSN not allowed", { status: 403 });
-        }
-
-        if (bypassUpstream) {
-            return new Response(null, {
-                status: 204,
-                headers: {
-                    "x-sentry-tunnel-debug": "bypass-upstream",
-                },
-            });
+            return new ApiResponse(
+                HTTP_STATUS_CODES.FORBIDDEN,
+                "Sentry DSN not allowed",
+            ).toResponse();
         }
 
         const upstreamUrl = `${configuredDsnUrl.protocol}//${configuredDsnUrl.host}/api/${configuredProjectId}/envelope/`;
@@ -86,7 +91,15 @@ export const POST: APIRoute = async ({ request }) => {
             headers: responseHeaders,
         });
     } catch (error) {
-        console.error("Sentry tunnel forwarding failed", error);
-        return new Response("Sentry tunnel forwarding failed", { status: 500 });
+        logger.error("Sentry tunnel forwarding failed", {
+            route: "/api/error-intake",
+            method: "POST",
+            error: error instanceof Error ? error.stack : String(error),
+        });
+
+        return new ApiResponse(
+            HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
+            "Sentry tunnel forwarding failed",
+        ).toResponse();
     }
 };

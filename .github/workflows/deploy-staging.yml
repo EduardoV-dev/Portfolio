@@ -11,16 +11,6 @@ on:
             - "pnpm-workspace.yaml"
             - ".github/workflows/deploy-staging.yml"
 
-    pull_request:
-        branches:
-            - staging
-        paths:
-            - "apps/web/**"
-            - "package.json"
-            - "pnpm-lock.yaml"
-            - "pnpm-workspace.yaml"
-            - ".github/workflows/deploy-staging.yml"
-
     workflow_dispatch:
 
 concurrency:

@@ -1,13 +1,11 @@
+import { HTTP_STATUS_CODES } from "@/server-src/constants/http-status-codes";
+import { ApiResponse } from "@/server-src/utils/api-response";
+import axios from "axios";
 import { type APIRoute } from "astro";
 
 export const prerender = false;
 
 type StrapiWebhookEvent = "entry.publish" | "entry.unpublish";
-
-interface StrapiWebhookPayload {
-    event?: unknown;
-    model?: unknown;
-}
 
 const ALLOWED_EVENTS: readonly StrapiWebhookEvent[] = ["entry.publish", "entry.unpublish"];
 
@@ -38,74 +36,94 @@ export const POST: APIRoute = async ({ request }) => {
     const githubWorkflowRef = import.meta.env.GITHUB_REBUILD_REF || "staging";
 
     if (!webhookSecret || !githubToken || !githubOwner || !githubRepo) {
-        return new Response("Missing webhook dispatch configuration", { status: 500 });
+        return new ApiResponse(
+            HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
+            "Missing webhook dispatch configuration",
+            {
+                webhookSecret: Boolean(webhookSecret),
+                githubToken: Boolean(githubToken),
+                githubOwner: Boolean(githubOwner),
+                githubRepo: Boolean(githubRepo),
+            },
+        ).toResponse();
     }
 
     const receivedToken = getBearerToken(request.headers.get("authorization"));
 
     if (!receivedToken || receivedToken !== webhookSecret) {
-        return new Response("Unauthorized", { status: 401 });
-    }
-
-    let payload: StrapiWebhookPayload = {};
-
-    try {
-        payload = (await request.json()) as StrapiWebhookPayload;
-    } catch {
-        return new Response("Invalid JSON payload", { status: 400 });
+        return new ApiResponse(HTTP_STATUS_CODES.UNAUTHORIZED, "Unauthorized").toResponse();
     }
 
     const headerEvent = request.headers.get("x-strapi-event");
-    const payloadEvent = typeof payload.event === "string" ? payload.event : "";
-    const eventName = headerEvent || payloadEvent;
+
+    if (!headerEvent) {
+        return new ApiResponse(HTTP_STATUS_CODES.BAD_REQUEST, "Missing x-strapi-event header", {
+            allowedEvents: ALLOWED_EVENTS,
+        }).toResponse();
+    }
+
+    const eventName = headerEvent;
 
     if (!eventName || !isAllowedEvent(eventName)) {
-        return new Response(null, { status: 204 });
+        return new ApiResponse(HTTP_STATUS_CODES.NO_CONTENT, "Event not allowed", {
+            allowedEvents: ALLOWED_EVENTS,
+        }).toResponse();
     }
 
-    const modelName = typeof payload.model === "string" ? payload.model : "";
-
-    const dispatchResponse = await fetch(
-        `https://api.github.com/repos/${githubOwner}/${githubRepo}/actions/workflows/${githubWorkflowFile}/dispatches`,
-        {
-            method: "POST",
-            headers: {
-                Accept: "application/vnd.github+json",
-                Authorization: `Bearer ${githubToken}`,
-                "Content-Type": "application/json",
-                "X-GitHub-Api-Version": "2022-11-28",
-            },
-            body: JSON.stringify({
+    try {
+        await axios.post(
+            `https://api.github.com/repos/${githubOwner}/${githubRepo}/actions/workflows/${githubWorkflowFile}/dispatches`,
+            {
                 ref: githubWorkflowRef,
-            }),
-        },
-    );
+            },
+            {
+                headers: {
+                    Accept: "application/vnd.github+json",
+                    Authorization: `Bearer ${githubToken}`,
+                    "Content-Type": "application/json",
+                    "X-GitHub-Api-Version": "2022-11-28",
+                },
+            },
+        );
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            const status = error.response?.status || HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR;
+            const body =
+                typeof error.response?.data === "string"
+                    ? error.response.data
+                    : JSON.stringify(error.response?.data || null);
 
-    if (!dispatchResponse.ok) {
-        const errorText = await dispatchResponse.text();
-        console.error("Failed to dispatch GitHub workflow", {
-            status: dispatchResponse.status,
-            body: errorText,
+            console.error("Failed to dispatch GitHub workflow", {
+                status,
+                body,
+                eventName,
+                message: error.message,
+            });
+
+            return new ApiResponse(
+                HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
+                "Failed to trigger rebuild workflow",
+                {
+                    status,
+                    body,
+                },
+            ).toResponse();
+        }
+
+        console.error("Unexpected error dispatching GitHub workflow", {
+            error,
             eventName,
-            modelName,
         });
 
-        return new Response("Failed to trigger rebuild", { status: 502 });
+        return new ApiResponse(
+            HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
+            "Unexpected error triggering rebuild workflow",
+        ).toResponse();
     }
 
-    return new Response(
-        JSON.stringify({
-            ok: true,
-            event: eventName,
-            model: modelName,
-            workflow: githubWorkflowFile,
-            ref: githubWorkflowRef,
-        }),
-        {
-            status: 202,
-            headers: {
-                "content-type": "application/json",
-            },
-        },
-    );
+    return new ApiResponse(HTTP_STATUS_CODES.ACCEPTED, "Rebuild workflow triggered successfully", {
+        event: eventName,
+        workflow: githubWorkflowFile,
+        ref: githubWorkflowRef,
+    }).toResponse();
 };

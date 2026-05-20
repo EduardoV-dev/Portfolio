@@ -27,8 +27,8 @@
         "@strapi/client": "^1.6.1",
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
-        "axios": "^1.13.2",
         "astro": "^6.3.2",
+        "axios": "^1.13.2",
         "clsx": "^2.1.1",
         "embla-carousel-react": "^8.6.0",
         "react": "^19.2.4",
@@ -38,6 +38,7 @@
     },
     "devDependencies": {
         "@astrojs/check": "^0.9.9",
+        "@types/node": "^20.19.37",
         "cross-env": "^7.0.3",
         "eslint-plugin-astro": "^1.3.1",
         "eslint-plugin-jsx-a11y": "^6.10.2",

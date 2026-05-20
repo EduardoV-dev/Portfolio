@@ -1,6 +1,7 @@
 import { HTTP_STATUS_CODES } from "@/server-src/constants/http-status-codes";
 import { ApiResponse } from "@/server-src/utils/api-response";
 import axios from "axios";
+import { env } from "cloudflare:workers";
 import { type APIRoute } from "astro";
 
 export const prerender = false;
@@ -28,14 +29,21 @@ function isAllowedEvent(eventName: string): eventName is StrapiWebhookEvent {
 }
 
 export const POST: APIRoute = async ({ request }) => {
-    const webhookSecret = import.meta.env.STRAPI_WEBHOOK_SECRET;
-    const githubToken = import.meta.env.GITHUB_ACTIONS_TOKEN;
-    const githubOwner = import.meta.env.GITHUB_REPO_OWNER;
-    const githubRepo = import.meta.env.GITHUB_REPO_NAME;
-    const githubWorkflowFile = import.meta.env.GITHUB_REBUILD_WORKFLOW_FILE || "deploy-staging.yml";
-    const githubWorkflowRef = import.meta.env.GITHUB_REBUILD_REF || "staging";
+    const webhookSecret = env.STRAPI_WEBHOOK_SECRET;
+    const githubToken = env.GITHUB_ACTIONS_TOKEN;
+    const githubOwner = env.GITHUB_REPO_OWNER;
+    const githubRepo = env.GITHUB_REPO_NAME;
+    const githubWorkflowFile = env.GITHUB_REBUILD_WORKFLOW_FILE;
+    const githubWorkflowRef = env.GITHUB_REBUILD_REF;
 
-    if (!webhookSecret || !githubToken || !githubOwner || !githubRepo) {
+    if (
+        !webhookSecret ||
+        !githubToken ||
+        !githubOwner ||
+        !githubRepo ||
+        !githubWorkflowFile ||
+        !githubWorkflowRef
+    ) {
         return new ApiResponse(
             HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
             "Missing webhook dispatch configuration",
@@ -44,6 +52,8 @@ export const POST: APIRoute = async ({ request }) => {
                 githubToken: Boolean(githubToken),
                 githubOwner: Boolean(githubOwner),
                 githubRepo: Boolean(githubRepo),
+                githubWorkflowFile: Boolean(githubWorkflowFile),
+                githubWorkflowRef: Boolean(githubWorkflowRef),
             },
         ).toResponse();
     }
@@ -97,7 +107,6 @@ export const POST: APIRoute = async ({ request }) => {
                 status,
                 body,
                 eventName,
-                message: error.message,
             });
 
             return new ApiResponse(
@@ -110,14 +119,17 @@ export const POST: APIRoute = async ({ request }) => {
             ).toResponse();
         }
 
-        console.error("Unexpected error dispatching GitHub workflow", {
-            error,
+        const message = error instanceof Error ? error.message : "unknown-error";
+
+        console.error("Failed to dispatch GitHub workflow", {
+            message,
             eventName,
         });
 
         return new ApiResponse(
             HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
-            "Unexpected error triggering rebuild workflow",
+            "Failed to trigger rebuild workflow",
+            { message },
         ).toResponse();
     }
 

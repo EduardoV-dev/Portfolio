@@ -7,7 +7,6 @@
         "staging": {
             "vars": {
                 "PUBLIC_SENTRY_ENABLED": "true",
-                "SENTRY_DSN": "",
                 "STRAPI_CMS_OPTIONAL": "false",
                 "PUBLIC_ENVIRONMENT": "staging",
                 "PUBLIC_SITE_URL": "https://stg.eduardov.dev",
@@ -20,7 +19,6 @@
         "production": {
             "vars": {
                 "PUBLIC_SENTRY_ENABLED": "true",
-                "SENTRY_DSN": "",
                 "STRAPI_CMS_OPTIONAL": "false",
                 "PUBLIC_ENVIRONMENT": "production",
                 "PUBLIC_SITE_URL": "https://www.eduardov.dev",

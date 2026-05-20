@@ -26,6 +26,7 @@ interface ImportMetaEnv {
     readonly PUBLIC_ENVIRONMENT: "development" | "staging" | "production";
     readonly PUBLIC_SITE_URL: string;
     readonly PUBLIC_SENTRY_ENABLED: string;
+    readonly PUBLIC_SENTRY_DSN: string;
     readonly PUBLIC_GA_MEASUREMENT_ID: string;
     readonly PUBLIC_WEB3FORMS_ACCESS_KEY: string;
 }

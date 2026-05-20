@@ -2,9 +2,9 @@ import * as Sentry from "@sentry/astro";
 
 const sentryTunnelPath = "/api/error-intake";
 
-if (import.meta.env.PUBLIC_SENTRY_ENABLED === "true" && import.meta.env.SENTRY_DSN) {
+if (import.meta.env.PUBLIC_SENTRY_ENABLED === "true" && import.meta.env.PUBLIC_SENTRY_DSN) {
     Sentry.init({
-        dsn: import.meta.env.SENTRY_DSN,
+        dsn: import.meta.env.PUBLIC_SENTRY_DSN,
         tunnel: sentryTunnelPath,
         sendDefaultPii: true,
         integrations: [Sentry.browserTracingIntegration(), Sentry.replayIntegration()],

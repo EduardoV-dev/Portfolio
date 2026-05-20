@@ -8,6 +8,12 @@ interface ImportMetaEnv {
     readonly STRAPI_API_TOKEN: string;
     readonly STRAPI_API_URL: string;
     readonly STRAPI_CMS_OPTIONAL: string;
+    readonly STRAPI_WEBHOOK_SECRET: string;
+    readonly GITHUB_ACTIONS_TOKEN: string;
+    readonly GITHUB_REPO_OWNER: string;
+    readonly GITHUB_REPO_NAME: string;
+    readonly GITHUB_REBUILD_WORKFLOW_FILE: string;
+    readonly GITHUB_REBUILD_REF: string;
 
     // Client-accessible (PUBLIC_ prefix required by Astro)
     readonly PUBLIC_ENVIRONMENT: "development" | "staging" | "production";

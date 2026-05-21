@@ -1,6 +1,6 @@
 import * as Sentry from "@sentry/astro";
 import { logger } from "@/utils/logger";
-import { HTTP_STATUS_CODES } from "@/server-src/constants/http-status-codes";
+import { HTTP_STATUS_CODES } from "./_constants/http-status-codes";
 
 export const prerender = false;
 

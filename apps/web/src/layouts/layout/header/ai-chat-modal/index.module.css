@@ -27,8 +27,8 @@
     right: 0;
     margin-inline: auto;
     z-index: 200;
-    width: min(580px, calc(100vw - 2rem));
-    height: min(520px, calc(100dvh - var(--header-height, 68px) - 2rem));
+    width: min(760px, calc(100vw - 2rem));
+    height: min(700px, calc(100dvh - var(--header-height, 68px) - 1.5rem));
     display: flex;
     flex-direction: column;
     border-radius: 0.875rem;
@@ -80,6 +80,22 @@
 
 .backdrop--closing {
     animation: backdropOut 160ms ease forwards;
+}
+
+@media (max-width: 900px) {
+    .modal {
+        width: min(680px, calc(100vw - 1.5rem));
+        height: min(660px, calc(100dvh - var(--header-height, 68px) - 1.25rem));
+    }
+}
+
+@media (max-width: 640px) {
+    .modal {
+        top: calc(var(--header-height, 68px) + 0.5rem);
+        width: calc(100vw - 1rem);
+        height: calc(100dvh - var(--header-height, 68px) - 0.75rem);
+        border-radius: 0.75rem;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {

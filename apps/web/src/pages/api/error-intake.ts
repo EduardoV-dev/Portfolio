@@ -1,6 +1,6 @@
 import { type APIRoute } from "astro";
-import { HTTP_STATUS_CODES } from "@/server-src/constants/http-status-codes";
-import { ApiResponse } from "@/server-src/utils/api-response";
+import { HTTP_STATUS_CODES } from "./_constants/http-status-codes";
+import { ApiResponse } from "./_utils/api-response";
 import { env } from "cloudflare:workers";
 import { logger } from "@/utils/logger";
 

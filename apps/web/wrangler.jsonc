@@ -15,6 +15,7 @@
                 "GITHUB_REPO_NAME": "portfolio",
                 "GITHUB_REBUILD_WORKFLOW_FILE": "deploy-staging.yml",
                 "GITHUB_REBUILD_REF": "staging",
+                "AI_PROVIDER_BASE_URL": "https://openrouter.ai/api/v1",
             },
         },
         "production": {
@@ -28,6 +29,7 @@
                 "GITHUB_REPO_NAME": "portfolio",
                 "GITHUB_REBUILD_WORKFLOW_FILE": "deploy-production.yml",
                 "GITHUB_REBUILD_REF": "main",
+                "AI_PROVIDER_BASE_URL": "https://openrouter.ai/api/v1",
             },
         },
     },

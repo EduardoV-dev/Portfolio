@@ -35,6 +35,7 @@ if (isSentryEnabled && dsn) {
         profilesSampleRate: parseRate(import.meta.env.SENTRY_PROFILES_SAMPLE_RATE, 0.0),
         debug: parseBoolean(import.meta.env.SENTRY_DEBUG, false),
         sendDefaultPii: true,
+        integrations: [Sentry.consoleLoggingIntegration({ levels: ["info", "warn", "error"] })],
         enableLogs: true,
     });
 }

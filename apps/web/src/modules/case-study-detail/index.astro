@@ -29,7 +29,7 @@ const { detail } = project;
 ---
 
 <div class="csd-page">
-    <div class="csd-page__inner">
+    <div class="csd-page__inner layout-container">
         <!-- ─── STICKY SIDE NAV ─── -->
         <CaseStudyNav items={navItems} backHref={APP_ROUTES.CASE_STUDIES.ROOT} />
 
@@ -64,22 +64,13 @@ const { detail } = project;
     .csd-page {
         position: relative;
         z-index: 1;
-        padding-block: 3rem 4rem;
+        padding-block: clamp(2.2rem, 5vw, 3.4rem) clamp(3rem, 6vw, 4.5rem);
     }
 
     .csd-page__inner {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding-inline: 1rem;
         display: flex;
         gap: 0;
         align-items: flex-start;
-    }
-
-    @mixin tablet-up {
-        .csd-page__inner {
-            padding-inline: 1.5rem;
-        }
     }
 
     @mixin desktop-up {

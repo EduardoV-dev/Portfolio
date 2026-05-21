@@ -3,13 +3,13 @@ import { YEARS_OF_PROFESSIONAL_EXPERIENCE } from "@/constants/common";
 ---
 
 <section class="about-hero" aria-labelledby="about-hero-heading">
-    <div class="about-hero__inner">
-        <p class="about-hero__label">ABOUT</p>
+    <div class="about-hero__inner layout-container">
+        <p class="about-hero__label section-kicker">About</p>
         <h1 class="about-hero__title" id="about-hero-heading">About Me</h1>
         <p class="about-hero__subtext">
-            {YEARS_OF_PROFESSIONAL_EXPERIENCE}+ years turning product ideas into polished,
-            high-performing digital products. I own the full stack from interfaces to cloud
-            infrastructure, bridging engineering, product, and marketing teams along the way.
+            {YEARS_OF_PROFESSIONAL_EXPERIENCE}+ years building products from UI to cloud
+            infrastructure. I work across engineering, product, and marketing when delivery needs
+            one shared plan.
         </p>
     </div>
 </section>
@@ -24,23 +24,10 @@ import { YEARS_OF_PROFESSIONAL_EXPERIENCE } from "@/constants/common";
     }
 
     .about-hero__inner {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding-inline: 1rem;
-    }
-
-    @mixin tablet-up {
-        .about-hero__inner {
-            padding-inline: 1.5rem;
-        }
+        position: relative;
     }
 
     .about-hero__label {
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--color-accent);
         margin-bottom: 1rem;
         animation: about-fade-up 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
         animation-delay: 40ms;

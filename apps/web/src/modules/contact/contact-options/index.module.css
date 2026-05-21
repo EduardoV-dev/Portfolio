@@ -4,19 +4,11 @@
 .co {
     position: relative;
     z-index: 1;
-    padding-block: 2rem 4rem;
+    padding-block: 1.4rem 4rem;
 }
 
 .co__inner {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding-inline: 1rem;
-}
-
-@mixin tablet-up {
-    .co__inner {
-        padding-inline: 1.5rem;
-    }
+    position: relative;
 }
 
 /* ── Header ── */
@@ -26,11 +18,6 @@
 }
 
 .co__label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-accent);
     margin-bottom: 0.75rem;
 }
 
@@ -63,13 +50,13 @@
     flex-direction: column;
     gap: 1.25rem;
     padding: 1.75rem;
-    background: var(--color-surface);
+    background: linear-gradient(180deg, rgba(16, 26, 38, 0.88), rgba(12, 20, 31, 0.92));
     border: 1px solid var(--color-border);
     border-radius: 1rem;
     transition:
-        transform 250ms ease,
-        box-shadow 250ms ease,
-        border-color 250ms ease;
+        transform var(--transition-fast),
+        box-shadow var(--transition-base),
+        border-color var(--transition-fast);
 }
 
 .co__card:hover {
@@ -183,10 +170,11 @@
 }
 
 .co__card-title {
-    font-size: 1.05rem;
+    font-size: 0.94rem;
     font-weight: 700;
     color: var(--color-text-primary);
-    letter-spacing: -0.02em;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
     line-height: 1.3;
 }
 
@@ -220,10 +208,11 @@
     gap: 0.4rem;
     padding: 0.6rem 1.1rem;
     border-radius: 0.6rem;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     font-weight: 650;
     font-family: inherit;
-    letter-spacing: -0.01em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     border: 1px solid rgba(255, 255, 255, 0.12);
     background: rgba(255, 255, 255, 0.05);
     color: var(--color-text-primary);
@@ -231,9 +220,9 @@
     text-decoration: none;
     touch-action: manipulation;
     transition:
-        background 150ms ease,
-        border-color 150ms ease,
-        transform 150ms ease;
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast);
     margin-top: auto;
     align-self: flex-start;
 }
@@ -266,9 +255,9 @@
         0 8px 24px color-mix(in srgb, var(--color-accent) 25%, transparent),
         inset 0 -1px 0 rgba(255, 255, 255, 0.2);
     transition:
-        filter 150ms ease,
-        transform 150ms ease,
-        box-shadow 150ms ease;
+        filter var(--transition-fast),
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
 }
 
 .co__card-btn--primary:hover {
@@ -330,9 +319,9 @@
     cursor: pointer;
     touch-action: manipulation;
     transition:
-        background 150ms ease,
-        border-color 150ms ease,
-        transform 150ms ease;
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast);
 }
 
 .co__card-copy:hover {
@@ -390,9 +379,9 @@
     cursor: pointer;
     touch-action: manipulation;
     transition:
-        background 150ms ease,
-        border-color 150ms ease,
-        color 150ms ease;
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        color var(--transition-fast);
     flex-shrink: 0;
 }
 
@@ -465,6 +454,80 @@
     height: 600px;
     border-radius: 0 0 1rem 1rem;
     overflow: hidden;
+}
+
+@media (max-width: 360px) {
+    .co__card {
+        padding: 1.1rem;
+        gap: 0.9rem;
+    }
+
+    .co__card-desc {
+        font-size: 0.84rem;
+        line-height: 1.52;
+    }
+
+    .co__card-btn,
+    .co__card-copy,
+    .co__card-btn--primary,
+    .co__card-btn--email {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .co__form-panel,
+    .co__calendly-panel {
+        margin-top: 1rem;
+    }
+
+    .co__form-panel {
+        padding: 1rem;
+    }
+
+    .co__calendly-widget-wrap {
+        height: 520px;
+    }
+}
+
+@media (max-width: 320px) {
+    .co {
+        padding-block: 1rem 2.4rem;
+    }
+
+    .co__header {
+        margin-bottom: 1.5rem;
+    }
+
+    .co__heading {
+        font-size: clamp(1.45rem, 8vw, 1.75rem);
+    }
+
+    .co__card-icon {
+        width: 2.35rem;
+        height: 2.35rem;
+    }
+
+    .co__card-title {
+        font-size: 0.86rem;
+    }
+
+    .co__calendly-widget-wrap {
+        height: 480px;
+    }
+}
+
+@media (max-width: 300px) {
+    .co__card {
+        padding: 0.9rem;
+    }
+
+    .co__form-panel {
+        padding: 0.85rem;
+    }
+
+    .co__calendly-widget-wrap {
+        height: 440px;
+    }
 }
 
 @mixin tablet-up {

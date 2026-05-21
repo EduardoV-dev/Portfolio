@@ -6,12 +6,13 @@ import CtaSection from "@/components/cta-section/index.astro";
 <InsightsHero />
 
 <section class="insights-empty" aria-label="Blog content">
-    <div class="insights-empty__inner">
-        <div class="insights-empty__card">
+    <div class="insights-empty__inner layout-container">
+        <div class="insights-empty__card panel-shell">
+            <p class="insights-empty__kicker section-kicker">Field Notes</p>
+            <h2 class="insights-empty__title">Technical essays in progress.</h2>
             <p class="insights-empty__text">
-                No articles published yet. This blog will cover engineering topics — architecture
-                decisions, performance patterns, and lessons from building systems in production.
-                Come back soon.
+                This space will publish architecture tradeoffs, reliability tactics, and lessons
+                from production delivery. First notes land soon.
             </p>
         </div>
     </div>
@@ -23,40 +24,38 @@ import CtaSection from "@/components/cta-section/index.astro";
     @import "../../styles/mixins.css";
 
     .insights-empty {
-        padding-block: 4rem;
+        padding-block: clamp(3rem, 7vw, 5rem);
     }
 
     .insights-empty__inner {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding-inline: 1rem;
-    }
-
-    @mixin tablet-up {
-        .insights-empty__inner {
-            padding-inline: 1.5rem;
-        }
+        position: relative;
     }
 
     .insights-empty__card {
-        padding: 3.5rem 2rem;
-        border: 1px solid var(--color-border);
-        border-radius: 1rem;
-        background: var(--color-surface);
+        padding: clamp(2rem, 4vw, 3.5rem) clamp(1.2rem, 4vw, 2.5rem);
         text-align: center;
+        display: grid;
+        justify-items: center;
+        gap: 0.9rem;
     }
 
-    @mixin tablet-up {
-        .insights-empty__card {
-            padding: 5rem 3rem;
-        }
+    .insights-empty__kicker {
+        margin-bottom: 0.3rem;
+    }
+
+    .insights-empty__title {
+        font-size: clamp(1.5rem, 4vw, 2.3rem);
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        color: var(--color-text-primary);
+        text-wrap: balance;
     }
 
     .insights-empty__text {
-        font-size: clamp(0.95rem, 2vw, 1.1rem);
+        font-size: clamp(0.95rem, 1.8vw, 1.05rem);
         color: var(--color-text-secondary);
         line-height: 1.7;
-        max-width: 58ch;
+        max-width: 52ch;
         margin: 0 auto;
     }
 </style>

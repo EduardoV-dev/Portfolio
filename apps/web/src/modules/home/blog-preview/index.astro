@@ -3,16 +3,17 @@ import { APP_ROUTES } from "@/constants/routes";
 ---
 
 <section class="bp" aria-labelledby="bp-heading">
-    <div class="bp__inner">
+    <div class="bp__inner layout-container">
         <header class="bp__header">
             <div class="bp__header-text">
-                <p class="bp__label" data-animate data-animate-delay="1">LATEST THINKING</p>
+                <p class="bp__label section-kicker" data-animate data-animate-delay="1">
+                    Field Notes
+                </p>
                 <h2 class="bp__heading" id="bp-heading" data-animate data-animate-delay="2">
                     From the Blog
                 </h2>
                 <p class="bp__subtext" data-animate data-animate-delay="3">
-                    Writing on architecture, performance, and what I've learned building systems in
-                    production.
+                    Notes on architecture, performance, and production tradeoffs.
                 </p>
             </div>
             <a href={APP_ROUTES.BLOG.ROOT} class="bp__cta-link" data-animate data-animate-delay="3">
@@ -22,8 +23,7 @@ import { APP_ROUTES } from "@/constants/routes";
 
         <div class="bp__empty" data-animate data-animate-delay="2">
             <p class="bp__empty-text">
-                No posts yet. I'll be sharing writing on architecture, performance, and production
-                systems — check back soon.
+                No posts yet. New writing on production systems lands soon.
             </p>
         </div>
 
@@ -41,19 +41,11 @@ import { APP_ROUTES } from "@/constants/routes";
     .bp {
         position: relative;
         z-index: 1;
-        padding-block: 4rem;
+        padding-block: clamp(3rem, 6vw, 4.6rem);
     }
 
     .bp__inner {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding-inline: 1rem;
-    }
-
-    @mixin tablet-up {
-        .bp__inner {
-            padding-inline: 1.5rem;
-        }
+        position: relative;
     }
 
     /* ── Header ── */
@@ -74,11 +66,6 @@ import { APP_ROUTES } from "@/constants/routes";
     }
 
     .bp__label {
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--color-accent);
         margin-bottom: 0.75rem;
     }
 
@@ -102,11 +89,13 @@ import { APP_ROUTES } from "@/constants/routes";
     /* Desktop CTA next to header */
     .bp__cta-link {
         display: none;
-        font-size: 0.88rem;
-        font-weight: 500;
+        font-size: 0.74rem;
+        font-weight: 650;
         color: var(--color-accent);
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
         white-space: nowrap;
-        transition: opacity 150ms ease;
+        transition: opacity var(--transition-fast);
         padding-bottom: 0.2rem;
     }
 
@@ -142,10 +131,10 @@ import { APP_ROUTES } from "@/constants/routes";
 
     /* ── Empty state ── */
     .bp__empty {
-        padding: 3rem 2rem;
+        padding: clamp(2rem, 4vw, 2.8rem) clamp(1rem, 3vw, 2rem);
         border: 1px solid var(--color-border);
         border-radius: 1rem;
-        background: var(--color-surface);
+        background: linear-gradient(180deg, rgba(16, 26, 38, 0.85), rgba(11, 18, 27, 0.88));
         text-align: center;
     }
 

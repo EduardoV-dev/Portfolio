@@ -48,9 +48,9 @@ export default function ContactOptionCards({
                 </div>
                 <div className={styles["co__card-body"]}>
                     <p className={styles["co__card-badge"]}>Recommended</p>
-                    <h3 className={styles["co__card-title"]}>Book a Strategy Call</h3>
+                    <h3 className={styles["co__card-title"]}>Book a Call</h3>
                     <p className={styles["co__card-desc"]}>
-                        Schedule a quick call to discuss your project, ideas, or opportunities.
+                        Talk through scope, constraints, and timeline.
                     </p>
                     <button
                         type="button"
@@ -107,8 +107,7 @@ export default function ContactOptionCards({
                     </p>
                     <h3 className={styles["co__card-title"]}>Send an Email</h3>
                     <p className={styles["co__card-desc"]}>
-                        Prefer writing? Send me a message and I&apos;ll get back to you within 24
-                        hours.
+                        Send details in writing. I reply within 24 hours.
                     </p>
                     <div className={styles["co__card-actions"]}>
                         <button
@@ -160,10 +159,8 @@ export default function ContactOptionCards({
                     <p className={styles["co__card-badge"]} aria-hidden="true">
                         &nbsp;
                     </p>
-                    <h3 className={styles["co__card-title"]}>Connect on LinkedIn</h3>
-                    <p className={styles["co__card-desc"]}>
-                        Connect professionally or send a direct message.
-                    </p>
+                    <h3 className={styles["co__card-title"]}>LinkedIn</h3>
+                    <p className={styles["co__card-desc"]}>Send direct message on LinkedIn.</p>
                     <a
                         href={linkedinUrl}
                         target="_blank"

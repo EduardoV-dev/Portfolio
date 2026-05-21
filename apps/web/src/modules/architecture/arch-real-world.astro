@@ -3,24 +3,25 @@ import { APP_ROUTES } from "@/constants/routes";
 ---
 
 <section class="arch-rw" aria-labelledby="arch-rw-heading">
-    <div class="arch-rw__inner">
+    <div class="arch-rw__inner layout-container">
         <div class="arch-rw__content">
             <header class="arch-rw__header">
-                <p class="arch-rw__label" data-animate data-animate-delay="1">APPLIED WORK</p>
+                <p class="arch-rw__label section-kicker" data-animate data-animate-delay="1">
+                    Applied work
+                </p>
                 <h2
                     class="arch-rw__heading"
                     id="arch-rw-heading"
                     data-animate
                     data-animate-delay="2"
                 >
-                    Applied in Real Projects
+                    Production Examples
                 </h2>
             </header>
 
             <p class="arch-rw__body" data-animate data-animate-delay="3">
-                These aren't theoretical patterns. I've applied them while building and shipping
-                full-stack products in production, making trade-off decisions that held under real
-                load and evolved cleanly as requirements changed.
+                I used these patterns in shipped products and validated them under production load,
+                changing architecture when product requirements changed.
             </p>
 
             <a
@@ -49,7 +50,7 @@ import { APP_ROUTES } from "@/constants/routes";
         <div class="arch-rw__stats" data-animate data-animate-delay="3">
             <div class="arch-rw__stat">
                 <span class="arch-rw__stat-value">4+</span>
-                <span class="arch-rw__stat-label">Production systems architected</span>
+                <span class="arch-rw__stat-label">Production systems designed</span>
             </div>
             <div class="arch-rw__stat">
                 <span class="arch-rw__stat-value">3+</span>
@@ -57,7 +58,7 @@ import { APP_ROUTES } from "@/constants/routes";
             </div>
             <div class="arch-rw__stat">
                 <span class="arch-rw__stat-value">5</span>
-                <span class="arch-rw__stat-label">Architecture domains mastered</span>
+                <span class="arch-rw__stat-label">Architecture domains covered</span>
             </div>
             <div class="arch-rw__stat">
                 <span class="arch-rw__stat-value">100%</span>
@@ -77,15 +78,7 @@ import { APP_ROUTES } from "@/constants/routes";
     }
 
     .arch-rw__inner {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding-inline: 1rem;
-    }
-
-    @mixin tablet-up {
-        .arch-rw__inner {
-            padding-inline: 1.5rem;
-        }
+        position: relative;
     }
 
     .arch-rw__content {
@@ -120,11 +113,6 @@ import { APP_ROUTES } from "@/constants/routes";
     }
 
     .arch-rw__label {
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--color-accent);
         margin-bottom: 0.75rem;
     }
 

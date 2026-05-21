@@ -4,7 +4,7 @@ import HeroVisual from "./hero-visual.astro";
 ---
 
 <section class="hero" aria-label="Homepage hero">
-    <div class="hero__inner">
+    <div class="hero__inner layout-container">
         <HeroContent />
         <HeroVisual />
     </div>
@@ -17,7 +17,7 @@ import HeroVisual from "./hero-visual.astro";
         position: relative;
         overflow: clip;
         background: transparent;
-        padding-bottom: 2rem;
+        padding-bottom: 1rem;
     }
 
     .hero::before {
@@ -36,14 +36,12 @@ import HeroVisual from "./hero-visual.astro";
     .hero__inner {
         position: relative;
         z-index: 1;
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 2rem 1rem 2.6rem;
+        padding: 2rem 0 2.6rem;
         min-height: auto;
         display: grid;
         grid-template-columns: 1fr;
         align-items: start;
-        gap: 1.6rem;
+        gap: 1.8rem;
     }
 
     @mixin tablet-up {
@@ -54,14 +52,13 @@ import HeroVisual from "./hero-visual.astro";
         .hero__inner {
             padding-top: clamp(2.4rem, 8vw, 3.4rem);
             padding-bottom: 2rem;
-            padding-inline: 1.5rem;
             gap: 2.5rem;
         }
     }
 
     @mixin desktop-up {
         .hero__inner {
-            padding: clamp(2.8rem, 8vh, 6.8rem) 1.5rem clamp(3rem, 8vh, 5.8rem);
+            padding: clamp(2.8rem, 8vh, 6.8rem) 0 clamp(3rem, 8vh, 5.8rem);
             min-height: calc(100vh - var(--header-height, 68px));
             grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
             align-items: center;

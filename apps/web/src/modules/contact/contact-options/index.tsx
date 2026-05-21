@@ -154,11 +154,11 @@ export default function ContactOptions() {
 
     return (
         <section className={styles.co} id="contact-options" aria-labelledby="co-heading">
-            <div className={styles.co__inner}>
+            <div className={`${styles.co__inner} layout-container`}>
                 <header className={styles.co__header}>
-                    <p className={styles.co__label}>GET IN TOUCH</p>
+                    <p className={`${styles.co__label} section-kicker`}>Contact</p>
                     <h2 className={styles.co__heading} id="co-heading">
-                        Choose how to connect
+                        Pick contact method
                     </h2>
                 </header>
 
@@ -204,7 +204,7 @@ export default function ContactOptions() {
                                 className="calendly-inline-widget"
                                 data-url={CALENDLY_URL}
                                 ref={calendlyWidgetRef}
-                                style={{ minWidth: "320px", height: "100%" }}
+                                style={{ minWidth: "300px", height: "100%" }}
                             />
                         </div>
                     </div>

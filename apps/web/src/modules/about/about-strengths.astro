@@ -48,9 +48,11 @@ const categories = [
 ---
 
 <section class="about-str" id="capabilities" aria-labelledby="about-str-heading">
-    <div class="about-str__inner">
+    <div class="about-str__inner layout-container">
         <header class="about-str__header">
-            <p class="about-str__label" data-animate data-animate-delay="1">CORE STRENGTHS</p>
+            <p class="about-str__label section-kicker" data-animate data-animate-delay="1">
+                Core strengths
+            </p>
             <h2
                 class="about-str__heading"
                 id="about-str-heading"
@@ -91,15 +93,7 @@ const categories = [
     }
 
     .about-str__inner {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding-inline: 1rem;
-    }
-
-    @mixin tablet-up {
-        .about-str__inner {
-            padding-inline: 1.5rem;
-        }
+        position: relative;
     }
 
     /* ── Header ── */
@@ -115,11 +109,6 @@ const categories = [
     }
 
     .about-str__label {
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--color-accent);
         margin-bottom: 0.75rem;
     }
 
@@ -161,7 +150,7 @@ const categories = [
         flex-direction: column;
         gap: 1.25rem;
         padding: 1.75rem;
-        background: var(--color-surface);
+        background: linear-gradient(180deg, rgba(16, 26, 38, 0.86), rgba(11, 18, 27, 0.9));
         border: 1px solid var(--color-border);
         border-radius: 1rem;
         transition:

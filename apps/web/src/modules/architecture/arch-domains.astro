@@ -11,7 +11,7 @@ const domains = [
             "Rate limiting & throttling",
         ],
         description:
-            "Well-designed APIs are the contract between systems. I define clear resource models, consistent error shapes, and versioning strategies that let clients evolve independently from servers.",
+            "I define resource models, error contracts, and versioning so clients and services can evolve independently.",
     },
     {
         id: "system-architecture",
@@ -24,7 +24,7 @@ const domains = [
             "Saga & outbox patterns",
         ],
         description:
-            "Architecture decisions have compounding consequences. I evaluate monolith-first vs. distributed tradeoffs deliberately, decomposing only when operational complexity is justified by scale or team autonomy.",
+            "I start monolith-first, then split services when scale or team ownership justifies operational cost.",
     },
     {
         id: "data-persistence",
@@ -37,7 +37,7 @@ const domains = [
             "Eventual vs strong consistency",
         ],
         description:
-            "Data is the most durable artifact in a system. I design schemas with access patterns in mind, optimize queries early, and choose consistency models based on actual business requirements.",
+            "I design schemas around access patterns, tune queries early, and pick consistency models from product requirements.",
     },
     {
         id: "cloud-infrastructure",
@@ -50,7 +50,7 @@ const domains = [
             "High availability design",
         ],
         description:
-            "Infrastructure is code. I build cloud systems with automation from day one: declarative infrastructure, environment parity, and deployment pipelines that make production releases routine, not risky.",
+            "I automate infrastructure from day one with declarative config, environment parity, and repeatable deployment pipelines.",
     },
     {
         id: "performance-optimization",
@@ -63,15 +63,17 @@ const domains = [
             "Observability & alerting",
         ],
         description:
-            "Performance is a feature. I instrument systems from the start with tracing, metrics, and structured logging, so bottlenecks are identified with data, not guesswork.",
+            "I instrument systems early with tracing, metrics, and structured logs so bottlenecks get measured, not guessed.",
     },
 ];
 ---
 
 <section class="arch-domains" aria-labelledby="arch-domains-heading">
-    <div class="arch-domains__inner">
+    <div class="arch-domains__inner layout-container">
         <header class="arch-domains__header">
-            <p class="arch-domains__label" data-animate data-animate-delay="1">DOMAINS</p>
+            <p class="arch-domains__label section-kicker" data-animate data-animate-delay="1">
+                Domains
+            </p>
             <h2
                 class="arch-domains__heading"
                 id="arch-domains-heading"
@@ -81,8 +83,7 @@ const domains = [
                 Architecture Domains
             </h2>
             <p class="arch-domains__subtext" data-animate data-animate-delay="3">
-                The areas where architectural decisions compound, and where getting them wrong is
-                expensive to undo.
+                Domains where architecture choices create long-term cost or speed.
             </p>
         </header>
 
@@ -124,15 +125,7 @@ const domains = [
     }
 
     .arch-domains__inner {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding-inline: 1rem;
-    }
-
-    @mixin tablet-up {
-        .arch-domains__inner {
-            padding-inline: 1.5rem;
-        }
+        position: relative;
     }
 
     /* ── Section header ── */
@@ -148,11 +141,6 @@ const domains = [
     }
 
     .arch-domains__label {
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--color-accent);
         margin-bottom: 0.75rem;
     }
 

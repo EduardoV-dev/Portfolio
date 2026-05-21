@@ -32,7 +32,7 @@ import logo from "@/assets/logo.png";
     .footer-brand {
         display: flex;
         flex-direction: column;
-        gap: 1.25rem;
+        gap: 1.1rem;
     }
 
     .footer-logo {
@@ -40,12 +40,15 @@ import logo from "@/assets/logo.png";
         align-items: center;
         gap: 0.75rem;
         color: var(--color-text-primary, #fff);
-        transition: opacity 150ms ease;
+        transition:
+            opacity var(--transition-fast),
+            transform var(--transition-fast);
         width: fit-content;
     }
 
     .footer-logo:hover {
-        opacity: 0.85;
+        opacity: 0.95;
+        transform: translateY(-1px);
     }
 
     .footer-logo__img {
@@ -62,25 +65,27 @@ import logo from "@/assets/logo.png";
     }
 
     .footer-logo__name {
-        font-size: 0.95rem;
-        font-weight: 600;
+        font-size: 0.92rem;
+        font-weight: 650;
         letter-spacing: -0.01em;
         line-height: 1.2;
         color: #fff;
     }
 
     .footer-logo__title {
-        font-size: 0.7rem;
-        font-weight: 400;
-        color: var(--color-text-secondary, rgba(255, 255, 255, 0.55));
-        letter-spacing: 0.01em;
+        font-size: 0.62rem;
+        font-weight: 520;
+        color: var(--color-text-muted, rgba(255, 255, 255, 0.55));
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
         line-height: 1;
     }
 
     .footer-brand__tagline {
-        font-size: 0.875rem;
+        font-size: 0.85rem;
         line-height: 1.65;
         color: var(--color-text-secondary, rgba(255, 255, 255, 0.55));
+        max-width: 35ch;
     }
 
     .footer-brand__badge {
@@ -89,6 +94,7 @@ import logo from "@/assets/logo.png";
         gap: 0.5rem;
         padding: 0.35rem 0.75rem;
         border: 1px solid var(--color-border, rgba(255, 255, 255, 0.05));
+        background: rgba(117, 168, 212, 0.08);
         border-radius: 100px;
         width: fit-content;
     }
@@ -99,7 +105,7 @@ import logo from "@/assets/logo.png";
         border-radius: 50%;
         background: var(--color-accent, #00ccff);
         flex-shrink: 0;
-        box-shadow: 0 0 6px var(--color-accent, #00ccff);
+        box-shadow: 0 0 0 5px rgba(105, 217, 255, 0.12);
         animation: pulse 2.5s ease-in-out infinite;
     }
 

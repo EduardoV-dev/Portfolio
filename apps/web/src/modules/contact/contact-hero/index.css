@@ -3,45 +3,37 @@
 .ch {
     position: relative;
     z-index: 1;
-    padding-block: 5rem 4rem;
+    padding-block: clamp(3rem, 7vw, 5.5rem) clamp(2.2rem, 4vw, 3.2rem);
     text-align: center;
 }
 
 .ch__inner {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding-inline: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .ch__label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-accent);
     margin-bottom: 1rem;
     animation: ch-fade-up 500ms var(--ease-out-quint) both;
     animation-delay: 40ms;
 }
 
 .ch__title {
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-size: clamp(2.2rem, 7vw, 4rem);
     font-weight: 800;
     letter-spacing: -0.05em;
     color: var(--color-text-primary);
     line-height: 1.05;
     margin-bottom: 1.5rem;
-    max-width: 16ch;
+    max-width: 18ch;
     text-wrap: balance;
     animation: ch-fade-up 560ms var(--ease-out-quint) both;
     animation-delay: 120ms;
 }
 
 .ch__subtext {
-    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    font-size: clamp(1rem, 2.2vw, 1.1rem);
     color: var(--color-text-secondary);
     line-height: 1.65;
     max-width: 44ch;
@@ -66,10 +58,6 @@
     .ch {
         padding-block: 6rem 4.5rem;
     }
-
-    .ch__inner {
-        padding-inline: 1.5rem;
-    }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -78,6 +66,17 @@
     .ch__subtext,
     .ch__tagline {
         animation: none;
+    }
+}
+
+@media (max-width: 360px) {
+    .ch__title {
+        line-height: 1.04;
+    }
+
+    .ch__subtext,
+    .ch__tagline {
+        font-size: 0.9rem;
     }
 }
 

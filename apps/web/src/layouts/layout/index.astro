@@ -125,7 +125,7 @@ const ogImageUrl = ogImage.startsWith("http")
 
         <div class="site-shell">
             <Header currentPath={Astro.url.pathname} client:load />
-            <main id="main-content" style="padding-top: var(--header-height, 68px);">
+            <main id="main-content" style="padding-top: calc(var(--header-height, 72px) + 1.5rem);">
                 <slot />
             </main>
             <Footer />

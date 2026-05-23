@@ -25,6 +25,7 @@ services:
         restart: unless-stopped
         env_file: ./apps/headless-cms/.env
         environment:
+            CI: "true"
             DATABASE_HOST: postgres
             DATABASE_PORT: "5432"
             DATABASE_NAME: portfolio

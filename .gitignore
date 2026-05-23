@@ -24,3 +24,4 @@ nul
 apps/web/amplify.yml
 apps/web/.wrangler/
 *.log
+.pnpm-store/

@@ -2,7 +2,6 @@ import OpenAI from "openai";
 import { type APIRoute } from "astro";
 import { env } from "cloudflare:workers";
 import { logger } from "@/utils/logger";
-import axios from "axios";
 import { HTTP_STATUS_CODES } from "./_constants/http-status-codes";
 import { ApiResponse } from "./_utils/api-response";
 
@@ -40,9 +39,16 @@ const IS_DEVELOPMENT = env.PUBLIC_ENVIRONMENT === "development";
 export const prerender = false;
 
 async function loadEduardoProfileMarkdown(request: Request): Promise<string> {
-    const origin = new URL(request.url).origin;
-    const profileResponse = await axios.get<string>(`${origin}${EDUARDO_PROFILE_ROUTE}`);
-    return profileResponse.data.trim();
+    const profileRequest = new Request(new URL(EDUARDO_PROFILE_ROUTE, request.url));
+    const profileResponse = await env.ASSETS.fetch(profileRequest);
+
+    if (!profileResponse.ok) {
+        throw new Error(
+            `Failed to load ${EDUARDO_PROFILE_ROUTE} from assets: ${profileResponse.status}`,
+        );
+    }
+
+    return (await profileResponse.text()).trim();
 }
 
 function createErrorResponse(status: number, message: string): Response {

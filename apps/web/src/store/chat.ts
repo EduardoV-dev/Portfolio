@@ -19,7 +19,7 @@ function createMessageId(role: MessageRole): string {
 const INITIAL_MESSAGE: Message = {
     id: "init",
     role: "assistant",
-    text: "LLM integration is on the roadmap. Soon you'll be able to ask about Eduardo's experience, projects, and how he approaches building digital products.",
+    text: "Ask about Eduardo's projects, architecture decisions, and real-world engineering experience.",
 };
 
 const RESPONSES: Record<string, string> = {

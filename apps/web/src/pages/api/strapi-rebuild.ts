@@ -3,6 +3,8 @@ import { ApiResponse } from "./_utils/api-response";
 import axios from "axios";
 import { env } from "cloudflare:workers";
 import { type APIRoute } from "astro";
+import { logger } from "@/utils/logger";
+import { enforceGlobalRateLimit } from "./_utils/global-rate-limit";
 
 export const prerender = false;
 
@@ -29,6 +31,14 @@ function isAllowedEvent(eventName: string): eventName is StrapiWebhookEvent {
 }
 
 export const POST: APIRoute = async ({ request }) => {
+    const globalApiRateLimitResponse = await enforceGlobalRateLimit({
+        route: "/api/strapi-rebuild",
+        method: "POST",
+    });
+    if (globalApiRateLimitResponse) {
+        return globalApiRateLimitResponse;
+    }
+
     const webhookSecret = env.STRAPI_WEBHOOK_SECRET;
     const githubToken = env.GITHUB_ACTIONS_TOKEN;
     const githubOwner = env.GITHUB_REPO_OWNER;
@@ -44,6 +54,18 @@ export const POST: APIRoute = async ({ request }) => {
         !githubWorkflowFile ||
         !githubWorkflowRef
     ) {
+        logger.error("Missing webhook dispatch configuration", {
+            route: "/api/strapi-rebuild",
+            method: "POST",
+            status: HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
+            webhookSecret: Boolean(webhookSecret),
+            githubToken: Boolean(githubToken),
+            githubOwner: Boolean(githubOwner),
+            githubRepo: Boolean(githubRepo),
+            githubWorkflowFile: Boolean(githubWorkflowFile),
+            githubWorkflowRef: Boolean(githubWorkflowRef),
+        });
+
         return new ApiResponse(
             HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
             "Missing webhook dispatch configuration",
@@ -61,12 +83,24 @@ export const POST: APIRoute = async ({ request }) => {
     const receivedToken = getBearerToken(request.headers.get("authorization"));
 
     if (!receivedToken || receivedToken !== webhookSecret) {
+        logger.warn("Unauthorized Strapi rebuild request", {
+            route: "/api/strapi-rebuild",
+            method: "POST",
+            status: HTTP_STATUS_CODES.UNAUTHORIZED,
+        });
+
         return new ApiResponse(HTTP_STATUS_CODES.UNAUTHORIZED, "Unauthorized").toResponse();
     }
 
     const headerEvent = request.headers.get("x-strapi-event");
 
     if (!headerEvent) {
+        logger.warn("Missing x-strapi-event header", {
+            route: "/api/strapi-rebuild",
+            method: "POST",
+            status: HTTP_STATUS_CODES.BAD_REQUEST,
+        });
+
         return new ApiResponse(HTTP_STATUS_CODES.BAD_REQUEST, "Missing x-strapi-event header", {
             allowedEvents: ALLOWED_EVENTS,
         }).toResponse();
@@ -75,6 +109,13 @@ export const POST: APIRoute = async ({ request }) => {
     const eventName = headerEvent;
 
     if (!eventName || !isAllowedEvent(eventName)) {
+        logger.warn("Strapi event not allowed", {
+            route: "/api/strapi-rebuild",
+            method: "POST",
+            status: HTTP_STATUS_CODES.NO_CONTENT,
+            eventName,
+        });
+
         return new ApiResponse(HTTP_STATUS_CODES.NO_CONTENT, "Event not allowed", {
             allowedEvents: ALLOWED_EVENTS,
         }).toResponse();
@@ -103,7 +144,7 @@ export const POST: APIRoute = async ({ request }) => {
                     ? error.response.data
                     : JSON.stringify(error.response?.data || null);
 
-            console.error("Failed to dispatch GitHub workflow", {
+            logger.error("Failed to dispatch GitHub workflow", {
                 status,
                 body,
                 eventName,
@@ -121,7 +162,7 @@ export const POST: APIRoute = async ({ request }) => {
 
         const message = error instanceof Error ? error.message : "unknown-error";
 
-        console.error("Failed to dispatch GitHub workflow", {
+        logger.error("Failed to dispatch GitHub workflow", {
             message,
             eventName,
         });

@@ -4,6 +4,7 @@ import { env } from "cloudflare:workers";
 import { logger } from "@/utils/logger";
 import { HTTP_STATUS_CODES } from "./_constants/http-status-codes";
 import { ApiResponse } from "./_utils/api-response";
+import { enforceGlobalRateLimit } from "./_utils/global-rate-limit";
 
 interface ChatRequestMessage {
     role: "assistant" | "user";
@@ -43,6 +44,11 @@ async function loadEduardoProfileMarkdown(request: Request): Promise<string> {
     const profileResponse = await env.ASSETS.fetch(profileRequest);
 
     if (!profileResponse.ok) {
+        logger.error("Failed to load profile markdown from assets", {
+            route: "/api/ai-chat",
+            method: "POST",
+        });
+
         throw new Error(
             `Failed to load ${EDUARDO_PROFILE_ROUTE} from assets: ${profileResponse.status}`,
         );
@@ -96,6 +102,12 @@ function getClientIp(request: Request): string {
 
 function validateProviderConfig(): Response | undefined {
     if (!env.AI_PROVIDER_API_KEY) {
+        logger.error("AI provider key missing", {
+            route: "/api/ai-chat",
+            method: "POST",
+            status: HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
+        });
+
         return createErrorResponse(
             HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
             "AI provider key missing on server",
@@ -109,6 +121,12 @@ async function parseAndSanitizeMessages(
     const body = (await request.json()) as ChatRequestBody;
 
     if (!Array.isArray(body.messages)) {
+        logger.warn("Invalid AI chat payload: messages missing", {
+            route: "/api/ai-chat",
+            method: "POST",
+            status: HTTP_STATUS_CODES.BAD_REQUEST,
+        });
+
         return createErrorResponse(
             HTTP_STATUS_CODES.BAD_REQUEST,
             "Invalid payload: messages are required",
@@ -118,6 +136,12 @@ async function parseAndSanitizeMessages(
     const sanitizedMessages = sanitizeMessages(body.messages);
 
     if (sanitizedMessages.length === 0) {
+        logger.warn("Invalid AI chat payload: empty messages", {
+            route: "/api/ai-chat",
+            method: "POST",
+            status: HTTP_STATUS_CODES.BAD_REQUEST,
+        });
+
         return createErrorResponse(
             HTTP_STATUS_CODES.BAD_REQUEST,
             "At least one message is required",
@@ -131,6 +155,14 @@ async function enforceRateLimits(request: Request): Promise<Response | undefined
     const rateLimiter = env.AI_CHAT_RATE_LIMITER;
     const globalRateLimiter = env.AI_CHAT_GLOBAL_RATE_LIMITER;
     const hasRateLimiters = Boolean(rateLimiter && globalRateLimiter);
+
+    const globalApiRateLimitResponse = await enforceGlobalRateLimit({
+        route: "/api/ai-chat",
+        method: "POST",
+    });
+    if (globalApiRateLimitResponse) {
+        return globalApiRateLimitResponse;
+    }
 
     if (!hasRateLimiters && !IS_DEVELOPMENT) {
         logger.error("AI chat rate limiter binding missing", {
@@ -154,6 +186,13 @@ async function enforceRateLimits(request: Request): Promise<Response | undefined
 
     const globalLimitResult = await globalRateLimiter!.limit({ key: "ai-chat:global" });
     if (!globalLimitResult.success) {
+        logger.warn("AI chat global rate limit exceeded", {
+            route: "/api/ai-chat",
+            method: "POST",
+            key: "ai-chat:global",
+            status: HTTP_STATUS_CODES.TOO_MANY_REQUESTS,
+        });
+
         return createTooManyRequestsResponse(
             "Service is busy right now. Please try again in a minute.",
         );
@@ -163,6 +202,13 @@ async function enforceRateLimits(request: Request): Promise<Response | undefined
     const { success } = await rateLimiter!.limit({ key: `ai-chat:${clientIp}` });
 
     if (!success) {
+        logger.warn("AI chat per-IP rate limit exceeded", {
+            route: "/api/ai-chat",
+            method: "POST",
+            key: `ai-chat:${clientIp}`,
+            status: HTTP_STATUS_CODES.TOO_MANY_REQUESTS,
+        });
+
         return createTooManyRequestsResponse("Rate limit exceeded. Please try again in a minute.");
     }
 }
@@ -171,6 +217,12 @@ async function resolveSystemPrompt(request: Request): Promise<string | Response>
     const systemPrompt = await loadEduardoProfileMarkdown(request);
 
     if (!systemPrompt) {
+        logger.error("AI chat system prompt unavailable", {
+            route: "/api/ai-chat",
+            method: "POST",
+            status: HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
+        });
+
         return createErrorResponse(
             HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
             "Profile prompt is unavailable. Please try again later.",
@@ -230,6 +282,11 @@ function createStreamingResponse(
 
                 controller.close();
             } catch (error) {
+                logger.error("AI chat stream response failed", {
+                    route: "/api/ai-chat",
+                    method: "POST",
+                    error: error instanceof Error ? error.stack : String(error),
+                });
                 controller.error(error);
             }
         },

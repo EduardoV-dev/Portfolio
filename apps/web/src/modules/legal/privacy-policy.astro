@@ -77,22 +77,22 @@ const siteUrl = ENVS.PUBLIC_SITE_URL.replace(/^https?:\/\//, "");
             <section class="legal__section">
                 <h2 class="legal__section-title">Third-Party Services</h2>
                 <p class="legal__para">
-                    This site uses third-party providers, including AWS (hosting and CDN), Google
-                    Analytics, Sentry, Web3Forms (contact delivery), Calendly (call scheduling), and
-                    Google Fonts.
+                    This site uses third-party providers, including Cloudflare (hosting, edge
+                    delivery, and server runtime via Cloudflare Workers), Google Analytics, Sentry,
+                    Web3Forms (contact delivery), Calendly (call scheduling), and Google Fonts.
                 </p>
                 <p class="legal__para">
-                    AWS may collect standard server log data (for example IP address, user agent,
-                    request path, and timestamp) as part of normal CDN and hosting operation. This
-                    data is governed by{" "}
+                    Cloudflare may process standard request metadata (for example IP address, user
+                    agent, request path, and timestamp) as part of edge delivery, security, and
+                    server runtime operation. This data is governed by{" "}
                     <a
-                        href="https://aws.amazon.com/privacy/"
+                        href="https://www.cloudflare.com/privacypolicy/"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="legal__link"
-                        aria-label="AWS Privacy Policy (opens in new tab)"
+                        aria-label="Cloudflare Privacy Policy (opens in new tab)"
                     >
-                        AWS&rsquo;s Privacy Policy
+                        Cloudflare&rsquo;s Privacy Policy
                     </a>.
                 </p>
                 <p class="legal__para">

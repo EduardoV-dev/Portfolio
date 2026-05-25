@@ -3,6 +3,7 @@ import { HTTP_STATUS_CODES } from "./_constants/http-status-codes";
 import { ApiResponse } from "./_utils/api-response";
 import { env } from "cloudflare:workers";
 import { logger } from "@/utils/logger";
+import { enforceGlobalRateLimit } from "./_utils/global-rate-limit";
 
 export const prerender = false;
 
@@ -33,9 +34,23 @@ function getEnvelopeDsn(envelope: string): string | null {
 
 export const POST: APIRoute = async ({ request }) => {
     try {
+        const globalApiRateLimitResponse = await enforceGlobalRateLimit({
+            route: "/api/error-intake",
+            method: "POST",
+        });
+        if (globalApiRateLimitResponse) {
+            return globalApiRateLimitResponse;
+        }
+
         const configuredDsn = resolveConfiguredDsn();
 
         if (!configuredDsn) {
+            logger.warn("Sentry DSN not configured", {
+                route: "/api/error-intake",
+                method: "POST",
+                status: HTTP_STATUS_CODES.NO_CONTENT,
+            });
+
             return new ApiResponse(
                 HTTP_STATUS_CODES.NO_CONTENT,
                 "Sentry DSN not configured",
@@ -47,6 +62,12 @@ export const POST: APIRoute = async ({ request }) => {
         const envelopeDsn = getEnvelopeDsn(bodyText);
 
         if (!envelopeDsn) {
+            logger.warn("Invalid Sentry envelope", {
+                route: "/api/error-intake",
+                method: "POST",
+                status: HTTP_STATUS_CODES.BAD_REQUEST,
+            });
+
             return new ApiResponse(
                 HTTP_STATUS_CODES.BAD_REQUEST,
                 "Invalid Sentry envelope",
@@ -62,6 +83,14 @@ export const POST: APIRoute = async ({ request }) => {
             configuredDsnUrl.hostname !== envelopeDsnUrl.hostname ||
             configuredProjectId !== envelopeProjectId
         ) {
+            logger.warn("Sentry DSN not allowed", {
+                route: "/api/error-intake",
+                method: "POST",
+                status: HTTP_STATUS_CODES.FORBIDDEN,
+                configuredHost: configuredDsnUrl.hostname,
+                envelopeHost: envelopeDsnUrl.hostname,
+            });
+
             return new ApiResponse(
                 HTTP_STATUS_CODES.FORBIDDEN,
                 "Sentry DSN not allowed",
@@ -79,6 +108,15 @@ export const POST: APIRoute = async ({ request }) => {
 
         const responseHeaders = new Headers();
         const upstreamContentType = upstreamResponse.headers.get("content-type");
+
+        if (!upstreamResponse.ok) {
+            logger.warn("Sentry upstream returned non-success status", {
+                route: "/api/error-intake",
+                method: "POST",
+                status: upstreamResponse.status,
+                upstreamUrl,
+            });
+        }
 
         if (upstreamContentType) {
             responseHeaders.set("content-type", upstreamContentType);

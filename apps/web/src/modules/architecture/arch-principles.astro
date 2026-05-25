@@ -6,34 +6,34 @@ const principles = [
         iconName: "scalability" as const,
         title: "Scalability First",
         description:
-            "Systems designed to grow with demand, both horizontally and vertically, without requiring fundamental rework as traffic and data volumes increase.",
+            "I design systems to scale with traffic and data growth without major rewrites.",
     },
     {
         iconName: "resilience" as const,
         title: "Resilience & Reliability",
         description:
-            "Built to handle failures without panic. Redundancy, circuit breakers, and graceful degradation keep services running instead of letting a single failure cascade.",
+            "I design failure handling with redundancy, circuit breakers, and graceful degradation.",
     },
     {
         iconName: "performance" as const,
         title: "Performance-Oriented",
         description:
-            "Optimized at every layer: query efficiency, cache hit rates, payload sizes, and infrastructure right-sizing. The goal is fast, predictable performance under real load.",
+            "I tune query paths, cache behavior, payload size, and infrastructure for predictable load performance.",
     },
     {
         iconName: "maintainability" as const,
         title: "Maintainability",
         description:
-            "Clear module boundaries, defined contracts, and consistent patterns ensure systems can evolve cleanly for years without accumulating design debt.",
+            "I enforce module boundaries and service contracts so teams can evolve systems without design debt.",
     },
 ];
 ---
 
 <section class="arch-principles" aria-labelledby="arch-principles-heading">
-    <div class="arch-principles__inner">
+    <div class="arch-principles__inner layout-container">
         <header class="arch-principles__header">
-            <p class="arch-principles__label" data-animate data-animate-delay="1">
-                CORE PRINCIPLES
+            <p class="arch-principles__label section-kicker" data-animate data-animate-delay="1">
+                Core principles
             </p>
             <h2
                 class="arch-principles__heading"
@@ -41,11 +41,10 @@ const principles = [
                 data-animate
                 data-animate-delay="2"
             >
-                How I Approach System Design
+                System Design Approach
             </h2>
             <p class="arch-principles__subtext" data-animate data-animate-delay="3">
-                These are the lenses I apply to every system decision. Trade-offs are always
-                explicit, never hidden.
+                I keep tradeoffs explicit so teams can make faster calls under production pressure.
             </p>
         </header>
 
@@ -65,15 +64,7 @@ const principles = [
     }
 
     .arch-principles__inner {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding-inline: 1rem;
-    }
-
-    @mixin tablet-up {
-        .arch-principles__inner {
-            padding-inline: 1.5rem;
-        }
+        position: relative;
     }
 
     /* ── Header ── */
@@ -89,11 +80,6 @@ const principles = [
     }
 
     .arch-principles__label {
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--color-accent);
         margin-bottom: 0.75rem;
     }
 

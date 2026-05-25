@@ -4,24 +4,28 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.55rem 1.15rem;
-    background: var(--color-cta-bg);
+    padding: 0.65rem 1.2rem;
+    background: linear-gradient(140deg, var(--color-cta-bg), var(--color-accent));
     color: var(--color-cta-text, #0a0a0a);
-    font-size: 0.75rem;
+    font-size: 0.68rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
-    border-radius: 6px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-radius: 10px;
+    border: 1px solid rgba(209, 240, 255, 0.28);
     white-space: nowrap;
     flex-shrink: 0;
     touch-action: manipulation;
     transition:
-        background 150ms ease,
-        transform 150ms ease;
+        background var(--transition-fast),
+        transform var(--transition-fast),
+        box-shadow var(--transition-base);
 }
 
 .cta-btn:hover {
-    background: var(--color-cta-hover, #7dd3fc);
+    background: linear-gradient(140deg, var(--color-cta-hover), var(--color-accent-hover));
     transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(95, 193, 238, 0.3);
 }
 
 .cta-btn:active {
@@ -31,8 +35,8 @@
 .cta-btn--mobile {
     justify-content: center;
     padding: 0.9rem 1.8rem;
-    font-size: 0.85rem;
-    border-radius: 8px;
+    font-size: 0.8rem;
+    border-radius: 10px;
 }
 
 a.cta-btn:not(.cta-btn--mobile) {

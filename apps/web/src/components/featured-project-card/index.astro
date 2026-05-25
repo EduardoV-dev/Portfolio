@@ -79,7 +79,7 @@ const projectBullets = Array.isArray(bullets) ? bullets : [];
                             rel="noopener noreferrer"
                             class="fpc-card__link"
                             aria-label="Source code"
-                            onclick="event.stopPropagation()"
+                            onclick="(event) => event.stopPropagation()"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -108,7 +108,7 @@ const projectBullets = Array.isArray(bullets) ? bullets : [];
                             rel="noopener noreferrer"
                             class="fpc-card__link"
                             aria-label="Live project"
-                            onclick="event.stopPropagation()"
+                            onclick="(event) => event.stopPropagation()"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -164,7 +164,7 @@ const projectBullets = Array.isArray(bullets) ? bullets : [];
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: auto 1fr;
-        background: var(--color-surface);
+        background: linear-gradient(180deg, rgba(15, 24, 35, 0.94), rgba(11, 18, 27, 0.95));
         border: 1px solid var(--color-border);
         border-radius: 1rem;
         overflow: hidden;
@@ -176,8 +176,8 @@ const projectBullets = Array.isArray(bullets) ? bullets : [];
     }
 
     .fpc-card:hover {
-        border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
-        transform: scale(1.01);
+        border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+        transform: translateY(-2px);
         box-shadow:
             0 0 0 1px color-mix(in srgb, var(--color-accent) 15%, transparent),
             0 20px 60px rgba(0, 0, 0, 0.4),
@@ -219,8 +219,8 @@ const projectBullets = Array.isArray(bullets) ? bullets : [];
         gap: 0.35rem;
         padding: 0.25rem 0.65rem;
         border-radius: 99px;
-        background: color-mix(in srgb, var(--color-accent) 12%, transparent);
-        border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+        background: color-mix(in srgb, var(--color-accent) 16%, transparent);
+        border: 1px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
         color: var(--color-accent);
         font-size: 0.65rem;
         font-weight: 700;
@@ -264,7 +264,7 @@ const projectBullets = Array.isArray(bullets) ? bullets : [];
 
     /* ── Title ── */
     .fpc-card__title {
-        font-size: clamp(1.5rem, 4vw, 2.1rem);
+        font-size: clamp(1.45rem, 4vw, 2rem);
         font-weight: 760;
         letter-spacing: -0.04em;
         line-height: 1.1;
@@ -368,9 +368,10 @@ const projectBullets = Array.isArray(bullets) ? bullets : [];
         border: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
         background: color-mix(in srgb, var(--color-accent) 8%, transparent);
         color: var(--color-accent);
-        font-size: 0.82rem;
+        font-size: 0.74rem;
         font-weight: 650;
-        letter-spacing: -0.01em;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
         text-decoration: none;
         transition:
             background var(--transition-fast),
@@ -398,6 +399,45 @@ const projectBullets = Array.isArray(bullets) ? bullets : [];
         }
         .fpc-card__cta:hover {
             transform: none;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .fpc-card__content {
+            padding: 1rem;
+            gap: 0.8rem;
+        }
+
+        .fpc-card__footer {
+            gap: 0.7rem;
+        }
+
+        .fpc-card__links {
+            width: 100%;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+
+        .fpc-card__cta {
+            width: 100%;
+            justify-content: center;
+            padding: 0.65rem 0.8rem;
+        }
+    }
+
+    @media (max-width: 320px) {
+        .fpc-card__title {
+            font-size: 1.3rem;
+        }
+
+        .fpc-card__impact,
+        .fpc-card__desc,
+        .fpc-card__bullet {
+            font-size: 0.8rem;
+        }
+
+        .fpc-card__link {
+            font-size: 0.64rem;
         }
     }
 </style>

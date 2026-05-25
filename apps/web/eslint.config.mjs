@@ -11,7 +11,7 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 export default [
     {
-        ignores: ["dist/**", ".astro/**", ".amplify-hosting/**"],
+        ignores: ["dist/**", ".astro/**", ".amplify-hosting/**", "worker-configuration.d.ts"],
     },
     ...rootConfig,
     {

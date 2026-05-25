@@ -5,27 +5,67 @@
     "main": "@astrojs/cloudflare/entrypoints/server",
     "env": {
         "staging": {
+            "ratelimits": [
+                {
+                    "name": "AI_CHAT_RATE_LIMITER",
+                    "namespace_id": "2001",
+                    "simple": {
+                        "limit": 3,
+                        "period": 60,
+                    },
+                },
+                {
+                    "name": "AI_CHAT_GLOBAL_RATE_LIMITER",
+                    "namespace_id": "2003",
+                    "simple": {
+                        "limit": 6,
+                        "period": 60,
+                    },
+                },
+            ],
             "vars": {
                 "PUBLIC_SENTRY_ENABLED": "true",
                 "STRAPI_CMS_OPTIONAL": "false",
                 "PUBLIC_ENVIRONMENT": "staging",
+                "PUBLIC_GA_MEASUREMENT_ID": "G-CPKFK53CJE",
                 "PUBLIC_SITE_URL": "https://stg.eduardov.dev",
                 "GITHUB_REPO_OWNER": "EduardoV-dev",
                 "GITHUB_REPO_NAME": "portfolio",
                 "GITHUB_REBUILD_WORKFLOW_FILE": "deploy-staging.yml",
                 "GITHUB_REBUILD_REF": "staging",
+                "AI_PROVIDER_BASE_URL": "https://openrouter.ai/api/v1",
             },
         },
         "production": {
+            "ratelimits": [
+                {
+                    "name": "AI_CHAT_RATE_LIMITER",
+                    "namespace_id": "2002",
+                    "simple": {
+                        "limit": 10,
+                        "period": 60,
+                    },
+                },
+                {
+                    "name": "AI_CHAT_GLOBAL_RATE_LIMITER",
+                    "namespace_id": "2004",
+                    "simple": {
+                        "limit": 120,
+                        "period": 60,
+                    },
+                },
+            ],
             "vars": {
                 "PUBLIC_SENTRY_ENABLED": "true",
                 "STRAPI_CMS_OPTIONAL": "false",
                 "PUBLIC_ENVIRONMENT": "production",
+                "PUBLIC_GA_MEASUREMENT_ID": "G-Q8P38XLZGF",
                 "PUBLIC_SITE_URL": "https://www.eduardov.dev",
                 "GITHUB_REPO_OWNER": "EduardoV-dev",
                 "GITHUB_REPO_NAME": "portfolio",
                 "GITHUB_REBUILD_WORKFLOW_FILE": "deploy-production.yml",
                 "GITHUB_REBUILD_REF": "main",
+                "AI_PROVIDER_BASE_URL": "https://openrouter.ai/api/v1",
             },
         },
     },

@@ -30,9 +30,11 @@ const items = [
 ---
 
 <section class="about-phil" aria-labelledby="about-phil-heading">
-    <div class="about-phil__inner">
+    <div class="about-phil__inner layout-container">
         <header class="about-phil__header">
-            <p class="about-phil__label" data-animate data-animate-delay="1">HOW I WORK</p>
+            <p class="about-phil__label section-kicker" data-animate data-animate-delay="1">
+                How I work
+            </p>
             <h2
                 class="about-phil__heading"
                 id="about-phil-heading"
@@ -63,15 +65,7 @@ const items = [
     }
 
     .about-phil__inner {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding-inline: 1rem;
-    }
-
-    @mixin tablet-up {
-        .about-phil__inner {
-            padding-inline: 1.5rem;
-        }
+        position: relative;
     }
 
     /* ── Header ── */
@@ -87,11 +81,6 @@ const items = [
     }
 
     .about-phil__label {
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--color-accent);
         margin-bottom: 0.75rem;
     }
 

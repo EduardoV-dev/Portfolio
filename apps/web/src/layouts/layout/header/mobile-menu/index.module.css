@@ -4,14 +4,16 @@
     position: fixed;
     inset: 0;
     z-index: 200;
-    background: var(--color-bg, #0a0a0a);
+    background:
+        linear-gradient(180deg, rgba(8, 15, 24, 0.96), rgba(6, 11, 18, 0.98)),
+        radial-gradient(90% 60% at 50% 0%, rgba(108, 184, 236, 0.12), transparent 72%);
     display: flex;
     flex-direction: column;
     padding: 0 1.5rem 2rem;
     overflow-y: auto;
     overscroll-behavior: contain;
     transform: translateX(100%);
-    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform var(--transition-base);
 }
 
 .mobile-menu[hidden] {
@@ -78,13 +80,28 @@
 .mobile-nav__link {
     display: block;
     padding: 0.75rem 0;
-    font-size: 2.25rem;
-    font-weight: 600;
+    font-size: clamp(1.35rem, 7.5vw, 2.1rem);
+    font-weight: 700;
     color: var(--color-text-secondary, rgba(255, 255, 255, 0.55));
-    letter-spacing: -0.02em;
-    transition: color 150ms ease;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color var(--transition-fast);
     position: relative;
     width: fit-content;
+}
+
+@media (max-width: 360px) {
+    .mobile-menu {
+        padding: 0 0.85rem 1.2rem;
+    }
+
+    .mobile-nav {
+        gap: 1.6rem;
+    }
+
+    .mobile-nav__list {
+        gap: 1rem;
+    }
 }
 
 .mobile-nav__item {

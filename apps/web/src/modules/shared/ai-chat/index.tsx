@@ -1,7 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
+import ReactMarkdown from "react-markdown";
 import { useChatStore, DEFAULT_PROMPTS } from "@/store/chat";
 import styles from "./index.module.css";
+
+interface ChatRequestMessage {
+    role: "assistant" | "user";
+    content: string;
+}
+
+interface ChatErrorResponse {
+    message?: string;
+}
 
 interface AiChatProps {
     mode?: "inline" | "popup";
@@ -13,29 +23,35 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
         messages,
         pendingPrompt,
         inlinePendingPrompt,
+        addMessage,
+        updateMessage,
         setPendingPrompt,
         setInlinePendingPrompt,
-        resetMessages,
+        clearChatHistory,
     } = useChatStore();
     const [input, setInput] = useState("");
-    const isTyping = false;
+    const [isStreaming, setIsStreaming] = useState(false);
+    const [isConfirmingClear, setIsConfirmingClear] = useState(false);
+    const [showClearedToast, setShowClearedToast] = useState(false);
     const messagesContainerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+    const clearToastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     const hasUserMessages = messages.some((m) => m.role === "user");
+    const canClearChat = messages.length > 1 || hasUserMessages;
 
     // Auto-scroll to bottom on new messages — scoped to the messages container only
     useEffect(() => {
         if (messagesContainerRef.current) {
             messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
         }
-    }, [messages, isTyping]);
+    }, [messages, isStreaming]);
 
     // Consume pendingPrompt — only in popup mode to avoid double-submission
     useEffect(() => {
         if (!pendingPrompt || mode !== "popup") return;
         setPendingPrompt(null);
-        submitMessage();
+        void submitMessage(pendingPrompt);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pendingPrompt]);
 
@@ -43,13 +59,86 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
     useEffect(() => {
         if (!inlinePendingPrompt || mode !== "inline") return;
         setInlinePendingPrompt(null);
-        submitMessage();
+        void submitMessage(inlinePendingPrompt);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [inlinePendingPrompt]);
 
-    function submitMessage() {
-        // LLM integration coming soon — submissions disabled
-        return;
+    useEffect(() => {
+        return () => {
+            if (clearToastTimerRef.current) {
+                clearTimeout(clearToastTimerRef.current);
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!canClearChat && isConfirmingClear) {
+            setIsConfirmingClear(false);
+        }
+    }, [canClearChat, isConfirmingClear]);
+
+    async function submitMessage(rawText: string) {
+        const text = rawText.trim();
+        if (!text || isStreaming) {
+            return;
+        }
+
+        const messagesForRequest: ChatRequestMessage[] = [
+            ...messages.map((message) => ({ role: message.role, content: message.text })),
+            { role: "user", content: text },
+        ];
+
+        addMessage({ role: "user", text });
+        const assistantMessageId = addMessage({ role: "assistant", text: "" });
+        setInput("");
+        setIsStreaming(true);
+
+        try {
+            const response = await fetch("/api/ai-chat", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ messages: messagesForRequest }),
+            });
+
+            if (!response.ok || !response.body) {
+                let backendMessage = "";
+                const contentType = response.headers.get("content-type") || "";
+
+                if (contentType.includes("application/json")) {
+                    const errorPayload = (await response.json()) as ChatErrorResponse;
+                    backendMessage = errorPayload.message || "";
+                }
+
+                const statusMessage = `Chat request failed with status ${response.status}`;
+                throw new Error(backendMessage || statusMessage);
+            }
+
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+            let assistantText = "";
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) {
+                    break;
+                }
+
+                assistantText += decoder.decode(value, { stream: true });
+                updateMessage(assistantMessageId, assistantText);
+            }
+
+            assistantText += decoder.decode();
+            updateMessage(assistantMessageId, assistantText.trim());
+        } catch (error) {
+            const fallbackMessage =
+                "Sorry, I hit an issue while generating response. Please try again.";
+            const errorMessage = error instanceof Error ? error.message : fallbackMessage;
+            updateMessage(assistantMessageId, errorMessage || fallbackMessage);
+        } finally {
+            setIsStreaming(false);
+        }
     }
 
     function handleSend() {
@@ -57,7 +146,7 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
             return;
         }
 
-        submitMessage();
+        void submitMessage(input);
     }
 
     function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -72,7 +161,34 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
             return;
         }
 
-        submitMessage();
+        void submitMessage(prompt);
+    }
+
+    function handleClearClick() {
+        if (!canClearChat || isStreaming) {
+            return;
+        }
+
+        if (!isConfirmingClear) {
+            setIsConfirmingClear(true);
+            return;
+        }
+
+        clearChatHistory();
+        setInput("");
+        setIsConfirmingClear(false);
+        setShowClearedToast(true);
+        if (clearToastTimerRef.current) {
+            clearTimeout(clearToastTimerRef.current);
+        }
+        clearToastTimerRef.current = setTimeout(() => {
+            setShowClearedToast(false);
+        }, 1800);
+        inputRef.current?.focus();
+    }
+
+    function handleCancelClear() {
+        setIsConfirmingClear(false);
     }
 
     return (
@@ -86,17 +202,18 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
                             <p className={styles.chatTitle}>
                                 Eduardo&apos;s AI Engineering Assistant
                             </p>
-                            <p className={styles.chatStatus}>STATUS: COMING SOON</p>
+                            <p className={styles.chatStatus}>STATUS: ONLINE</p>
                         </div>
                     </div>
                     <div className={styles.chatHeaderRight}>
-                        {hasUserMessages && (
+                        {canClearChat && (
                             <button
                                 className={styles.resetBtn}
-                                onClick={resetMessages}
+                                onClick={handleClearClick}
                                 aria-label="New conversation"
-                                title="New conversation"
+                                title={isConfirmingClear ? "Confirm clear chat" : "Clear chat"}
                                 type="button"
+                                disabled={isStreaming}
                             >
                                 <svg
                                     width="14"
@@ -121,6 +238,28 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
                                     />
                                 </svg>
                             </button>
+                        )}
+                        {isConfirmingClear && (
+                            <>
+                                <button
+                                    className={styles.confirmBtn}
+                                    onClick={handleClearClick}
+                                    aria-label="Confirm clear chat"
+                                    title="Confirm clear chat"
+                                    type="button"
+                                >
+                                    Clear
+                                </button>
+                                <button
+                                    className={styles.cancelBtn}
+                                    onClick={handleCancelClear}
+                                    aria-label="Cancel clear chat"
+                                    title="Cancel"
+                                    type="button"
+                                >
+                                    Cancel
+                                </button>
+                            </>
                         )}
                         <button
                             className={styles.closeBtn}
@@ -177,7 +316,19 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
                                     <span className={styles.roleName}>ASSISTANT</span>
                                 </div>
                                 <div className={clsx(styles.bubble, styles["bubble--assistant"])}>
-                                    {msg.text}
+                                    {msg.text ? (
+                                        <div className={styles.markdown}>
+                                            <ReactMarkdown>{msg.text}</ReactMarkdown>
+                                        </div>
+                                    ) : (
+                                        isStreaming && (
+                                            <span className={styles.typingDots}>
+                                                <span />
+                                                <span />
+                                                <span />
+                                            </span>
+                                        )
+                                    )}
                                 </div>
                             </div>
                         )}
@@ -211,42 +362,50 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
                         )}
                     </div>
                 ))}
-
-                {/* Typing indicator */}
-                {isTyping && (
-                    <div className={clsx(styles.messageRow, styles["messageRow--assistant"])}>
-                        <div className={styles.messageGroup}>
-                            <div className={styles.roleLabel}>
-                                <div className={styles.avatarIcon} aria-hidden="true">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                                        <path
-                                            d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"
-                                            fill="var(--color-accent)"
-                                            stroke="var(--color-accent)"
-                                            strokeWidth="1.5"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                    </svg>
-                                </div>
-                                <span className={styles.roleName}>ASSISTANT</span>
-                            </div>
-                            <div className={clsx(styles.bubble, styles["bubble--assistant"])}>
-                                <span className={styles.typingDots}>
-                                    <span />
-                                    <span />
-                                    <span />
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                )}
             </div>
 
-            {/* Suggested prompts — shown until first user message; disabled until LLM is live */}
+            {mode === "inline" && canClearChat && (
+                <div className={styles.inlineActions}>
+                    {!isConfirmingClear && (
+                        <button
+                            className={styles.inlineClearBtn}
+                            onClick={handleClearClick}
+                            type="button"
+                            disabled={isStreaming}
+                        >
+                            Clear chat history
+                        </button>
+                    )}
+                    {isConfirmingClear && (
+                        <>
+                            <span className={styles.inlineConfirmText}>
+                                Clear saved chat history on this browser?
+                            </span>
+                            <button
+                                className={styles.inlineConfirmBtn}
+                                onClick={handleClearClick}
+                                type="button"
+                            >
+                                Clear
+                            </button>
+                            <button
+                                className={styles.inlineCancelBtn}
+                                onClick={handleCancelClear}
+                                type="button"
+                            >
+                                Cancel
+                            </button>
+                        </>
+                    )}
+                </div>
+            )}
+
+            {showClearedToast && <p className={styles.clearedToast}>Chat history cleared</p>}
+
+            {/* Suggested prompts — shown until first user message */}
             {!hasUserMessages && (
                 <div className={styles.prompts}>
-                    <p className={styles.promptsLabel}>COMING SOON</p>
+                    <p className={styles.promptsLabel}>START WITH:</p>
                     <div className={styles.promptsList}>
                         {DEFAULT_PROMPTS.map((prompt) => (
                             <button
@@ -254,7 +413,7 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
                                 className={styles.promptBtn}
                                 onClick={() => handlePromptClick(prompt)}
                                 type="button"
-                                disabled
+                                disabled={isStreaming}
                             >
                                 {prompt}
                             </button>
@@ -269,17 +428,17 @@ export default function AiChat({ mode = "inline", onClose }: AiChatProps) {
                     ref={inputRef}
                     className={styles.input}
                     type="text"
-                    placeholder="Chat coming soon…"
+                    placeholder="Ask about Eduardo's experience…"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
                     aria-label="Chat input"
-                    disabled
+                    disabled={isStreaming}
                 />
                 <button
                     className={styles.sendBtn}
                     onClick={handleSend}
-                    disabled
+                    disabled={isStreaming || !input.trim()}
                     aria-label="Send message"
                     type="button"
                 >

@@ -17,6 +17,8 @@
     },
     "dependencies": {
         "@radix-ui/react-tooltip": "^1.0.7",
+        "@strapi/admin": "5.37.1",
+        "@strapi/data-transfer": "5.37.1",
         "@strapi/design-system": "^2.2.0",
         "@strapi/plugin-cloud": "5.37.1",
         "@strapi/plugin-users-permissions": "5.37.1",
@@ -29,6 +31,7 @@
         "styled-components": "^6.0.0"
     },
     "devDependencies": {
+        "@types/lodash": "^4.17.20",
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",

@@ -28,8 +28,15 @@ jobs:
             STRAPI_CMS_OPTIONAL: false
             PUBLIC_SENTRY_ENABLED: true
             PUBLIC_ENVIRONMENT: production
+            SENTRY_ENVIRONMENT: production
+            SENTRY_SAMPLE_RATE: "1.0"
+            SENTRY_TRACES_SAMPLE_RATE: "0.2"
+            SENTRY_PROFILES_SAMPLE_RATE: "0.0"
+            SENTRY_DEBUG: "false"
             PUBLIC_GA_MEASUREMENT_ID: ${{ vars.PUBLIC_GA_MEASUREMENT_ID }}
             PUBLIC_SENTRY_DSN: ${{ vars.PUBLIC_SENTRY_DSN }}
+            SENTRY_DSN: ${{ vars.PUBLIC_SENTRY_DSN }}
+            SENTRY_RELEASE: ${{ github.sha }}
             SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
             SENTRY_ORG: ${{ vars.SENTRY_ORG }}
             SENTRY_PROJECT: ${{ vars.SENTRY_PROJECT }}

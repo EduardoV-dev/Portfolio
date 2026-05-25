@@ -1,12 +1,13 @@
 <section class="arch-header" aria-labelledby="arch-header-heading">
-    <div class="arch-header__inner">
-        <p class="arch-header__label" data-animate data-animate-delay="1">ARCHITECTURE</p>
+    <div class="arch-header__inner layout-container">
+        <p class="arch-header__label section-kicker" data-animate data-animate-delay="1">
+            Architecture
+        </p>
         <h1 class="arch-header__title" data-animate data-animate-delay="2">
             System Design &amp; Architecture
         </h1>
         <p class="arch-header__subtext" data-animate data-animate-delay="3">
-            How I think about systems, APIs, and cloud infrastructure. Every decision here reflects
-            deliberate trade-offs made in production, not just on paper.
+            How I design systems, APIs, and cloud infrastructure for production constraints.
         </p>
     </div>
 </section>
@@ -21,23 +22,10 @@
     }
 
     .arch-header__inner {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding-inline: 1rem;
-    }
-
-    @mixin tablet-up {
-        .arch-header__inner {
-            padding-inline: 1.5rem;
-        }
+        position: relative;
     }
 
     .arch-header__label {
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--color-accent);
         margin-bottom: 1rem;
     }
 

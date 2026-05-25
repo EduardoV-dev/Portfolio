@@ -11,7 +11,7 @@ const cards = [
         iconHeight: productDrivenIcon.height,
         title: "Product-Driven Development",
         description:
-            "Every technical decision maps to a user need or a business outcome. I don't write code for its own sake.",
+            "I tie technical decisions to user behavior and business outcomes. If work does not change one of those, I cut it.",
     },
     {
         iconSrc: scalableArchIcon.src,
@@ -19,7 +19,7 @@ const cards = [
         iconHeight: scalableArchIcon.height,
         title: "Reliable by Default",
         description:
-            "Cloud-native from day one, built to grow without rewrites, and resilient enough to handle the unexpected.",
+            "I design cloud systems to scale without rewrites, then add failure paths before traffic exposes them.",
     },
     {
         iconSrc: perfReliabilityIcon.src,
@@ -27,20 +27,20 @@ const cards = [
         iconHeight: perfReliabilityIcon.height,
         title: "Performance That Ships",
         description:
-            "Speed and accessibility aren't polish. They're requirements. I optimize before things break, not after.",
+            "I treat speed and accessibility as release requirements and fix bottlenecks before users hit them.",
     },
 ];
 ---
 
 <section class="phil-section" aria-labelledby="phil-heading">
-    <div class="phil-section__inner">
+    <div class="phil-section__inner layout-container">
         <!-- Header -->
         <div class="phil-section__header">
-            <p class="phil-section__label">MY PHILOSOPHY</p>
-            <h2 class="phil-section__heading" id="phil-heading">Engineering with Purpose</h2>
+            <p class="phil-section__label section-kicker">Operating Principles</p>
+            <h2 class="phil-section__heading" id="phil-heading">Engineering That Holds Up</h2>
             <p class="phil-section__subtext">
-                Good engineering isn't just clean code. It's the right tradeoffs at the right time,
-                made with the business outcome in mind.
+                You get better outcomes when tradeoffs stay explicit and tied to user and business
+                impact.
             </p>
         </div>
 
@@ -57,19 +57,11 @@ const cards = [
     .phil-section {
         position: relative;
         z-index: 1;
-        padding-block: 5rem 4rem;
+        padding-block: clamp(3.2rem, 7vw, 5.4rem);
     }
 
     .phil-section__inner {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding-inline: 1rem;
-    }
-
-    @mixin tablet-up {
-        .phil-section__inner {
-            padding-inline: 1.5rem;
-        }
+        position: relative;
     }
 
     /* ── Header ── */
@@ -85,16 +77,11 @@ const cards = [
     }
 
     .phil-section__label {
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--color-accent);
         margin-bottom: 0.75rem;
     }
 
     .phil-section__heading {
-        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        font-size: clamp(1.9rem, 6vw, 2.7rem);
         font-weight: 760;
         letter-spacing: -0.04em;
         color: var(--color-text-primary);
@@ -103,7 +90,7 @@ const cards = [
     }
 
     .phil-section__subtext {
-        font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+        font-size: clamp(1rem, 2.3vw, 1.1rem);
         color: var(--color-text-secondary);
         line-height: 1.65;
         max-width: 48rem;

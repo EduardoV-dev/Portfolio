@@ -75,9 +75,11 @@ const categories: StackCategory[] = [
 ---
 
 <section class="about-stack" id="tech-stack" aria-labelledby="about-stack-heading">
-    <div class="about-stack__inner">
+    <div class="about-stack__inner layout-container">
         <header class="about-stack__header">
-            <p class="about-stack__label" data-animate data-animate-delay="1">MY STACK</p>
+            <p class="about-stack__label section-kicker" data-animate data-animate-delay="1">
+                My stack
+            </p>
             <h2
                 class="about-stack__heading"
                 id="about-stack-heading"
@@ -124,15 +126,7 @@ const categories: StackCategory[] = [
     }
 
     .about-stack__inner {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding-inline: 1rem;
-    }
-
-    @mixin tablet-up {
-        .about-stack__inner {
-            padding-inline: 1.5rem;
-        }
+        position: relative;
     }
 
     /* ── Header ── */
@@ -148,11 +142,6 @@ const categories: StackCategory[] = [
     }
 
     .about-stack__label {
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--color-accent);
         margin-bottom: 0.75rem;
     }
 
@@ -180,6 +169,7 @@ const categories: StackCategory[] = [
         border: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
         border-radius: 1rem;
         overflow: hidden;
+        background: rgba(10, 17, 25, 0.7);
     }
 
     /* ── Row ── */
@@ -197,7 +187,7 @@ const categories: StackCategory[] = [
     }
 
     .about-stack__row:hover {
-        background: rgba(255, 255, 255, 0.02);
+        background: rgba(120, 196, 247, 0.08);
     }
 
     @mixin tablet-up {

@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 export type MessageRole = "assistant" | "user";
 
@@ -8,10 +9,17 @@ export interface Message {
     text: string;
 }
 
+const CHAT_STORAGE_KEY = "eduardov-ai-chat";
+const CHAT_HISTORY_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+
+function createMessageId(role: MessageRole): string {
+    return `${role}-${Date.now()}-${Math.random()}`;
+}
+
 const INITIAL_MESSAGE: Message = {
     id: "init",
     role: "assistant",
-    text: "LLM integration is on the roadmap. Soon you'll be able to ask about Eduardo's experience, projects, and how he approaches building digital products.",
+    text: "Ask about Eduardo's projects, architecture decisions, and real-world engineering experience.",
 };
 
 const RESPONSES: Record<string, string> = {
@@ -52,31 +60,82 @@ interface ChatState {
 
     openChat: () => void;
     closeChat: () => void;
-    addMessage: (msg: Omit<Message, "id">) => void;
+    addMessage: (msg: Omit<Message, "id">) => string;
+    updateMessage: (id: string, text: string) => void;
+    replaceMessages: (messages: Message[]) => void;
     setPendingPrompt: (prompt: string | null) => void;
     setInlinePendingPrompt: (prompt: string | null) => void;
     resetMessages: () => void;
+    clearChatHistory: () => void;
+    lastUpdatedAt: number;
 }
 
-export const useChatStore = create<ChatState>((set) => ({
-    isOpen: false,
-    messages: [INITIAL_MESSAGE],
-    pendingPrompt: null,
-    inlinePendingPrompt: null,
+export const useChatStore = create<ChatState>()(
+    persist(
+        (set) => ({
+            isOpen: false,
+            messages: [INITIAL_MESSAGE],
+            pendingPrompt: null,
+            inlinePendingPrompt: null,
+            lastUpdatedAt: Date.now(),
 
-    openChat: () => set({ isOpen: true }),
-    closeChat: () => set({ isOpen: false }),
+            openChat: () => set({ isOpen: true }),
+            closeChat: () => set({ isOpen: false }),
 
-    addMessage: (msg) =>
-        set((state) => ({
-            messages: [
-                ...state.messages,
-                { ...msg, id: `${msg.role}-${Date.now()}-${Math.random()}` },
-            ],
-        })),
+            addMessage: (msg) => {
+                const id = createMessageId(msg.role);
+                set((state) => ({
+                    messages: [...state.messages, { ...msg, id }],
+                    lastUpdatedAt: Date.now(),
+                }));
+                return id;
+            },
 
-    setPendingPrompt: (prompt) => set({ pendingPrompt: prompt }),
-    setInlinePendingPrompt: (prompt) => set({ inlinePendingPrompt: prompt }),
+            updateMessage: (id, text) =>
+                set((state) => ({
+                    messages: state.messages.map((message) =>
+                        message.id === id ? { ...message, text } : message,
+                    ),
+                    lastUpdatedAt: Date.now(),
+                })),
 
-    resetMessages: () => set({ messages: [INITIAL_MESSAGE] }),
-}));
+            replaceMessages: (messages) => set({ messages, lastUpdatedAt: Date.now() }),
+
+            setPendingPrompt: (prompt) => set({ pendingPrompt: prompt, lastUpdatedAt: Date.now() }),
+            setInlinePendingPrompt: (prompt) =>
+                set({ inlinePendingPrompt: prompt, lastUpdatedAt: Date.now() }),
+
+            resetMessages: () => set({ messages: [INITIAL_MESSAGE], lastUpdatedAt: Date.now() }),
+
+            clearChatHistory: () => {
+                localStorage.removeItem(CHAT_STORAGE_KEY);
+                set({
+                    messages: [INITIAL_MESSAGE],
+                    pendingPrompt: null,
+                    inlinePendingPrompt: null,
+                    lastUpdatedAt: Date.now(),
+                });
+            },
+        }),
+        {
+            name: CHAT_STORAGE_KEY,
+            storage: createJSONStorage(() => localStorage),
+            partialize: (state) => ({
+                messages: state.messages,
+                pendingPrompt: state.pendingPrompt,
+                inlinePendingPrompt: state.inlinePendingPrompt,
+                lastUpdatedAt: state.lastUpdatedAt,
+            }),
+            onRehydrateStorage: () => (state) => {
+                if (!state) {
+                    return;
+                }
+
+                const isExpired = Date.now() - state.lastUpdatedAt > CHAT_HISTORY_TTL_MS;
+                if (isExpired) {
+                    state.clearChatHistory();
+                }
+            },
+        },
+    ),
+);

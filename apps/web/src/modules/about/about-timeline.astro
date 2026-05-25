@@ -51,9 +51,11 @@ const entries: TimelineEntry[] = [
 ---
 
 <section class="about-tl" aria-labelledby="about-tl-heading">
-    <div class="about-tl__inner">
+    <div class="about-tl__inner layout-container">
         <header class="about-tl__header">
-            <p class="about-tl__label" data-animate data-animate-delay="1">EXPERIENCE</p>
+            <p class="about-tl__label section-kicker" data-animate data-animate-delay="1">
+                Experience
+            </p>
             <h2 class="about-tl__heading" id="about-tl-heading" data-animate data-animate-delay="2">
                 Career Timeline
             </h2>
@@ -109,15 +111,7 @@ const entries: TimelineEntry[] = [
     }
 
     .about-tl__inner {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding-inline: 1rem;
-    }
-
-    @mixin tablet-up {
-        .about-tl__inner {
-            padding-inline: 1.5rem;
-        }
+        position: relative;
     }
 
     /* ── Header ── */
@@ -126,11 +120,6 @@ const entries: TimelineEntry[] = [
     }
 
     .about-tl__label {
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--color-accent);
         margin-bottom: 0.75rem;
     }
 
@@ -230,6 +219,10 @@ const entries: TimelineEntry[] = [
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
+        padding: 0.95rem;
+        border: 1px solid rgba(120, 196, 247, 0.14);
+        border-radius: 0.8rem;
+        background: rgba(16, 26, 38, 0.45);
     }
 
     .about-tl__meta {

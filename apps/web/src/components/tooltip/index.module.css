@@ -30,7 +30,7 @@
 }
 
 .tooltip-container:hover .tooltip-box,
-.tooltip-container:focus-within .tooltip-box {
+.tooltip-container:focus-visible .tooltip-box {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);

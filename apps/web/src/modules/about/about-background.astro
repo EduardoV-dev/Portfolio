@@ -3,10 +3,10 @@ import { YEARS_OF_PROFESSIONAL_EXPERIENCE } from "@/constants/common";
 ---
 
 <section class="about-bg" aria-labelledby="about-bg-heading">
-    <div class="about-bg__inner">
+    <div class="about-bg__inner layout-container">
         <header class="about-bg__header">
-            <p class="about-bg__label" data-animate data-animate-delay="1">
-                PROFESSIONAL BACKGROUND
+            <p class="about-bg__label section-kicker" data-animate data-animate-delay="1">
+                Professional background
             </p>
             <h2 class="about-bg__heading" id="about-bg-heading" data-animate data-animate-delay="2">
                 How I Got Here
@@ -15,22 +15,18 @@ import { YEARS_OF_PROFESSIONAL_EXPERIENCE } from "@/constants/common";
 
         <div class="about-bg__prose">
             <p class="about-bg__para" data-animate data-animate-delay="1">
-                I started in frontend development and grew into full-stack engineering, driven by a
-                need to own the entire product, from the interface users interact with down to the
-                backend services and cloud infrastructure that powers it. That path led me to stop
-                working in isolation and start bridging engineering, product, and marketing teams.
+                I started in frontend and moved into full-stack work to own delivery from UI to API
+                to cloud. That shift pushed me into cross-functional work with engineering, product,
+                and marketing.
             </p>
             <p class="about-bg__para" data-animate data-animate-delay="2">
-                Over 4+ years, I've built and shipped end-to-end marketing web experiences in React,
-                Next.js, and Svelte, backed by Node.js and Express APIs on AWS. I've led full-stack
-                feature implementations, improved site speed and accessibility, and partnered with
-                DevOps on deployment workflows that keep releases reliable and performance stable.
+                Over 4+ years, I shipped web products in React, Next.js, and Svelte with Node.js and
+                Express APIs on AWS. I led full-stack features, improved speed and accessibility,
+                and worked with DevOps on deployment workflows.
             </p>
             <p class="about-bg__para" data-animate data-animate-delay="3">
-                I gravitate toward roles where technical decisions have direct business impact,
-                where improving a page's performance translates to better conversions, or a cleaner
-                architecture lets a team ship faster. The work I'm proudest of consistently delivers
-                on both fronts.
+                I look for roles where technical choices change business results. Faster pages raise
+                conversion. Cleaner architecture helps teams ship faster.
             </p>
         </div>
 
@@ -61,15 +57,7 @@ import { YEARS_OF_PROFESSIONAL_EXPERIENCE } from "@/constants/common";
     }
 
     .about-bg__inner {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding-inline: 1rem;
-    }
-
-    @mixin tablet-up {
-        .about-bg__inner {
-            padding-inline: 1.5rem;
-        }
+        position: relative;
     }
 
     /* ── Header ── */
@@ -78,11 +66,6 @@ import { YEARS_OF_PROFESSIONAL_EXPERIENCE } from "@/constants/common";
     }
 
     .about-bg__label {
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--color-accent);
         margin-bottom: 0.75rem;
     }
 
@@ -113,6 +96,10 @@ import { YEARS_OF_PROFESSIONAL_EXPERIENCE } from "@/constants/common";
         font-size: clamp(0.95rem, 2.5vw, 1.05rem);
         color: var(--color-text-secondary);
         line-height: 1.75;
+        padding: 0.9rem 1rem;
+        border: 1px solid rgba(120, 196, 247, 0.14);
+        border-radius: 0.7rem;
+        background: rgba(16, 26, 38, 0.42);
     }
 
     /* ── Stats ── */

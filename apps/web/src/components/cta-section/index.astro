@@ -1,20 +1,18 @@
 <section class="cta-section" aria-label="Call to action">
-    <div class="cta-section__inner">
+    <div class="cta-section__inner layout-container panel-shell">
         <div class="cta-section__glow" aria-hidden="true"></div>
 
         <h2 class="cta-section__heading" data-animate data-animate-delay="1">
-            Need someone who
-            <span class="cta-section__accent">owns the full stack,</span>
-            not just a slice of it?
+            Need engineer who can own delivery across stack?
         </h2>
 
         <p class="cta-section__subtext" data-animate data-animate-delay="2">
-            I work with teams to design, build, and ship polished digital products, from interfaces
-            to infrastructure, with direct business impact.
+            I help teams ship product work from interface to infrastructure with clear business
+            goals.
         </p>
 
         <a href="/contact" class="cta-section__btn" data-animate data-animate-delay="3">
-            Book a Strategy Call
+            Book a Call
         </a>
     </div>
 </section>
@@ -25,15 +23,13 @@
     .cta-section {
         position: relative;
         z-index: 1;
-        padding-block: 5rem 6rem;
+        padding-block: clamp(3.2rem, 8vw, 6rem) clamp(2.5rem, 6vw, 4rem);
         overflow: hidden;
     }
 
     .cta-section__inner {
         position: relative;
-        max-width: 1280px;
-        margin: 0 auto;
-        padding-inline: 1rem;
+        padding: clamp(2rem, 5vw, 3.5rem) clamp(1.2rem, 3vw, 2.6rem);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -70,11 +66,7 @@
         line-height: 1.1;
         color: var(--color-text-primary);
         text-wrap: balance;
-        max-width: 18ch;
-    }
-
-    .cta-section__accent {
-        color: var(--color-accent);
+        max-width: 21ch;
     }
 
     .cta-section__subtext {
@@ -99,13 +91,14 @@
         border-radius: 0.95rem;
         border: 1px solid transparent;
         color: var(--color-cta-text, #021018);
-        background: linear-gradient(135deg, #33d9ff 0%, #00ccff 52%, #00c2f0 100%);
+        background: linear-gradient(140deg, var(--color-cta-bg) 0%, var(--color-accent) 100%);
         box-shadow:
             0 12px 30px rgba(0, 204, 255, 0.22),
             inset 0 -1px 0 rgba(255, 255, 255, 0.2);
-        font-size: 1.03rem;
-        font-weight: 650;
-        letter-spacing: -0.01em;
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
         text-decoration: none;
         transition:
             transform var(--transition-fast),
@@ -116,7 +109,7 @@
     .cta-section__btn:hover {
         transform: translateY(-2px);
         box-shadow:
-            0 15px 34px rgba(0, 204, 255, 0.32),
+            0 15px 34px rgba(104, 197, 240, 0.32),
             inset 0 -1px 0 rgba(255, 255, 255, 0.25);
     }
 
@@ -130,10 +123,6 @@
     }
 
     @mixin tablet-up {
-        .cta-section__inner {
-            padding-inline: 1.5rem;
-        }
-
         .cta-section__heading {
             font-size: clamp(2.2rem, 5vw, 3rem);
         }

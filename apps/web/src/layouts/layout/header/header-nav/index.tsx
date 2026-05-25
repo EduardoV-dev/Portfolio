@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { HEADER_NAV_ITEMS } from "@/constants/routes";
+import { APP_ROUTES, HEADER_NAV_ITEMS } from "@/constants/routes";
 import styles from "./index.module.css";
 
 interface HeaderNavProps {
@@ -27,6 +27,23 @@ export default function HeaderNav({ currentPath }: HeaderNavProps) {
                         </li>
                     );
                 })}
+                {!HEADER_NAV_ITEMS.some(({ href }) => href === APP_ROUTES.BLOG.ROOT) && (
+                    <li>
+                        <a
+                            href={APP_ROUTES.BLOG.ROOT}
+                            className={clsx(styles["nav__link"], {
+                                [styles["nav__link--active"]]: currentPath.startsWith(
+                                    APP_ROUTES.BLOG.ROOT,
+                                ),
+                            })}
+                            aria-current={
+                                currentPath.startsWith(APP_ROUTES.BLOG.ROOT) ? "page" : undefined
+                            }
+                        >
+                            Blog
+                        </a>
+                    </li>
+                )}
             </ul>
         </nav>
     );

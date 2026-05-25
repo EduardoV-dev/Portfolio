@@ -1,78 +1,80 @@
-# Headless CMS — `apps/headless-cms`
+# Headless CMS (`apps/headless-cms`)
 
-Strapi 5 content backend for the portfolio. Currently scaffolded and not yet wired to the frontend.
+Strapi 5 backend for portfolio content.
 
-## Tech stack
+## Stack
 
 | Concern | Tool |
 |---|---|
 | CMS | Strapi 5 |
 | Language | TypeScript |
-| Database (Docker) | PostgreSQL 16 |
-| Database (local) | SQLite (default fallback) |
+| DB support | PostgreSQL or SQLite |
 
 ## Prerequisites
 
-- Node.js `>=22.0.0`
-- pnpm `10`
-- A running PostgreSQL instance (provided automatically via Docker Compose)
+- Node.js `>=20 <=24` (package engines)
+- pnpm `11`
 
-## Environment variables
+## Environment Variables
 
-Copy the example file before starting:
+Create env file first:
 
 ```bash
 cp .env.example .env
 ```
 
-| Variable | Description |
+Core vars:
+
+| Variable | Purpose |
 |---|---|
-| `ADMIN_JWT_SECRET` | Secret for Strapi admin panel JWTs |
-| `APP_KEYS` | Comma-separated session keys (four values) |
-| `API_TOKEN_SALT` | Salt used to generate API tokens |
-| `JWT_SECRET` | Secret for content API JWTs |
-| `DATABASE_CLIENT` | `postgres` or `sqlite` |
-| `DATABASE_HOST` | DB host — `127.0.0.1` locally, `postgres` in Docker |
-| `DATABASE_PORT` | DB port — `5432` |
-| `DATABASE_NAME` | Database name — `portfolio` |
-| `DATABASE_USERNAME` | DB user — `portfolio` |
-| `DATABASE_PASSWORD` | DB password — `portfolio` |
-| `DATABASE_SSL` | `false` for local/Docker |
+| `APP_KEYS` | Comma-separated app keys |
+| `API_TOKEN_SALT` | API token salt |
+| `ADMIN_JWT_SECRET` | Admin JWT secret |
+| `TRANSFER_TOKEN_SALT` | Transfer token salt |
+| `JWT_SECRET` | API JWT secret |
+| `ENCRYPTION_KEY` | Data encryption key |
+| `DATABASE_*` | DB connection settings |
 
-> When running via Docker Compose, the `DATABASE_HOST` and other database variables are overridden by the values in `docker-compose.yml`. The `.env` values apply for local development only.
+## Run
 
-## Getting started
-
-### Via Docker Compose (recommended)
-
-Start from the monorepo root — Strapi, PostgreSQL, and the frontend all start together:
+From repo root:
 
 ```bash
-docker compose up
+pnpm dev:headless-cms
 ```
 
-Strapi admin panel: http://localhost:1337/admin
-
-### Via pnpm (local)
-
-Ensure a PostgreSQL instance is reachable at the coordinates in your `.env`, then from the monorepo root:
-
-```bash
-pnpm dev:strapi
-```
-
-Or start everything at once:
+Or from this directory:
 
 ```bash
 pnpm dev
 ```
 
+Default admin URL: `http://localhost:1337/admin`.
+
 ## Scripts
 
-Run from the monorepo root via `--filter headless-cms`, or directly from this directory:
+Use via `pnpm --filter headless-cms <script>` from root, or run directly here.
 
 | Script | Description |
 |---|---|
-| `pnpm dev` | Start Strapi with auto-reload enabled |
-| `pnpm start` | Start Strapi with auto-reload disabled (production-like) |
-| `pnpm build` | Build the Strapi admin panel |
+| `dev` / `develop` | Start Strapi with watch mode |
+| `start` | Start Strapi in production mode |
+| `build` | Build admin panel |
+| `lint` | Run ESLint |
+| `console` | Open Strapi console |
+| `upgrade` | Upgrade Strapi to latest |
+| `upgrade:dry` | Dry-run upgrade |
+
+## Validation
+
+Recommended before commit:
+
+```bash
+pnpm --filter headless-cms lint
+pnpm --filter headless-cms build
+```
+
+## Notes
+
+- CMS exists in monorepo but frontend may still use static content sources.
+- Pre-commit hook from repo root runs CMS build, so local CMS build health matters.

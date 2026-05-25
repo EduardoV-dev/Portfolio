@@ -77,19 +77,19 @@ const { highlights } = Astro.props;
     @import "../../../styles/mixins.css";
 
     .csd-section {
-        padding-block: 3rem;
+        padding-block: clamp(2.2rem, 5vw, 3rem);
         border-bottom: 1px solid var(--color-border);
         scroll-margin-top: calc(var(--header-height, 68px) + 1.5rem);
     }
 
     .csd-section__label {
-        font-size: 0.65rem;
+        font-size: 0.68rem;
         font-weight: 700;
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: var(--color-accent);
         margin-bottom: 0.6rem;
-        opacity: 0.7;
+        opacity: 0.9;
     }
 
     .csd-section__heading {
@@ -108,8 +108,10 @@ const { highlights } = Astro.props;
     }
 
     .csd-highlight {
-        border-left: 2px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
-        padding-left: 1.5rem;
+        border: 1px solid rgba(120, 196, 247, 0.2);
+        border-radius: 0.85rem;
+        padding: 1rem;
+        background: linear-gradient(180deg, rgba(16, 26, 38, 0.76), rgba(11, 18, 27, 0.8));
     }
 
     .csd-highlight__title {
@@ -214,14 +216,7 @@ const { highlights } = Astro.props;
                 await navigator.clipboard.writeText(code);
             } catch {
                 // Fallback for non-secure contexts
-                const ta = document.createElement("textarea");
-                ta.value = code;
-                ta.style.position = "fixed";
-                ta.style.opacity = "0";
-                document.body.appendChild(ta);
-                ta.select();
-                document.execCommand("copy");
-                document.body.removeChild(ta);
+                console.warn("Clipboard API unavailable for this context.");
             }
 
             iconDefault.style.display = "none";

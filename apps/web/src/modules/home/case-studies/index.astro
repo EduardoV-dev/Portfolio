@@ -7,11 +7,11 @@ const caseStudies = await projectServices.findOnlyTwo();
 ---
 
 <section class="cs-section" aria-labelledby="cs-heading">
-    <div class="cs-section__inner">
+    <div class="cs-section__inner layout-container">
         <!-- Section header -->
         <div class="cs-section__header" data-animate>
             <div class="cs-section__meta">
-                <p class="cs-section__label">PORTFOLIO</p>
+                <p class="cs-section__label section-kicker">Portfolio</p>
                 <h2 class="cs-section__heading" id="cs-heading">Selected Case Studies</h2>
             </div>
             <a href={APP_ROUTES.CASE_STUDIES.ROOT} class="cs-section__view-all">
@@ -40,19 +40,11 @@ const caseStudies = await projectServices.findOnlyTwo();
     .cs-section {
         position: relative;
         z-index: 1;
-        padding-block: 5rem 4rem;
+        padding-block: var(--section-space) clamp(3.2rem, 7vw, 5rem);
     }
 
     .cs-section__inner {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding-inline: 1rem;
-    }
-
-    @mixin tablet-up {
-        .cs-section__inner {
-            padding-inline: 1.5rem;
-        }
+        position: relative;
     }
 
     /* ── Section header ── */
@@ -74,16 +66,11 @@ const caseStudies = await projectServices.findOnlyTwo();
     }
 
     .cs-section__label {
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--color-accent);
         margin-bottom: 0.5rem;
     }
 
     .cs-section__heading {
-        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        font-size: clamp(1.9rem, 6vw, 2.8rem);
         font-weight: 760;
         letter-spacing: -0.04em;
         color: var(--color-text-primary);
@@ -95,8 +82,10 @@ const caseStudies = await projectServices.findOnlyTwo();
         display: inline-flex;
         align-items: center;
         gap: 0.3rem;
-        font-size: 0.9rem;
-        font-weight: 500;
+        font-size: 0.78rem;
+        font-weight: 650;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
         color: var(--color-text-secondary);
         text-decoration: none;
         white-space: nowrap;
@@ -113,7 +102,7 @@ const caseStudies = await projectServices.findOnlyTwo();
     .cs-section__grid {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 1.25rem;
+        gap: 1.35rem;
     }
 
     @mixin tablet-up {

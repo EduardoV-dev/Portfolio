@@ -44,7 +44,7 @@ const techStack = skills.reduce(
     @import "../../../styles/mixins.css";
 
     .csd-section {
-        padding-block: 3rem;
+        padding-block: clamp(2.2rem, 5vw, 3rem);
         border-bottom: 1px solid var(--color-border);
         scroll-margin-top: calc(var(--header-height, 68px) + 1.5rem);
     }
@@ -84,6 +84,10 @@ const techStack = skills.reduce(
         display: flex;
         flex-direction: column;
         gap: 0.65rem;
+        padding: 0.95rem;
+        border: 1px solid rgba(120, 196, 247, 0.16);
+        border-radius: 0.75rem;
+        background: rgba(16, 26, 38, 0.54);
     }
 
     .csd-techstack__group-label {
@@ -107,8 +111,8 @@ const techStack = skills.reduce(
         font-weight: 500;
         padding: 0.3rem 0.75rem;
         border-radius: 0.4rem;
-        background: var(--color-surface);
-        border: 1px solid var(--color-border);
+        background: rgba(120, 196, 247, 0.1);
+        border: 1px solid rgba(120, 196, 247, 0.22);
         color: var(--color-text-primary);
     }
 </style>

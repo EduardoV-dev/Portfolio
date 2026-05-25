@@ -1,7 +1,9 @@
 <section class="arch-diagram" aria-labelledby="arch-diagram-heading">
-    <div class="arch-diagram__inner">
+    <div class="arch-diagram__inner layout-container">
         <header class="arch-diagram__header">
-            <p class="arch-diagram__label" data-animate data-animate-delay="1">SYSTEM DESIGN</p>
+            <p class="arch-diagram__label section-kicker" data-animate data-animate-delay="1">
+                System design
+            </p>
             <h2
                 class="arch-diagram__heading"
                 id="arch-diagram-heading"
@@ -221,9 +223,7 @@
     }
 
     .arch-diagram__inner {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding-inline: 1rem;
+        position: relative;
     }
 
     .arch-diagram__header {
@@ -231,9 +231,6 @@
     }
 
     @mixin tablet-up {
-        .arch-diagram__inner {
-            padding-inline: 1.5rem;
-        }
         .arch-diagram__canvas {
             padding: 3rem 2.5rem;
         }
@@ -250,11 +247,6 @@
     }
 
     .arch-diagram__label {
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--color-accent);
         margin-bottom: 0.75rem;
     }
 

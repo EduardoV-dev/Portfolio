@@ -4,11 +4,14 @@
     gap: 0.75rem;
     flex-shrink: 0;
     color: var(--color-text-primary, #fff);
-    transition: opacity 150ms ease;
+    transition:
+        opacity var(--transition-fast),
+        transform var(--transition-fast);
 }
 
 .logo:hover {
-    opacity: 0.85;
+    opacity: 0.95;
+    transform: translateY(-1px);
 }
 
 .logo__img {
@@ -16,6 +19,7 @@
     height: 40px;
     object-fit: contain;
     flex-shrink: 0;
+    filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.3));
 }
 
 .logo__text {
@@ -31,17 +35,18 @@
 }
 
 .logo__name {
-    font-size: 0.95rem;
-    font-weight: 600;
+    font-size: 0.9rem;
+    font-weight: 650;
     letter-spacing: -0.01em;
     line-height: 1.2;
-    color: #fff;
+    color: var(--color-text-primary);
 }
 
 .logo__title {
-    font-size: 0.7rem;
-    font-weight: 400;
-    color: var(--color-text-secondary, rgba(255, 255, 255, 0.55));
-    letter-spacing: 0.01em;
+    font-size: 0.62rem;
+    font-weight: 520;
+    color: var(--color-text-muted, rgba(255, 255, 255, 0.55));
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
     line-height: 1;
 }

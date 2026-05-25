@@ -430,6 +430,34 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiMyProfileMyProfile extends Struct.SingleTypeSchema {
+  collectionName: 'my_profiles';
+  info: {
+    displayName: 'my-profile';
+    pluralName: 'my-profiles';
+    singularName: 'my-profile';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::my-profile.my-profile'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    systemPrompt: Schema.Attribute.RichText & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProjectCategoryProjectCategory
   extends Struct.CollectionTypeSchema {
   collectionName: 'project_categories';
@@ -1142,6 +1170,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::my-profile.my-profile': ApiMyProfileMyProfile;
       'api::project-category.project-category': ApiProjectCategoryProjectCategory;
       'api::project-detail.project-detail': ApiProjectDetailProjectDetail;
       'api::project.project': ApiProjectProject;

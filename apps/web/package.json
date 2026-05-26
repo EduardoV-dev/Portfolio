@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "@astrojs/cloudflare": "^13.5.1",
+        "@astrojs/partytown": "^2.1.7",
         "@astrojs/react": "^5.0.5",
         "@sentry/astro": "^10.53.1",
         "@sentry/cloudflare": "^10.53.1",

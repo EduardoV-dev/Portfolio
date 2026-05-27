@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useChatStore } from "@/store/chat";
+import AiIntro from "./ai-intro";
 import AiButton from "./ai-button";
 import AiChatModal from "./ai-chat-modal";
 import HeaderCta from "./header-cta";
@@ -12,10 +13,23 @@ interface HeaderProps {
     currentPath: string;
 }
 
+const INTRO_EXIT_DURATION_MS = 180;
+
 export default function Header({ currentPath }: HeaderProps) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { isOpen: isChatOpen, openChat, closeChat } = useChatStore();
+    const {
+        isOpen: isChatOpen,
+        hasHydrated,
+        hasSeenAiIntro,
+        openChat,
+        closeChat,
+        markAiIntroSeen,
+    } = useChatStore();
     const lastFocusedElementRef = useRef<HTMLElement | null>(null);
+    const [introAction, setIntroAction] = useState<"none" | "ask" | "dismiss">("none");
+
+    const shouldShowAiIntro = hasHydrated && !hasSeenAiIntro && !isChatOpen && !isMenuOpen;
+    const shouldRenderAiIntro = shouldShowAiIntro || introAction !== "none";
 
     const restoreFocus = useCallback(() => {
         lastFocusedElementRef.current?.focus();
@@ -42,6 +56,32 @@ export default function Header({ currentPath }: HeaderProps) {
     const handleCloseMenu = useCallback(() => {
         setIsMenuOpen(false);
     }, []);
+
+    const handleAskAiFromIntro = useCallback(() => {
+        setIntroAction("ask");
+    }, []);
+
+    const handleDismissAiIntro = useCallback(() => {
+        setIntroAction("dismiss");
+    }, []);
+
+    useEffect(() => {
+        if (introAction === "none") {
+            return;
+        }
+
+        const timerId = window.setTimeout(() => {
+            markAiIntroSeen();
+            if (introAction === "ask") {
+                openChat();
+            }
+            setIntroAction("none");
+        }, INTRO_EXIT_DURATION_MS);
+
+        return () => {
+            window.clearTimeout(timerId);
+        };
+    }, [introAction, markAiIntroSeen, openChat]);
 
     // Escape closes both menu and chat
     useEffect(() => {
@@ -79,7 +119,17 @@ export default function Header({ currentPath }: HeaderProps) {
                     <HeaderNav currentPath={currentPath} />
 
                     <div className={styles["header__actions"]}>
-                        <AiButton onClick={handleOpenChat} />
+                        <div className={styles["header__ai"]}>
+                            <AiButton onClick={handleOpenChat} />
+                            {shouldRenderAiIntro && (
+                                <AiIntro
+                                    variant="desktop"
+                                    isClosing={introAction !== "none"}
+                                    onAskAi={handleAskAiFromIntro}
+                                    onDismiss={handleDismissAiIntro}
+                                />
+                            )}
+                        </div>
                         <HeaderCta id="cta-desktop" />
                     </div>
 
@@ -107,6 +157,15 @@ export default function Header({ currentPath }: HeaderProps) {
             />
 
             <AiChatModal onRestoreFocus={restoreFocus} />
+
+            {shouldRenderAiIntro && (
+                <AiIntro
+                    variant="mobile"
+                    isClosing={introAction !== "none"}
+                    onAskAi={handleAskAiFromIntro}
+                    onDismiss={handleDismissAiIntro}
+                />
+            )}
         </>
     );
 }

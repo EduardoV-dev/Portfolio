@@ -53,13 +53,16 @@ export const DEFAULT_PROMPTS = [
 ];
 
 interface ChatState {
+    hasHydrated: boolean;
     isOpen: boolean;
+    hasSeenAiIntro: boolean;
     messages: Message[];
     pendingPrompt: string | null;
     inlinePendingPrompt: string | null;
 
     openChat: () => void;
     closeChat: () => void;
+    markAiIntroSeen: () => void;
     addMessage: (msg: Omit<Message, "id">) => string;
     updateMessage: (id: string, text: string) => void;
     replaceMessages: (messages: Message[]) => void;
@@ -74,6 +77,8 @@ export const useChatStore = create<ChatState>()(
     persist(
         (set) => ({
             isOpen: false,
+            hasHydrated: false,
+            hasSeenAiIntro: false,
             messages: [INITIAL_MESSAGE],
             pendingPrompt: null,
             inlinePendingPrompt: null,
@@ -81,6 +86,7 @@ export const useChatStore = create<ChatState>()(
 
             openChat: () => set({ isOpen: true }),
             closeChat: () => set({ isOpen: false }),
+            markAiIntroSeen: () => set({ hasSeenAiIntro: true }),
 
             addMessage: (msg) => {
                 const id = createMessageId(msg.role);
@@ -121,6 +127,7 @@ export const useChatStore = create<ChatState>()(
             name: CHAT_STORAGE_KEY,
             storage: createJSONStorage(() => localStorage),
             partialize: (state) => ({
+                hasSeenAiIntro: state.hasSeenAiIntro,
                 messages: state.messages,
                 pendingPrompt: state.pendingPrompt,
                 inlinePendingPrompt: state.inlinePendingPrompt,
@@ -130,6 +137,8 @@ export const useChatStore = create<ChatState>()(
                 if (!state) {
                     return;
                 }
+
+                state.hasHydrated = true;
 
                 const isExpired = Date.now() - state.lastUpdatedAt > CHAT_HISTORY_TTL_MS;
                 if (isExpired) {

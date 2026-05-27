@@ -34,7 +34,6 @@ Main public vars:
 | `PUBLIC_ENVIRONMENT` | Environment label (`development`, `staging`, `production`) |
 | `PUBLIC_SITE_URL` | Canonical site URL (local: `http://localhost:4321`) |
 | `PUBLIC_WEB3FORMS_ACCESS_KEY` | Contact form provider key |
-| `PUBLIC_RECAPTCHA_SITE_KEY` | reCAPTCHA site key |
 
 `PUBLIC_SITE_URL` should always be set.
 
@@ -98,7 +97,6 @@ src/
 |- assets/
 |- components/
 |- constants/
-|- data/
 |- layouts/
 |- modules/
 |- pages/
@@ -107,3 +105,11 @@ src/
 ```
 
 Path alias: `@/*` -> `src/*`.
+
+## Related Project Docs
+
+- `docs/frontend.md` - frontend structure and conventions
+- `docs/feature-development.md` - feature implementation workflow
+- `docs/environment.md` - env variable ownership and usage
+- `docs/deployment.md` - staging/production deployment flow
+- `docs/troubleshooting.md` - common issues and fixes

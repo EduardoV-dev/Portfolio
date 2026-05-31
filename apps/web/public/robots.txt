@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://eduardov.dev/sitemap.xml
+Sitemap: https://www.eduardov.dev/sitemap.xml

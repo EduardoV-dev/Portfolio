@@ -1,6 +1,7 @@
 ---
 import Header from "./header/index.tsx";
 import Footer from "./footer/index.astro";
+import GoogleAnalytics from "./google-analytics/index.astro";
 import { ENVS } from "@/constants/environment-variables";
 import "@/styles/global.css";
 
@@ -23,7 +24,6 @@ const {
 } = Astro.props;
 
 const SITE_NAME = "Eduardo Varela";
-const gaMeasurementId = ENVS.PUBLIC_GA_MEASUREMENT_ID;
 const environment = ENVS.PUBLIC_ENVIRONMENT;
 const isProduction = environment === "production";
 const siteUrl = ENVS.PUBLIC_SITE_URL.replace(/\/$/, "");
@@ -40,23 +40,7 @@ const ogImageUrl = ogImage.startsWith("http")
 <!doctype html>
 <html lang="en" style="color-scheme: dark;">
     <head>
-        {
-            gaMeasurementId && (
-                <>
-                    <script async is:inline type="text/partytown" src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`} />
-                    <script async is:inline type="text/partytown" define:vars={{gaMeasurementId}}>
-                        window.dataLayer = window.dataLayer || [];
-                        function gtag() {
-                            // eslint-disable-next-line no-undef
-                            dataLayer.push(arguments);
-                        }
-                        gtag("js", new Date());
-                        gtag("config", gaMeasurementId);
-                    </script>
-                </>
-            )
-        }
-
+        <GoogleAnalytics />
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#05080c" />
@@ -92,7 +76,7 @@ const ogImageUrl = ogImage.startsWith("http")
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={ogImageUrl} />
-        
+
         <title>{title}</title>
         <script is:inline type="application/ld+json">
             {

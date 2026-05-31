@@ -11,11 +11,7 @@ export default defineConfig({
     adapter: cloudflare({
         prerenderEnvironment: "node",
     }),
-    integrations: [
-        react(),
-        sentry(),
-        partytown({ config: { forward: ["dataLayer.push", "gtag"] } }),
-    ],
+    integrations: [react(), sentry(), partytown({ config: { forward: ["dataLayer.push"] } })],
     site: process.env.PUBLIC_SITE_URL,
     build: {
         format: "directory",

@@ -23,6 +23,7 @@
         "@astrojs/cloudflare": "^13.5.1",
         "@astrojs/partytown": "^2.1.7",
         "@astrojs/react": "^5.0.5",
+        "@astrojs/sitemap": "^3.7.3",
         "@sentry/astro": "^10.53.1",
         "@sentry/cloudflare": "^10.53.1",
         "@strapi/client": "^1.6.1",

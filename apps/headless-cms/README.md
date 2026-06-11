@@ -74,7 +74,22 @@ pnpm --filter headless-cms lint
 pnpm --filter headless-cms build
 ```
 
+## Deployment
+
+- Hosted in Strapi Cloud.
+- Uses same GitHub repo branch strategy as frontend:
+  - `staging` branch -> Strapi Cloud staging environment
+  - `main` branch -> Strapi Cloud production environment
+
 ## Notes
 
 - CMS exists in monorepo but frontend may still use static content sources.
 - Pre-commit hook from repo root runs CMS build, so local CMS build health matters.
+
+## Related Project Docs
+
+- `docs/cms.md` - CMS structure and operating model
+- `docs/content-model.md` - content type and relation map
+- `docs/feature-development.md` - adding CMS-backed features
+- `docs/environment.md` - env variable ownership and usage
+- `docs/deployment.md` - Strapi Cloud staging/production flow

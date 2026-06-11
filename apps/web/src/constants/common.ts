@@ -1,2 +1,2 @@
 export const YEARS_OF_PROFESSIONAL_EXPERIENCE = new Date().getFullYear() - 2022;
-export const LAST_UPDATED = "May 04, 2026";
+export const LAST_UPDATED = "May 25, 2026";

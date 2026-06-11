@@ -7,6 +7,14 @@
         "staging": {
             "ratelimits": [
                 {
+                    "name": "GLOBAL_RATE_LIMITER",
+                    "namespace_id": "2000",
+                    "simple": {
+                        "limit": 50,
+                        "period": 60,
+                    },
+                },
+                {
                     "name": "AI_CHAT_RATE_LIMITER",
                     "namespace_id": "2001",
                     "simple": {
@@ -38,6 +46,14 @@
         },
         "production": {
             "ratelimits": [
+                {
+                    "name": "GLOBAL_RATE_LIMITER",
+                    "namespace_id": "2006",
+                    "simple": {
+                        "limit": 200,
+                        "period": 60,
+                    },
+                },
                 {
                     "name": "AI_CHAT_RATE_LIMITER",
                     "namespace_id": "2002",

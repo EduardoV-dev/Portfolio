@@ -10,7 +10,7 @@ importers:
     devDependencies:
       '@commitlint/cli':
         specifier: ^19.6.0
-        version: 19.8.1(@types/node@20.19.37)(typescript@5.9.3)
+        version: 19.8.1(@types/node@24.13.1)(typescript@5.9.3)
       '@commitlint/config-conventional':
         specifier: ^19.6.0
         version: 19.8.1
@@ -105,9 +105,15 @@ importers:
       '@astrojs/cloudflare':
         specifier: ^13.5.1
         version: 13.5.1(@types/node@20.19.37)(astro@6.3.2(@types/node@20.19.37)(jiti@2.6.1)(rollup@4.59.0)(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.1)(yaml@2.8.2))(jiti@2.6.1)(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.1)(workerd@1.20260515.1)(wrangler@4.92.0)(yaml@2.8.2)
+      '@astrojs/partytown':
+        specifier: ^2.1.7
+        version: 2.1.7
       '@astrojs/react':
         specifier: ^5.0.5
         version: 5.0.5(@types/node@20.19.37)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(jiti@2.6.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.1)(yaml@2.8.2)
+      '@astrojs/sitemap':
+        specifier: ^3.7.3
+        version: 3.7.3
       '@sentry/astro':
         specifier: ^10.53.1
         version: 10.53.1(astro@6.3.2(@types/node@20.19.37)(jiti@2.6.1)(rollup@4.59.0)(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.1)(yaml@2.8.2))(rollup@4.59.0)
@@ -265,6 +271,9 @@ packages:
   '@astrojs/markdown-remark@7.1.2':
     resolution: {integrity: sha512-caXZ4Dc2St2dW8luEg22GlP0gupLdztCTQE4EzZOxW1pqWXz9mbeJEuHUkgDYcKWW8tjIHkydYDhWLVoxJ327Q==}
 
+  '@astrojs/partytown@2.1.7':
+    resolution: {integrity: sha512-dbffmNmJ+sAJ0/aXSaLX4aI04EZS/2C6Mm/+fmd4ikqWO7hV6nIi0sug8Z3c+yqedJNi1swFvpwluWmGjLHNzw==}
+
   '@astrojs/prism@4.0.2':
     resolution: {integrity: sha512-KTivpmnz6lDsC6o9H4+DNm2SrE/GHzw8cNAvEJwAvUT+eoaEnn/4NtbDNfRRaxaJHdp15gf+tfHAWiXR4wB3BA==}
     engines: {node: '>=22.12.0'}
@@ -277,6 +286,9 @@ packages:
       '@types/react-dom': ^17.0.17 || ^18.0.6 || ^19.0.0
       react: ^17.0.2 || ^18.0.0 || ^19.0.0
       react-dom: ^17.0.2 || ^18.0.0 || ^19.0.0
+
+  '@astrojs/sitemap@3.7.3':
+    resolution: {integrity: sha512-f8euLVsyeAmAkSm/1M2Kb8sL8byQmfgbvBNaHFItCheTj/IpiJYSEWVcqDHZ/yEHxiS7+w87mQkzwZaPHmk5GA==}
 
   '@astrojs/telemetry@3.3.2':
     resolution: {integrity: sha512-j8DNruA8ors99Al39RYZPJK4DC1bKkoNm93mAMuBhY9TCNC4R8n1q7ovFnJ5qhGh5Lsh7pa1gpQVpYpsJPeTHQ==}
@@ -2104,6 +2116,11 @@ packages:
     peerDependencies:
       '@opentelemetry/api': ^1.8
 
+  '@qwik.dev/partytown@0.13.2':
+    resolution: {integrity: sha512-Umls4bSkuzqLVcGvf8OgwIn/OldproSAbaQ/iYGe8VPYBpl2CaOSxabWwkeC72LDFqxVL0b0q8XlI8MuChDyzg==}
+    engines: {node: '>=18.0.0'}
+    hasBin: true
+
   '@radix-ui/number@1.0.1':
     resolution: {integrity: sha512-T5gIdVO2mmPW3NNhjNgEP3cqMXjXL9UbO0BzWcXfvdBs+BohbQxvd/K5hSVKmn9/lbTdsQVKbUcP5WLCwvUbBg==}
 
@@ -3638,6 +3655,9 @@ packages:
   '@types/node@20.19.37':
     resolution: {integrity: sha512-8kzdPJ3FsNsVIurqBs7oodNnCEVbni9yUEkaHbgptDACOPW04jimGagZ51E6+lXUwJjgnBw+hyko/lkFWCldqw==}
 
+  '@types/node@24.13.1':
+    resolution: {integrity: sha512-RSpUJGmvsJ1ZeBehQZFhIdpsz+bIpES0nIQXko4Ybq+N+kX6XvOq3Jo+iJ82FWLdblFq85AsMikd3m35jgezYg==}
+
   '@types/nodemon@1.19.6':
     resolution: {integrity: sha512-vjKuaQOLUA5EY2zkUmWG1ipXbKt9Wd+H/0SiIuHVeH4cHtt6509iRUGH9ZR0iqgUrtj3BrP9KqoTuV3ZCbQcYA==}
 
@@ -3688,6 +3708,9 @@ packages:
 
   '@types/responselike@1.0.3':
     resolution: {integrity: sha512-H/+L+UkTV33uf49PH5pCAUBVPNj2nDBXTN+qS1dOwyyg24l3CcicicCA7ca+HMvJBZcFgl5r8e+RR6elsb4Lyw==}
+
+  '@types/sax@1.2.7':
+    resolution: {integrity: sha512-rO73L89PJxeYM3s3pPPjiPgVVcymqU490g0YO5n5By0k2Erzj6tay/4lr1CHAAU4JyOWd1rpQ8bCf6cZfHU96A==}
 
   '@types/send@0.17.6':
     resolution: {integrity: sha512-Uqt8rPBE8SY0RK8JB1EzVOIZ32uqy8HwdxCnoCOsYrvnswqmFZ/k+9Ikidlk/ImhsdvBsloHbAlewb2IEBV/Og==}
@@ -4063,6 +4086,9 @@ packages:
   anymatch@3.1.3:
     resolution: {integrity: sha512-KMReFUr0B4t+D+OBkjR3KYqvocp2XaSzO55UcB6mgQMd3KbcE+mWTyvVV7D/zsdEbNnV6acZUutkiHQXvTr1Rw==}
     engines: {node: '>= 8'}
+
+  arg@5.0.2:
+    resolution: {integrity: sha512-PYjyFOLKQ9y57JvQ6QLo8dAgNqswh8M1RMJYdQduT6xbWSgK36P/Z/v+p888pM69jMMfS8Xd8F6I1kQ/I9HUGg==}
 
   argparse@1.0.10:
     resolution: {integrity: sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==}
@@ -4984,6 +5010,10 @@ packages:
 
   dotenv@16.4.5:
     resolution: {integrity: sha512-ZmdL2rui+eB2YwhsWzjInR8LldtZHGDoQ1ugH85ppHKwpUHL7j7rN0Ti9NCnGiQbhaZ11FpR+7ao1dNsmduNUg==}
+    engines: {node: '>=12'}
+
+  dotenv@16.6.1:
+    resolution: {integrity: sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow==}
     engines: {node: '>=12'}
 
   dset@3.1.4:
@@ -8500,6 +8530,11 @@ packages:
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
 
+  sitemap@9.0.1:
+    resolution: {integrity: sha512-S6hzjGJSG3d6if0YoF5kTyeRJvia6FSTBroE5fQ0bu1QNxyJqhhinfUsXi9fH3MgtXODWvwo2BDyQSnhPQ88uQ==}
+    engines: {node: '>=20.19.5', npm: '>=10.8.2'}
+    hasBin: true
+
   slate-history@0.93.0:
     resolution: {integrity: sha512-Gr1GMGPipRuxIz41jD2/rbvzPj8eyar56TVMyJBvBeIpQSSjNISssvGNDYfJlSWM8eaRqf6DAcxMKzsLCYeX6g==}
     peerDependencies:
@@ -8617,6 +8652,9 @@ packages:
 
   stream-json@1.8.0:
     resolution: {integrity: sha512-HZfXngYHUAr1exT4fxlbc1IOce1RYxp2ldeaf97LYCOPSoOqY/1Psp7iGvpb+6JIOgkra9zDYnPX01hGAHzEPw==}
+
+  stream-replace-string@2.0.0:
+    resolution: {integrity: sha512-TlnjJ1C0QrmxRNrON00JvaFFlNh5TTG00APw23j74ET7gkQpTASi6/L2fuiav8pzK715HXtUeClpBTw2NPSn6w==}
 
   stream-slice@0.1.2:
     resolution: {integrity: sha512-QzQxpoacatkreL6jsxnVb7X5R/pGw9OUv2qWTYWnmLpg4NdN31snPy/f3TdQE1ZUXaThRvj1Zw4/OGg0ZkaLMA==}
@@ -9074,6 +9112,9 @@ packages:
 
   undici-types@6.21.0:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
+
+  undici-types@7.18.2:
+    resolution: {integrity: sha512-AsuCzffGHJybSaRrmr5eHr81mwJU3kjw6M+uprWvCXiNeN9SOGwQ3Jn8jb8m3Z6izVgknn1R0FTCEAP2QrLY/w==}
 
   undici@6.23.0:
     resolution: {integrity: sha512-VfQPToRA5FZs/qJxLIinmU59u0r7LXqoJkCzinq3ckNJp3vKEh7jTWN589YQ5+aoAC/TGRLyJLCPKcLQbM8r9g==}
@@ -9935,6 +9976,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@astrojs/partytown@2.1.7':
+    dependencies:
+      '@qwik.dev/partytown': 0.13.2
+      mrmime: 2.0.1
+
   '@astrojs/prism@4.0.2':
     dependencies:
       prismjs: 1.30.0
@@ -9963,6 +10009,12 @@ snapshots:
       - terser
       - tsx
       - yaml
+
+  '@astrojs/sitemap@3.7.3':
+    dependencies:
+      sitemap: 9.0.1
+      stream-replace-string: 2.0.0
+      zod: 4.4.3
 
   '@astrojs/telemetry@3.3.2':
     dependencies:
@@ -10352,11 +10404,11 @@ snapshots:
 
   '@colors/colors@1.6.0': {}
 
-  '@commitlint/cli@19.8.1(@types/node@20.19.37)(typescript@5.9.3)':
+  '@commitlint/cli@19.8.1(@types/node@24.13.1)(typescript@5.9.3)':
     dependencies:
       '@commitlint/format': 19.8.1
       '@commitlint/lint': 19.8.1
-      '@commitlint/load': 19.8.1(@types/node@20.19.37)(typescript@5.9.3)
+      '@commitlint/load': 19.8.1(@types/node@24.13.1)(typescript@5.9.3)
       '@commitlint/read': 19.8.1
       '@commitlint/types': 19.8.1
       tinyexec: 1.0.4
@@ -10403,7 +10455,7 @@ snapshots:
       '@commitlint/rules': 19.8.1
       '@commitlint/types': 19.8.1
 
-  '@commitlint/load@19.8.1(@types/node@20.19.37)(typescript@5.9.3)':
+  '@commitlint/load@19.8.1(@types/node@24.13.1)(typescript@5.9.3)':
     dependencies:
       '@commitlint/config-validator': 19.8.1
       '@commitlint/execute-rule': 19.8.1
@@ -10411,7 +10463,7 @@ snapshots:
       '@commitlint/types': 19.8.1
       chalk: 5.6.2
       cosmiconfig: 9.0.1(typescript@5.9.3)
-      cosmiconfig-typescript-loader: 6.2.0(@types/node@20.19.37)(cosmiconfig@9.0.1(typescript@5.9.3))(typescript@5.9.3)
+      cosmiconfig-typescript-loader: 6.2.0(@types/node@24.13.1)(cosmiconfig@9.0.1(typescript@5.9.3))(typescript@5.9.3)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -11646,6 +11698,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@qwik.dev/partytown@0.13.2':
+    dependencies:
+      dotenv: 16.6.1
+
   '@radix-ui/number@1.0.1':
     dependencies:
       '@babel/runtime': 7.29.2
@@ -12720,7 +12776,7 @@ snapshots:
       '@strapi/design-system': 2.1.2(@babel/runtime@7.29.2)(@codemirror/autocomplete@6.20.1)(@codemirror/language@6.12.2)(@codemirror/lint@6.9.5)(@codemirror/search@6.6.0)(@codemirror/state@6.6.0)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.40.0)(@strapi/icons@2.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.3.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(codemirror@5.65.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.3.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@strapi/icons': 2.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.3.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@strapi/permissions': 5.37.1
-      '@strapi/types': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(pg@8.20.0)(typescript@5.4.4)
+      '@strapi/types': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(pg@8.20.0)(typescript@5.9.3)
       '@strapi/typescript-utils': 5.37.1
       '@strapi/utils': 5.37.1
       '@testing-library/dom': 10.4.1
@@ -12925,7 +12981,7 @@ snapshots:
       '@strapi/database': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(pg@8.20.0)
       '@strapi/design-system': 2.1.2(@babel/runtime@7.29.2)(@codemirror/autocomplete@6.20.1)(@codemirror/language@6.12.2)(@codemirror/lint@6.9.5)(@codemirror/search@6.6.0)(@codemirror/state@6.6.0)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.40.0)(@strapi/icons@2.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.3.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(codemirror@5.65.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.3.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@strapi/icons': 2.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.3.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      '@strapi/types': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(pg@8.20.0)(typescript@5.4.4)
+      '@strapi/types': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(pg@8.20.0)(typescript@5.9.3)
       '@strapi/utils': 5.37.1
       date-fns: 2.30.0
       date-fns-tz: 2.0.1(date-fns@2.30.0)
@@ -13026,7 +13082,7 @@ snapshots:
       '@strapi/generators': 5.37.1(@types/node@20.19.37)
       '@strapi/logger': 5.37.1
       '@strapi/permissions': 5.37.1
-      '@strapi/types': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(pg@8.20.0)(typescript@5.4.4)
+      '@strapi/types': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(pg@8.20.0)(typescript@5.9.3)
       '@strapi/typescript-utils': 5.37.1
       '@strapi/utils': 5.37.1
       '@vercel/stega': 0.1.2
@@ -13108,39 +13164,6 @@ snapshots:
       - styled-components
       - supports-color
       - tedious
-
-  '@strapi/data-transfer@5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(pg@8.20.0)(typescript@5.4.4)':
-    dependencies:
-      '@strapi/logger': 5.37.1
-      '@strapi/types': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(pg@8.20.0)(typescript@5.4.4)
-      '@strapi/utils': 5.37.1
-      chalk: 4.1.2
-      cli-table3: 0.6.5
-      commander: 8.3.0
-      fs-extra: 11.2.0
-      inquirer: 8.2.5
-      lodash: 4.17.23
-      ora: 5.4.1
-      resolve-cwd: 3.0.0
-      semver: 7.5.4
-      stream-chain: 2.2.5
-      stream-json: 1.8.0
-      tar: 7.5.9
-      tar-stream: 2.2.0
-      ws: 8.17.1
-    transitivePeerDependencies:
-      - '@types/node'
-      - better-sqlite3
-      - bufferutil
-      - mysql
-      - mysql2
-      - pg
-      - pg-native
-      - sqlite3
-      - supports-color
-      - tedious
-      - typescript
-      - utf-8-validate
 
   '@strapi/data-transfer@5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(pg@8.20.0)(typescript@5.9.3)':
     dependencies:
@@ -13529,7 +13552,7 @@ snapshots:
       '@strapi/content-releases': 5.37.1(b7cccdf87ea102a51b7528d630dde02b)
       '@strapi/content-type-builder': 5.37.1(6214ea981265c5a5f82314673a36a2fc)
       '@strapi/core': 5.37.1(@babel/runtime@7.29.2)(@codemirror/autocomplete@6.20.1)(@codemirror/language@6.12.2)(@codemirror/lint@6.9.5)(@codemirror/search@6.6.0)(@codemirror/state@6.6.0)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.40.0)(@emotion/is-prop-valid@1.4.0)(@strapi/data-transfer@5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(pg@8.20.0)(typescript@5.9.3))(@types/hoist-non-react-statics@3.3.7(@types/react@18.3.28))(@types/node@20.19.37)(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(better-sqlite3@12.4.1)(codemirror@5.65.21)(pg@8.20.0)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.30.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(redux@4.2.1)(styled-components@6.3.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      '@strapi/data-transfer': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(pg@8.20.0)(typescript@5.4.4)
+      '@strapi/data-transfer': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(pg@8.20.0)(typescript@5.9.3)
       '@strapi/database': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(pg@8.20.0)
       '@strapi/email': 5.37.1(4c205976d48329e854abff95c50ffd0d)
       '@strapi/generators': 5.37.1(@types/node@20.19.37)
@@ -13538,7 +13561,7 @@ snapshots:
       '@strapi/openapi': 5.37.1
       '@strapi/permissions': 5.37.1
       '@strapi/review-workflows': 5.37.1(2c3677a71d6dec805484734f4cdfdd57)
-      '@strapi/types': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(pg@8.20.0)(typescript@5.4.4)
+      '@strapi/types': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(pg@8.20.0)(typescript@5.9.3)
       '@strapi/typescript-utils': 5.37.1
       '@strapi/upload': 5.37.1(3942f5ab536b85daa93be4b3144295eb)
       '@strapi/utils': 5.37.1
@@ -13642,36 +13665,6 @@ snapshots:
       - webpack-dev-server
       - webpack-plugin-serve
 
-  '@strapi/types@5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(pg@8.20.0)(typescript@5.4.4)':
-    dependencies:
-      '@casl/ability': 6.7.5
-      '@koa/cors': 5.0.0
-      '@koa/router': 12.0.2
-      '@strapi/database': 5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(pg@8.20.0)
-      '@strapi/logger': 5.37.1
-      '@strapi/permissions': 5.37.1
-      '@strapi/utils': 5.37.1
-      commander: 8.3.0
-      json-logic-js: 2.0.5
-      koa: 2.16.3
-      koa-body: 6.0.1
-      node-schedule: 2.1.1
-      typedoc: 0.25.10(typescript@5.4.4)
-      typedoc-github-wiki-theme: 1.1.0(typedoc-plugin-markdown@3.17.1(typedoc@0.25.10(typescript@5.9.3)))(typedoc@0.25.10(typescript@5.9.3))
-      typedoc-plugin-markdown: 3.17.1(typedoc@0.25.10(typescript@5.9.3))
-      zod: 3.25.67
-    transitivePeerDependencies:
-      - '@types/node'
-      - better-sqlite3
-      - mysql
-      - mysql2
-      - pg
-      - pg-native
-      - sqlite3
-      - supports-color
-      - tedious
-      - typescript
-
   '@strapi/types@5.37.1(@types/node@20.19.37)(better-sqlite3@12.4.1)(pg@8.20.0)(typescript@5.9.3)':
     dependencies:
       '@casl/ability': 6.7.5
@@ -13687,8 +13680,8 @@ snapshots:
       koa-body: 6.0.1
       node-schedule: 2.1.1
       typedoc: 0.25.10(typescript@5.9.3)
-      typedoc-github-wiki-theme: 1.1.0(typedoc-plugin-markdown@3.17.1(typedoc@0.25.10(typescript@5.9.3)))(typedoc@0.25.10(typescript@5.9.3))
-      typedoc-plugin-markdown: 3.17.1(typedoc@0.25.10(typescript@5.9.3))
+      typedoc-github-wiki-theme: 1.1.0(typedoc-plugin-markdown@3.17.1(typedoc@0.25.10(typescript@5.4.4)))(typedoc@0.25.10(typescript@5.4.4))
+      typedoc-plugin-markdown: 3.17.1(typedoc@0.25.10(typescript@5.4.4))
       zod: 3.25.67
     transitivePeerDependencies:
       - '@types/node'
@@ -14148,6 +14141,10 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
+  '@types/node@24.13.1':
+    dependencies:
+      undici-types: 7.18.2
+
   '@types/nodemon@1.19.6':
     dependencies:
       '@types/node': 20.19.37
@@ -14196,6 +14193,10 @@ snapshots:
       csstype: 3.2.3
 
   '@types/responselike@1.0.3':
+    dependencies:
+      '@types/node': 20.19.37
+
+  '@types/sax@1.2.7':
     dependencies:
       '@types/node': 20.19.37
 
@@ -14665,6 +14666,8 @@ snapshots:
     dependencies:
       normalize-path: 3.0.0
       picomatch: 2.3.1
+
+  arg@5.0.2: {}
 
   argparse@1.0.10:
     dependencies:
@@ -15369,9 +15372,9 @@ snapshots:
 
   core-util-is@1.0.3: {}
 
-  cosmiconfig-typescript-loader@6.2.0(@types/node@20.19.37)(cosmiconfig@9.0.1(typescript@5.9.3))(typescript@5.9.3):
+  cosmiconfig-typescript-loader@6.2.0(@types/node@24.13.1)(cosmiconfig@9.0.1(typescript@5.9.3))(typescript@5.9.3):
     dependencies:
-      '@types/node': 20.19.37
+      '@types/node': 24.13.1
       cosmiconfig: 9.0.1(typescript@5.9.3)
       jiti: 2.6.1
       typescript: 5.9.3
@@ -15686,6 +15689,8 @@ snapshots:
       is-obj: 2.0.0
 
   dotenv@16.4.5: {}
+
+  dotenv@16.6.1: {}
 
   dset@3.1.4: {}
 
@@ -20042,6 +20047,13 @@ snapshots:
 
   sisteransi@1.0.5: {}
 
+  sitemap@9.0.1:
+    dependencies:
+      '@types/node': 24.13.1
+      '@types/sax': 1.2.7
+      arg: 5.0.2
+      sax: 1.6.0
+
   slate-history@0.93.0(slate@0.94.1):
     dependencies:
       is-plain-object: 5.0.0
@@ -20148,6 +20160,8 @@ snapshots:
   stream-json@1.8.0:
     dependencies:
       stream-chain: 2.2.5
+
+  stream-replace-string@2.0.0: {}
 
   stream-slice@0.1.2: {}
 
@@ -20534,23 +20548,15 @@ snapshots:
     dependencies:
       is-typedarray: 1.0.0
 
-  typedoc-github-wiki-theme@1.1.0(typedoc-plugin-markdown@3.17.1(typedoc@0.25.10(typescript@5.9.3)))(typedoc@0.25.10(typescript@5.9.3)):
+  typedoc-github-wiki-theme@1.1.0(typedoc-plugin-markdown@3.17.1(typedoc@0.25.10(typescript@5.4.4)))(typedoc@0.25.10(typescript@5.4.4)):
     dependencies:
       typedoc: 0.25.10(typescript@5.9.3)
-      typedoc-plugin-markdown: 3.17.1(typedoc@0.25.10(typescript@5.9.3))
+      typedoc-plugin-markdown: 3.17.1(typedoc@0.25.10(typescript@5.4.4))
 
-  typedoc-plugin-markdown@3.17.1(typedoc@0.25.10(typescript@5.9.3)):
+  typedoc-plugin-markdown@3.17.1(typedoc@0.25.10(typescript@5.4.4)):
     dependencies:
       handlebars: 4.7.8
       typedoc: 0.25.10(typescript@5.9.3)
-
-  typedoc@0.25.10(typescript@5.4.4):
-    dependencies:
-      lunr: 2.3.9
-      marked: 4.3.0
-      minimatch: 9.0.9
-      shiki: 0.14.7
-      typescript: 5.4.4
 
   typedoc@0.25.10(typescript@5.9.3):
     dependencies:
@@ -20616,6 +20622,8 @@ snapshots:
   undefsafe@2.0.5: {}
 
   undici-types@6.21.0: {}
+
+  undici-types@7.18.2: {}
 
   undici@6.23.0: {}
 

@@ -10,6 +10,14 @@ apps/
 `- headless-cms   Strapi 5 CMS (default: http://localhost:1337)
 ```
 
+## Deployment Model
+
+- Frontend (`apps/web`) deploys to Cloudflare Workers.
+- CMS (`apps/headless-cms`) deploys to Strapi Cloud.
+- Both use same branch strategy:
+  - `staging` -> staging environments
+  - `main` -> production environments
+
 ## Tech Stack
 
 | Concern | Tool |
@@ -110,3 +118,7 @@ pnpm husky
 
 - `apps/web/README.md` covers frontend scripts, env, structure, and checks.
 - `apps/headless-cms/README.md` covers Strapi setup, env, and scripts.
+
+## Contributor Docs
+
+- `docs/README.md` for architecture, feature development, env, deployment, and troubleshooting guides.
